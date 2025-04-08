@@ -59,7 +59,151 @@ Com os scripts carregados, o navegador executa o código JavaScript, que normalm
 Esse padrão é típico de aplicações \acrshort{spa}, onde todo o conteúdo é inserido dinamicamente a partir da execução dos arquivos JavaScript. O elemento \texttt{<app-root>} funciona como ponto de entrada da aplicação, sendo substituído no navegador pelos componentes definidos no framework Angular. {\cite{atori2024}}
 
 
-\section{S2} 
+\section{\english{Server-Side Rendering} (\acrshort{ssr})}
+\label{subsec:ssr}
+
+A \textbf{\english{\acrfull{ssr}}} é uma abordagem em que a geração do conteúdo e da interface ocorre integralmente no servidor antes de ser enviada ao navegador do cliente. Ou seja, o servidor processa a lógica da aplicação, obtém dados necessários (por exemplo, em bancos de dados ou \emph{APIs}) e retorna ao cliente um arquivo \english{\acrshort{html}} já renderizado. Dessa forma, o navegador exibe imediatamente a página completa, sem precisar executar \emph{scripts} para montar o conteúdo inicial \cite{atori2024}. 
+
+Segundo \citeonline{atori2024}, o processo típico de renderização no lado do servidor pode ser descrito em quatro etapas principais:
+
+\begin{enumerate}
+    \item O servidor recebe uma requisição para uma página e recupera os dados necessários para compor seu conteúdo (por exemplo, produtos de uma base de dados ou artigos de um blog).
+    \item O servidor insere esses dados em um \emph{template} \acrshort{html}, gerando a estrutura final da página.
+    \item Em seguida, o servidor aplica estilos e finaliza a renderização, resultando em um documento \acrshort{html} completamente montado.
+    \item Por fim, esse documento \acrshort{html} é enviado ao navegador do usuário, exibindo a página prontamente, sem a necessidade de executar \emph{JavaScript} durante o carregamento inicial.
+\end{enumerate}
+
+Nesse modelo, a fase de hydration\footnote{Hydration é uma etapa essencial no \acrshort{ssr}, em que o JavaScript torna interativo o conteúdo HTML previamente renderizado no servidor.} ocorre após o carregamento inicial da página. costuma ocorrer após a entrega do conteúdo estático. Significa que, assim que o arquivo \acrshort{html} é carregado e mostrado ao usuário, o \emph{JavaScript} do lado do cliente assume o controle para tratar as interações e atualizações dinâmicas subsequentes. Dessa forma, o \acrshort{ssr} beneficia tanto o primeiro acesso (tornando o conteúdo visível rapidamente) quanto o \acrshort{seo}, por exibir ao rastreador dos mecanismos de busca um código \acrshort{html} completo \cite{atori2024}.
+
+\begin{figure}[h!]
+    \centering
+    \caption{Etapas do método de renderização no lado do servidor}
+    \includegraphics[width=0.9\textwidth]{media/server_side_rendering.jpeg}
+    \legend{Fonte: \cite{atori2024} (adaptado)}
+    \label{fig:server_side_rendering}
+\end{figure}
+
+A \autoref{fig:server_side_rendering} ilustra o fluxo de uma aplicação \acrshort{ssr}. Ao receber a requisição, o servidor gera a página completa em \acrshort{html} e a envia ao cliente. Essa estratégia costuma ser vantajosa em cenários onde o carregamento inicial rápido e a indexação por motores de busca são prioridades, como em sites de e-commerce e páginas de \emph{landing}, permitindo que o usuário visualize o conteúdo de forma imediata. 
+
+\emph{Meta-\-frameworks} como \emph{Next.js}, \emph{Nuxt.js}, \emph{SvelteKit}, \emph{Angular Universal}, \emph{Remix}, \emph{Astro} e \emph{Qwik} são amplamente utilizados para construir aplicações com suporte a \acrshort{ssr}, simplificando a configuração e fornecendo recursos prontos para lidar com \emph{routing}, recuperação de dados e \emph{hydration}. 
+
+\begin{lstlisting}[language=html, caption={Exemplo de HTML mínimo em aplicação Next.js com SSR}, label={lst:nextjs_html}]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>My SSR App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    /* Exemplo simples de estilo inline */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f6f6f6;
+    }
+    h1 { color: #333; }
+  </style>
+</head>
+<body>
+  <!-- Conteúdo já processado e inserido no servidor -->
+  <div id="__next">
+    <header>
+      <h1>Olá, mundo!</h1>
+    </header>
+    <main>
+      <p>Este conteúdo foi renderizado no servidor usando Next.js.</p>
+    </main>
+  </div>
+  <!-- Scripts do Next.js para interação no cliente -->
+  <script src="/_next/static/chunks/main.js" defer></script>
+</body>
+</html>
+\end{lstlisting}
+
+No \autoref{lst:nextjs_html}, pode-se observar que o arquivo \acrshort{html} já contém todo o \emph{markup} necessário para exibir o conteúdo da página. Assim que o navegador recebe esse arquivo, o usuário já visualiza o cabeçalho, o texto e o layout definidos. Posteriormente, o \emph{JavaScript} baixado (por exemplo, \texttt{main.js}) pode entrar em ação para lidar com eventos, rotas adicionais e atualizações dinâmicas, caso o desenvolvedor deseje funcionalidades mais interativas.
+
+Por fim, aplicações \acrshort{ssr} tendem a apresentar melhor performance em termos de \emph{time-to-first-byte} e de \emph{indexabilidade} por motores de busca, ao mesmo tempo em que podem demandar maior carga de processamento no servidor. A escolha por \acrshort{ssr} ou não, portanto, depende do perfil da aplicação e das prioridades do projeto, considerando fatores como volume de tráfego, necessidade de interatividade e requisitos de otimização de conteúdo.
+
+\section{Fundamentos de Desenvolvimento Web}
+\label{sec:fundamentos-devweb}
+Para entender como as abordagens \acrshort{ssr} e \acrshort{csr} se inserem no cenário de desenvolvimento web, é fundamental revisar protocolos, modelos de arquitetura e ferramentas.
+
+\subsection{Protocolo HTTP}
+\label{subsec:http}
+O \textbf{Protocolo de Transferência de Hipertexto} (\acrshort{http}) define como clientes (navegadores) e servidores comunicam-se na web. Na \acrshort{ssr}, cada solicitação aciona a geração dinâmica da página no servidor. Já na \acrshort{csr}, o cliente requisita recursos (HTML mínimo, JavaScript, CSS) e efetua chamadas subsequentes ao servidor para buscar dados adicionais via \textit{APIs}, geralmente no formato \textit{JSON}.
+
+Evoluções como HTTP/2 e HTTP/3 trouxeram melhorias de desempenho (multiplexação de requisições, compressão de cabeçalhos, etc.), impactando positivamente o tempo de carregamento tanto em \acrshort{ssr} quanto em \acrshort{csr}.
+
+\subsection{Modelos de Arquitetura Web}
+\label{subsec:modelos-arq-web}
+Os modelos arquiteturais variam conforme os requisitos de escalabilidade, manutenção e desempenho:
+
+\begin{itemize}
+    \item \textbf{Arquitetura Monolítica}: Um único projeto concentra \textit{frontend} e \textit{backend}, frequentemente usando \acrshort{ssr}. Possui inicialização simples, mas pode tornar-se complexo de manter e escalar.
+    \item \textbf{Microserviços}: Divide a aplicação em múltiplos serviços independentes. Cada serviço pode escolher a melhor abordagem de renderização (SSR ou CSR), facilitando a escalabilidade seletiva.
+    \item \textbf{Serverless}: As funções são executadas sob demanda em plataformas de nuvem, onde a renderização pode ocorrer tanto no servidor (funções que retornam HTML) quanto no cliente (ao entregar apenas APIs).
+\end{itemize}
+
+\subsection{Ferramentas e \textit{Frameworks}}
+\label{subsec:ferramentas-frameworks}
+O ecossistema de desenvolvimento web oferece diversas ferramentas que simplificam \acrshort{ssr} e \acrshort{csr}:
+
+\begin{itemize}
+    \item \textbf{\acrshort{ssr}}: \textit{Next.js} (React), \textit{Nuxt.js} (Vue), \textit{SvelteKit} (Svelte), entre outros.
+    \item \textbf{\acrshort{csr}}: React, Vue.js, Angular e muitas bibliotecas voltadas para \textit{Single Page Applications} (SPA).
+\end{itemize}
+
+
+\section{Infraestrutura de Serviço Web}
+\label{sec:infraestrutura-web}
+
+A decisão por \acrshort{ssr} ou \acrshort{csr} influencia diretamente a infraestrutura necessária:
+
+\begin{itemize}
+    \item \textbf{Servidores e Processamento}: Em \acrshort{ssr}, o servidor gera páginas dinamicamente, aumentando a carga de CPU. Já em \acrshort{csr}, o servidor atua mais como um provedor de arquivos estáticos e APIs.
+    \item \textbf{\english{Content Delivery Networks} (CDNs)}: Tanto para SSR quanto para CSR, uma CDN pode melhorar a distribuição de arquivos estáticos (HTML, CSS, JavaScript, imagens) e reduzir a latência.
+    \item \textbf{Escalabilidade}: Aplicações com alto número de requisições precisam de estratégias adequadas para lidar com picos de acesso. Em \acrshort{ssr}, muitas requisições simultâneas podem sobrecarregar o servidor; em \acrshort{csr}, o foco está em serviços de dados e na entrega eficiente de arquivos iniciais.
+\end{itemize}
+
+\textbf{Segurança} também se faz presente em ambas as abordagens. Boas práticas incluem:
+\begin{itemize}
+    \item Uso de \textbf{HTTPS} para proteger a comunicação.
+    \item Implementação de \textbf{CORS} (Cross-Origin Resource Sharing) quando necessário.
+    \item Tratamento de \textbf{tokens de sessão/autenticação} com cuidado para evitar vazamento de dados.
+\end{itemize}
+
+---
+
+\section{Experiência do Usuário (\english{User Experience} – UX)}
+\label{sec:ux}
+Um dos objetivos principais ao optar por \acrshort{ssr} ou \acrshort{csr} é oferecer uma experiência de usuário satisfatória. Alguns aspectos relevantes incluem:
+
+\begin{itemize}
+    \item \textbf{Tempo de Carregamento Inicial}: Em \acrshort{ssr}, o conteúdo aparece mais rápido para o usuário no primeiro acesso. Em \acrshort{csr}, embora o primeiro carregamento possa ser mais lento (devido ao download e execução de scripts), a navegação interna torna-se mais rápida após a aplicação já estar carregada no navegador.
+    \item \textbf{Interatividade e Navegação}: \acrshort{csr} geralmente proporciona transições fluidas entre páginas e atualizações em tempo real sem recarregamento completo. \acrshort{ssr}, porém, pode recorrer a estratégias de atualização parcial, como AJAX, para melhorar a interatividade.
+    \item \textbf{Acessibilidade}: Independentemente da abordagem, a aplicação deve atender a boas práticas de acessibilidade, garantindo que leitores de tela e outras tecnologias assistivas consigam interpretar adequadamente o conteúdo.
+    \item \textbf{Consistência de Interface}: A aplicação deve manter uma experiência coesa, independentemente de páginas estarem sendo renderizadas no servidor ou no cliente.
+\end{itemize}
+
+\subsection{\english{Search Engine Optimization} (SEO)}
+\label{sec:seo}
+O \textbf{\acrshort{seo}} é o conjunto de técnicas para melhorar o ranqueamento de um site nos resultados dos mecanismos de busca. No contexto de \acrshort{csr} e \acrshort{ssr}, o \acrshort{seo} é especialmente importante por afetar:
+
+\begin{itemize}
+    \item \textbf{Indexação de Conteúdo}: No \acrshort{ssr}, o HTML completo chega aos robôs de busca, facilitando a indexação imediata. Já em \acrshort{csr}, se o robô não executar JavaScript, pode ocorrer indexação incompleta ou ausente.
+    \item \textbf{Metadados Dinâmicos}: O uso de títulos, descrições e tags \textit{Open Graph} deve ser planejado para gerar conteúdo correto em cada rota, principalmente em aplicações SPA.
+    \item \textbf{Velocidade de Carregamento}: O tempo de carregamento é um fator relevante no ranqueamento, exigindo otimizações como \textit{caching}, minificação de scripts, compressão de imagens e \textit{lazy loading}.
+\end{itemize}
+
+Alguns mecanismos de busca modernos suportam \textit{renderização dinâmica} (executando JavaScript para rastrear páginas em CSR), mas configurações incorretas podem prejudicar a visibilidade do site nos resultados de pesquisa.
+
+---
+
+---
+
+\noindent
+Conclui-se, portanto, que \acrshort{ssr} e \acrshort{csr} oferecem caminhos distintos para a criação de aplicações web, cada qual com implicações em termos de desempenho, \acrshort{seo}, infraestrutura e experiência do usuário. Nas próximas seções deste trabalho, será apresentado um estudo de caso prático que visa comparar e avaliar as duas abordagens em diferentes cenários de uso.
+
 \label{s2}
 
 
