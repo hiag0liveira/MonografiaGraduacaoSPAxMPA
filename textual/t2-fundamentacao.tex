@@ -6,7 +6,7 @@ Este capítulo apresenta os conceitos de \english{\acrfull{csr}} e \english{\acr
 \section{\english{Client-Side Rendering} (\acrshort{csr})}
 \label{subsec:csr}
 
-A \textbf{\english{\acrfull{csr}}} é uma técnica em que a geração da interface e do conteúdo final ocorre diretamente no navegador do usuário, utilizando JavaScript\footnote{JavaScript é uma linguagem de programação interpretada utilizada para criar conteúdo dinâmico em páginas web.}. Nessa abordagem, o servidor envia um arquivo \english{\acrfull{html}} mínimo, contendo apenas a estrutura básica da página e referências a arquivos de estilo e scripts.{\cite{atori2024}}
+A \textbf{\english{\acrfull{csr}}} é uma técnica em que a geração da interface e do conteúdo final ocorre diretamente no navegador do usuário, utilizando JavaScript\footnote{JavaScript é uma linguagem de programação interpretada, amplamente utilizada para adicionar interatividade e dinamismo às páginas web. Ela permite implementar funcionalidades como atualizações em tempo real, animações, mapas interativos e validações de formulários, enriquecendo a experiência do usuário. Juntamente com HTML e CSS, JavaScript compõe as três principais tecnologias da World Wide Web. Além de ser executada no navegador (\acrshort{csr}), a linguagem também pode ser utilizada no \english{\acrfull{ssr}} por meio de ambientes como Node.js(um ambiente de execução JavaScript de código aberto e multiplataforma que permite executar código JavaScript no lado do servidor, utilizando uma arquitetura orientada a eventos e não bloqueante, ideal para aplicações escaláveis e em tempo real.\cite{nodejs2025} ), possibilitando o desenvolvimento de aplicações completas com uma única linguagem.\cite{js2025}}. Nessa abordagem, o servidor envia um arquivo \english{\acrfull{html}} mínimo, contendo apenas a estrutura básica da página e referências a arquivos de estilo e scripts.{\cite{atori2024}}
 
 Segundo \citeonline{atori2024}, o processo de renderização no cliente segue as seguintes etapas:
 
@@ -18,7 +18,7 @@ Segundo \citeonline{atori2024}, o processo de renderização no cliente segue as
     \item O conteúdo da página é atualizado de forma interativa conforme o usuário interage com a aplicação.
 \end{enumerate}
 
-Esse modelo é comumente utilizado em aplicações \english{\acrfull{spa}}, nas quais o carregamento inicial é seguido por atualizações dinâmicas sem recarregamento da página. Frameworks como React\footnote{React é uma biblioteca JavaScript para construção de interfaces de usuário, desenvolvida pelo Facebook.}, Vue.js\footnote{Vue.js é um framework JavaScript progressivo utilizado para a criação de interfaces web interativas, focado na camada de visualização.}, Angular\footnote{Angular é um framework para desenvolvimento de aplicações web, mantido pelo Google, que utiliza TypeScript como linguagem principal.} e Svelte\footnote{Svelte é um framework JavaScript que realiza a compilação de componentes no momento do build, gerando código otimizado sem a necessidade de um virtual DOM.} são amplamente utilizados para implementar \acrshort{csr}.
+Esse modelo é comumente utilizado em aplicações \english{\acrfull{spa}}, nas quais o carregamento inicial é seguido por atualizações dinâmicas sem recarregamento da página. Frameworks como React\footnote{React é uma biblioteca JavaScript para construção de interfaces de usuário, desenvolvida pelo Facebook. \cite{react2025} }, Vue.js\footnote{Vue.js é um framework JavaScript progressivo utilizado para a criação de interfaces web interativas, focado na camada de visualização. \cite{vue2025} }, Angular\footnote{Angular é um framework para desenvolvimento de aplicações web, mantido pelo Google, que utiliza TypeScript como linguagem principal. \cite{angular2025} } e Svelte\footnote{Svelte é um framework JavaScript que realiza a compilação de componentes no momento do build, gerando código otimizado sem a necessidade de um virtual DOM. \cite{svelte2025} } são amplamente utilizados para implementar \acrshort{csr}.
 
 \begin{figure}[h!]
     \centering
@@ -34,7 +34,7 @@ Na sequência, o navegador interpreta esse \acrshort{html} e constrói a estrutu
 
 Com os scripts carregados, o navegador executa o código JavaScript, que normalmente utiliza bibliotecas ou frameworks como React ou Vue para gerar dinamicamente o conteúdo da aplicação. Somente após essa etapa o conteúdo completo do site é finalmente exibido ao usuário, quando o navegador conclui o processo de renderização e o site é carregado completamente.
 
-\begin{lstlisting}[language=html, caption={Exemplo de HTML mínimo em aplicação Angular com CSR}, label={lst:angular_html}]
+\begin{lstlisting}[language=html, capt.\ion={Exemplo de HTML mínimo em aplicação Angular com CSR}, label={lst:angular_html}]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,7 +134,7 @@ Para entender como as abordagens \acrshort{ssr} e \acrshort{csr} se inserem no c
 
 \subsection{Protocolo HTTP}
 \label{subsec:http}
-O \textbf{Protocolo de Transferência de Hipertexto} (\acrshort{http}) define como clientes (navegadores) e servidores comunicam-se na web. Na \acrshort{ssr}, cada solicitação aciona a geração dinâmica da página no servidor. Já na \acrshort{csr}, o cliente requisita recursos (HTML mínimo, JavaScript, CSS) e efetua chamadas subsequentes ao servidor para buscar dados adicionais via \textit{APIs}, geralmente no formato \textit{JSON}.
+O \textbf{Protocolo de Transferência de Hipertexto} (\acrshort{http}) define como clientes (navegadores) e servidores comunicam-se na web. Na \acrshort{ssr}, cada solicitação aciona a geração dinâmica da página no servidor.JavaScript é uma linguagem de programação interpretada utilizada para criar conteúdo dinâmico em Já na \acrshort{csr}, o cliente requisita recursos (HTML mínimo, JavaScript, CSS) e efetua chamadas subsequentes ao servidor para buscar dados adicionais via \textit{APIs}, geralmente no formato \textit{JSON}.
 
 Evoluções como HTTP/2 e HTTP/3 trouxeram melhorias de desempenho (multiplexação de requisições, compressão de cabeçalhos, etc.), impactando positivamente o tempo de carregamento tanto em \acrshort{ssr} quanto em \acrshort{csr}.
 
