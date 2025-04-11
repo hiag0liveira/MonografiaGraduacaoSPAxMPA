@@ -174,35 +174,17 @@ A decisão por \acrshort{ssr} ou \acrshort{csr} influencia diretamente a infraes
 
 ---
 
-\section{Experiência do Usuário (\english{User Experience} – UX)}
+\section{Experiência do Usuário}
 \label{sec:ux}
-Um dos objetivos principais ao optar por \acrshort{ssr} ou \acrshort{csr} é oferecer uma experiência de usuário satisfatória. Alguns aspectos relevantes incluem:
-
-\begin{itemize}
-    \item \textbf{Tempo de Carregamento Inicial}: Em \acrshort{ssr}, o conteúdo aparece mais rápido para o usuário no primeiro acesso. Em \acrshort{csr}, embora o primeiro carregamento possa ser mais lento (devido ao download e execução de scripts), a navegação interna torna-se mais rápida após a aplicação já estar carregada no navegador.
-    \item \textbf{Interatividade e Navegação}: \acrshort{csr} geralmente proporciona transições fluidas entre páginas e atualizações em tempo real sem recarregamento completo. \acrshort{ssr}, porém, pode recorrer a estratégias de atualização parcial, como AJAX, para melhorar a interatividade.
-    \item \textbf{Acessibilidade}: Independentemente da abordagem, a aplicação deve atender a boas práticas de acessibilidade, garantindo que leitores de tela e outras tecnologias assistivas consigam interpretar adequadamente o conteúdo.
-    \item \textbf{Consistência de Interface}: A aplicação deve manter uma experiência coesa, independentemente de páginas estarem sendo renderizadas no servidor ou no cliente.
-\end{itemize}
+A \acrfull{ux} é um aspecto crítico no desenvolvimento de aplicações web, influenciando diretamente a satisfação e a eficácia da interação do usuário com o sistema \cite{atori2023}. Para alcançar uma \acrshort{ux} satisfatória, a escolha entre \acrshort{csr} e \acrshort{ssr} deve considerar fatores como: {\acrshort{seo}}, tempo de carregamento, interatividade e responsividade.
+Conforme \citeonline{atori2024}, a \acrshort{ux} vai além da interface gráfica, englobando toda a jornada do usuário desde a navegação até a conclusão de tarefas. 
 
 \subsection{\english{Search Engine Optimization} (SEO)}
 \label{sec:seo}
-O \textbf{\acrshort{seo}} é o conjunto de técnicas para melhorar o ranqueamento de um site nos resultados dos mecanismos de busca. No contexto de \acrshort{csr} e \acrshort{ssr}, o \acrshort{seo} é especialmente importante por afetar:
+O \acrfull{seo} consiste em um conjunto integrado de técnicas de otimização técnica e de conteúdo, com três objetivos principais: a maximização da visibilidade orgânica nos mecanismos de busca, o posicionamento estratégico de páginas-chave e a garantia de uma experiência de usuário qualificada durante o processo de busca \cite{conor2022}.
 
-\begin{itemize}
-    \item \textbf{Indexação de Conteúdo}: No \acrshort{ssr}, o HTML completo chega aos robôs de busca, facilitando a indexação imediata. Já em \acrshort{csr}, se o robô não executar JavaScript, pode ocorrer indexação incompleta ou ausente.
-    \item \textbf{Metadados Dinâmicos}: O uso de títulos, descrições e tags \textit{Open Graph} deve ser planejado para gerar conteúdo correto em cada rota, principalmente em aplicações SPA.
-    \item \textbf{Velocidade de Carregamento}: O tempo de carregamento é um fator relevante no ranqueamento, exigindo otimizações como \textit{caching}, minificação de scripts, compressão de imagens e \textit{lazy loading}.
-\end{itemize}
 
-Alguns mecanismos de busca modernos suportam \textit{renderização dinâmica} (executando JavaScript para rastrear páginas em CSR), mas configurações incorretas podem prejudicar a visibilidade do site nos resultados de pesquisa.
 
----
-
----
-
-\noindent
-Conclui-se, portanto, que \acrshort{ssr} e \acrshort{csr} oferecem caminhos distintos para a criação de aplicações web, cada qual com implicações em termos de desempenho, \acrshort{seo}, infraestrutura e experiência do usuário. Nas próximas seções deste trabalho, será apresentado um estudo de caso prático que visa comparar e avaliar as duas abordagens em diferentes cenários de uso.
 
 \label{s2}
 
