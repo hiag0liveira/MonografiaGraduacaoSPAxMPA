@@ -132,6 +132,37 @@ Por fim, aplicações \acrshort{ssr} tendem a apresentar melhor performance em t
 \section{Fundamentos de Desenvolvimento Web}
 \label{sec:fundamentos-devweb}
 Para entender como as abordagens \acrshort{ssr} e \acrshort{csr} se inserem no cenário de desenvolvimento web, é fundamental revisar protocolos, modelos de arquitetura e ferramentas.
+Os fundamentos de desenvolvimento web englobam os princípios, tecnologias e práticas essenciais para a criação e manutenção de aplicações acessíveis via internet. 
+
+O desenvolvimento web baseia-se na arquitetura cliente-servidor, onde o cliente (geralmente um navegador) solicita recursos ao servidor, que processa essas requisições e retorna os dados necessários. Essa interação é mediada por protocolos como o 
+\english{\acrfull{http}} , que define as regras de comunicação entre cliente e servidor.
+
+As tecnologias fundamentais incluem \english{\acrfull{html}} para estruturação do conteúdo, \english{\acrfull{css}} para estilização e JavaScript para interatividade. Essas linguagens permitem a construção de interfaces dinâmicas e responsivas. Além disso, o desenvolvimento web envolve práticas como controle de versão, testes automatizados e integração contínua, que garantem a qualidade e a escalabilidade das aplicações \cite{fundamentosDevWeb}. 
+
+\subsection{Arquitetura Cliente-Servidor}
+\label{subsec:Arquitetura Cliente-Servidor}
+
+A arquitetura cliente-servidor é um modelo amplamente adotado no desenvolvimento de aplicações web, caracterizado pela separação entre dois componentes principais: o \textbf{cliente}, responsável pela interface com o usuário, e o \textbf{servidor}, que processa solicitações e fornece os recursos necessários \cite{clienteServidorControlNet}.
+
+Nesse modelo, os clientes — como navegadores em diferentes dispositivos — enviam requisições através da internet, enquanto os servidores respondem disponibilizando dados, arquivos e serviços. Essa divisão de responsabilidades favorece a escalabilidade, facilita a manutenção e permite que cliente e servidor operem em plataformas distintas~\cite{fundamentosDevWeb}.
+
+A Figura~\ref{fig:cliente-servidor} ilustra, de forma simplificada, esse fluxo de comunicação entre cliente e servidor.
+
+\begin{figure}[H]
+  \centering
+  \caption{Comunicação entre cliente e servidor.}
+  \includegraphics[width=0.8\textwidth]{media/cliente_servidor.jpeg}
+  \legend{Fonte: \cite{fundamentosDevWeb} }
+  \label{fig:cliente-servidor}
+\end{figure}
+
+
+A arquitetura cliente-servidor apresenta características que contribuem para sua ampla adoção em aplicações web. Entre elas, destaca-se a \textbf{distribuição de responsabilidades}, onde o servidor gerencia dados e processos mais complexos, enquanto o cliente lida com a interface e a interação com o usuário. 
+
+Outro ponto relevante é a \textbf{independência entre plataformas}, possibilitada pelo uso de protocolos padronizados, o que permite a comunicação entre diferentes dispositivos e sistemas operacionais. Além disso, esse modelo favorece a \textbf{facilidade de manutenção}, já que atualizações podem ser feitas no servidor sem necessidade de intervenção nos dispositivos dos usuários.
+
+Na web, essa arquitetura é implementada por padrão: navegadores atuam como clientes, enviando requisições HTTP que são processadas por servidores, os quais respondem com páginas e recursos solicitados~\cite{fundamentosDevWeb}.
+
 
 \subsection{Protocolo HTTP}
 \label{subsec:http}
