@@ -166,9 +166,69 @@ Na web, essa arquitetura é implementada por padrão: navegadores atuam como cli
 
 \subsection{Protocolo HTTP}
 \label{subsec:http}
-O \textbf{Protocolo de Transferência de Hipertexto} (\acrshort{http}) define como clientes (navegadores) e servidores comunicam-se na web. Na \acrshort{ssr}, cada solicitação aciona a geração dinâmica da página no servidor.JavaScript é uma linguagem de programação interpretada utilizada para criar conteúdo dinâmico em Já na \acrshort{csr}, o cliente requisita recursos (HTML mínimo, JavaScript, CSS) e efetua chamadas subsequentes ao servidor para buscar dados adicionais via \textit{APIs}, geralmente no formato \textit{JSON}.
+O \textbf{Protocolo de Transferência de Hipertexto} (\acrshort{http}) é a base da comunicação na World Wide Web, definindo como clientes (navegadores) e servidores trocam informações. Ele especifica a estrutura das requisições e respostas, permitindo a recuperação de recursos como documentos \acrshort(html), imagens e vídeos \cite{mdn_http}.
 
-Evoluções como HTTP/2 e HTTP/3 trouxeram melhorias de desempenho (multiplexação de requisições, compressão de cabeçalhos, etc.), impactando positivamente o tempo de carregamento tanto em \acrshort{ssr} quanto em \acrshort{csr}.
+
+ O \textbf{Funcionamento do \acrshort{http}}opera no modelo cliente-servidor, onde o cliente inicia uma requisição e o servidor responde com os recursos solicitados ou mensagens de erro, se aplicável. Cada interação consiste em uma mensagem de requisição do cliente e uma mensagem de resposta do servidor. As mensagens \acrshort{http} são compostas por:
+
+\begin{itemize}
+    \item \textbf{Linha de início:} Indica o método \acrshort{http} (como \texttt{GET} ou \texttt{POST}) e o caminho do recurso.
+    \item \textbf{Cabeçalhos:} Fornecem informações adicionais sobre a requisição ou resposta, como tipo de conteúdo e codificação.
+    \item \textbf{Corpo:} Contém os dados enviados ou recebidos, sendo opcional dependendo do método utilizado.
+\end{itemize}
+
+\begin{flushright}
+    \cite{mdn_http}
+\end{flushright}
+
+
+\textbf{Métodos \acrshort{http}} são operações definidas pelo protocolo que especificam a ação a ser realizada em um recurso. Os métodos mais comuns incluem:
+
+\begin{itemize}
+    \item \textbf{GET:} Solicita a representação de um recurso específico. Requisições GET devem ser utilizadas apenas para recuperar dados.
+    \item \textbf{POST:} Envia dados ao servidor para processamento, como o envio de formulários.
+    \item \textbf{PUT:} Atualiza um recurso existente ou cria um novo se não existir.
+    \item \textbf{DELETE:} Remove um recurso específico.
+    \item \textbf{HEAD:} Similar ao GET, mas solicita apenas os cabeçalhos da resposta, sem o corpo.
+\end{itemize}
+Cada método possui uma finalidade específica e deve ser utilizado conforme a necessidade da aplicação \cite{wikipedia_http}.
+
+
+\textbf{Códigos de Status \acrshort{http}} são códigos de três dígitos que indicam o resultado de uma requisição feita pelo cliente ao servidor. Eles são agrupados em cinco classes principais:
+
+\begin{itemize}
+    \item \textbf{1xx (Informativo):} Indica que a requisição foi recebida e o processo continua.
+    \item \textbf{2xx (Sucesso):} Indica que a requisição foi bem-sucedida. Exemplo: 200 OK.
+    \item \textbf{3xx (Redirecionamento):} Indica que é necessário tomar medidas adicionais para completar a requisição. Exemplo: 301 Moved Permanently.
+    \item \textbf{4xx (Erro do Cliente):} Indica que houve um erro na requisição do cliente. Exemplo: 404 Not Found.
+    \item \textbf{5xx (Erro do Servidor):} Indica que o servidor falhou ao processar uma requisição válida. Exemplo: 500 Internal Server Error.
+\end{itemize}
+
+Esses códigos auxiliam na identificação e resolução de problemas durante a comunicação \acrshort{http} \cite{mdn_http}.
+
+
+\textbf{Evolução do \acrshort{http}} refere-se às revisões progressivas do protocolo com o objetivo de aprimorar sua eficiência, segurança e desempenho ao longo do tempo. As principais versões são:
+
+\begin{itemize}
+    \item \textbf{HTTP/1.0:} Primeira versão oficial do protocolo, em que cada requisição exigia uma nova conexão com o servidor.
+    \item \textbf{HTTP/1.1:} Introduziu conexões persistentes, permitindo múltiplas requisições por conexão. Trouxe também melhorias no controle de cache e suporte a novos métodos.
+    \item \textbf{HTTP/2:} Implementou multiplexação, compressão de cabeçalhos e priorização de fluxos, resultando em uma transferência de dados mais rápida e eficiente.
+    \item \textbf{HTTP/3:} Baseado no protocolo \acrshort{quic}, substitui o \acrshort{tcp} pelo \acrshort{udp}, oferecendo conexões mais rápidas e seguras, com menor latência e melhor desempenho em redes instáveis.
+\end{itemize}
+
+Essas atualizações refletem a evolução das necessidades da web e a busca por protocolos mais robustos e otimizados \cite{cloudflare_http}.
+
+\textbf{\acrshort{http} e \acrshort{https}} representam protocolos utilizados para comunicação na web, com a principal distinção centrada na segurança da transmissão dos dados.
+
+O \textbf{\english{\acrfull{https}}} é uma extensão do \acrshort{http} que adiciona uma camada de proteção por meio do protocolo \english{\acrfull{tls}} ou, anteriormente, \english{\acrfull{ssl}}. Essa camada de segurança garante a confidencialidade, integridade e autenticidade dos dados trafegados entre cliente e servidor. 
+
+A criptografia utilizada impede que terceiros acessem ou modifiquem as informações transmitidas, o que é fundamental em transações sensíveis, como cadastros, pagamentos e autenticações. Além disso, o uso de \textit{certificados digitais} garante que o site visitado é realmente aquele que afirma ser, protegendo os usuários contra ataques como o \textit{man-in-the-middle}\footnote{Um ataque \textit{man-in-the-middle} ocorre quando um invasor intercepta e possivelmente altera a comunicação entre duas partes que acreditam estar se comunicando diretamente. Isso pode permitir que o invasor capture informações sensíveis ou injete dados maliciosos na comunicação.\cite{wikipedia_man_in_the_middle}}.
+
+Enquanto o \acrshort{http} tradicional opera normalmente na porta \acrshort{tcp} 80, o \acrshort{https} utiliza, por convenção, a porta 443. Atualmente, o uso do \acrshort{https} é fortemente recomendado — e até exigido por navegadores modernos — como padrão de segurança para qualquer aplicação web, contribuindo para a privacidade e confiança dos usuários \cite{wikipedia_http}.
+
+\subsection{HTML, CSS e JavaScript}
+\label{subsec:html-css-js}
+Explicação das três tecnologias básicas da web e seus papéis no desenvolvimento frontend.
 
 \subsection{Modelos de Arquitetura Web}
 \label{subsec:modelos-arq-web}
