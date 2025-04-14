@@ -18,13 +18,68 @@ Esta seção apresenta a estratégia de buscas de artigos científicos e livros 
 \begin{itemize}
     \item \textbf{Periódicos Capes:} É uma ferramenta disponibilizada pelo governo federal para uso de estudantes e pesquisadores. Acessando através da instituição de ensino ou pesquisa, é possível ter acesso completo a uma grande quantidade de artigos científicos publicados em variadas revistas, conferências e universidades. A principal vantagem dessa ferramenta é a possibilidade de ler o conteúdo integral de grande parte das publicações disponíveis. Por outro lado, as expressões de busca atualmente suportadas são bem limitadas.
     \item \textbf{\english{Scopus:}} Trata-se de um ferramenta similar ao Periódicos Capes. No entanto, o \english{Scopus} permite a elaboração de expressões de buscas mais complexas e sofisticadas, servindo para descobrir publicações não detectadas pelas outras plataformas. Além disso, possui um acervo bem mais amplo que o Periódicos Capes. Entretanto, algumas publicações não podem ser vistas na íntegra de forma gratuita.
+    \item \textbf{\english{PICOC}}: A técnica \english{PICOC} foi utilizada para estruturar e refinar a estratégia de busca. Essa abordagem consiste em definir cinco elementos principais que auxiliam na formulação da expressão booleana para a pesquisa:
+\begin{itemize}
+    \item \textbf{P (População/Problema):} Define os estudos ou o grupo de interesse, ou seja, o problema ou a população que se deseja investigar. Por exemplo, “artigos que tratem da integração de tecnologias digitais na educação.”
+    \item \textbf{I (Intervenção/Interesse):} Refere-se à intervenção, prática ou fenômeno que está sendo analisado. Neste caso, pode ser a “inserção de tecnologias digitais nos processos de ensino e aprendizagem.”
+    \item \textbf{C (Comparação):} Descreve o(s) elemento(s) com os quais a intervenção ou situação é comparada, como “ensino tradicional” ou a comparação entre diferentes estratégias digitais, quando aplicável.
+    \item \textbf{O (Outcome/Desfecho):} Indica os resultados ou efeitos esperados da intervenção. Por exemplo, “melhora do desempenho acadêmico” ou “maior engajamento dos alunos.”
+    \item \textbf{C (Contexto):} Considera o ambiente ou cenário onde a intervenção ocorre, como “instituições de ensino, universidades” ou “publicações indexadas em bases internacionais.”
+\end{itemize}
+A partir da definição desses elementos, foi possível construir uma expressão booleana que unisse os principais termos de interesse para a pesquisa. Esse método colaborou para refinar os resultados, tornando a busca mais precisa e abrangente, conforme exemplificado no \autoref{quad:quadro_picoc}.
     \item \textbf{\english{Google Docs:}} Ferramenta desenvolvida pela \english{Google LLC} que permite a criação e edição de documentos de texto. Suas grandes vantagens em relação a ferramentas de outros fornecedores são as avançadas ferramentas de colaboração e a possibilidade de acesso por meio de navegadores \english{web}, sem necessidade de instalação de \english{software} específico.
     \item \textbf{\english{Google Sheets}}: Com as mesmas características e vantagens do \english{Google Docs}, essa ferramenta fornece recursos para elaboração de planilhas de cálculo. É muito útil para realizar análise de dados simples e também visualizar e apresentar dados tabulares.
 \end{itemize}
 
-Como grande parte das publicações na área de computação são em inglês, esta pesquisa utiliza esse idioma para fazer buscas nas ferramentas indicadas. Além disso, \acrfull{csr} e \acrfull{ssr} são relativamente recentes, as buscas se limitaram a publicações feitas nos últimos 20 anos.
 
-Os termos-chave para realização das buscas são: Microsserviço, \acrshort{csr} e \acrlong{ssr}. Como a busca é feita em inglês, se usará \english{web performance} nas buscas.
+
+% Como grande parte das publicações na área de computação são em inglês, esta pesquisa utiliza esse idioma para fazer buscas nas ferramentas indicadas. Além disso, \acrfull{csr} e \acrfull{ssr} são relativamente recentes, as buscas se limitaram a publicações feitas nos últimos 20 anos.
+
+% Os termos-chave para realização das buscas são: Microsserviço, \acrshort{csr} e \acrlong{ssr}. Como a busca é feita em inglês, se usará \english{web performance} nas buscas.
+
+\subsection{Quadro PICOC}
+\label{section:quadro_picoc}
+
+\begin{quadro}[H]
+\centering
+
+\setlength{\tabcolsep}{0.8em} % espaçamento horizontal
+\renewcommand{\arraystretch}{1.5} % espaçamento vertical
+\caption{Estrutura PICOC aplicada à pesquisa}
+\begin{tabular}{|p{1.5in}|p{4.2in}|}
+\hline
+\textbf{Elemento} & \textbf{Descrição} \\ \hline
+
+\textbf{P (População/Problema)} & 
+Equipes de desenvolvimento web, arquitetos de software e gestores de TI que precisam escolher estratégias de renderização (\acrshort{csr} ou \acrshort{ssr}) para aplicações web modernas, visando otimizar desempenho, \acrshort{seo} e experiência do usuário. 
+\\ \hline
+
+\textbf{I (Intervenção)} & 
+Adoção de técnicas de \textbf{\acrshort{csr}} (Client-Side Rendering): todo (ou quase todo) o conteúdo gerado no lado do cliente, utilizando frameworks/libraries como React, Vue, Angular etc.
+\\ \hline
+
+\textbf{C (Comparação)} & 
+Implementação de \textbf{\acrshort{ssr}} (Server-Side Rendering): conteúdo pré-renderizado no servidor antes de ser enviado ao cliente, usando \emph{meta-frameworks} como Next.js, Nuxt.js, SvelteKit, Angular Universal, entre outros.
+\\ \hline
+
+\textbf{O (Outcome / Resultado)} & 
+\begin{itemize}
+  \item Métricas de desempenho (tempo de carregamento, \textit{time-to-first-byte}, \textit{largest contentful paint}, etc.)
+  \item Impacto no \textbf{\acrshort{seo}} (indexabilidade, posicionamento em buscadores)
+  \item Experiência do usuário e usabilidade
+  \item Escalabilidade do sistema (uso de recursos de servidor/cliente)
+\end{itemize}
+\\ \hline
+
+\textbf{C (Contexto)} & 
+Aplicações web modernas que buscam equilibrar interatividade, rapidez de carregamento, otimização para motores de busca e redução de custos operacionais. O estudo pode ser aplicado a sistemas de e-commerce, portais de conteúdo, \emph{landing pages}, etc.
+\\ \hline
+
+\end{tabular}
+\label{quad:quadro_picoc}
+\fonte{os autores}
+\end{quadro}
+
 
 \subsection{Expressão de busca}
 \label{section:string_busca}
@@ -39,10 +94,60 @@ Os termos-chave para realização das buscas são: Microsserviço, \acrshort{csr
 
 \hline
 Expressão de Busca \\ \hline
-\english{( ( TITLE-ABS-KEY (CSR OR Client-Side Rendering) AND TITLE-ABS-KEY (SSR OR Server-Side Rendering) AND TITLE-ABS-KEY (web performance)
-) )} \\ \hline
+\english{(TITLE-ABS-KEY("Client-Side Rendering" OR "CSR" OR "Server-Side Rendering" OR "SSR")) AND (TITLE-ABS-KEY("web performance" OR "page speed" OR "web optimization" OR "SEO" OR "search engine optimization" OR "user experience" OR "UX" OR "usability"))} \\ \hline
 
 \end{tabular}
 \label{quad:string_busca}
 \fonte{os autores}
 \end{quadro}
+
+\subsection{Estratégia de seleção}
+\label{section:estrategia_selecao}
+A estratégia de seleção dos artigos foi baseada em critérios de inclusão e exclusão, conforme descrito a seguir:
+\begin{itemize}
+    \item \textbf{Critérios de inclusão:}
+    \begin{itemize}
+        \item Artigos publicados entre 2015 e 2025.
+        \item Artigos que abordem o impacto de \acrshort{csr} e \acrshort{ssr} em aplicações web.
+        \item Artigos que apresentem resultados de experimentos ou estudos de caso relacionados a \acrshort{csr} e \acrshort{ssr}.
+    \end{itemize}
+    \item \textbf{Critérios de exclusão:}
+    \begin{itemize}
+        \item Artigos que não estejam disponíveis na íntegra.
+        \item Artigos que não abordem diretamente o tema da pesquisa.
+        \item Artigos que sejam duplicados ou muito semelhantes a outros já selecionados.
+    \end{itemize}
+\end{itemize}
+
+\section{Caracterização de pesquisa}
+\label{section:caracterizacao_pesquisa}
+Na \autoref{fig:docs_by_year}, é apresentado o número de publicações identificadas por ano, entre 2015 e 2025. Observa-se um crescimento gradual a partir de 2015, com alguns picos notáveis em 2018 e principalmente em 2023, que apresentou o maior número de documentos publicados (15). Após esse ápice, verifica-se uma queda acentuada em 2024 e um número ainda reduzido em 2025, reflexo do fato de que a busca foi realizada no mês de abril deste mesmo ano, não contemplando ainda todas as publicações do período. Ao todo, foram encontrados 96 documentos relevantes para a pesquisa, distribuídos de forma desigual ao longo dos anos, evidenciando o crescente interesse da comunidade científica pelo tema, especialmente nos últimos cinco anos.
+
+\begin{figure}[H]
+    \centering
+    \caption{Número de publicações ao longo dos anos}
+    \includegraphics[width=0.9\textwidth]{media/docs_by_year.png}
+    \legend{Fonte: Scopus}
+    \label{fig:docs_by_year}
+\end{figure}
+
+Na \autoref{fig:docs_by_country} são apresentados os países com maior número de publicações relacionadas ao tema desta pesquisa. Observa-se que a China lidera com 16 documentos, seguida pela Alemanha, com 9 publicações. Em seguida, aparecem Índia, Reino Unido e Estados Unidos, cada um com 8 documentos. Outros países com destaque incluem Turquia (6), Austrália, Dinamarca, Japão e Polônia, todos com 4 publicações. Esses dados indicam uma concentração significativa de estudos em países com forte presença tecnológica e acadêmica, especialmente na Ásia, Europa Ocidental e América do Norte, refletindo o interesse global na comparação entre abordagens de renderização em aplicações web modernas.
+
+\begin{figure}[H]
+    \centering
+    \caption{Distribuição das publicações por país}
+    \includegraphics[width=0.9\textwidth]{media/docs_by_country.png}
+    \legend{Fonte: Scopus}
+    \label{fig:docs_by_country}
+\end{figure}
+
+
+\section{Artigos selecionados}
+\label{section:artigos_selecionados}
+
+
+
+\section{Resultados e Discussão}
+\label{section:resultados_discussao}
+
+
