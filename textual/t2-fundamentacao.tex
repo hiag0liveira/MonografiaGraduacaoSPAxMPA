@@ -226,49 +226,75 @@ A criptografia utilizada impede que terceiros acessem ou modifiquem as informaç
 
 Enquanto o \acrshort{http} tradicional opera normalmente na porta \acrshort{tcp} 80, o \acrshort{https} utiliza, por convenção, a porta 443. Atualmente, o uso do \acrshort{https} é fortemente recomendado — e até exigido por navegadores modernos — como padrão de segurança para qualquer aplicação web, contribuindo para a privacidade e confiança dos usuários \cite{wikipedia_http}.
 
-\subsection{HTML, CSS e JavaScript}
+\subsection{\acrshort{html}, \acrshort{css} e JavaScript}
 \label{subsec:html-css-js}
-Explicação das três tecnologias básicas da web e seus papéis no desenvolvimento frontend.
 
-\subsection{Modelos de Arquitetura Web}
-\label{subsec:modelos-arq-web}
-Os modelos arquiteturais variam conforme os requisitos de escalabilidade, manutenção e desempenho:
+O desenvolvimento \textit{frontend}\footnote{%
+\textit{Frontend} refere-se à camada de apresentação de uma aplicação web, ou seja, a interface gráfica com a qual os usuários interagem diretamente. Envolve a implementação de elementos visuais e interativos, como menus, botões e formulários, utilizando tecnologias como \acrshort{html}, \acrshort{css} e JavaScript. Essa camada é fundamental para proporcionar uma experiência de usuário intuitiva e responsiva~\cite{aws_frontend_backend}.
+} de aplicações web baseia-se em um conjunto de tecnologias fundamentais que operam em conjunto para fornecer estrutura, estilo e interatividade às páginas: \acrshort{html}, \acrshort{css} e JavaScript. Cada uma dessas linguagens desempenha um papel específico e complementar, sendo essenciais tanto em abordagens tradicionais quanto em técnicas modernas como o \acrshort{csr}.
 
-\begin{itemize}
-    \item \textbf{Arquitetura Monolítica}: Um único projeto concentra \textit{frontend} e \textit{backend}, frequentemente usando \acrshort{ssr}. Possui inicialização simples, mas pode tornar-se complexo de manter e escalar.
-    \item \textbf{Microserviços}: Divide a aplicação em múltiplos serviços independentes. Cada serviço pode escolher a melhor abordagem de renderização (SSR ou CSR), facilitando a escalabilidade seletiva.
-    \item \textbf{Serverless}: As funções são executadas sob demanda em plataformas de nuvem, onde a renderização pode ocorrer tanto no servidor (funções que retornam HTML) quanto no cliente (ao entregar apenas APIs).
-\end{itemize}
+\textbf{\acrfull{html}} é a linguagem de marcação padrão para a criação da estrutura de páginas web. Através de um conjunto de elementos (ou \textit{tags}), o \acrshort{html} organiza e define o conteúdo exibido ao usuário, como textos, imagens, links, formulários e tabelas. Além de estruturar visualmente o documento, o \acrshort{html} também confere semântica aos elementos, facilitando a indexação por motores de busca e promovendo acessibilidade para leitores de tela. Elementos como \texttt{<header>}, \texttt{<main>}, \texttt{<article>} e \texttt{<footer>} exemplificam essa função semântica~\cite{alura_htmlcssjs}.
 
-\subsection{Ferramentas e \textit{Frameworks}}
-\label{subsec:ferramentas-frameworks}
-O ecossistema de desenvolvimento web oferece diversas ferramentas que simplificam \acrshort{ssr} e \acrshort{csr}:
+\textbf{\acrfull{css}} é a linguagem responsável pela estilização das páginas web. Com o \acrshort{css}, define-se a aparência dos elementos estruturados no \acrshort{html}, controlando propriedades visuais como cores, fontes, espaçamentos, tamanhos e posicionamentos. O \acrshort{css} permite ainda a construção de layouts complexos e responsivos, adaptando o conteúdo para diferentes tamanhos de tela e dispositivos. A separação entre estrutura (\acrshort{html}) e estilo (\acrshort{css}) é um dos pilares das boas práticas em desenvolvimento web, promovendo manutenibilidade, reutilização e modularidade do código.
 
-\begin{itemize}
-    \item \textbf{\acrshort{ssr}}: \textit{Next.js} (React), \textit{Nuxt.js} (Vue), \textit{SvelteKit} (Svelte), entre outros.
-    \item \textbf{\acrshort{csr}}: React, Vue.js, Angular e muitas bibliotecas voltadas para \textit{Single Page Applications} (SPA).
-\end{itemize}
+Entre os recursos modernos do \acrshort{css}, destacam-se os seletores avançados, variáveis \acrshort{css}, pseudo-classes, animações e as funcionalidades de \textit{Flexbox} e \textit{Grid}, que facilitam a criação de interfaces ricas e adaptáveis~\cite{herocode_diferencas}.
+
+\textbf{JavaScript} é uma linguagem de programação interpretada, orientada a objetos e baseada em eventos, que permite adicionar comportamento e interatividade às páginas. Ao manipular a \textit{\acrfull{dom}}, o JavaScript possibilita respostas dinâmicas às ações do usuário, como cliques, envio de formulários, movimentações do mouse ou digitação. Essa linguagem é essencial para o carregamento assíncrono de dados por meio da técnica \textit{AJAX} (\textit{Asynchronous JavaScript and XML}), evitando recarregamentos completos da página e melhorando a experiência do usuário~\cite{alura_htmlcssjs}.
+
+Além disso, JavaScript desempenha papel central na construção de aplicações baseadas em \acrshort{csr}, onde a renderização das páginas ocorre no lado do cliente. Com o avanço do ecossistema JavaScript, surgiram bibliotecas e frameworks robustos como React, Vue.js e Angular, que permitem o desenvolvimento de aplicações complexas com componentes reutilizáveis e gerenciamento eficiente de estado.
+
+A interação entre essas três tecnologias pode ser compreendida por meio de uma analogia: o \acrshort{html} representa a estrutura de um corpo (esqueleto), o \acrshort{css} corresponde à sua aparência externa (pele, roupas, estilo), enquanto o JavaScript age como os músculos e o sistema nervoso, controlando os movimentos e respostas interativas da aplicação. A Figura~\ref{fig:html-css-js} ilustra essa relação.
+
+\begin{figure}[H]
+  \centering
+  \caption{Analogia entre HTML, CSS e JavaScript e os componentes de um corpo humano.}
+  \includegraphics[width=0.6\textwidth]{media/html_css_js_analogia.png}
+  \legend{Fonte: \cite{herocode_diferencas}.}
+  \label{fig:html-css-js}
+\end{figure}
+
+Portanto, o domínio dessas três tecnologias é indispensável para qualquer desenvolvedor web. Elas formam o alicerce sobre o qual se constroem interfaces acessíveis, performáticas e envolventes, sendo empregadas tanto em aplicações renderizadas no servidor (\acrshort{ssr}) quanto no cliente (\acrshort{csr}), com adaptações específicas conforme a abordagem escolhida.
 
 
-\section{Infraestrutura de Serviço Web}
-\label{sec:infraestrutura-web}
+% \subsection{Modelos de Arquitetura Web}
+% \label{subsec:modelos-arq-web}
+% Os modelos arquiteturais variam conforme os requisitos de escalabilidade, manutenção e desempenho:
 
-A decisão por \acrshort{ssr} ou \acrshort{csr} influencia diretamente a infraestrutura necessária:
+% \begin{itemize}
+%     \item \textbf{Arquitetura Monolítica}: Um único projeto concentra \textit{frontend} e \textit{backend}, frequentemente usando \acrshort{ssr}. Possui inicialização simples, mas pode tornar-se complexo de manter e escalar.
+%     \item \textbf{Microserviços}: Divide a aplicação em múltiplos serviços independentes. Cada serviço pode escolher a melhor abordagem de renderização (SSR ou CSR), facilitando a escalabilidade seletiva.
+%     \item \textbf{Serverless}: As funções são executadas sob demanda em plataformas de nuvem, onde a renderização pode ocorrer tanto no servidor (funções que retornam HTML) quanto no cliente (ao entregar apenas APIs).
+% \end{itemize}
 
-\begin{itemize}
-    \item \textbf{Servidores e Processamento}: Em \acrshort{ssr}, o servidor gera páginas dinamicamente, aumentando a carga de CPU. Já em \acrshort{csr}, o servidor atua mais como um provedor de arquivos estáticos e APIs.
-    \item \textbf{\english{Content Delivery Networks} (CDNs)}: Tanto para SSR quanto para CSR, uma CDN pode melhorar a distribuição de arquivos estáticos (HTML, CSS, JavaScript, imagens) e reduzir a latência.
-    \item \textbf{Escalabilidade}: Aplicações com alto número de requisições precisam de estratégias adequadas para lidar com picos de acesso. Em \acrshort{ssr}, muitas requisições simultâneas podem sobrecarregar o servidor; em \acrshort{csr}, o foco está em serviços de dados e na entrega eficiente de arquivos iniciais.
-\end{itemize}
+% \subsection{Ferramentas e \textit{Frameworks}}
+% \label{subsec:ferramentas-frameworks}
+% O ecossistema de desenvolvimento web oferece diversas ferramentas que simplificam \acrshort{ssr} e \acrshort{csr}:
 
-\textbf{Segurança} também se faz presente em ambas as abordagens. Boas práticas incluem:
-\begin{itemize}
-    \item Uso de \textbf{HTTPS} para proteger a comunicação.
-    \item Implementação de \textbf{CORS} (Cross-Origin Resource Sharing) quando necessário.
-    \item Tratamento de \textbf{tokens de sessão/autenticação} com cuidado para evitar vazamento de dados.
-\end{itemize}
+% \begin{itemize}
+%     \item \textbf{\acrshort{ssr}}: \textit{Next.js} (React), \textit{Nuxt.js} (Vue), \textit{SvelteKit} (Svelte), entre outros.
+%     \item \textbf{\acrshort{csr}}: React, Vue.js, Angular e muitas bibliotecas voltadas para \textit{Single Page Applications} (SPA).
+% \end{itemize}
 
----
+
+% \section{Infraestrutura de Serviço Web}
+% \label{sec:infraestrutura-web}
+
+% A decisão por \acrshort{ssr} ou \acrshort{csr} influencia diretamente a infraestrutura necessária:
+
+% \begin{itemize}
+%     \item \textbf{Servidores e Processamento}: Em \acrshort{ssr}, o servidor gera páginas dinamicamente, aumentando a carga de CPU. Já em \acrshort{csr}, o servidor atua mais como um provedor de arquivos estáticos e APIs.
+%     \item \textbf{\english{Content Delivery Networks} (CDNs)}: Tanto para SSR quanto para CSR, uma CDN pode melhorar a distribuição de arquivos estáticos (HTML, CSS, JavaScript, imagens) e reduzir a latência.
+%     \item \textbf{Escalabilidade}: Aplicações com alto número de requisições precisam de estratégias adequadas para lidar com picos de acesso. Em \acrshort{ssr}, muitas requisições simultâneas podem sobrecarregar o servidor; em \acrshort{csr}, o foco está em serviços de dados e na entrega eficiente de arquivos iniciais.
+% \end{itemize}
+
+% \textbf{Segurança} também se faz presente em ambas as abordagens. Boas práticas incluem:
+% \begin{itemize}
+%     \item Uso de \textbf{HTTPS} para proteger a comunicação.
+%     \item Implementação de \textbf{CORS} (Cross-Origin Resource Sharing) quando necessário.
+%     \item Tratamento de \textbf{tokens de sessão/autenticação} com cuidado para evitar vazamento de dados.
+% \end{itemize}
+
+% ---
 
 \section{Experiência do Usuário (\english{User Experience} – UX)}
 \label{sec:ux}
