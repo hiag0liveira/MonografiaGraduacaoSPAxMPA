@@ -103,9 +103,9 @@ Enquanto o \acrshort{http} tradicional opera normalmente na porta \acrshort{tcp}
 \subsection{\acrshort{html}, \acrshort{css} e JavaScript}
 \label{subsec:html-css-js}
 
-O desenvolvimento \textit{frontend}\footnote{%
-\textit{Frontend} refere-se à camada de apresentação de uma aplicação web, ou seja, a interface gráfica com a qual os usuários interagem diretamente. Envolve a implementação de elementos visuais e interativos, como menus, botões e formulários, utilizando tecnologias como \acrshort{html}, \acrshort{css} e JavaScript. Essa camada é fundamental para proporcionar uma experiência de usuário intuitiva e responsiva~\cite{aws_frontend_backend}.
-} de aplicações web baseia-se em um conjunto de tecnologias fundamentais que operam em conjunto para fornecer estrutura, estilo e interatividade às páginas: \acrshort{html}, \acrshort{css} e JavaScript. Cada uma dessas linguagens desempenha um papel específico e complementar, sendo essenciais tanto em abordagens tradicionais quanto em técnicas modernas como o \acrshort{csr}.
+
+O desenvolvimento frontend, conforme definido por \citeonline{aws_frontend_backend}, refere-se à camada de apresentação de uma aplicação web — a interface gráfica com a qual os usuários interagem diretamente, composta por menus, botões, formulários e outros elementos visuais. Essa camada baseia-se em um conjunto de tecnologias fundamentais que operam em conjunto para fornecer estrutura, estilo e interatividade às páginas: \acrshort{html}, \acrshort{css} e JavaScript. Cada uma dessas linguagens desempenha um papel específico e complementar, sendo essenciais tanto em abordagens tradicionais quanto em técnicas modernas como o \acrshort{csr}.
+
 
 \textbf{\acrfull{html}} é a linguagem de marcação padrão para a criação da estrutura de páginas web. Através de um conjunto de elementos (ou \textit{tags}), o \acrshort{html} organiza e define o conteúdo exibido ao usuário, como textos, imagens, links, formulários e tabelas. Além de estruturar visualmente o documento, o \acrshort{html} também confere semântica aos elementos, facilitando a indexação por motores de busca e promovendo acessibilidade para leitores de tela. Elementos como \texttt{<header>}, \texttt{<main>}, \texttt{<article>} e \texttt{<footer>} exemplificam essa função semântica~\cite{alura_htmlcssjs}.
 
@@ -113,9 +113,11 @@ O desenvolvimento \textit{frontend}\footnote{%
 
 Entre os recursos modernos do \acrshort{css}, destacam-se os seletores avançados, variáveis \acrshort{css}, pseudo-classes, animações e as funcionalidades de \textit{Flexbox} e \textit{Grid}, que facilitam a criação de interfaces ricas e adaptáveis~\cite{herocode_diferencas}.
 
-\textbf{JavaScript} é uma linguagem de programação interpretada, orientada a objetos e baseada em eventos, que permite adicionar comportamento e interatividade às páginas. Ao manipular a \textit{\acrfull{dom}}, o JavaScript possibilita respostas dinâmicas às ações do usuário, como cliques, envio de formulários, movimentações do mouse ou digitação. Essa linguagem é essencial para o carregamento assíncrono de dados por meio da técnica \textit{AJAX} (\textit{Asynchronous JavaScript and XML}), evitando recarregamentos completos da página e melhorando a experiência do usuário~\cite{alura_htmlcssjs}.
+\textbf{JavaScript} é uma linguagem de programação interpretada, orientada a objetos e baseada em eventos, amplamente utilizada para adicionar interatividade e dinamismo às páginas web. Por meio da manipulação da \textit{\acrfull{dom}}, permite implementar funcionalidades como respostas a cliques, envio de formulários, movimentações do mouse, digitação, animações, validações e atualizações em tempo real, enriquecendo significativamente a experiência do usuário~\cite{alura_htmlcssjs}. Além disso, possibilita o carregamento assíncrono de dados com a técnica \textit{AJAX} (\textit{Asynchronous JavaScript and XML}), evitando recarregamentos completos da página.
 
-Além disso, JavaScript desempenha papel central na construção de aplicações baseadas em \acrshort{csr}, onde a renderização das páginas ocorre no lado do cliente. Com o avanço do ecossistema JavaScript, surgiram bibliotecas e frameworks robustos como React, Vue.js e Angular, que permitem o desenvolvimento de aplicações complexas com componentes reutilizáveis e gerenciamento eficiente de estado.
+JavaScript é uma das três principais tecnologias da World Wide Web, juntamente com \acrshort{html} e \acrshort{css}, sendo essencial tanto em abordagens tradicionais quanto modernas. Nas aplicações baseadas em \acrshort{csr}, essa linguagem tem papel central, pois a renderização das páginas ocorre diretamente no navegador do usuário. Com a evolução do ecossistema JavaScript, surgiram bibliotecas e frameworks robustos como a biblioteca React e os frameworks Vue.js e Angular que facilitam o desenvolvimento de aplicações complexas com componentes reutilizáveis e gerenciamento eficiente de estado.
+
+Adicionalmente, o JavaScript também pode ser executado no lado do servidor (\acrshort{ssr}) por meio de ambientes como o Node.js — uma plataforma de código aberto e multiplataforma baseada em eventos e não bloqueante, ideal para aplicações escaláveis e em tempo real~\cite{nodejs2025, js2025}. Isso permite o desenvolvimento de aplicações completas utilizando uma única linguagem em ambas as camadas, cliente e servidor.
 
 A interação entre essas três tecnologias pode ser compreendida por meio de uma analogia: o \acrshort{html} representa a estrutura de um corpo (esqueleto), o \acrshort{css} corresponde à sua aparência externa (pele, roupas, estilo), enquanto o JavaScript age como os músculos e o sistema nervoso, controlando os movimentos e respostas interativas da aplicação. A Figura~\ref{fig:html-css-js} ilustra essa relação.
 
@@ -133,7 +135,7 @@ Portanto, o domínio dessas três tecnologias é indispensável para qualquer de
 \section{\english{Client-Side Rendering} (\acrshort{csr})}
 \label{subsec:csr}
 
-A \textbf{\english{\acrfull{csr}}} é uma técnica em que a geração da interface e do conteúdo final ocorre diretamente no navegador do usuário, utilizando JavaScript\footnote{JavaScript é uma linguagem de programação interpretada, amplamente utilizada para adicionar interatividade e dinamismo às páginas web. Ela permite implementar funcionalidades como atualizações em tempo real, animações, mapas interativos e validações de formulários, enriquecendo a experiência do usuário. Juntamente com HTML e CSS, JavaScript compõe as três principais tecnologias da World Wide Web. Além de ser executada no navegador (\acrshort{csr}), a linguagem também pode ser utilizada no \english{\acrfull{ssr}} por meio de ambientes como Node.js(um ambiente de execução JavaScript de código aberto e multiplataforma que permite executar código JavaScript no lado do servidor, utilizando uma arquitetura orientada a eventos e não bloqueante, ideal para aplicações escaláveis e em tempo real.\cite{nodejs2025} ), possibilitando o desenvolvimento de aplicações completas com uma única linguagem.\cite{js2025}}. Nessa abordagem, o servidor envia um arquivo \english{\acrfull{html}} mínimo, contendo apenas a estrutura básica da página e referências a arquivos de estilo e scripts.{\cite{atori2024}}
+A \textbf{\english{\acrfull{csr}}} é uma técnica em que a geração da interface e do conteúdo final ocorre diretamente no navegador do usuário, utilizando JavaScript. Nessa abordagem, o servidor envia um arquivo \english{\acrfull{html}} mínimo, contendo apenas a estrutura básica da página e referências a arquivos de estilo e scripts.{\cite{atori2024}}
 
 Segundo \citeonline{atori2024}, o processo de renderização no cliente segue as seguintes etapas:
 
@@ -145,15 +147,19 @@ Segundo \citeonline{atori2024}, o processo de renderização no cliente segue as
     \item O conteúdo da página é atualizado de forma interativa conforme o usuário interage com a aplicação.
 \end{enumerate}
 
-Esse modelo é comumente utilizado em aplicações \english{\acrfull{spa}}, nas quais o carregamento inicial é seguido por atualizações dinâmicas sem recarregamento da página. Frameworks como React\footnote{React é uma biblioteca JavaScript para construção de interfaces de usuário, desenvolvida pelo Facebook. \cite{react2025} }, Vue.js\footnote{Vue.js é um framework JavaScript progressivo utilizado para a criação de interfaces web interativas, focado na camada de visualização. \cite{vue2025} }, Angular\footnote{Angular é um framework para desenvolvimento de aplicações web, mantido pelo Google, que utiliza TypeScript como linguagem principal. \cite{angular2025} } e Svelte\footnote{Svelte é um framework JavaScript que realiza a compilação de componentes no momento do build, gerando código otimizado sem a necessidade de um virtual DOM. \cite{svelte2025} } são amplamente utilizados para implementar \acrshort{csr}.
+Esse modelo é comumente utilizado em aplicações \english{\acrfull{spa}}, nas quais o carregamento inicial é seguido por atualizações dinâmicas sem recarregamento da página. Ferramentas como a biblioteca React, e frameworks como Vue.js, Angular e Svelte são amplamente utilizadas para implementar \acrshort{csr}, permitindo o desenvolvimento de interfaces dinâmicas, interativas e responsivas.
+
+
+A renderização no lado do cliente (\acrshort{csr}) é especialmente vantajosa em aplicações que exigem alta interatividade e atualizações frequentes de conteúdo, como redes sociais, plataformas de streaming e jogos online. No entanto, essa abordagem pode apresentar desvantagens em termos de desempenho inicial e \acrshort{seo}, uma vez que o conteúdo só é exibido após a execução do JavaScript, o que pode impactar negativamente a indexação por motores de busca e a experiência do usuário em conexões lentas \cite{atori2024}.
 
 \begin{figure}[h!]
     \centering
     \caption{Etapas do método de renderização no lado do cliente}
-    \includegraphics[width=0.9\textwidth]{media/client_side_rendering.png}
+    \includegraphics[width=0.8\textwidth]{media/client_side_rendering.png}
     \legend{Fonte: \cite{atori2024} (adaptado)}
     \label{fig:client_side_rendering}
 \end{figure}
+
 
 A \autoref{fig:client_side_rendering} ilustra visualmente o fluxo completo da renderização no lado do cliente (\acrshort{csr}). O processo é iniciado quando o usuário acessa o site em questão. Em resposta, o servidor envia o arquivo \acrshort{html} básico, contendo apenas links para os arquivos de estilo \acrshort{css} e scripts JavaScript responsáveis por carregar e renderizar o conteúdo da aplicação.
 
@@ -161,7 +167,8 @@ Na sequência, o navegador interpreta esse \acrshort{html} e constrói a estrutu
 
 Com os scripts carregados, o navegador executa o código JavaScript, que normalmente utiliza bibliotecas ou frameworks como React ou Vue para gerar dinamicamente o conteúdo da aplicação. Somente após essa etapa o conteúdo completo do site é finalmente exibido ao usuário, quando o navegador conclui o processo de renderização e o site é carregado completamente.
 
-\begin{lstlisting}[language=html, capt.\ion={Exemplo de HTML mínimo em aplicação Angular com CSR}, label={lst:angular_html}]
+\begin{codigo}[H]
+  \begin{lstlisting}[language=html]
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -182,6 +189,9 @@ Com os scripts carregados, o navegador executa o código JavaScript, que normalm
 </body>
 </html>
 \end{lstlisting}
+  \caption{Exemplo de HTML mínimo em aplicação Angular com CSR}
+  \label{lst:angular_html}
+\end{codigo}
 
 Esse padrão é típico de aplicações \acrshort{spa}, onde todo o conteúdo é inserido dinamicamente a partir da execução dos arquivos JavaScript. O elemento \texttt{<app-root>} funciona como ponto de entrada da aplicação, sendo substituído no navegador pelos componentes definidos no framework Angular. {\cite{atori2024}}
 
@@ -212,47 +222,127 @@ Nesse modelo, a fase de hydration\footnote{Hydration é uma etapa essencial no \
 
 A \autoref{fig:server_side_rendering} ilustra o fluxo de uma aplicação \acrshort{ssr}. Ao receber a requisição, o servidor gera a página completa em \acrshort{html} e a envia ao cliente. Essa estratégia costuma ser vantajosa em cenários onde o carregamento inicial rápido e a indexação por motores de busca são prioridades, como em sites de e-commerce e páginas de \emph{landing}, permitindo que o usuário visualize o conteúdo de forma imediata. 
 
+\emph{Meta-frameworks} como Next.js, Nuxt.js, SvelteKit, Angular Universal, Remix, Astro e Qwik são amplamente utilizados para construir aplicações com suporte a \acrshort{ssr}. Esses frameworks operam em um nível superior aos tradicionais (como React, Vue ou Svelte), agregando funcionalidades comuns ao desenvolvimento web, como roteamento, pré-renderização, recuperação de dados e \emph{hydration} podendo oferecer uma estrutura mais completa, opinativa e voltada à escalabilidade.
 
-\emph{Meta-\-frameworks}\footnote{
-  Os meta-frameworks são sistemas de desenvolvimento web que operam em um nível superior a frameworks tradicionais, como React, Vue ou Svelte. Seu principal objetivo é agregar e organizar múltiplas funcionalidades comuns no desenvolvimento de aplicações, oferecendo uma estrutura mais completa e opinativa. \cite{benHolmes}
-} como \emph{Next.js}\footnote{Next.js é um framework de código aberto para React que facilita a criação de aplicações web com renderização no lado do servidor (\acrshort{ssr}) e geração de sites estáticos. Fornece recursos como roteamento baseado em arquivos, pré-renderização e suporte a APIs. \cite{nextjs2024}} , \emph{Nuxt.js}\footnote{Nuxt.js é um framework baseado em Vue.js que simplifica a criação de aplicações universais, oferecendo renderização no lado do servidor, geração de sites estáticos e uma arquitetura modular que facilita a escalabilidade. \cite{nuxtjs2024}} , \emph{SvelteKit}\footnote{SvelteKit é um framework para Svelte que oferece uma experiência de desenvolvimento simplificada, permitindo a criação de aplicações com renderização no lado do servidor e no cliente, além de otimizações de desempenho. \cite{sveltekit2024}} , \emph{Angular Universal}\footnote{Angular Universal é a solução oficial de renderização no lado do servidor para aplicações Angular, permitindo a renderização de páginas no servidor para melhorar o desempenho e a indexação por mecanismos de busca. \cite{angularuniversal2024}} , \emph{Remix}\footnote{Remix é um framework full-stack para React que foca na experiência do desenvolvedor e no desempenho, oferecendo renderização no lado do servidor e um modelo de dados baseado em carregadores e ações. \cite{remix2024}} , \emph{Astro}\footnote{Astro é um framework moderno que permite a construção de sites rápidos, carregando apenas o JavaScript necessário e permitindo o uso de componentes de diferentes frameworks como React, Svelte e Vue. \cite{astro2024}} e \emph{Qwik}\footnote{Qwik é um framework JavaScript que introduz o conceito de aplicações web "resumíveis", visando tempos de carregamento instantâneos e desempenho aprimorado, utilizando renderização no lado do servidor e aprimoramentos progressivos. \cite{qwik2024}} são amplamente utilizados para construir aplicações com suporte a \acrshort{ssr}, simplificando a configuração e fornecendo recursos prontos para lidar com roteamento, recuperação de dados e \english{hidration}.
+O \acrshort{ssr} é especialmente útil em aplicações que exigem um carregamento inicial rápido e uma boa indexação por motores de busca, como sites de e-commerce, blogs e páginas de \emph{landing}. Essa abordagem permite que o usuário visualize o conteúdo imediatamente, sem esperar pela execução do JavaScript. Além disso, o \acrshort{ssr} melhora a \acrshort{seo}, pois os mecanismos de busca conseguem indexar o conteúdo completo da página desde o início.
 
 No \autoref{lst:nextjs_html}, pode-se observar que o arquivo \acrshort{html} já contém todo o \emph{markup} necessário para exibir o conteúdo da página. Assim que o navegador recebe esse arquivo, o usuário já visualiza o cabeçalho, o texto e o layout definidos. Posteriormente, o \emph{JavaScript} baixado (por exemplo, \texttt{main.js}) pode entrar em ação para lidar com eventos, rotas adicionais e atualizações dinâmicas, caso o desenvolvedor deseje funcionalidades mais interativas.
 
 Por fim, aplicações \acrshort{ssr} tendem a apresentar melhor performance em termos de \emph{time-to-first-byte}\footnote{O \emph{time-to-first-byte} (TTFB) é uma métrica que mede o tempo decorrido entre o envio de uma solicitação HTTP pelo cliente e o recebimento do primeiro byte da resposta do servidor. Um TTFB menor indica maior rapidez na resposta do servidor, impactando diretamente na velocidade de carregamento da página e na experiência do usuário. \cite{ttfb-craig}} e de \emph{indexabilidade}\footnote{A \emph{indexabilidade} refere-se à capacidade dos motores de busca de rastrear e indexar o conteúdo de uma página web. Aplicações SSR, ao fornecerem conteúdo totalmente renderizado no servidor, facilitam a indexação eficiente pelos motores de busca, melhorando a visibilidade nos resultados de pesquisa. \cite{ttfb-oskay}} por motores de busca, ao mesmo tempo em que podem demandar maior carga de processamento no servidor. A escolha por \acrshort{ssr} ou não, portanto, depende do perfil da aplicação e das prioridades do projeto, considerando fatores como volume de tráfego, necessidade de interatividade e requisitos de otimização de conteúdo.
 
-\begin{lstlisting}[language=html, caption={Exemplo de HTML mínimo em aplicação Next.js com SSR}, label={lst:nextjs_html}]
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>My SSR App</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    /* Exemplo simples de estilo inline */
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f6f6f6;
-    }
-    h1 { color: #333; }
-  </style>
-</head>
-<body>
-  <!-- Conteúdo já processado e inserido no servidor -->
-  <div id="__next">
-    <header>
-      <h1>Olá, mundo!</h1>
-    </header>
-    <main>
-      <p>Este conteúdo foi renderizado no servidor usando Next.js.</p>
-    </main>
-  </div>
-  <!-- Scripts do Next.js para interação no cliente -->
-  <script src="/_next/static/chunks/main.js" defer></script>
-</body>
-</html>
-\end{lstlisting}
+\begin{codigo}[H]
+  \begin{lstlisting}[language=html]
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>My SSR App</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <style>
+        /* Exemplo simples de estilo inline */
+        body {
+          margin: 0;
+          font-family: Arial, sans-serif;
+          background: #f6f6f6;
+        }
+        h1 { color: #333; }
+      </style>
+    </head>
+    <body>
+<!-- Conteudo ja processado e inserido no servidor -->
+      <div id="__next">
+        <header>
+          <h1>Ola, mundo!</h1>
+        </header>
+        <main>
+          <p>Este conteudo foi renderizado no servidor usando Next.js.</p>
+        </main>
+      </div>
+      <!-- Scripts do Next.js para interacao no cliente -->
+      <script src="/_next/static/chunks/main.js" defer></script>
+    </body>
+    </html>
+  \end{lstlisting}
+  \caption{Exemplo de HTML mínimo em aplicação Next.js com SSR}
+  \label{cod:nextjs_html}
+\end{codigo}
+
+
+\section{Frameworks Web}
+\label{sec:frameworks-web}
+
+O uso de bibliotecas e frameworks no desenvolvimento web moderno proporciona ganhos significativos de produtividade, desempenho e organização de código. Eles abstraem operações complexas e oferecem estruturas padronizadas para construção de aplicações escaláveis. A escolha da ferramenta está diretamente relacionada à abordagem de renderização adotada, seja no lado do cliente (\acrshort{csr}) ou do servidor (\acrshort{ssr}).
+
+\subsection{Bibliotecas JavaScript}
+\label{subsec:bibliotecas-js}
+
+Bibliotecas JavaScript são conjuntos de funcionalidades reutilizáveis que fornecem recursos específicos, permitindo que o desenvolvedor tenha maior controle sobre o fluxo da aplicação. Elas diferem dos frameworks por não imporem uma estrutura rígida, sendo mais flexíveis em sua aplicação.
+
+\textbf{React} é um exemplo amplamente utilizado de biblioteca voltada para a criação de interfaces de usuário baseadas em componentes reutilizáveis. Desenvolvida pelo Facebook, React se destaca por sua abordagem declarativa, desempenho otimizado com o uso de um \textit{virtual DOM}, e ampla adoção na construção de aplicações com \acrshort{csr}. Apesar de muitas vezes ser chamado de framework, React é tecnicamente uma biblioteca, já que seu foco é exclusivamente a camada de visualização, deixando a cargo do desenvolvedor a escolha de ferramentas para rotas, estados e lógica de aplicação~\cite{react2025}.
+
+\subsection{Frameworks para CSR}
+\label{subsec:frameworks-csr}
+
+No modelo \acrshort{csr}, a renderização da interface é realizada diretamente no navegador do usuário, após o carregamento dos arquivos JavaScript. Frameworks como os listados a seguir são amplamente utilizados para implementar essa abordagem:
+
+\begin{itemize}
+    \item \textbf{Vue.js}: framework progressivo para construção de interfaces web interativas. Seu foco está na camada de visualização, com curva de aprendizado acessível e estrutura modular~\cite{vue2025}.
+    
+    \item \textbf{Angular}: framework completo mantido pelo Google, baseado em TypeScript, que oferece arquitetura robusta e recursos integrados como injeção de dependência e roteamento~\cite{angular2025}.
+    
+    \item \textbf{Svelte}: framework que realiza a compilação dos componentes no momento do build, eliminando a necessidade de um \textit{virtual DOM}, o que reduz o tempo de carregamento e o uso de recursos do navegador~\cite{svelte2025}.
+\end{itemize}
+
+Esses frameworks tornam o desenvolvimento com \acrshort{csr} mais eficiente e sustentável, proporcionando experiências ricas ao usuário com foco em interatividade e responsividade.
+
+\subsection{Meta-frameworks para SSR}
+\label{subsec:frameworks-ssr}
+
+Para aplicações com foco em renderização no lado do servidor, os \emph{meta-frameworks} oferecem soluções completas, otimizando tanto o desempenho inicial quanto a indexabilidade em mecanismos de busca. Eles operam sobre frameworks tradicionais (como Vue ou Svelte) ou bibliotecas (como React), incorporando funcionalidades essenciais como roteamento, pré-renderização, recuperação de dados e \textit{hydration}.
+
+\begin{itemize}
+    \item \textbf{Next.js}: baseado em React, fornece recursos para \acrshort{ssr}, geração de sites estáticos e suporte a APIs integradas~\cite{nextjs2024}.
+    
+    \item \textbf{Nuxt.js}: extensão do Vue.js que oferece SSR, geração estática e arquitetura modular~\cite{nuxtjs2024}.
+    
+    \item \textbf{SvelteKit}: baseado em Svelte, permite renderização no servidor e no cliente, com foco em simplicidade e desempenho~\cite{sveltekit2024}.
+    
+    \item \textbf{Angular Universal}: solução oficial para SSR em Angular, melhora a indexação e o tempo de carregamento inicial~\cite{angularuniversal2024}.
+    
+    \item \textbf{Remix}: framework full-stack para React que adota um modelo de dados centrado em carregadores e ações~\cite{remix2024}.
+    
+    \item \textbf{Astro}: framework moderno que carrega apenas o JavaScript necessário, permitindo uso híbrido de componentes React, Vue, Svelte e outros~\cite{astro2024}.
+    
+    \item \textbf{Qwik}: introduz o conceito de aplicações \textit{resumíveis}, com SSR e carregamento progressivo de interatividade~\cite{qwik2024}.
+\end{itemize}
+
+Esses meta-frameworks são especialmente indicados para aplicações que priorizam SEO, acessibilidade e desempenho no primeiro carregamento, como páginas institucionais, lojas virtuais e blogs.
+
+\subsection{Comparativo entre Frameworks CSR e SSR}
+\label{subsec:comparativo-frameworks}
+
+\begin{table}[H]
+\centering
+\caption{Comparação entre frameworks para CSR e SSR}
+\label{tab:comparativo-frameworks}
+\begin{tabular}{|p{3cm}|p{5.5cm}|p{5.5cm}|}
+\hline
+\textbf{Critério} & \textbf{Frameworks CSR (Vue, Angular, Svelte)} & \textbf{Meta-frameworks SSR (Next.js, Nuxt, SvelteKit, etc.)} \\
+\hline
+\textbf{Renderização Inicial} & O conteúdo é montado no navegador após o carregamento do JavaScript & O conteúdo é gerado no servidor e entregue já renderizado ao navegador \\
+\hline
+\textbf{Tempo de Carregamento} & Maior tempo de carregamento inicial (dependente do JS) & Melhor desempenho no carregamento inicial (TTFB menor) \\
+\hline
+\textbf{SEO} & Pode ser limitado, pois bots podem não processar JavaScript adequadamente & Excelente, já que o HTML completo está disponível para rastreadores \\
+\hline
+\textbf{Interatividade} & Alta, com foco em aplicações ricas e dinâmicas & Boa, com necessidade de \textit{hydration} após o carregamento \\
+\hline
+\textbf{Complexidade de Infraestrutura} & Menor, geralmente servido por CDNs e arquivos estáticos & Maior, exige servidores para processar cada requisição \\
+\hline
+\textbf{Casos de Uso Ideais} & SPAs, dashboards, aplicações com muitas interações em tempo real & Landing pages, blogs, e-commerces, sites que dependem de SEO \\
+\hline
+\end{tabular}
+\end{table}
 
 
 % \subsection{Modelos de Arquitetura Web}
