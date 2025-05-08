@@ -297,7 +297,7 @@ Por fim, aplicações \acrshort{ssr} tendem a apresentar melhor performance em t
 
 \section{Experiência do Usuário}
 \label{sec:ux}
-A \acrfull{ux} é um aspecto crítico no desenvolvimento de aplicações web, influenciando diretamente a satisfação e a eficácia da interação do usuário com o sistema \cite{atori2023}. Para alcançar uma \acrshort{ux} satisfatória, a escolha entre \acrshort{csr} e \acrshort{ssr} deve considerar fatores como: {\acrshort{seo}}, velocidade de carregamento, interatividade e responsividade.
+A \acrfull{ux} é um aspecto crítico no desenvolvimento de aplicações web, influenciando diretamente a satisfação e a eficácia da interação do usuário com o sistema \cite{atori2023}. Para alcançar uma \acrshort{ux} satisfatória, a escolha entre \acrshort{csr} e \acrshort{ssr} deve considerar fatores como: {\acrshort{seo}}, velocidade de carregamento, interatividade e acessibilidade.
 Conforme \citeonline{atori2024}, a \acrshort{ux} vai além da interface gráfica, englobando toda a jornada do usuário desde a navegação até a conclusão de tarefas. 
 
 \subsection{\english{Search Engine Optimization} (SEO)}
@@ -323,3 +323,26 @@ A velocidade de carregamento da página refere-se ao tempo que uma página da we
 A velocidade de carregamento é um dos principais fatores que afetam a \acrshort{ux} e o \acrshort{seo}. Páginas que carregam rapidamente tendem a ter taxas de rejeição mais baixas e melhor desempenho em termos de conversão. O \acrshort{seo} também considera a velocidade de carregamento como um fator importante para determinar a classificação nos resultados de busca \cite{conor2022}.
 
 Segundo o \citeonline{google}, aumentar a velocidade de carregamento é fundamental: quanto mais rápido o site carregar, melhor será a experiência do usuário. Caso contrário, o usuário passa menos tempo na página, o que pode aumentar a taxa de rejeição.
+
+\subsection{Interatividade}
+\label{subsec:interatividade}
+
+A interatividade é um fator decisivo na experiência do usuário em aplicações web modernas, pois determina a forma como os usuários percebem a continuidade e a capacidade de resposta durante a navegação. Nas aplicações que utilizam \acrshort{csr}, o código JavaScript é executado diretamente no navegador, permitindo respostas imediatas a interações como cliques, preenchimento de formulários ou navegação entre páginas internas. Essa abordagem possibilita transições de página mais suaves e experiências semelhantes às de aplicativos nativos, sem a necessidade de recarregamentos completos \cite{pixelfree2023}.
+
+Segundo \citeonline{atori2024}, a renderização no lado do cliente favorece experiências altamente dinâmicas, oferecendo um nível elevado de controle sobre os elementos da interface. Em contrapartida, o \acrshort{ssr}, embora proporcione carregamento inicial mais rápido e visibilidade imediata do conteúdo, apresenta limitações em termos de interatividade. Alterações na interface em aplicações \acrshort{ssr} geralmente demandam comunicações adicionais com o servidor, o que pode comprometer a continuidade da experiência do usuário \cite{atori2024, splunk2023}.
+
+Para mitigar essas limitações, abordagens híbridas têm sido amplamente adotadas. Nelas, o conteúdo é inicialmente renderizado no servidor e, posteriormente, reativado no cliente com JavaScript, em uma estratégia conhecida como \emph{hydration} \cite{splunk2023}. Essa técnica busca aliar os benefícios de desempenho e \acrshort{seo} do \acrshort{ssr} com a interatividade aprimorada do \acrshort{csr}.
+
+
+\subsection{Acessibilidade}
+\label{subsec:acessibilidade}
+
+A acessibilidade em aplicações web refere-se à capacidade de tornar conteúdos e funcionalidades utilizáveis por pessoas com deficiência, como visual, auditiva, motora ou cognitiva. É um princípio essencial para garantir a equidade no acesso à informação e à interação digital. De acordo com \cite{pixelfree2023access}, acessibilidade diz respeito a assegurar que todos, independentemente de suas habilidades, possam acessar e interagir com o conteúdo da web. Para pessoas com deficiência, isso pode significar o uso de leitores de tela, navegação por teclado ou a dependência de outras tecnologias assistivas.
+
+As abordagens de renderização, como \acrshort{csr} e \acrshort{ssr}, impactam diretamente a acessibilidade, especialmente na compatibilidade com essas tecnologias. Em aplicações que utilizam \acrshort{csr}, o conteúdo geralmente é carregado de forma assíncrona após a execução do JavaScript, o que pode dificultar a leitura imediata por leitores de tela que dependem de uma estrutura HTML previamente carregada para interpretar a página corretamente \cite{pixelfree2023access}. Já no \acrshort{ssr}, o conteúdo é entregue completamente no carregamento inicial, facilitando a interpretação por essas ferramentas e proporcionando uma experiência mais estável para usuários com deficiência visual \cite{atori2024}.
+
+Além disso, em contextos com atualizações dinâmicas de conteúdo — como ocorre em SPAs com \acrshort{csr} — é necessário adotar práticas específicas para garantir a acessibilidade, como gerenciamento de foco, uso de alertas ARIA e atualização de leitores de tela após mudanças no DOM. Essas medidas são fundamentais para que as mudanças de visualização sejam percebidas corretamente por tecnologias assistivas, uma vez que alterações no DOM nem sempre são reconhecidas automaticamente por leitores de tela. O envio de foco a elementos interativos ou o uso de regiões ARIA ao vivo são técnicas recomendadas para anunciar mudanças de estado ao usuário \cite{sutton2018}.
+
+Assim, embora o \acrshort{ssr} ofereça uma base naturalmente mais acessível, ambas as abordagens podem ser igualmente inclusivas quando aplicadas com atenção às diretrizes e boas práticas de acessibilidade.
+
+
