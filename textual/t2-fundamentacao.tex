@@ -267,6 +267,101 @@ Por fim, aplicações \acrshort{ssr} tendem a apresentar melhor performance em t
   \label{cod:nextjs_html}
 \end{codigo}
 
+\section{\english{Static Site Generation} (\acrshort{ssg})}
+\label{subsec:ssg}
+
+A \textbf{\english{\acrfull{ssg}}} é uma técnica de pré-renderização na qual as páginas da aplicação são geradas estaticamente em tempo de *build* (compilação) e armazenadas como arquivos \acrshort{html}. Ao contrário de abordagens como \acrshort{csr} e \acrshort{ssr}, onde a renderização ocorre no navegador ou sob demanda no servidor, o \acrshort{ssg} permite que o conteúdo já esteja pronto e otimizado para ser entregue diretamente ao navegador, reduzindo a carga do servidor e otimizando o desempenho de carregamento \cite{pahan2021}.
+
+Segundo \citeonline{bose2022}, a renderização no modelo \acrshort{ssg} segue estas etapas principais:
+
+\begin{enumerate}
+    \item Durante o processo de construção (build), o gerador de sites estáticos coleta dados de fontes como arquivos locais, \emph{APIs} ou bancos de dados.
+    \item Esses dados são utilizados para gerar arquivos \acrshort{html} completos para cada rota da aplicação.
+    \item Os arquivos gerados são armazenados e podem ser servidos diretamente por uma \emph{CDN} (Content Delivery Network).
+    \item Quando o usuário acessa a aplicação, os arquivos estáticos são entregues instantaneamente, sem necessidade de renderização adicional.
+\end{enumerate}
+
+Essa abordagem é ideal para páginas cujo conteúdo não muda com frequência, como blogs, documentações, portfólios e sites institucionais. Como os arquivos são pré-gerados, o tempo de resposta é extremamente rápido, e o \acrshort{seo} é favorecido, já que os mecanismos de busca encontram o conteúdo pronto para indexação.
+
+\begin{figure}[H]
+  \centering
+  \caption{Etapas do método de geração estática de páginas (SSG)}
+  \includegraphics[width=0.8\textwidth]{media/static_site_generation.png}
+  \legend{Fonte: \cite{bose2022} (adaptado)}
+  \label{fig:ssg}
+\end{figure}
+
+Frameworks como Next.js, Gatsby, Hugo e Jekyll oferecem suporte completo ao \acrshort{ssg}, integrando funcionalidades como roteamento dinâmico, \emph{markdown}, e integração com CMSs. No exemplo a seguir, observa-se um documento \acrshort{html} gerado estaticamente por meio de um processo de \emph{build}:
+
+\begin{codigo}[H]
+  \begin{lstlisting}[language=html]
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Post: SSG Example</title>
+  </head>
+  <body>
+    <article>
+      <h1>Exemplo de página gerada com SSG</h1>
+      <p>Esse conteúdo foi gerado em tempo de build.</p>
+    </article>
+  </body>
+</html>
+  \end{lstlisting}
+  \caption{Exemplo de HTML estático gerado com SSG}
+  \label{cod:ssg_example}
+\end{codigo}
+
+A principal limitação do \acrshort{ssg} é a dificuldade em lidar com conteúdos altamente dinâmicos. Alterações nos dados requerem um novo processo de build para que as páginas sejam atualizadas, o que pode ser custoso em grandes aplicações ou com frequência de atualização elevada.
+
+\section{\english{Incremental Static Regeneration} (\acrshort{isr})}
+\label{subsec:isr}
+
+A \textbf{\english{\acrfull{isr}}} é uma estratégia híbrida introduzida por frameworks como o Next.js, que combina os benefícios da geração estática (\acrshort{ssg}) com a flexibilidade de atualização dinâmica. Com \acrshort{isr}, as páginas são inicialmente geradas estaticamente em tempo de build, mas podem ser revalidadas e regeneradas no servidor de forma incremental e automática, com base em uma estratégia de tempo (ex: a cada 10 segundos) ou conforme novas requisições são feitas \cite{pahan2021}.
+
+De acordo com \citeonline{bose2022}, o fluxo típico do \acrshort{isr} inclui as seguintes etapas:
+
+\begin{enumerate}
+    \item No momento do build inicial, as páginas são geradas e armazenadas como arquivos estáticos.
+    \item Ao ser requisitada por um usuário, a página é entregue imediatamente, com o conteúdo pré-renderizado.
+    \item Se o tempo de revalidação definido (ex: \texttt{revalidate: 60}) tiver expirado, uma nova requisição ao backend é feita em segundo plano.
+    \item Essa nova versão da página é armazenada e substitui a anterior, sendo usada em acessos futuros.
+\end{enumerate}
+
+Essa abordagem permite obter performance e \acrshort{seo} semelhantes ao \acrshort{ssg}, mas com a vantagem de manter o conteúdo atualizado sem precisar de reconstruções manuais. Por isso, o \acrshort{isr} é ideal para sites que possuem atualizações regulares, porém não críticas em tempo real, como catálogos de produtos, blogs com comentários ou páginas de notícias.
+
+\begin{figure}[H]
+  \centering
+  \caption{Funcionamento do modelo Incremental Static Regeneration (ISR)}
+  \includegraphics[width=0.8\textwidth]{media/incremental_static_regeneration.png}
+  \legend{Fonte: \cite{pahan2021}}
+  \label{fig:isr}
+\end{figure}
+
+Abaixo, um exemplo típico em Next.js:
+
+\begin{codigo}[H]
+  \begin{lstlisting}[language=JavaScript]
+      // Funcao usada em getStaticProps
+      export async function getStaticProps() {
+        const res = await fetch('https://api.exemplo.com/posts')
+        const posts = await res.json()
+
+        return {
+          props: { posts },
+          revalidate: 60, // Pagina sera regenerada a cada 60 segundos
+          }
+      }
+  \end{lstlisting}
+  \caption{Exemplo de revalidação de conteúdo com ISR no Next.js}
+  \label{cod:isr_next}
+\end{codigo}
+
+
+O \acrshort{isr} representa um meio-termo eficiente entre a performance do \acrshort{ssg} e a flexibilidade do \acrshort{ssr}, oferecendo escalabilidade, \acrshort{seo} eficiente e atualização contínua do conteúdo, sem prejudicar a experiência do usuário.
+
 
 \section{Frameworks Web}
 \label{sec:frameworks-web}
@@ -276,9 +371,16 @@ O uso de bibliotecas e frameworks no desenvolvimento web moderno proporciona gan
 \subsection{Bibliotecas JavaScript}
 \label{subsec:bibliotecas-js}
 
-Bibliotecas JavaScript são conjuntos de funcionalidades reutilizáveis que fornecem recursos específicos, permitindo que o desenvolvedor tenha maior controle sobre o fluxo da aplicação. Elas diferem dos frameworks por não imporem uma estrutura rígida, sendo mais flexíveis em sua aplicação.
+Bibliotecas JavaScript são conjuntos de funcionalidades reutilizáveis que fornecem recursos específicos para o desenvolvimento de aplicações web. Elas diferem dos frameworks por não imporem uma estrutura rígida, oferecendo maior flexibilidade ao desenvolvedor. A seguir, são apresentadas algumas das bibliotecas mais relevantes no contexto de renderização do lado do cliente (\acrshort{csr}):
 
-\textbf{React} é um exemplo amplamente utilizado de biblioteca voltada para a criação de interfaces de usuário baseadas em componentes reutilizáveis. Desenvolvida pelo Facebook, React se destaca por sua abordagem declarativa, desempenho otimizado com o uso de um \textit{virtual DOM}, e ampla adoção na construção de aplicações com \acrshort{csr}. Apesar de muitas vezes ser chamado de framework, React é tecnicamente uma biblioteca, já que seu foco é exclusivamente a camada de visualização, deixando a cargo do desenvolvedor a escolha de ferramentas para rotas, estados e lógica de aplicação~\cite{react2025}.
+
+\begin{itemize}
+  \item \textbf{React:} Desenvolvida pelo Facebook, React é uma biblioteca declarativa focada na construção de interfaces de usuário por meio de componentes reutilizáveis. Seu uso do \textit{virtual DOM} permite renderizações mais eficientes, tornando-a ideal para aplicações interativas com alto desempenho. Apesar de ser comumente chamada de framework, React atua apenas na camada de visualização, exigindo bibliotecas complementares para roteamento e gerenciamento de estado~\cite{react2025}.
+
+  \item \textbf{jQuery:} Uma das bibliotecas mais populares da era inicial do JavaScript moderno, jQuery simplifica tarefas comuns como manipulação do DOM, tratamento de eventos e requisições AJAX. Embora sua popularidade tenha diminuído com o surgimento de bibliotecas mais modernas e frameworks reativos, ela ainda é amplamente utilizada em sistemas legados e aplicações de menor complexidade~\cite{jquery2023}.
+
+  \item \textbf{Alpine.js:} Alpine.js é uma biblioteca leve e reativa voltada para a manipulação de componentes diretamente no HTML, com uma sintaxe declarativa inspirada em Vue.js. Ela é particularmente útil para adicionar interatividade a páginas estáticas ou aplicações simples, sendo uma alternativa eficiente em cenários onde o uso de bibliotecas maiores seria excessivo~\cite{alpinejs2023}.
+\end{itemize}
 
 \subsection{Frameworks para CSR}
 \label{subsec:frameworks-csr}
