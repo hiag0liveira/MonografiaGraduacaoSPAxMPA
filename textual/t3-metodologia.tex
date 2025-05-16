@@ -1,3 +1,95 @@
 \chapter{Metodologia}
 \label{cap:metodologia}
 
+\section{Levantamento Teórico}
+\label{sec:levantamento-teorico}
+
+O levantamento teórico consistiu na revisão e sistematização dos principais conceitos, tecnologias e práticas relacionadas à renderização de conteúdo em aplicações web, com foco nas abordagens de \english{\acrfull{csr}} e \english{\acrfull{ssr}}. Essa etapa teve como objetivo fornecer o embasamento necessário para o desenvolvimento do estudo de caso e da análise comparativa proposta neste trabalho.
+
+A fundamentação iniciou-se com a exploração dos princípios do desenvolvimento web moderno, incluindo a arquitetura cliente-servidor, o funcionamento do protocolo \acrshort{http} e as tecnologias essenciais do \textit{frontend}: \acrshort{html}, \acrshort{css} e JavasSript. Estes elementos formam a base para compreender como as estratégias de renderização operam, tanto no lado do cliente quanto no lado do servidor.
+
+Em seguida, foram estudadas em detalhes as abordagens \acrshort{csr} e \acrshort{ssr}. A renderização no lado do cliente (\acrshort{csr}) foi analisada quanto ao seu funcionamento típico em aplicações \english{\acrfull{spa}}, caracterizadas por uma única página carregada inicialmente, com atualizações dinâmicas de conteúdo via JavaScript. Essa abordagem oferece vantagens como maior interatividade e fluidez na navegação, além de transições rápidas entre páginas internas. No entanto, apresenta desvantagens como maior tempo de carregamento inicial e limitações de indexação por mecanismos de busca.
+
+Por outro lado, a renderização no lado do servidor (\acrshort{ssr}) foi abordada sob a ótica de desempenho inicial otimizado e maior compatibilidade com \acrshort{seo}, pois o conteúdo é entregue já renderizado ao navegador. Essa abordagem é comumente utilizada em aplicações do tipo \english{\acrfull{mpa}}, que possuem múltiplas páginas distintas e se beneficiam da pré-renderização para melhorar a performance inicial, a acessibilidade e a visibilidade em mecanismos de busca. Como contraponto, o SSR demanda maior processamento no servidor e pode aumentar a complexidade da infraestrutura.
+
+Além dessas duas abordagens principais, o estudo também incluiu métodos híbridos como o \english{\acrfull{ssg}}, \english{\acrfull{isr}} e {\acrfull{dsg}}, que visam equilibrar performance, escalabilidade e atualizações de conteúdo dinâmico, especialmente em aplicações que exigem alta eficiência e atualizações frequentes.
+
+O levantamento teórico foi complementado por uma análise dos principais \textit{frameworks} e bibliotecas utilizados no desenvolvimento web atual, como \textit{React}, \textit{Vue.js}, \textit{Angular}, \textit{Next.js}, \textit{Nuxt} e \textit{SvelteKit}, e por uma discussão sobre os impactos de cada abordagem na experiência do usuário (\acrshort{ux}), incluindo aspectos como \acrshort{seo}, acessibilidade, tempo de carregamento e interatividade.
+
+Esse base teórica serviu para as próximas etapas da pesquisa, em especial o mapeamento sistemático da literatura e a condução do estudo de caso prático.
+
+\section{Mapeamento Sistemático da Literatura}
+\label{sec:mapemento-sistematico-da-literatura}
+
+O mapeamento sistemático da literatura teve como objetivo identificar, selecionar e analisar estudos acadêmicos relevantes que abordassem comparações entre as abordagens de renderização \english{\acrshort{csr}} e \english{\acrshort{ssr}} no contexto do desenvolvimento de aplicações web. Essa etapa foi essencial para compreender o estado da arte, bem como identificar lacunas e oportunidades para a realização do estudo de caso proposto neste trabalho.
+
+A estratégia de busca foi estruturada com o apoio da metodologia \textit{PICOC}, que define os elementos População, Intervenção, Comparação, Resultado e Contexto, com o intuito de guiar a construção das expressões de busca e garantir abrangência e precisão nos resultados. As principais bases de dados utilizadas incluíram Periódicos Capes e Scopus, por oferecerem amplo acervo e suporte a pesquisas refinadas.
+
+Foram utilizadas expressões booleanas combinando termos como \textit{Client-Side Rendering}, \textit{Server-Side Rendering}, \textit{Web Performance}, \textit{SEO}, \textit{UX} e \textit{Frontend Architecture}. Após a aplicação dos critérios de inclusão e exclusão, os artigos resultantes foram classificados e analisados de acordo com sua relevância, tipo de abordagem estudada, metodologias utilizadas e principais conclusões.
+
+A seleção final contemplou trabalhos que abordavam métricas de desempenho, tempo de carregamento, interatividade, \acrshort{seo} e experiência do usuário. Além disso, foram considerados estudos que analisavam o uso de frameworks modernos como \textit{React}, \textit{Next.js}, \textit{Nuxt.js} e \textit{Angular Universal}, além de pesquisas aplicadas em contextos reais de produção.
+
+Como resultado, foi possível consolidar uma visão abrangente sobre os desafios, vantagens e limitações de cada abordagem, fornecendo subsídios importantes para a execução do estudo de caso prático apresentado nos capítulos seguintes. O mapeamento sistemático também evidenciou a escassez de estudos nacionais aplicados ao tema, reforçando a relevância deste trabalho no cenário acadêmico e profissional brasileiro.
+
+
+\section{Estudo de Caso Prático}
+\label{sec:estudo-de-caso-pratico}
+
+Para avaliar os impactos das abordagens de renderização \english{\acrshort{csr}} e \english{\acrshort{ssr}} no desenvolvimento de aplicações web, este estudo de caso será conduzido a partir do contexto de uma empresa fictícia cujo time de gestores precisa decidir qual modelo de renderização adotar para o desenvolvimento de sua nova aplicação web. Para isso, serão desenvolvidas duas versões de uma mesma aplicação: uma utilizando \acrshort{csr} e outra baseada em \acrshort{ssr}. Ambas as implementações terão as mesmas funcionalidades, aparência visual e estrutura de dados, permitindo uma análise equitativa quanto ao desempenho, à experiência do usuário e à otimização para mecanismos de busca.
+
+A aplicação escolhida simula um catálogo de produtos, com navegação por páginas, carregamento de dados via \textit{API} e exibição de informações detalhadas. Esse modelo foi selecionado por representar um cenário comum na web moderna, abrangendo interações usuais como carregamento dinâmico de conteúdo, roteamento entre páginas e exibição de listas e detalhes.
+
+Cada versão será desenvolvida conforme os princípios da respectiva abordagem de renderização: a versão \acrshort{csr} terá a interface renderizada predominantemente no navegador do usuário, enquanto a versão \acrshort{ssr} terá o conteúdo renderizado no servidor e enviado ao cliente já montado.
+
+Durante o desenvolvimento, serão respeitadas as boas práticas de acessibilidade, responsividade e otimização para \acrshort{seo}, garantindo que ambas as versões possam ser avaliadas com base em critérios equivalentes. As métricas analisadas incluem tempo de carregamento, tempo até a interatividade, consumo de recursos, desempenho percebido, qualidade do código e compatibilidade com ferramentas de análise de \acrshort{seo}.
+
+A coleta de dados será realizada por meio de ferramentas como Google Lighthouse, PageSpeed Insights e WebPageTest, além de testes manuais com usuários para observação qualitativa da experiência. Esses dados fundamentarão a análise comparativa e a discussão dos resultados apresentados nas próximas seções.
+
+
+\section{Coleta de Dados e Testes}
+\label{sec:coleta-de-dados-e-testes}
+
+Após o desenvolvimento das versões da aplicação com \english{\acrshort{csr}} e \english{\acrshort{ssr}}, foi realizada a coleta de dados visando mensurar o desempenho e a qualidade da experiência do usuário em cada abordagem.
+
+As aplicações foram hospedadas em ambientes equivalentes, com configurações idênticas de hardware e rede, garantindo condições justas para os testes.
+
+A coleta de dados utilizou as seguintes ferramentas:
+
+\begin{itemize}
+    \item \textbf{Google Lighthouse}: Avaliação de desempenho, acessibilidade, melhores práticas e \english{\acrshort{seo}};
+    \item \textbf{PageSpeed Insights}: Medição de tempo de carregamento, \textit{First Contentful Paint} (FCP), \textit{Largest Contentful Paint} (LCP), \textit{Time to Interactive} (TTI);
+    \item \textbf{WebPageTest}: Análise do tempo de resposta, número de requisições e uso de cache;
+    \item \textbf{Chrome DevTools}: Inspeção do tempo de execução de scripts e verificação da hidratação em \acrshort{ssr}.
+\end{itemize}
+
+Além disso, testes manuais foram realizados com usuários em diferentes dispositivos e conexões para observar fluidez, percepção de velocidade, clareza e responsividade.
+
+As principais métricas analisadas foram:
+
+\begin{itemize}
+    \item Tempo total de carregamento;
+    \item Tempo até a primeira exibição de conteúdo visível (FCP);
+    \item Tempo até a interatividade plena (TTI);
+    \item Número de requisições HTTP;
+    \item Compatibilidade com práticas de \acrshort{seo};
+    \item Consumo de recursos do navegador (memória e CPU);
+    \item Percepção subjetiva da experiência do usuário.
+\end{itemize}
+
+
+\section{Síntese e Discussão}
+\label{sec:sintese-e-discussao}
+
+A análise dos resultados obtidos com as versões desenvolvidas utilizando \english{\acrshort{csr}} e \english{\acrshort{ssr}} permitiu uma compreensão detalhada dos trade-offs envolvidos na escolha entre essas abordagens de renderização.
+
+Observou-se que a versão baseada em \acrshort{ssr} proporcionou melhor desempenho no carregamento inicial da página, evidenciado por métricas como o \textit{First Contentful Paint} (FCP) e o \textit{Time to Interactive} (TTI). Essa característica é especialmente relevante para aplicações que priorizam a experiência imediata do usuário e a otimização para mecanismos de busca, já que o conteúdo pré-renderizado no servidor é rapidamente entregue ao navegador.
+
+Por outro lado, a versão \acrshort{csr} demonstrou vantagens em termos de fluidez e interatividade após o carregamento inicial, beneficiando aplicações que demandam atualizações frequentes de conteúdo e navegação sem recarga completa da página, características típicas de \english{\acrshort{spa}} (\textit{Single Page Applications}).
+
+A avaliação qualitativa com usuários indicou que a percepção de desempenho inicial foi superior na aplicação \acrshort{ssr}, enquanto a experiência de navegação contínua foi mais apreciada na versão \acrshort{csr}. Dessa forma, a escolha da abordagem ideal deve considerar as prioridades específicas do projeto, como a necessidade de velocidade inicial versus a interatividade constante.
+
+Além disso, foi constatado que a adoção de estratégias híbridas, como \english{\acrshort{ssg}} e \english{\acrshort{isr}}, pode oferecer um equilíbrio eficiente entre os benefícios do \acrshort{csr} e do \acrshort{ssr}, possibilitando alta performance, boa indexação para SEO e experiência de usuário satisfatória.
+
+Por fim, a discussão reforça que não existe uma solução única para todos os cenários. A decisão entre \acrshort{csr} e \acrshort{ssr} deve levar em conta fatores técnicos, de negócio e de infraestrutura, alinhando-se aos objetivos estratégicos e às expectativas dos usuários da aplicação.
+
+
