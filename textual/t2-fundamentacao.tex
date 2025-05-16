@@ -132,7 +132,100 @@ A interação entre essas três tecnologias pode ser compreendida por meio de um
 Portanto, o domínio dessas três tecnologias é indispensável para qualquer desenvolvedor web. Elas formam o alicerce sobre o qual se constroem interfaces acessíveis, performáticas e envolventes, sendo empregadas tanto em aplicações renderizadas no servidor (\acrshort{ssr}) quanto no cliente (\acrshort{csr}), com adaptações específicas conforme a abordagem escolhida.
 
 
-\section{\english{Client-Side Rendering} (\acrshort{csr})}
+
+
+
+
+
+\section{Renderização na Web}
+\label{sec:renderizacao-web}
+
+A renderização na Web diz respeito ao processo de transformar dados em conteúdo visual interpretável pelo navegador. A escolha sobre onde e como essa renderização será realizada (seja no cliente, no servidor ou em tempo de build), isso impacta diretamente métricas como tempo de carregamento, interatividade e indexação por mecanismos de busca \cite{osmani2025}.
+
+
+\subsection{\acrfull{spa} e \acrfull{mpa}}
+\label{subsec:spa-mpa}
+
+As arquiteturas \acrfull{spa} e \acrfull{mpa} representam duas abordagens distintas para a estrutura de navegação e carregamento de conteúdo em aplicações web.
+
+As \acrshort{spa}s são aplicações em que a navegação entre páginas ocorre sem recarregamentos completos do navegador. Após o carregamento inicial, todo o conteúdo adicional é gerenciado dinamicamente com JavaScript, o que proporciona uma experiência mais fluida e interativa. Essa abordagem é comumente utilizada em conjunto com a renderização no lado do cliente (\acrshort{csr}) e frameworks como React, Angular ou Vue.js \cite{atori2024}.
+
+Já as \acrshort{mpa}s seguem o modelo tradicional de navegação, em que cada clique em um link leva a uma nova requisição \acrshort{http} e recarregamento completo da página. Essa arquitetura é naturalmente mais compatível com a renderização no lado do servidor (\acrshort{ssr}) e favorece aspectos como \acrshort{seo}, acessibilidade e previsibilidade de comportamento \cite{osmani2025}.
+
+A escolha entre \acrshort{spa} e \acrshort{mpa} está diretamente ligada à estratégia de renderização adotada. As \acrshort{spa}s tendem a oferecer experiências mais ricas e responsivas, mas exigem cuidados extras com desempenho e indexação. Por outro lado, as \acrshort{mpa}s são mais robustas em cenários com grande volume de tráfego e requisitos de otimização para mecanismos de busca.
+
+
+
+\subsection*{Conceitos e Terminologia}
+
+Segundo \citeonline{osmani2025}, é importante distinguir os principais modelos:
+
+
+\begin{description}
+  \item[\textbf{Client-Side Rendering (CSR)}] 
+  O conteúdo da aplicação é gerado dinamicamente no navegador, utilizando JavaScript. A página HTML inicial contém apenas uma estrutura básica com os scripts necessários para montar a interface após o carregamento. É comum em aplicações do tipo SPA (Single Page Application).
+  
+  \item[\textbf{Server-Side Rendering (SSR)}]
+  O servidor monta todo o conteúdo da página em HTML antes de enviá-lo ao cliente. Isso permite uma exibição mais rápida do conteúdo, mesmo em conexões lentas, e melhora a indexação por mecanismos de busca.
+
+  \item[\textbf{Static Site Generation (SSG)}]
+  As páginas são geradas de forma estática em tempo de build, com base em dados disponíveis no momento da compilação. O conteúdo é entregue diretamente por uma CDN, garantindo alto desempenho.
+
+  \item[\textbf{Incremental Static Regeneration (ISR)}]
+  Introduzido pelo Next.js, o ISR permite que páginas geradas estaticamente possam ser atualizadas de forma incremental, após um período de tempo definido. Isso é feito em segundo plano, sem bloquear o carregamento da página atual. Ideal para sites com atualizações frequentes, mas não críticas em tempo real.
+
+  \item[\textbf{Deferred Static Generation (DSG)}]
+  Proposto pelo Gatsby, o DSG difere do ISR por não gerar certas páginas no momento do build. Em vez disso, elas são geradas apenas na primeira requisição (on-demand). Após isso, são armazenadas em cache e servidas como estáticas nas requisições seguintes. É útil em projetos com milhares de páginas de baixo acesso, reduzindo significativamente o tempo de build.
+\end{description}
+
+Além dessas abordagens, destaca-se o conceito de \textbf{reidratação}, que consiste em ativar a interatividade de páginas SSR ou SSG no cliente. Esse processo utiliza JavaScript para associar os eventos dinâmicos à estrutura HTML previamente renderizada, sendo essencial para tornar a página interativa após a exibição inicial \cite{osmani2025}.
+
+
+Esses métodos influenciam diretamente métricas como:
+
+\begin{itemize}
+    \item \textbf{TTFB (Time to First Byte)}: tempo até o primeiro byte da resposta.
+    \item \textbf{FCP (First Contentful Paint)}: quando o conteúdo começa a ser exibido.
+    \item \textbf{TTI (Time to Interactive)}: quando a página se torna responsiva.
+    \item \textbf{INP (Interaction to Next Paint)} e \textbf{TBT (Total Blocking Time)}: indicadores de interatividade e bloqueio da thread principal.
+\end{itemize}
+
+\subsection*{Desempenho e Compensações}
+
+A renderização do lado do servidor tende a exibir conteúdo mais rapidamente (menor FCP), favorecendo acessibilidade e \textit{SEO}. No entanto, pode aumentar o TTFB, já que a página precisa ser processada antes de ser enviada \cite{osmani2025}. Já a renderização no cliente pode reduzir o tempo de resposta inicial do servidor, mas exige mais do navegador e aumenta o tempo até a página estar interativa (TTI), especialmente em dispositivos móveis.
+
+Modelos híbridos como SSR com \textit{hydration} tentam unir os benefícios de ambas as abordagens, mas podem causar atrasos na interatividade. Técnicas como \textit{hydration progressiva} ou \textit{streaming} reduzem esses impactos ao ativar partes da interface conforme necessário \cite{osmani2025}.
+
+\subsection*{Avanços Recentes}
+
+Estratégias mais recentes, como a \textbf{renderização trimórfica}, permitem que a renderização ocorra em três camadas: servidor, cliente e \textit{service worker}. Isso possibilita desempenho superior em acessos repetidos e melhor controle sobre o cache e atualização de conteúdo dinâmico \cite{osmani2025}.
+
+\subsection*{Impacto em SEO e Indexação}
+
+Segundo \citeonline{osmani2025}, abordagens que entregam HTML completo como SSR e SSG são mais eficazes para indexação por mecanismos de busca. Já modelos que dependem fortemente de JavaScript (CSR) exigem testes adicionais e podem comprometer a visibilidade em sistemas como o Googlebot, especialmente quando há falhas na execução dos scripts.
+
+\begin{figure}[H]
+  \centering
+  \caption{Comparativo entre estratégias de renderização}
+  \includegraphics[width=\textwidth]{media/rendering_comparison_table.png}
+  \legend{Fonte: Adaptado de \cite{osmani2025}}
+  \label{fig:comparativo_renderizacao}
+\end{figure}
+
+\subsection*{Considerações Finais}
+
+Não há abordagem única que sirva para todos os casos. Como sugerem \citeonline{osmani2025}, aplicações altamente interativas podem se beneficiar de CSR com otimizações como \textit{code splitting}, enquanto sites estáticos ou com foco em \textit{performance} e SEO podem optar por SSG ou SSR com \textit{streaming}. Avaliar as prioridades da aplicação, tempo de carregamento, interatividade, escalabilidade e indexação é fundamental para a escolha da estratégia mais adequada.
+
+
+
+
+
+
+
+
+
+
+\subsection{\english{Client-Side Rendering} (\acrshort{csr})}
 \label{subsec:csr}
 
 A \textbf{\english{\acrfull{csr}}} é uma técnica em que a geração da interface e do conteúdo final ocorre diretamente no navegador do usuário, utilizando JavaScript. Nessa abordagem, o servidor envia um arquivo \english{\acrfull{html}} mínimo, contendo apenas a estrutura básica da página e referências a arquivos de estilo e scripts.{\cite{atori2024}}
@@ -196,7 +289,7 @@ Com os scripts carregados, o navegador executa o código JavaScript, que normalm
 Esse padrão é típico de aplicações \acrshort{spa}, onde todo o conteúdo é inserido dinamicamente a partir da execução dos arquivos JavaScript. O elemento \texttt{<app-root>} funciona como ponto de entrada da aplicação, sendo substituído no navegador pelos componentes definidos no framework Angular. {\cite{atori2024}}
 
 
-\section{\english{Server-Side Rendering} (\acrshort{ssr})}
+\subsection{\english{Server-Side Rendering} (\acrshort{ssr})}
 \label{subsec:ssr}
 
 A \textbf{\english{\acrfull{ssr}}} é uma abordagem em que a geração do conteúdo e da interface ocorre integralmente no servidor antes de ser enviada ao navegador do cliente. Ou seja, o servidor processa a lógica da aplicação, obtém dados necessários (por exemplo, em bancos de dados ou \emph{APIs}) e retorna ao cliente um arquivo \english{\acrshort{html}} já renderizado. Dessa forma, o navegador exibe imediatamente a página completa, sem precisar executar \emph{scripts} para montar o conteúdo inicial \cite{atori2024}. 
@@ -267,7 +360,7 @@ Por fim, aplicações \acrshort{ssr} tendem a apresentar melhor performance em t
   \label{cod:nextjs_html}
 \end{codigo}
 
-\section{\english{Static Site Generation} (\acrshort{ssg})}
+\subsection{\english{Static Site Generation} (\acrshort{ssg})}
 \label{subsec:ssg}
 
 A \textbf{\english{\acrfull{ssg}}} é uma técnica de pré-renderização na qual as páginas da aplicação são geradas estaticamente em tempo de *build* (compilação) e armazenadas como arquivos \acrshort{html}. Ao contrário de abordagens como \acrshort{csr} e \acrshort{ssr}, onde a renderização ocorre no navegador ou sob demanda no servidor, o \acrshort{ssg} permite que o conteúdo já esteja pronto e otimizado para ser entregue diretamente ao navegador, reduzindo a carga do servidor e otimizando o desempenho de carregamento \cite{pahan2021}.
@@ -316,7 +409,7 @@ Frameworks como Next.js, Gatsby, Hugo e Jekyll oferecem suporte completo ao \acr
 
 A principal limitação do \acrshort{ssg} é a dificuldade em lidar com conteúdos altamente dinâmicos. Alterações nos dados requerem um novo processo de build para que as páginas sejam atualizadas, o que pode ser custoso em grandes aplicações ou com frequência de atualização elevada.
 
-\section{\english{Incremental Static Regeneration} (\acrshort{isr})}
+\subsection{\english{Incremental Static Regeneration} (\acrshort{isr})}
 \label{subsec:isr}
 
 A \textbf{\english{\acrfull{isr}}} é uma estratégia híbrida introduzida por frameworks como o Next.js, que combina os benefícios da geração estática (\acrshort{ssg}) com a flexibilidade de atualização dinâmica. Com \acrshort{isr}, as páginas são inicialmente geradas estaticamente em tempo de build, mas podem ser revalidadas e regeneradas no servidor de forma incremental e automática, com base em uma estratégia de tempo (ex: a cada 10 segundos) ou conforme novas requisições são feitas \cite{pahan2021}.
@@ -361,6 +454,79 @@ Abaixo, um exemplo típico em Next.js:
 
 
 O \acrshort{isr} representa um meio-termo eficiente entre a performance do \acrshort{ssg} e a flexibilidade do \acrshort{ssr}, oferecendo escalabilidade, \acrshort{seo} eficiente e atualização contínua do conteúdo, sem prejudicar a experiência do usuário.
+
+
+
+
+\subsection{\english{Deferred Static Generation} (\acrshort{dsg})}
+\label{subsec:deferred-dsg}
+
+A \textbf{\english{Deferred Static Generation} (DSG)} é uma extensão da estratégia de geração estática proposta pelo framework Gatsby. Essa abordagem permite que certas páginas do site sejam geradas sob demanda ( ou seja, somente no momento em que forem requisitadas pela primeira vez ) em vez de serem construídas durante o processo inicial de build, como ocorre no \acrshort{ssg} tradicional \cite{gatsby2023}.
+
+Segundo a \citeonline{gatsby2023}, o \acrshort{dsg} tem como principal vantagem a capacidade de reduzir significativamente o tempo de build em projetos com um número elevado de páginas, ao evitar a pré-renderização de rotas que têm baixo tráfego ou que não precisam estar imediatamente disponíveis. Após a primeira solicitação, a página é armazenada em cache e, a partir daí, servida como conteúdo estático em acessos subsequentes.
+
+O fluxo típico de geração diferida no \acrshort{dsg} ocorre da seguinte forma:
+
+\begin{enumerate}
+    \item Durante o processo de build, apenas páginas prioritárias são pré-geradas.
+    \item Páginas marcadas como \texttt{defer} são ignoradas temporariamente.
+    \item Quando uma página \acrshort{dsg} é acessada pela primeira vez, um \textit{worker} do Gatsby gera a versão \acrshort{html} da página com base em um componente React (ex: \texttt{about.js}).
+    \item A página gerada é armazenada em cache e servida como conteúdo estático nas próximas requisições.
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \caption{Funcionamento da estratégia Deferred Static Generation (DSG)}
+  \includegraphics[width=0.9\textwidth]{media/deferred_static_generation_dsg.png}
+  \legend{Fonte: \cite{gatsby2023}}
+  \label{fig:deferred_dsg}
+\end{figure}
+
+Na \autoref{fig:deferred_dsg}, observa-se que, ao acessar uma página como \texttt{/about} pela primeira vez, ocorre um \textit{cache miss}, e um \textit{worker} do Gatsby é acionado para gerar o arquivo \texttt{about.html} a partir do componente correspondente (\texttt{about.js}). Esse conteúdo pode incluir dados extraídos de plugins, \textit{APIs} de terceiros ou do próprio \textit{Gatsby DB}. Após o processamento, a resposta é enviada ao usuário e armazenada em cache. Requisições futuras à mesma rota são atendidas diretamente pela CDN, com desempenho semelhante ao de páginas \acrshort{ssg}.
+
+Segundo \citeonline{locofy2024}, a estratégia do \acrshort{dsg} é especialmente útil para projetos com milhares de páginas cujo acesso é desigual. Exemplos incluem catálogos de produtos legados, páginas de arquivos antigos ou conteúdos gerados a partir de sistemas CMS.
+
+A seguir, um exemplo de configuração de uma rota com \acrshort{dsg} em Gatsby:
+
+\begin{codigo}[H]
+  \begin{lstlisting}[language=JavaScript]
+// gatsby-node.js
+exports.createPages = async ({ actions }) => {
+  const { createPage } = actions
+  createPage({
+    path: `/produto/exemplo`,
+    component: require.resolve(`./src/templates/produto.js`),
+    context: { id: `produto-exemplo` },
+    defer: true, // ativa DSG
+  })
+}
+  \end{lstlisting}
+  \caption{Exemplo de definição de página DSG no Gatsby}
+  \label{cod:dsg_example}
+\end{codigo}
+
+Assim como o \acrshort{isr}, o \acrshort{dsg} busca combinar desempenho, escalabilidade e atualizações eficientes. No entanto, sua particularidade está em adiar completamente o custo da renderização até o momento da primeira requisição, tornando-o ideal em contextos onde o tempo de build precisa ser otimizado sem prejudicar a entrega do conteúdo a longo prazo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \section{Frameworks Web}
