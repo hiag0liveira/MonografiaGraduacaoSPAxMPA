@@ -35,61 +35,54 @@ Como resultado, foi possível consolidar uma visão abrangente sobre os desafios
 \section{Estudo de Caso Prático}
 \label{sec:estudo-de-caso-pratico}
 
-Para avaliar os impactos das abordagens de renderização \english{\acrshort{csr}} e \english{\acrshort{ssr}} no desenvolvimento de aplicações web, este estudo de caso será conduzido a partir do contexto de uma empresa fictícia cujo time de gestores precisa decidir qual modelo de renderização adotar para o desenvolvimento de sua nova aplicação web. Para isso, serão desenvolvidas duas versões de uma mesma aplicação: uma utilizando \acrshort{csr} e outra baseada em \acrshort{ssr}. Ambas as implementações terão as mesmas funcionalidades, aparência visual e estrutura de dados, permitindo uma análise equitativa quanto ao desempenho, à experiência do usuário e à otimização para mecanismos de busca.
+O escopo da aplicação a ser desenvolvida visa avaliar os impactos das abordagens de renderização \english{\acrshort{csr}} e \english{\acrshort{ssr}} no desenvolvimento de aplicações web. Para isso, será considerado o contexto de uma empresa fictícia cujo time de gestores precisa decidir qual modelo de renderização adotar para a criação de sua nova aplicação web. Serão desenvolvidas duas versões de uma mesma aplicação: uma utilizando \acrshort{csr} e outra baseada em \acrshort{ssr}. Ambas as implementações terão as mesmas funcionalidades, aparência visual e estrutura de dados, de modo a permitir uma análise equitativa quanto ao desempenho, à experiência do usuário e à otimização para mecanismos de busca.
 
-A aplicação escolhida simula um catálogo de produtos, com navegação por páginas, carregamento de dados via \textit{API} e exibição de informações detalhadas. Esse modelo foi selecionado por representar um cenário comum na web moderna, abrangendo interações usuais como carregamento dinâmico de conteúdo, roteamento entre páginas e exibição de listas e detalhes.
+A aplicação a ser desenvolvida simulará um catálogo de produtos, com navegação por páginas, carregamento de dados via \textit{API} e exibição de informações detalhadas. Esse modelo foi escolhido por representar um cenário comum na web moderna, abrangendo interações usuais como carregamento dinâmico de conteúdo, roteamento entre páginas e exibição de listas e detalhes.
 
-Cada versão será desenvolvida conforme os princípios da respectiva abordagem de renderização: a versão \acrshort{csr} terá a interface renderizada predominantemente no navegador do usuário, enquanto a versão \acrshort{ssr} terá o conteúdo renderizado no servidor e enviado ao cliente já montado.
+Cada versão será implementada conforme os princípios da respectiva abordagem de renderização: a versão \acrshort{csr} terá a interface renderizada predominantemente no navegador do usuário, enquanto a versão \acrshort{ssr} contará com o conteúdo renderizado no servidor e enviado ao cliente já montado.
 
-Durante o desenvolvimento, serão respeitadas as boas práticas de acessibilidade, responsividade e otimização para \acrshort{seo}, garantindo que ambas as versões possam ser avaliadas com base em critérios equivalentes. As métricas analisadas incluem tempo de carregamento, tempo até a interatividade, consumo de recursos, desempenho percebido, qualidade do código e compatibilidade com ferramentas de análise de \acrshort{seo}.
+Durante o desenvolvimento, serão seguidas boas práticas de acessibilidade, responsividade e otimização para \acrshort{seo}, garantindo que ambas as versões possam ser avaliadas com base em critérios equivalentes. As métricas a serem analisadas incluirão tempo de carregamento, tempo até a interatividade, consumo de recursos, desempenho percebido, qualidade do código e compatibilidade com ferramentas de análise de \acrshort{seo}.
 
-A coleta de dados será realizada por meio de ferramentas como Google Lighthouse, PageSpeed Insights e WebPageTest, além de testes manuais com usuários para observação qualitativa da experiência. Esses dados fundamentarão a análise comparativa e a discussão dos resultados apresentados nas próximas seções.
+A coleta de dados será realizada por meio de ferramentas como Google Lighthouse, PageSpeed Insights e WebPageTest, além de testes manuais com usuários, a fim de observar qualitativamente a experiência de uso. Esses dados fundamentarão a análise comparativa e a discussão dos resultados, que serão apresentados nas seções seguintes.
 
 
 \section{Coleta de Dados e Testes}
 \label{sec:coleta-de-dados-e-testes}
 
-Após o desenvolvimento das versões da aplicação com \english{\acrshort{csr}} e \english{\acrshort{ssr}}, foi realizada a coleta de dados visando mensurar o desempenho e a qualidade da experiência do usuário em cada abordagem.
+Após o desenvolvimento das versões da aplicação com \english{\acrshort{csr}} e \english{\acrshort{ssr}}, será realizada a coleta de dados com o objetivo de mensurar o desempenho e a qualidade da experiência do usuário em cada abordagem.
 
-As aplicações foram hospedadas em ambientes equivalentes, com configurações idênticas de hardware e rede, garantindo condições justas para os testes.
+As aplicações serão hospedadas em ambientes equivalentes, com configurações idênticas de hardware e rede, a fim de garantir condições justas para os testes.
 
-A coleta de dados utilizou as seguintes ferramentas:
-
-\begin{itemize}
-    \item \textbf{Google Lighthouse}: Avaliação de desempenho, acessibilidade, melhores práticas e \english{\acrshort{seo}};
-    \item \textbf{PageSpeed Insights}: Medição de tempo de carregamento, \textit{First Contentful Paint} (FCP), \textit{Largest Contentful Paint} (LCP), \textit{Time to Interactive} (TTI);
-    \item \textbf{WebPageTest}: Análise do tempo de resposta, número de requisições e uso de cache;
-    \item \textbf{Chrome DevTools}: Inspeção do tempo de execução de scripts e verificação da hidratação em \acrshort{ssr}.
-\end{itemize}
-
-Além disso, testes manuais foram realizados com usuários em diferentes dispositivos e conexões para observar fluidez, percepção de velocidade, clareza e responsividade.
-
-As principais métricas analisadas foram:
+A coleta de dados utilizará as seguintes ferramentas:
 
 \begin{itemize}
-    \item Tempo total de carregamento;
-    \item Tempo até a primeira exibição de conteúdo visível (FCP);
-    \item Tempo até a interatividade plena (TTI);
-    \item Número de requisições HTTP;
-    \item Compatibilidade com práticas de \acrshort{seo};
-    \item Consumo de recursos do navegador (memória e CPU);
-    \item Percepção subjetiva da experiência do usuário.
+\item \textbf{Google Lighthouse}: Avaliação de desempenho, acessibilidade, melhores práticas e \english{\acrshort{seo}};
+\item \textbf{PageSpeed Insights}: Medição de tempo de carregamento, \textit{First Contentful Paint} (FCP), \textit{Largest Contentful Paint} (LCP), \textit{Time to Interactive} (TTI);
+\item \textbf{WebPageTest}: Análise do tempo de resposta, número de requisições e uso de cache;
+\item \textbf{Chrome DevTools}: Inspeção do tempo de execução de scripts e verificação do processo de hidratação na abordagem \acrshort{ssr}.
 \end{itemize}
 
+Além disso, será realizada uma etapa de testes manuais com usuários em diferentes dispositivos e conexões, com o intuito de observar a fluidez da navegação, percepção de velocidade, clareza das interfaces e responsividade.
+
+As principais métricas a serem analisadas incluirão:
+
+\begin{itemize}
+\item Tempo total de carregamento;
+\item Tempo até a primeira exibição de conteúdo visível (FCP);
+\item Tempo até a interatividade plena (TTI);
+\item Número de requisições HTTP;
+\item Compatibilidade com práticas de \acrshort{seo};
+\item Consumo de recursos do navegador (memória e CPU);
+\item Percepção subjetiva da experiência do usuário.
+\end{itemize}
 
 \section{Síntese e Discussão}
 \label{sec:sintese-e-discussao}
 
-A análise dos resultados obtidos com as versões desenvolvidas utilizando \english{\acrshort{csr}} e \english{\acrshort{ssr}} permitiu uma compreensão detalhada dos trade-offs envolvidos na escolha entre essas abordagens de renderização.
+De maneira geral, será feita uma análise comparativa entre as abordagens \english{\acrshort{csr}} e \english{\acrshort{ssr}}, com base nas informações que serão obtidas ao longo da implementação descrita no Capítulo \ref{cap:estudo_caso1}. Essa análise terá como foco os aspectos técnicos e funcionais relacionados ao desempenho, tempo de carregamento, interatividade, experiência do usuário e compatibilidade com mecanismos de busca.
 
-Observou-se que a versão baseada em \acrshort{ssr} proporcionou melhor desempenho no carregamento inicial da página, evidenciado por métricas como o \textit{First Contentful Paint} (FCP) e o \textit{Time to Interactive} (TTI). Essa característica é especialmente relevante para aplicações que priorizam a experiência imediata do usuário e a otimização para mecanismos de busca, já que o conteúdo pré-renderizado no servidor é rapidamente entregue ao navegador.
+A discussão será conduzida de forma imparcial, considerando os dados coletados por meio de ferramentas especializadas, como Google Lighthouse, PageSpeed Insights e WebPageTest, bem como possíveis observações manuais obtidas em testes de usabilidade. A intenção será compreender como cada abordagem impacta diferentes requisitos de projeto e quais implicações essas escolhas podem trazer no contexto do desenvolvimento de aplicações web.
 
-Por outro lado, a versão \acrshort{csr} demonstrou vantagens em termos de fluidez e interatividade após o carregamento inicial, beneficiando aplicações que demandam atualizações frequentes de conteúdo e navegação sem recarga completa da página, características típicas de \english{\acrshort{spa}} (\textit{Single Page Applications}).
+Além da comparação direta entre {\acrshort{csr}} e {\acrshort{ssr}}, poderá ser explorada, conforme a relevância no decorrer da análise, a viabilidade de estratégias híbridas, como o uso de \english{\acrshort{ssg}} e \english{\acrshort{isr}}, no sentido de identificar soluções que conciliem desempenho, escalabilidade e experiência do usuário.
 
-A avaliação qualitativa com usuários indicou que a percepção de desempenho inicial foi superior na aplicação \acrshort{ssr}, enquanto a experiência de navegação contínua foi mais apreciada na versão \acrshort{csr}. Dessa forma, a escolha da abordagem ideal deve considerar as prioridades específicas do projeto, como a necessidade de velocidade inicial versus a interatividade constante.
-
-Além disso, foi constatado que a adoção de estratégias híbridas, como \english{\acrshort{ssg}} e \english{\acrshort{isr}}, pode oferecer um equilíbrio eficiente entre os benefícios do \acrshort{csr} e do \acrshort{ssr}, possibilitando alta performance, boa indexação para SEO e experiência de usuário satisfatória.
-
-Por fim, a discussão reforça que não existe uma solução única para todos os cenários. A decisão entre \acrshort{csr} e \acrshort{ssr} deve levar em conta fatores técnicos, de negócio e de infraestrutura, alinhando-se aos objetivos estratégicos e às expectativas dos usuários da aplicação.
-
-
+Essa etapa terá caráter investigativo e descritivo, sem antecipar conclusões, e servirá como base para reflexões futuras e para a elaboração de recomendações alinhadas aos objetivos definidos neste trabalho.
