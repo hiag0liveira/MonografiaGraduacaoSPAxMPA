@@ -18,7 +18,7 @@ As tecnologias fundamentais incluem \english{\acrfull{html}} para estruturação
 
 A arquitetura cliente-servidor é um modelo amplamente adotado no desenvolvimento de aplicações web, caracterizado pela separação entre dois componentes principais: o \textbf{cliente}, responsável pela interface com o usuário, e o \textbf{servidor}, que processa solicitações e fornece os recursos necessários \cite{clienteServidorControlNet}.
 
-Nesse modelo, os clientes — como navegadores em diferentes dispositivos — enviam requisições através da internet, enquanto os servidores respondem disponibilizando dados, arquivos e serviços. Essa divisão de responsabilidades favorece a escalabilidade, facilita a manutenção e permite que cliente e servidor operem em plataformas distintas~\cite{fundamentosDevWeb}.
+Nesse modelo, os clientes como navegadores em diferentes dispositivos enviam requisições através da internet, enquanto os servidores respondem disponibilizando dados, arquivos e serviços. Essa divisão de responsabilidades favorece a escalabilidade, facilita a manutenção e permite que cliente e servidor operem em plataformas distintas~\cite{fundamentosDevWeb}.
 
 A Figura~\ref{fig:cliente-servidor} ilustra, de forma simplificada, esse fluxo de comunicação entre cliente e servidor.
 
@@ -98,13 +98,13 @@ O \textbf{\english{\acrfull{https}}} é uma extensão do \acrshort{http} que adi
 
 A criptografia utilizada impede que terceiros acessem ou modifiquem as informações transmitidas, o que é fundamental em transações sensíveis, como cadastros, pagamentos e autenticações. Além disso, o uso de \textit{certificados digitais} garante que o site visitado é realmente aquele que afirma ser, protegendo os usuários contra ataques como o \textit{man-in-the-middle}\footnote{Um ataque \textit{man-in-the-middle} ocorre quando um invasor intercepta e possivelmente altera a comunicação entre duas partes que acreditam estar se comunicando diretamente. Isso pode permitir que o invasor capture informações sensíveis ou injete dados maliciosos na comunicação.\cite{wikipedia_man_in_the_middle}}.
 
-Enquanto o \acrshort{http} tradicional opera normalmente na porta \acrshort{tcp} 80, o \acrshort{https} utiliza, por convenção, a porta 443. Atualmente, o uso do \acrshort{https} é fortemente recomendado — e até exigido por navegadores modernos — como padrão de segurança para qualquer aplicação web, contribuindo para a privacidade e confiança dos usuários \cite{wikipedia_http}.
+Enquanto o \acrshort{http} tradicional opera normalmente na porta \acrshort{tcp} 80, o \acrshort{https} utiliza, por convenção, a porta 443. Atualmente, o uso do \acrshort{https} é fortemente recomendado e até exigido por navegadores modernos como padrão de segurança para qualquer aplicação web, contribuindo para a privacidade e confiança dos usuários \cite{wikipedia_http}.
 
 \subsection{\acrshort{html}, \acrshort{css} e JavaScript}
 \label{subsec:html-css-js}
 
 
-O desenvolvimento frontend, conforme definido por \citeonline{aws_frontend_backend}, refere-se à camada de apresentação de uma aplicação web — a interface gráfica com a qual os usuários interagem diretamente, composta por menus, botões, formulários e outros elementos visuais. Essa camada baseia-se em um conjunto de tecnologias fundamentais que operam em conjunto para fornecer estrutura, estilo e interatividade às páginas: \acrshort{html}, \acrshort{css} e JavaScript. Cada uma dessas linguagens desempenha um papel específico e complementar, sendo essenciais tanto em abordagens tradicionais quanto em técnicas modernas como o \acrshort{csr}.
+O desenvolvimento frontend, conforme definido por \citeonline{aws_frontend_backend}, refere-se à camada de apresentação de uma aplicação web a interface gráfica com a qual os usuários interagem diretamente, composta por menus, botões, formulários e outros elementos visuais. Essa camada baseia-se em um conjunto de tecnologias fundamentais que operam em conjunto para fornecer estrutura, estilo e interatividade às páginas: \acrshort{html}, \acrshort{css} e JavaScript. Cada uma dessas linguagens desempenha um papel específico e complementar, sendo essenciais tanto em abordagens tradicionais quanto em técnicas modernas como o \acrshort{csr}.
 
 
 \textbf{\acrfull{html}} é a linguagem de marcação padrão para a criação da estrutura de páginas web. Através de um conjunto de elementos (ou \textit{tags}), o \acrshort{html} organiza e define o conteúdo exibido ao usuário, como textos, imagens, links, formulários e tabelas. Além de estruturar visualmente o documento, o \acrshort{html} também confere semântica aos elementos, facilitando a indexação por motores de busca e promovendo acessibilidade para leitores de tela. Elementos como \texttt{<header>}, \texttt{<main>}, \texttt{<article>} e \texttt{<footer>} exemplificam essa função semântica~\cite{alura_htmlcssjs}.
@@ -117,7 +117,7 @@ Entre os recursos modernos do \acrshort{css}, destacam-se os seletores avançado
 
 JavaScript é uma das três principais tecnologias da World Wide Web, juntamente com \acrshort{html} e \acrshort{css}, sendo essencial tanto em abordagens tradicionais quanto modernas. Nas aplicações baseadas em \acrshort{csr}, essa linguagem tem papel central, pois a renderização das páginas ocorre diretamente no navegador do usuário. Com a evolução do ecossistema JavaScript, surgiram bibliotecas e frameworks robustos como a biblioteca React e os frameworks Vue.js e Angular que facilitam o desenvolvimento de aplicações complexas com componentes reutilizáveis e gerenciamento eficiente de estado.
 
-Adicionalmente, o JavaScript também pode ser executado no lado do servidor (\acrshort{ssr}) por meio de ambientes como o Node.js — uma plataforma de código aberto e multiplataforma baseada em eventos e não bloqueante, ideal para aplicações escaláveis e em tempo real~\cite{nodejs2025, js2025}. Isso permite o desenvolvimento de aplicações completas utilizando uma única linguagem em ambas as camadas, cliente e servidor.
+Adicionalmente, o JavaScript também pode ser executado no lado do servidor (\acrshort{ssr}) por meio de ambientes como o Node.js uma plataforma de código aberto e multiplataforma baseada em eventos e não bloqueante, ideal para aplicações escaláveis e em tempo real~\cite{nodejs2025, js2025}. Isso permite o desenvolvimento de aplicações completas utilizando uma única linguagem em ambas as camadas, cliente e servidor.
 
 A interação entre essas três tecnologias pode ser compreendida por meio de uma analogia: o \acrshort{html} representa a estrutura de um corpo (esqueleto), o \acrshort{css} corresponde à sua aparência externa (pele, roupas, estilo), enquanto o JavaScript age como os músculos e o sistema nervoso, controlando os movimentos e respostas interativas da aplicação. A Figura~\ref{fig:html-css-js} ilustra essa relação.
 
@@ -182,9 +182,39 @@ Entre os recursos oferecidos pelo GitHub Projects, destacam-se:
 \item \textbf{Integração com Issues e Pull Requests:} Possibilidade de vincular tarefas diretamente ao código, permitindo rastreabilidade completa entre planejamento e implementação.
 \end{itemize}
 
-No contexto deste trabalho, o \textbf{GitHub Projects} foi utilizado para planejar e acompanhar o desenvolvimento das plataformas \textit{WallTech-CSR} e \textit{WallTech-SSR}. A organização das tarefas em sprints e o uso de um fluxo Kanban contribuíram para a gestão ágil do projeto, promovendo maior visibilidade sobre o andamento das atividades e colaboração entre os membros da equipe.
 
 
+
+
+
+\section{News API}
+\label{sec:news-api}
+
+A \textbf{News API} é uma interface de programação que disponibiliza fluxos de notícias e artigos de forma estruturada, permitindo o acesso a conteúdos de mais de 150\,000 fontes jornalísticas ao redor do mundo. Seu propósito é fornecer informações publicadas em tempo real, facilitando o desenvolvimento de soluções de agregação, análise e visualização de notícias \cite{newsapi_docs}.
+
+\subsection{Escopo e cobertura}
+A plataforma oferece dois principais tipos de consulta: 
+
+\begin{itemize}
+    \item \textbf{Busca por artigos (\texttt{/everything}):} permite pesquisar notícias com base em termos, operadores booleanos, intervalos de datas, domínios específicos e critérios de ordenação, como relevância, popularidade ou data de publicação \cite{newsapi_docs}.
+    \item \textbf{Manchetes principais (\texttt{/top-headlines}):} retorna as notícias mais recentes, com filtros por país, categoria jornalística e fontes específicas.
+\end{itemize}
+
+Além disso, a \textbf{News API} disponibiliza o endpoint \texttt{/sources}, que fornece metadados sobre os veículos indexados, como nome, idioma, categoria e URL oficial.
+
+\subsection{Autenticação e formato de resposta}
+Para utilizar os endpoints, é necessário um \acrshort{api} key, que autentica as requisições e controla o uso da plataforma. As respostas são retornadas no formato \acrshort{json}, contendo campos como \texttt{status}, \texttt{totalResults} e uma lista de objetos \texttt{articles}, com atributos como título, autor, descrição, \acrshort{url} e data de publicação \cite{newsapi_docs}.
+
+\subsection{Funcionalidade e integração}
+A \textbf{News API} suporta buscas avançadas com:
+
+\begin{itemize}
+    \item termos exatos ou operadores lógicos (\texttt{AND}, \texttt{OR}, \texttt{NOT});
+    \item filtros por idioma, domínios específicos e intervalos de datas (\texttt{from}, \texttt{to});
+    \item paginação e controle de volume de resultados, com limite máximo de 100 artigos por página.
+\end{itemize}
+
+Essas características permitem integração tanto em aplicações com \acrshort{csr}, que realizam chamadas diretamente do navegador após o carregamento, quanto em soluções com \acrshort{ssr}, onde as requisições são feitas na camada servidor, possibilitando que o conteúdo seja renderizado previamente antes de ser entregue ao cliente.
 
 
 
@@ -733,9 +763,9 @@ Esse fator é determinante tanto para a \acrshort{ux} quanto para o \acrshort{se
 
 De acordo com \citeonline{google}, quanto mais rápido um site carregar, melhor tende a ser a experiência do usuário. Sites lentos comprometem a navegação e reduzem o tempo de permanência, afetando negativamente o engajamento.
 
-A percepção de desempenho — muitas vezes chamada de \emph{velocidade percebida} — também é um fator crucial para a usabilidade e pode ser tão relevante quanto o tempo de carregamento real. Nesse sentido, a escolha entre \acrshort{ssr} e \acrshort{csr} influencia diretamente essa percepção. O \acrshort{ssr} geralmente proporciona carregamento inicial mais rápido, pois o conteúdo é renderizado no servidor e entregue ao navegador já pronto para exibição. Isso permite que os usuários visualizem o conteúdo principal imediatamente, mesmo que outros recursos ainda estejam sendo carregados \cite{atori2024}.
+A percepção de desempenho muitas vezes chamada de \emph{velocidade percebida} também é um fator crucial para a usabilidade e pode ser tão relevante quanto o tempo de carregamento real. Nesse sentido, a escolha entre \acrshort{ssr} e \acrshort{csr} influencia diretamente essa percepção. O \acrshort{ssr} geralmente proporciona carregamento inicial mais rápido, pois o conteúdo é renderizado no servidor e entregue ao navegador já pronto para exibição. Isso permite que os usuários visualizem o conteúdo principal imediatamente, mesmo que outros recursos ainda estejam sendo carregados \cite{atori2024}.
 
-Por outro lado, no \acrshort{csr}, o navegador precisa baixar, interpretar e executar o JavaScript antes de renderizar qualquer conteúdo. Isso pode resultar em uma exibição inicial em branco ou em telas de carregamento, o que compromete a percepção de desempenho — especialmente em conexões lentas ou dispositivos com menor capacidade de processamento \cite{pixelfree2023}.
+Por outro lado, no \acrshort{csr}, o navegador precisa baixar, interpretar e executar o JavaScript antes de renderizar qualquer conteúdo. Isso pode resultar em uma exibição inicial em branco ou em telas de carregamento, o que compromete a percepção de desempenho especialmente em conexões lentas ou dispositivos com menor capacidade de processamento \cite{pixelfree2023}.
 
 
 \subsection{Interatividade}
@@ -755,7 +785,7 @@ A acessibilidade em aplicações web refere-se à capacidade de tornar conteúdo
 
 As abordagens de renderização, como \acrshort{csr} e \acrshort{ssr}, impactam diretamente a acessibilidade, especialmente na compatibilidade com essas tecnologias. Em aplicações que utilizam \acrshort{csr}, o conteúdo geralmente é carregado de forma assíncrona após a execução do JavaScript, o que pode dificultar a leitura imediata por leitores de tela que dependem de uma estrutura HTML previamente carregada para interpretar a página corretamente \cite{pixelfree2023access}. Já no \acrshort{ssr}, o conteúdo é entregue completamente no carregamento inicial, facilitando a interpretação por essas ferramentas e proporcionando uma experiência mais estável para usuários com deficiência visual \cite{atori2024}.
 
-Além disso, em contextos com atualizações dinâmicas de conteúdo — como ocorre em SPAs com \acrshort{csr} — é necessário adotar práticas específicas para garantir a acessibilidade, como gerenciamento de foco, uso de alertas ARIA e atualização de leitores de tela após mudanças no DOM. Essas medidas são fundamentais para que as mudanças de visualização sejam percebidas corretamente por tecnologias assistivas, uma vez que alterações no DOM nem sempre são reconhecidas automaticamente por leitores de tela. O envio de foco a elementos interativos ou o uso de regiões ARIA ao vivo são técnicas recomendadas para anunciar mudanças de estado ao usuário \cite{sutton2018}.
+Além disso, em contextos com atualizações dinâmicas de conteúdo como ocorre em SPAs com \acrshort{csr} é necessário adotar práticas específicas para garantir a acessibilidade, como gerenciamento de foco, uso de alertas ARIA e atualização de leitores de tela após mudanças no DOM. Essas medidas são fundamentais para que as mudanças de visualização sejam percebidas corretamente por tecnologias assistivas, uma vez que alterações no DOM nem sempre são reconhecidas automaticamente por leitores de tela. O envio de foco a elementos interativos ou o uso de regiões ARIA ao vivo são técnicas recomendadas para anunciar mudanças de estado ao usuário \cite{sutton2018}.
 
 Assim, embora o \acrshort{ssr} ofereça uma base naturalmente mais acessível, ambas as abordagens podem ser igualmente inclusivas quando aplicadas com atenção às diretrizes e boas práticas de acessibilidade.
 
