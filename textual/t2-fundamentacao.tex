@@ -132,6 +132,58 @@ A interação entre essas três tecnologias pode ser compreendida por meio de um
 Portanto, o domínio dessas três tecnologias é indispensável para qualquer desenvolvedor web. Elas formam o alicerce sobre o qual se constroem interfaces acessíveis, performáticas e envolventes, sendo empregadas tanto em aplicações renderizadas no servidor (\acrshort{ssr}) quanto no cliente (\acrshort{csr}), com adaptações específicas conforme a abordagem escolhida.
 
 
+\section{Controle de Versão com Git e GitHub}
+\label{sec:git-github}
+
+O desenvolvimento de aplicações web modernas exige práticas que garantam organização, rastreabilidade e colaboração eficiente entre desenvolvedores. Nesse contexto, ferramentas de controle de versão como o \textbf{Git} e plataformas de hospedagem como o \textbf{GitHub} são fundamentais para o gerenciamento do ciclo de vida do software \cite{github_official}.
+
+\subsection{Git}
+\label{subsec:git}
+
+O \textbf{Git} é um sistema de controle de versão distribuído criado por Linus Torvalds em 2005 com o objetivo de gerenciar projetos de forma rápida e eficiente, independentemente do tamanho ou complexidade \cite{chacon_git}. Ele permite que múltiplos desenvolvedores trabalhem simultaneamente em um projeto, mantendo o histórico de alterações de forma segura e auditável.
+
+Entre os conceitos fundamentais do Git, destacam-se:
+
+\begin{itemize}
+\item \textbf{Repositório (\textit{Repository}):} Estrutura que armazena o histórico completo do projeto, incluindo arquivos, diretórios e suas versões ao longo do tempo.
+\item \textbf{Commits:} Registros de alterações no projeto. Cada commit possui um identificador único (hash) e uma mensagem descritiva \cite{chacon_git}.
+\item \textbf{Branches:} Ramificações independentes do repositório que permitem o desenvolvimento paralelo de funcionalidades, correções ou experimentos sem impactar o código principal.
+\item \textbf{Merge:} Integração de alterações realizadas em diferentes branches.
+\item \textbf{Clone e Pull:} Operações que permitem obter uma cópia local do repositório e sincronizar com atualizações remotas.
+\end{itemize}
+
+O modelo distribuído do Git permite que cada colaborador mantenha uma cópia completa do repositório em sua máquina local, o que garante maior resiliência e independência em relação ao servidor central \cite{chacon_git}.
+
+\subsection{GitHub}
+\label{subsec:github}
+
+O \textbf{GitHub} é uma plataforma de hospedagem de código baseada em Git, que amplia suas funcionalidades com recursos colaborativos e integração contínua \cite{github_official}. Fundada em 2008, a plataforma popularizou-se como um ambiente de colaboração para projetos de software de código aberto e privado.
+
+Além de hospedar repositórios Git, o GitHub oferece funcionalidades como:
+
+\begin{itemize}
+\item \textbf{Issues:} Ferramenta para rastreamento de tarefas, bugs e melhorias \cite{github_official}.
+\item \textbf{Pull Requests (PR):} Fluxo de revisão e integração de código, permitindo que contribuições sejam analisadas antes de serem incorporadas ao branch principal.
+\item \textbf{Actions:} Automatização de processos com integração contínua (CI) e entrega contínua (CD).
+\item \textbf{Wikis e Documentação:} Área para criação de páginas informativas sobre o projeto.
+\end{itemize}
+
+\subsection{GitHub Projects}
+\label{subsec:github-projects}
+
+O \textbf{GitHub Projects} é uma funcionalidade integrada à plataforma que possibilita o gerenciamento de projetos utilizando quadros visuais baseados em metodologias ágeis, como Kanban e Scrum \cite{github_projects}. Essa ferramenta permite organizar tarefas, acompanhar o progresso e priorizar demandas de maneira colaborativa.
+
+Entre os recursos oferecidos pelo GitHub Projects, destacam-se:
+
+\begin{itemize}
+\item \textbf{Quadros Kanban:} Visualização de tarefas em colunas (como \textit{To Do}, \textit{In Progress} e \textit{Done}), facilitando o acompanhamento do fluxo de trabalho.
+\item \textbf{Automação:} Regras automáticas que movem cartões entre colunas com base em eventos, como o fechamento de issues ou merge de pull requests \cite{github_projects}.
+\item \textbf{Customização:} Campos personalizados e filtros para adaptar o quadro às necessidades do projeto.
+\item \textbf{Integração com Issues e Pull Requests:} Possibilidade de vincular tarefas diretamente ao código, permitindo rastreabilidade completa entre planejamento e implementação.
+\end{itemize}
+
+No contexto deste trabalho, o \textbf{GitHub Projects} foi utilizado para planejar e acompanhar o desenvolvimento das plataformas \textit{WallTech-CSR} e \textit{WallTech-SSR}. A organização das tarefas em sprints e o uso de um fluxo Kanban contribuíram para a gestão ágil do projeto, promovendo maior visibilidade sobre o andamento das atividades e colaboração entre os membros da equipe.
+
 
 
 
