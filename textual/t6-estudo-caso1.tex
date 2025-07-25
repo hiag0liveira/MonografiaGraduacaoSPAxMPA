@@ -49,3 +49,65 @@ A Figura \ref{fig:kanban-userstories} mostra um exemplo de cartão \english{issu
   \label{fig:kanban-userstories}
 \end{figure}
 
+
+
+
+\section{Requisitos}
+\label{section:requisitos}
+
+\section{Design do Sistema}
+\label{cap:design}
+
+O design do sistema foi orientado para refletir as diferenças estruturais entre as abordagens \acrshort{spa} e \acrshort{mpa}, levando em consideração os requisitos funcionais da plataforma \textit{WallTech}. Esta vitrine digital exibe notícias de tecnologia obtidas por meio da \textit{NewsAPI}, com recursos de busca, filtragem e destaque de conteúdo segmentado por país. Não há backend próprio, sendo todas as chamadas feitas diretamente para a API externa, o que simplifica a arquitetura e acentua o papel do frontend na renderização de conteúdo.
+
+Para modelagem arquitetural e comportamental, foram utilizados diagramas da UML, incluindo:
+\begin{itemize}
+  \item \textbf{Diagrama de Caso de Uso}, para representar as principais funcionalidades acessadas pelos usuários visitantes.
+  \item \textbf{Diagrama de Sequência}, a fim de ilustrar o fluxo de interação entre navegador e a \textit{NewsAPI} durante operações como busca e carregamento de notícias.
+  \item \textbf{Diagrama de Componentes}, para representar os módulos da aplicação, como a interface, o serviço de requisição à API, e os componentes de renderização.
+\end{itemize}
+
+As decisões de design foram fundamentadas em boas práticas para renderização web discutidas por \cite{osmani2025}, bem como nas diretrizes da literatura especializada em arquitetura de frontend, como apresentado pela \cite{atori2024}.
+
+Segundo \cite{osmani2025}, a escolha entre renderização no cliente ou no servidor deve considerar o contexto da aplicação, os requisitos de desempenho e os objetivos de SEO. Já o artigo da \cite{atori2024} destaca que SPAs tendem a oferecer maior fluidez e interatividade, enquanto MPAs são mais eficazes em aplicações que dependem de indexação e acessibilidade.
+
+\subsection{Arquitetura SPA}
+
+A versão \acrshort{spa} da aplicação foi projetada com foco em responsividade e fluidez de interação. Utilizando bibliotecas como React, a renderização do conteúdo é feita inteiramente no navegador, após o carregamento inicial de um documento \texttt{HTML} mínimo. Todas as requisições são feitas dinamicamente via \texttt{fetch} para a \textit{NewsAPI}, permitindo uma experiência de uso imersiva sem recarregamentos completos de página.
+
+Essa abordagem reduz a carga no servidor, melhora a experiência de usuário em conexões rápidas e facilita a manutenção do código por meio de componentes reutilizáveis. Por outro lado, apresenta desafios quanto à indexação por mecanismos de busca, dado que o conteúdo depende da execução de JavaScript, conforme destacado por \cite{osmani2025}. Essa limitação pode ser parcialmente mitigada com técnicas como \textit{pre-rendering} e \textit{hydration} progressiva.
+
+O diagrama de componentes da SPA evidencia a centralização da lógica no navegador, enquanto o diagrama de sequência demonstra o ciclo de vida de requisições e renderização client-side.
+
+\subsection{Arquitetura MPA}
+
+A versão \acrshort{mpa}, por sua vez, simula a renderização \acrshort{ssr}, em que cada rota representa uma nova página entregue já montada. Neste modelo, cada requisição à aplicação resulta na obtenção de uma nova instância de HTML contendo os dados pré-processados. Frameworks como Next.js permitem implementar essa estratégia, mesmo quando os dados provêm de APIs externas como a \textit{NewsAPI}.
+
+Esse tipo de renderização favorece o desempenho inicial (menor \acrshort{fcp}) e melhora a indexação do conteúdo pelos mecanismos de busca, como discutido pela \cite{atori2024}. Na aplicação, isso se traduz em páginas com conteúdo estático inicial pronto para rastreamento, mesmo que a interatividade seja ativada posteriormente via JavaScript (\textit{hydration}).
+
+O diagrama de componentes da MPA demonstra a responsabilidade do servidor em montar o HTML completo, enquanto o diagrama de sequência mostra o papel da API externa na geração do conteúdo antes da entrega ao navegador.
+
+
+
+\section{Implementação}
+\label{sec:implementacao}
+
+Esta seção descreve o conjunto de tecnologias, bibliotecas e ferramentas que são empregadas para a construção das duas versões do sistema de prova de conceito, detalhando a fundamentação para a escolha de cada componente do ecossistema de desenvolvimento. O gerenciamento do código-fonte e do ciclo de vida do projeto é realizado com o sistema de controle de versão \textbf{Git} e a plataforma de hospedagem \textbf{GitHub}, conforme as práticas descritas na Seção~\ref{sec:git-github}.
+
+Ambas as implementações consomem dados da mesma fonte externa, a \textbf{News API}, uma \acrshort{api} RESTful que fornece o conteúdo jornalístico para a aplicação, como detalhado na Seção~\ref{sec:news-api}. Para garantir a consistência visual e a qualidade da interface entre as duas arquiteturas, utiliza-se a biblioteca de componentes \textbf{shadcn/ui}, que oferece um conjunto de componentes acessíveis e personalizáveis, conforme apresentado na Seção~\ref{sec:ferramentas-modernas}.
+
+\subsection{Implementação da Aplicação SPA}
+\label{ssec:implementacao_spa}
+
+A implementação da \acrfull{spa} é desenvolvida utilizando a biblioteca \textbf{React} na sua versão 18. O React é uma biblioteca JavaScript declarativa, mantida pela Meta, focada na construção de interfaces de usuário a partir de componentes reutilizáveis. Sua adoção neste projeto se dá por sua vasta popularidade no mercado e ao seu paradigma de componentização, que facilita a criação de UIs modulares e de fácil manutenção \cite{react2025}. A eficiência da renderização é otimizada pelo uso de um DOM Virtual, um conceito central da biblioteca que minimiza as manipulações diretas no navegador.
+
+Para a estruturação inicial do projeto e o gerenciamento do ambiente de desenvolvimento, utiliza-se a ferramenta de \textit{build} \textbf{Vite}. O Vite é um ecossistema de desenvolvimento frontend moderno que oferece um servidor de desenvolvimento com recarregamento rápido (\textit{Hot Module Replacement}) e um processo de compilação (\textit{build}) otimizado, que resulta em pacotes de produção menores e mais eficientes \cite{vite_docs}.
+
+O roteamento no lado do cliente, uma característica fundamental da arquitetura SPA, implementa-se com a biblioteca \textbf{React Router}. Trata-se da solução padrão para navegação em aplicações React, que possibilita a criação de uma experiência de usuário fluida e sem recarregamentos de página ao manipular a \acrshort{api} de Histórico do navegador \cite{react_router_docs}. A comunicação com a News API é realizada por meio da \acrshort{api} \texttt{fetch}, nativa dos navegadores modernos.
+
+\subsection{Implementação da Aplicação MPA}
+\label{ssec:implementacao_mpa}
+
+A implementação da \acrfull{mpa}, com foco em \acrfull{ssr}, é desenvolvida com o \emph{framework} \textbf{Next.js} na versão 14. O Next.js é um meta-framework baseado em React, mantido pela Vercel, que se posiciona como uma solução completa para a construção de aplicações web de produção. Sua escolha para este estudo de caso justifica-se por ser a principal referência de mercado para a implementação de \acrshort{ssr} no ecossistema React, oferecendo uma estrutura robusta e opinativa \cite{nextjs2024}.
+
+O \emph{framework} opera sobre um ambiente \textbf{Node.js}, o que permite a execução de código JavaScript no lado do servidor \cite{nodejs2025}. Essa capacidade é a base da renderização no servidor, onde o Next.js utiliza funções específicas, como a \texttt{getServerSideProps}, para buscar dados de fontes externas e pré-renderizar o HTML completo de uma página antes de enviá-la ao navegador. Além disso, o Next.js implementa um sistema de roteamento baseado no sistema de arquivos, onde a estrutura de diretórios da pasta \texttt{pages} define automaticamente as rotas da aplicação, simplificando a configuração e a manutenção do projeto.
