@@ -49,11 +49,25 @@ A Figura \ref{fig:kanban-userstories} mostra um exemplo de cartão \english{issu
   \label{fig:kanban-userstories}
 \end{figure}
 
-
-
-
 \section{Requisitos}
 \label{section:requisitos}
+Os requisitos do sistema foram definidos com base nas necessidades dos usuários e nas funcionalidades desejadas para a plataforma WallTech. A seguir, são apresentados os principais requisitos funcionais e não funcionais identificados para o desenvolvimento da aplicação.
+
+\subsection{Requisitos Funcionais}
+\label{subsec:requisitos-funcionais}
+A Figura \ref{fig:sequence-diagram} ilustra um diagrama de sequência da plataforma WallTech, onde o usuário pode visualizar notícias e navegar para os detalhes de uma notícia específica.
+
+No diagrama, o processo começa quando o usuário acessa o site da WallTech, e o navegador faz a requisição para carregar a página inicial. O servidor Next.js então busca as notícias padrão, como as mais recentes e em destaque, na API Externa (NewsAPI). O servidor renderiza a página HTML completa e a envia ao navegador para exibição, permitindo que o usuário veja as notícias em português.
+
+
+\begin{figure}[H]
+  \centering
+  \caption{Diagrama de sequência da plataforma WallTech}
+  \includegraphics[width=0.7\textwidth]{media/wall_tech_sequence_diagram.jpeg}
+  \legend{Fonte: os autores.}
+  \label{fig:sequence-diagram}
+\end{figure}
+
 
 \section{Design do Sistema}
 \label{cap:design}
