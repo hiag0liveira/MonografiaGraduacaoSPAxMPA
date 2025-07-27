@@ -49,95 +49,293 @@ A Figura \ref{fig:kanban-userstories} mostra um exemplo de cartão \english{issu
   \label{fig:kanban-userstories}
 \end{figure}
 
+
+
+
+\subsection{Planejamento Funcional: Épico e Histórias de Usuário}
+
+Para guiar o desenvolvimento da plataforma \textbf{WallTech}, foi adotada uma abordagem baseada em práticas ágeis, especialmente no uso de \textit{épicos} e \textit{histórias de usuário}. Essa técnica visa descrever funcionalidades a partir da perspectiva do usuário, proporcionando clareza sobre o propósito e os objetivos de cada componente da aplicação.
+
+As histórias de usuário foram redigidas segundo o modelo dos \textbf{3Ws (Who, What, Why)}, uma técnica comum em análise de requisitos que busca responder:
+\begin{itemize}
+  \item \textbf{Who (Quem):} Quem está solicitando ou interagindo com a funcionalidade?
+  \item \textbf{What (O quê):} Qual é a ação ou funcionalidade desejada?
+  \item \textbf{Why (Por quê):} Qual é o benefício ou valor esperado para o usuário?
+\end{itemize}
+
+Esse modelo torna a narrativa mais centrada no usuário e contribui para um entendimento compartilhado entre desenvolvedores, designers e partes interessadas. Além disso, as funcionalidades foram agrupadas em \textbf{épicos}, que representam blocos de funcionalidades coesas e de maior escala dentro do sistema.
+
+A seguir, apresenta-se o \textbf{EPIC-01}, responsável por organizar as funcionalidades relacionadas à visualização pública de notícias na plataforma WallTech, seguido de suas respectivas histórias de usuário.
+
+\subsubsection*{EPIC-01: Visualização de Notícias (Público)}
+
+\begin{itemize}
+  \item \textbf{ID do Épico:} EPIC-01
+  \item \textbf{Persona Principal:} Leitor (Anônimo)
+\end{itemize}
+
+\noindent \textbf{Descrição:} Este épico representa a “vitrine” da plataforma WallTech, onde visitantes anônimos podem explorar notícias de tecnologia de forma rápida, atrativa e segmentada por país. O fluxo foi pensado para maximizar o engajamento do usuário ao destacar as notícias mais relevantes e oferecer ferramentas intuitivas de busca e filtragem.
+
+\noindent \textbf{Funcionalidades Principais:}
+\begin{itemize}
+  \item Barra de pesquisa (por título, palavra-chave ou categoria);
+  \item Destaque para a notícia mais visitada e outras três recentemente acessadas;
+  \item Listagem das cinco últimas notícias;
+  \item Filtro por país (Brasil ou EUA);
+  \item Página de detalhes da notícia com conteúdo completo e relacionadas.
+\end{itemize}
+
+\noindent \textbf{Requisitos Não-Funcionais:}
+\begin{itemize}
+  \item Interface responsiva em diferentes dispositivos;
+  \item Otimização de desempenho para carregamento rápido;
+  \item Suporte a SEO nas páginas públicas (relevante em SSR).
+\end{itemize}
+
+\noindent \textbf{Critérios de Aceite:}
+\begin{itemize}
+  \item Visitantes conseguem navegar e visualizar notícias sem necessidade de login;
+  \item É possível realizar pesquisas e aplicar filtros por país;
+  \item A navegação é responsiva, intuitiva e eficiente;
+  \item A página de detalhes apresenta informações completas da notícia.
+\end{itemize}
+
+\subsubsection*{HU01: Visualização da Tela Inicial com Notícias em Destaque}
+
+\begin{itemize}
+  \item \textbf{Who:} Visitante anônimo
+  \item \textbf{What:} Ver na página inicial uma barra de pesquisa, uma notícia mais visitada em destaque, três outras recém acessadas e uma lista com as cinco últimas notícias publicadas.
+  \item \textbf{Why:} Explorar rapidamente o conteúdo mais relevante e recente sobre tecnologia.
+\end{itemize}
+
+\noindent \textbf{História:} \textit{Como um visitante, quero ver na página inicial uma barra de pesquisa, a notícia mais visitada em destaque, outras três recém visitadas ao lado e as cinco últimas notícias abaixo, para que eu possa explorar rapidamente o conteúdo mais relevante sobre tecnologia.}
+
+\noindent \textbf{Critérios de Aceite:}
+\begin{itemize}
+  \item A página inicial contém uma barra de pesquisa funcional;
+  \item A notícia mais visitada aparece em destaque;
+  \item Outras três notícias aparecem ao lado da principal;
+  \item Abaixo, as cinco últimas notícias são exibidas em ordem cronológica;
+  \item Interface é responsiva e com bom desempenho.
+\end{itemize}
+
+\subsubsection*{HU02: Pesquisar Notícias por Palavra-chave ou Categoria}
+
+\begin{itemize}
+  \item \textbf{Who:} Visitante
+  \item \textbf{What:} Utilizar a barra de pesquisa para buscar por título, palavra-chave ou categoria.
+  \item \textbf{Why:} Encontrar conteúdos relevantes de forma eficiente.
+\end{itemize}
+
+\noindent \textbf{História:} \textit{Como um visitante, quero pesquisar notícias por título, palavra-chave ou categoria, para que eu possa encontrar facilmente conteúdos relevantes sem precisar navegar por toda a lista.}
+
+\noindent \textbf{Critérios de Aceite:}
+\begin{itemize}
+  \item Campo de texto para busca;
+  \item Filtro por categoria;
+  \item Resultados relevantes são exibidos com base na busca;
+  \item A busca pode ser combinada com o filtro por categoria;
+  \item Mensagem amigável exibida em caso de nenhum resultado.
+\end{itemize}
+
+\subsubsection*{HU03: Filtrar Notícias por País}
+
+\begin{itemize}
+  \item \textbf{Who:} Visitante
+  \item \textbf{What:} Filtrar as notícias por país usando um seletor com bandeiras.
+  \item \textbf{Why:} Visualizar conteúdos específicos da localidade desejada.
+\end{itemize}
+
+\noindent \textbf{História:} \textit{Como um visitante, quero filtrar notícias por país (Brasil ou EUA), para que eu possa visualizar apenas conteúdos relevantes para minha localidade ou interesse regional.}
+
+\noindent \textbf{Critérios de Aceite:}
+\begin{itemize}
+  \item Menu com seleção de país exibindo bandeira e nome;
+  \item Lista de notícias é atualizada dinamicamente conforme a seleção;
+  \item O filtro mantém o estado ao navegar;
+  \item Filtro compatível com busca por palavra-chave ou categoria.
+\end{itemize}
+
+\subsubsection*{HU04: Visualizar Detalhes de uma Notícia}
+
+\begin{itemize}
+  \item \textbf{Who:} Visitante
+  \item \textbf{What:} Acessar a página de detalhes de uma notícia específica.
+  \item \textbf{Why:} Ler o conteúdo completo e visualizar informações adicionais.
+\end{itemize}
+
+\noindent \textbf{História:} \textit{Como um visitante, quero clicar em uma notícia para acessar sua página de detalhes, para que eu possa ler o conteúdo completo e visualizar informações relacionadas.}
+
+\noindent \textbf{Critérios de Aceite:}
+\begin{itemize}
+  \item Acesso a uma URL única da notícia;
+  \item Exibição completa do conteúdo (título, autor, data, imagem, corpo do texto, país de origem);
+  \item Exibição de até três notícias relacionadas;
+  \item Página de erro amigável no caso de URL inválida;
+  \item Botão para retornar à lista ou pesquisa anterior.
+\end{itemize}
+
+
+
+
+
+
+
+
+
 \section{Requisitos}
 \label{section:requisitos}
-Os requisitos do sistema foram definidos com base nas necessidades dos usuários e nas funcionalidades desejadas para a plataforma WallTech. A seguir, são apresentados os principais requisitos funcionais e não funcionais identificados para o desenvolvimento da aplicação.
+
+O levantamento e a definição dos requisitos da plataforma \textbf{WallTech} foram guiados pelas necessidades dos usuários e organizados por meio da técnica de \textit{histórias de usuário}, agrupadas em \textit{épicos}. A partir da análise funcional do \textbf{EPIC-01 — Visualização de Notícias (Público)}, foram identificadas as principais funcionalidades esperadas para a aplicação, considerando tanto o fluxo de interação do visitante quanto os objetivos de usabilidade, desempenho e escalabilidade.
+
+Os requisitos a seguir foram organizados em duas categorias: \textbf{funcionais}, que representam as funcionalidades diretamente percebidas pelos usuários, e \textbf{não funcionais}, que tratam de atributos como desempenho, acessibilidade e responsividade.
 
 \subsection{Requisitos Funcionais}
 \label{subsec:requisitos-funcionais}
-A Figura \ref{fig:sequence-diagram} ilustra um diagrama de sequência da plataforma WallTech, onde o usuário pode visualizar notícias e navegar para os detalhes de uma notícia específica.
 
-No diagrama, o processo começa quando o \textit{usuário} acessa o site da WallTech, e o \textit{navegador} faz a requisição para carregar a página inicial. O \textit{servidor Next.js} então busca as notícias padrão, como as mais recentes e em destaque, na \textit{API Externa (NewsAPI)}. O servidor renderiza a página HTML completa e a envia ao \textit{navegador} para exibição, permitindo que o \textit{usuário} veja as notícias em português.
+\begin{itemize}
+  \item O sistema deve permitir que visitantes visualizem uma lista de notícias recentes e em destaque.
+  \item O sistema deve disponibilizar uma barra de pesquisa por palavra-chave, título ou categoria.
+  \item O sistema deve permitir a filtragem de notícias por país (🇧🇷 Brasil ou 🇺🇸 EUA).
+  \item O sistema deve possibilitar o acesso aos detalhes completos de uma notícia selecionada.
+  \item O sistema deve armazenar localmente os acessos recentes para melhorar a experiência do usuário.
+  \item O sistema deve apresentar mensagens claras em situações de ausência de conteúdo.
+\end{itemize}
 
-Após visualizar a página inicial, o \textit{usuário} clica em um link de uma notícia para acessar os detalhes dessa notícia específica. O \textit{navegador} faz uma nova requisição para a página de detalhes, e o \textit{servidor Next.js} não mantém estado, então ele precisa buscar os dados novamente na \textit{API Externa (NewsAPI)}. A \textit{API} retorna os dados da notícia, e o \textit{servidor Next.js} renderiza a página de detalhes em HTML, exibindo as informações completas da notícia, como título, conteúdo e data de publicação.
+\subsection{Requisitos Não Funcionais}
+\label{subsec:requisitos-nao-funcionais}
 
-Além disso, o \textit{navegador} interage com o \textit{LocalStorage}, salvando o acesso recente à notícia, o que melhora a performance e a experiência do usuário, pois ele pode acessar rapidamente os detalhes da última notícia visualizada sem precisar fazer nova requisição.
+\begin{itemize}
+  \item A interface deve ser responsiva, adaptando-se corretamente a diferentes tamanhos de tela.
+  \item O carregamento das páginas deve ser otimizado, proporcionando uma experiência fluida mesmo em conexões lentas.
+  \item O sistema deve estar preparado para indexação por motores de busca (SEO), quando aplicado via Server-Side Rendering.
+  \item A navegação deve ser acessível, com suporte a teclado e leitores de tela.
+  \item A interface deve manter a consistência visual e funcional entre suas versões SPA e MPA.
+\end{itemize}
+
+
+\subsection{Fluxo de Navegação - SSR/MPA}
+\label{subsec:fluxo-ssr}
+
+Na abordagem baseada em \textbf{Server-Side Rendering (SSR)} com \textbf{Multi-Page Application (MPA)}, cada página é gerada no servidor a partir de uma requisição HTTP completa. Esse modelo favorece aspectos como \textit{SEO}, pois o conteúdo chega pré-renderizado ao navegador, sendo interpretável por motores de busca.
+
+O fluxo típico da visualização de notícias na plataforma WallTech segue os seguintes passos:
+
+\begin{itemize}
+  \item O \textbf{usuário} acessa o site da WallTech;
+  \item O \textbf{navegador} realiza uma requisição \texttt{GET /} ao \textbf{servidor Next.js};
+  \item O servidor consulta a \textbf{API externa (NewsAPI)} para obter as notícias mais recentes e em destaque;
+  \item Com os dados recebidos, o servidor renderiza a página inicial em HTML;
+  \item A página completa é enviada ao navegador e exibida ao usuário;
+  \item Quando o usuário clica para ver os detalhes de uma notícia, uma nova requisição HTTP é feita para uma rota do tipo \texttt{/noticias/detalhes/...};
+  \item O servidor realiza uma nova chamada à \textbf{NewsAPI} para buscar os dados da notícia específica;
+  \item A página de detalhes é então renderizada e enviada como HTML ao navegador;
+  \item Após o carregamento, um script no cliente pode salvar ou ler o acesso recente no \textbf{LocalStorage}.
+\end{itemize}
+
+Esse fluxo garante uma experiência sólida mesmo em conexões lentas, com boa previsibilidade de carregamento, e permite que os motores de busca indexem o conteúdo diretamente.
 
 \begin{figure}[H]
   \centering
-  \caption{Diagrama de sequência da plataforma WallTech}
-  \includegraphics[width=0.9\textwidth]{media/wall_tech_sequence_diagram.jpeg}
+  \caption{Diagrama de sequência da plataforma WallTech - SSR/MPA}
+  \includegraphics[width=1\textwidth]{media/wall_tech_sequence_diagram.jpeg}
   \legend{Fonte: os autores.}
   \label{fig:sequence-diagram}
 \end{figure}
 
-A Figura \ref{fig:sequence-diagram-details} ilustra o fluxo de interações entre o \textit{usuário}, o \textit{navegador}, o \textit{gerenciador de estado}, o \textit{servidor de API}, e o \textit{LocalStorage} ao acessar os detalhes de uma notícia. Este diagrama complementa o anterior, mostrando como o sistema lida com a navegação do \textit{usuário} após a visualização da página inicial com as notícias.
+\subsection{Fluxo de Navegação - CSR/SPA}
+\label{subsec:fluxo-csr}
 
-No processo, o \textit{usuário} clica em uma notícia para ver os detalhes. O \textit{roteador} do React intercepta o clique, altera a URL instantaneamente (sem recarregar a página), e o \textit{gerenciador de estado} solicita os dados da notícia específica. Como a aplicação é baseada em SPA, os dados já estão carregados e não é necessário fazer uma nova requisição à \textit{API}. O \textit{gerenciador de estado} filtra os dados e encontra a notícia no estado atual, antes de salvar o acesso recente no \textit{LocalStorage}.
+Na abordagem baseada em \textbf{Client-Side Rendering (CSR)} com \textbf{Single Page Application (SPA)}, a aplicação é carregada inicialmente como um conjunto de componentes React, e toda a navegação subsequente ocorre sem recarregamentos de página — tornando a experiência mais fluida e rápida.
 
-A Figura \ref{fig:sequence-diagram-details} ilustra esse processo, detalhando a interatividade e a eficiência da SPA na exibição de detalhes da notícia.
+O comportamento da plataforma WallTech nesse modelo ocorre da seguinte forma:
+
+\begin{itemize}
+  \item O \textbf{usuário} acessa o site da WallTech;
+  \item O \textbf{navegador} carrega o \textbf{aplicativo React} e monta o componente da página inicial;
+  \item O componente dispara uma ação para o \textbf{gerenciador de estado} requisitar os dados iniciais da aplicação;
+  \item O gerenciador aciona o \textbf{serviço de API}, que realiza uma chamada à \textbf{NewsAPI} para buscar notícias em destaque e recentes;
+  \item Os dados retornados são entregues ao gerenciador de estado, que os armazena e notifica a interface para renderizar a UI;
+  \item O usuário então visualiza a página inicial com os dados carregados;
+  \item Ao clicar em uma notícia, o \textbf{roteador do React} intercepta o evento e atualiza a URL sem recarregar a página;
+  \item O gerenciador de estado busca os dados da notícia específica (já presentes em cache);
+  \item Os dados são entregues ao componente de detalhes, e a interface é atualizada dinamicamente;
+  \item O acesso recente é salvo ou lido do \textbf{LocalStorage}, sem nova requisição externa.
+\end{itemize}
+
+Este fluxo aproveita o carregamento inicial para melhorar a performance da navegação interna e reduzir o tráfego com a API externa.
 
 \begin{figure}[H]
   \centering
-  \caption{Diagrama de sequência para visualização de detalhes da notícia na plataforma WallTech}
-  \includegraphics[width=0.9\textwidth]{media/wall_tech_detail_sequence_diagram.jpeg}
+  \caption{Diagrama de sequência da plataforma WallTech - CSR/SPA}
+  \includegraphics[width=1\textwidth]{media/wall_tech_detail_sequence_diagram.jpeg}
   \legend{Fonte: os autores.}
   \label{fig:sequence-diagram-details}
 \end{figure}
 
 
-\subsection{Diagrama de componentes}
-A Figura \ref{fig:component-diagram-react} apresenta o diagrama de componentes da plataforma WallTech para a abordagem \textbf{SPA (Single Page Application)}, utilizando React. Este diagrama ilustra como os diferentes módulos do sistema interagem entre si para garantir o funcionamento da plataforma.
 
-Na arquitetura \textbf{SPA}:
+
+\subsection{Diagrama de Componentes}
+\label{subsec:diagrama-componentes}
+
+O diagrama de componentes tem como objetivo apresentar a estrutura modular da plataforma WallTech, evidenciando os principais elementos envolvidos em sua arquitetura e a forma como interagem entre si. A modelagem foi realizada para duas abordagens distintas de renderização e navegação: \textbf{SPA (Single Page Application)} com React e \textbf{MPA (Multi Page Application)} com Next.js.
+
+\subsubsection{Arquitetura SPA com React - Detalhamento do Diagrama}
+
+A Figura~\ref{fig:component-diagram-react} ilustra os principais componentes da arquitetura \textbf{SPA (Single Page Application)} da plataforma WallTech, implementada com React. Nesse modelo, toda a lógica de renderização, navegação e atualização da interface ocorre no navegador do usuário, após o carregamento inicial da aplicação.
+
+A aplicação é estruturada em torno de um \textbf{Roteador de Páginas (React Router)}, responsável por controlar qual componente de view será renderizado: a \textbf{Página Inicial (Home)} ou a \textbf{Página de Detalhes da Notícia}. Esses componentes disparam ações para o \textbf{Gerenciador de Estado}, que coordena o armazenamento e recuperação dos dados utilizados na interface.
+
+O \textbf{Gerenciador de Estado} atua como intermediário entre as views e o \textbf{Serviço de API}, responsável por realizar chamadas à \textbf{NewsAPI.org} para obter as notícias em destaque ou os detalhes de uma notícia específica. Além disso, é ele quem gerencia a persistência de dados temporários no \textbf{LocalStorage}, como o histórico de notícias acessadas.
+
+Ao centralizar a lógica no cliente e evitar recarregamentos de página, essa arquitetura proporciona:
 \begin{itemize}
-    \item O \textit{Roteador de Páginas} gerencia a navegação entre as páginas (Página Inicial e Página de Detalhes da Notícia).
-    \item O \textit{Gerenciador de Estado} solicita dados e dispara ações de filtro e busca para a renderização.
-    \item O \textit{Serviço de Acesso à API} realiza requisições HTTP GET para a \textit{API Externa (NewsAPI)}.
-    \item O \textit{LocalStorage} é utilizado para salvar os acessos recentes e melhorar a performance, permitindo acesso rápido aos dados já carregados.
+  \item Maior fluidez na navegação;
+  \item Redução do número de requisições HTTP ao servidor;
+  \item Melhor experiência de uso após o carregamento inicial.
 \end{itemize}
+
 
 \begin{figure}[H]
   \centering
   \caption{Diagrama de Componentes da Plataforma WallTech - SPA (React)}
-  \includegraphics[width=0.8\textwidth]{media/component-diagram-react.jpeg}
+  \includegraphics[width=1\textwidth]{media/component-diagram-react.jpeg}
   \legend{Fonte: os autores.}
   \label{fig:component-diagram-react}
 \end{figure}
 
-A Figura \ref{fig:component-diagram-next} apresenta o diagrama de componentes para a abordagem \textbf{MPA (Multi Page Application)}, utilizando Next.js. Este diagrama mostra a interação entre os módulos da aplicação no contexto de renderização no servidor (SSR).
 
-Na arquitetura \textbf{MPA}:
+
+
+\subsubsection{Arquitetura MPA com Next.js - Detalhamento do Diagrama}
+
+A Figura~\ref{fig:component-diagram-next} apresenta o diagrama de componentes da abordagem \textbf{MPA (Multi Page Application)} com \textbf{Server-Side Rendering}, implementada com Next.js. Nessa arquitetura, a renderização de cada página ocorre no servidor a partir de uma requisição completa realizada pelo navegador do usuário.
+
+O processo inicia-se quando o \textbf{usuário} realiza uma ação de navegação (por exemplo, clicar em uma notícia), o que resulta em uma nova requisição HTTP. Essa requisição é interceptada pelo sistema de \textbf{Roteamento por Arquivos} do Next.js, que determina qual componente de página será responsável pelo conteúdo da URL requisitada.
+
+O componente selecionado então invoca a função \texttt{getServerSideProps}, aqui representada como \textbf{Lógica de Busca de Dados}, que realiza a coleta dos dados necessários junto à \textbf{API externa (NewsAPI.org)}. Após obter os dados, o servidor executa a renderização completa da página HTML com os conteúdos dinâmicos integrados. Essa página é então enviada ao navegador do usuário, que a exibe diretamente.
+
+Por fim, scripts embutidos na página utilizam o \textbf{LocalStorage} para salvar ou recuperar o histórico de acessos recentes, melhorando a experiência de navegação sem a necessidade de consultas adicionais ao servidor.
+
+Essa arquitetura favorece aspectos como:
 \begin{itemize}
-    \item O \textit{Roteamento por Arquivos} gerencia as rotas da aplicação, com cada clique acionando a renderização de uma nova página no servidor.
-    \item O \textit{Next.js} executa a busca de dados no servidor utilizando a função \texttt{getServerSideProps}.
-    \item A página HTML é completamente renderizada no servidor e enviada ao \textit{navegador}.
-    \item O \textit{LocalStorage} é usado para armazenar os acessos recentes, melhorando a experiência do usuário.
+  \item Otimização para motores de busca (\textit{SEO});
+  \item Redução de tempo de carregamento inicial em conexões lentas;
+  \item Maior previsibilidade de renderização e acessibilidade.
 \end{itemize}
+
 
 \begin{figure}[H]
   \centering
   \caption{Diagrama de Componentes da Plataforma WallTech - MPA (Next.js)}
-  \includegraphics[width=0.8\textwidth]{media/component-diagram-next.jpeg}
+  \includegraphics[width=1\textwidth]{media/component-diagram-next.jpeg}
   \legend{Fonte: os autores.}
   \label{fig:component-diagram-next}
 \end{figure}
 
 
-\subsection{Requisitos Não Funcionais}
-\label{subsec:requisitos-nao-funcionais}
-Com base nas características da plataforma WallTech e nas expectativas de desempenho, escalabilidade e segurança, os seguintes requisitos não funcionais foram definidos:
 
-\begin{itemize}
-  \item \textbf{Desempenho}: O tempo de resposta para o carregamento da página inicial com as notícias deve ser inferior a 3 segundos em 90\% das requisições, garantindo uma boa experiência de usuário.
-  \item \textbf{Escalabilidade}: A plataforma deve ser capaz de suportar até 500 usuários simultâneos sem comprometer significativamente o desempenho. O sistema deve ser escalável, permitindo a adição de recursos para suportar um aumento no número de acessos.
-  \item \textbf{Segurança}: Todos os dados pessoais dos usuários devem ser armazenados de maneira segura e criptografada, cumprindo com as normas de proteção de dados, como a Lei Geral de Proteção de Dados (LGPD).
-  \item \textbf{Acessibilidade}: A plataforma deve ser acessível para usuários com deficiência visual e auditiva, seguindo as diretrizes WCAG 2.1 para garantir que todos os recursos da aplicação sejam acessíveis.
-  \item \textbf{Compatibilidade}: A plataforma deve ser compatível com os navegadores mais populares, como Google Chrome, Mozilla Firefox, Safari e Microsoft Edge, tanto em versões desktop quanto mobile.
-  \item \textbf{Manutenibilidade}: O código da plataforma deve ser organizado e modular, permitindo uma fácil manutenção e futuras atualizações do sistema, sem causar interrupções nos serviços já existentes.
-  \item \textbf{SEO (Search Engine Optimization)}: A plataforma deve ser otimizada para motores de busca (SEO), permitindo que as notícias sejam facilmente indexadas e classificadas nos resultados de busca, facilitando o acesso do usuário.
-  \item \textbf{Armazenamento de Dados}: O sistema deve ser capaz de armazenar os dados de acesso das notícias visualizadas no \textit{LocalStorage} para melhorar a performance da aplicação e permitir uma navegação mais rápida, sem a necessidade de novas requisições de dados já carregados.
-\end{itemize}
 
 \section{Design do Sistema}
 \label{cap:design}
