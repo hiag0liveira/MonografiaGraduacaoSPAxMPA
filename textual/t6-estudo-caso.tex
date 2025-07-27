@@ -86,6 +86,58 @@ A Figura \ref{fig:sequence-diagram-details} ilustra esse processo, detalhando a 
 \end{figure}
 
 
+\subsection{Diagrama de componentes}
+A Figura \ref{fig:component-diagram-react} apresenta o diagrama de componentes da plataforma WallTech para a abordagem \textbf{SPA (Single Page Application)}, utilizando React. Este diagrama ilustra como os diferentes módulos do sistema interagem entre si para garantir o funcionamento da plataforma.
+
+Na arquitetura \textbf{SPA}:
+\begin{itemize}
+    \item O \textit{Roteador de Páginas} gerencia a navegação entre as páginas (Página Inicial e Página de Detalhes da Notícia).
+    \item O \textit{Gerenciador de Estado} solicita dados e dispara ações de filtro e busca para a renderização.
+    \item O \textit{Serviço de Acesso à API} realiza requisições HTTP GET para a \textit{API Externa (NewsAPI)}.
+    \item O \textit{LocalStorage} é utilizado para salvar os acessos recentes e melhorar a performance, permitindo acesso rápido aos dados já carregados.
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \caption{Diagrama de Componentes da Plataforma WallTech - SPA (React)}
+  \includegraphics[width=0.8\textwidth]{media/component-diagram-react.jpeg}
+  \legend{Fonte: os autores.}
+  \label{fig:component-diagram-react}
+\end{figure}
+
+A Figura \ref{fig:component-diagram-next} apresenta o diagrama de componentes para a abordagem \textbf{MPA (Multi Page Application)}, utilizando Next.js. Este diagrama mostra a interação entre os módulos da aplicação no contexto de renderização no servidor (SSR).
+
+Na arquitetura \textbf{MPA}:
+\begin{itemize}
+    \item O \textit{Roteamento por Arquivos} gerencia as rotas da aplicação, com cada clique acionando a renderização de uma nova página no servidor.
+    \item O \textit{Next.js} executa a busca de dados no servidor utilizando a função \texttt{getServerSideProps}.
+    \item A página HTML é completamente renderizada no servidor e enviada ao \textit{navegador}.
+    \item O \textit{LocalStorage} é usado para armazenar os acessos recentes, melhorando a experiência do usuário.
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \caption{Diagrama de Componentes da Plataforma WallTech - MPA (Next.js)}
+  \includegraphics[width=0.8\textwidth]{media/component-diagram-next.jpeg}
+  \legend{Fonte: os autores.}
+  \label{fig:component-diagram-next}
+\end{figure}
+
+
+\subsection{Requisitos Não Funcionais}
+\label{subsec:requisitos-nao-funcionais}
+Com base nas características da plataforma WallTech e nas expectativas de desempenho, escalabilidade e segurança, os seguintes requisitos não funcionais foram definidos:
+
+\begin{itemize}
+  \item \textbf{Desempenho}: O tempo de resposta para o carregamento da página inicial com as notícias deve ser inferior a 3 segundos em 90\% das requisições, garantindo uma boa experiência de usuário.
+  \item \textbf{Escalabilidade}: A plataforma deve ser capaz de suportar até 500 usuários simultâneos sem comprometer significativamente o desempenho. O sistema deve ser escalável, permitindo a adição de recursos para suportar um aumento no número de acessos.
+  \item \textbf{Segurança}: Todos os dados pessoais dos usuários devem ser armazenados de maneira segura e criptografada, cumprindo com as normas de proteção de dados, como a Lei Geral de Proteção de Dados (LGPD).
+  \item \textbf{Acessibilidade}: A plataforma deve ser acessível para usuários com deficiência visual e auditiva, seguindo as diretrizes WCAG 2.1 para garantir que todos os recursos da aplicação sejam acessíveis.
+  \item \textbf{Compatibilidade}: A plataforma deve ser compatível com os navegadores mais populares, como Google Chrome, Mozilla Firefox, Safari e Microsoft Edge, tanto em versões desktop quanto mobile.
+  \item \textbf{Manutenibilidade}: O código da plataforma deve ser organizado e modular, permitindo uma fácil manutenção e futuras atualizações do sistema, sem causar interrupções nos serviços já existentes.
+  \item \textbf{SEO (Search Engine Optimization)}: A plataforma deve ser otimizada para motores de busca (SEO), permitindo que as notícias sejam facilmente indexadas e classificadas nos resultados de busca, facilitando o acesso do usuário.
+  \item \textbf{Armazenamento de Dados}: O sistema deve ser capaz de armazenar os dados de acesso das notícias visualizadas no \textit{LocalStorage} para melhorar a performance da aplicação e permitir uma navegação mais rápida, sem a necessidade de novas requisições de dados já carregados.
+\end{itemize}
 
 \section{Design do Sistema}
 \label{cap:design}
