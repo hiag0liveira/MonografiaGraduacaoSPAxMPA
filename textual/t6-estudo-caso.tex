@@ -57,16 +57,34 @@ Os requisitos do sistema foram definidos com base nas necessidades dos usuários
 \label{subsec:requisitos-funcionais}
 A Figura \ref{fig:sequence-diagram} ilustra um diagrama de sequência da plataforma WallTech, onde o usuário pode visualizar notícias e navegar para os detalhes de uma notícia específica.
 
-No diagrama, o processo começa quando o usuário acessa o site da WallTech, e o navegador faz a requisição para carregar a página inicial. O servidor Next.js então busca as notícias padrão, como as mais recentes e em destaque, na API Externa (NewsAPI). O servidor renderiza a página HTML completa e a envia ao navegador para exibição, permitindo que o usuário veja as notícias em português.
+No diagrama, o processo começa quando o \textit{usuário} acessa o site da WallTech, e o \textit{navegador} faz a requisição para carregar a página inicial. O \textit{servidor Next.js} então busca as notícias padrão, como as mais recentes e em destaque, na \textit{API Externa (NewsAPI)}. O servidor renderiza a página HTML completa e a envia ao \textit{navegador} para exibição, permitindo que o \textit{usuário} veja as notícias em português.
 
+Após visualizar a página inicial, o \textit{usuário} clica em um link de uma notícia para acessar os detalhes dessa notícia específica. O \textit{navegador} faz uma nova requisição para a página de detalhes, e o \textit{servidor Next.js} não mantém estado, então ele precisa buscar os dados novamente na \textit{API Externa (NewsAPI)}. A \textit{API} retorna os dados da notícia, e o \textit{servidor Next.js} renderiza a página de detalhes em HTML, exibindo as informações completas da notícia, como título, conteúdo e data de publicação.
+
+Além disso, o \textit{navegador} interage com o \textit{LocalStorage}, salvando o acesso recente à notícia, o que melhora a performance e a experiência do usuário, pois ele pode acessar rapidamente os detalhes da última notícia visualizada sem precisar fazer nova requisição.
 
 \begin{figure}[H]
   \centering
   \caption{Diagrama de sequência da plataforma WallTech}
-  \includegraphics[width=0.7\textwidth]{media/wall_tech_sequence_diagram.jpeg}
+  \includegraphics[width=0.9\textwidth]{media/wall_tech_sequence_diagram.jpeg}
   \legend{Fonte: os autores.}
   \label{fig:sequence-diagram}
 \end{figure}
+
+A Figura \ref{fig:sequence-diagram-details} ilustra o fluxo de interações entre o \textit{usuário}, o \textit{navegador}, o \textit{gerenciador de estado}, o \textit{servidor de API}, e o \textit{LocalStorage} ao acessar os detalhes de uma notícia. Este diagrama complementa o anterior, mostrando como o sistema lida com a navegação do \textit{usuário} após a visualização da página inicial com as notícias.
+
+No processo, o \textit{usuário} clica em uma notícia para ver os detalhes. O \textit{roteador} do React intercepta o clique, altera a URL instantaneamente (sem recarregar a página), e o \textit{gerenciador de estado} solicita os dados da notícia específica. Como a aplicação é baseada em SPA, os dados já estão carregados e não é necessário fazer uma nova requisição à \textit{API}. O \textit{gerenciador de estado} filtra os dados e encontra a notícia no estado atual, antes de salvar o acesso recente no \textit{LocalStorage}.
+
+A Figura \ref{fig:sequence-diagram-details} ilustra esse processo, detalhando a interatividade e a eficiência da SPA na exibição de detalhes da notícia.
+
+\begin{figure}[H]
+  \centering
+  \caption{Diagrama de sequência para visualização de detalhes da notícia na plataforma WallTech}
+  \includegraphics[width=0.9\textwidth]{media/wall_tech_detail_sequence_diagram.jpeg}
+  \legend{Fonte: os autores.}
+  \label{fig:sequence-diagram-details}
+\end{figure}
+
 
 
 \section{Design do Sistema}
