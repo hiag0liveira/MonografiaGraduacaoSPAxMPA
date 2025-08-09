@@ -5,11 +5,11 @@ Este capítulo apresenta o contexto, os requisitos, a organização, os métodos
 
 \section{Contexto}
 \label{section:contexto}
-O estudo de caso é realizado em uma empresa fictícia chamada WallTech, uma plataforma de notícias sobre tecnologia que tem como objetivo fornecer conteúdos atualizados e relevantes sobre inovações e tendências do setor. Nela, os usuários podem acessar e buscar notícias utilizando palavras-chave, tanto em dispositivos móveis quanto em computadores, graças ao design responsivo da aplicação.  
+Este estudo de caso é realizado em uma empresa fictícia do setor de notícias sobre tecnologia, com foco em fornecer conteúdos atualizados e relevantes sobre inovações e tendências. O público-alvo inclui entusiastas de tecnologia, profissionais da área e usuários que desejam acompanhar novidades do setor, podendo acessar a plataforma em dispositivos móveis ou computadores graças ao design responsivo.
 
-Visando melhorar a experiência do usuário (UX) e otimizar o desempenho da plataforma, os gestores de tecnologia da WallTech decidiram realizar um estudo comparativo entre duas abordagens de renderização: \acrfull{csr} e \acrfull{ssr}. Para isso, optou-se pelo desenvolvimento de dois protótipos da plataforma, um com \acrshort{csr} utilizando React e outro com \acrshort{ssr} utilizando Next.js, com o objetivo de analisar qual modelo de renderização apresenta melhores resultados em termos de velocidade de carregamento, interatividade e no \english{\acrfull{seo}}.
+Para a análise, foram desenvolvidos dois protótipos da aplicação, um utilizando \acrfull{csr} com React e outro utilizando \acrfull{ssr} com Next.js, com o objetivo de comparar o desempenho, a interatividade e o \english{\acrfull{seo}} de cada abordagem.
 
-A Figura \ref{fig:caso-uso-walltech} apresenta o diagrama de caso de uso da plataforma WallTech, mostrando as principais funcionalidades disponíveis para o usuário anônimo. O diagrama ilustra as interações do usuário com o sistema, permitindo que ele visualize a lista de notícias mais recentes, acesse os detalhes de uma notícia ao clicar nela, ou realize buscas específicas utilizando palavras-chave.  
+A Figura \ref{fig:caso-uso-walltech} apresenta o diagrama de caso de uso da plataforma, mostrando as principais funcionalidades disponíveis para o usuário anônimo. O diagrama ilustra as interações do usuário com o sistema, permitindo que ele visualize a lista de notícias mais recentes, acesse os detalhes de uma notícia ao clicar nela ou realize buscas específicas utilizando palavras-chave.  
 
 \begin{figure}[H]
   \centering
@@ -18,7 +18,6 @@ A Figura \ref{fig:caso-uso-walltech} apresenta o diagrama de caso de uso da plat
   \legend{Fonte: os autores.}
   \label{fig:caso-uso-walltech}
 \end{figure}
-
 
 
 \section{Processo de Desenvolvimento}
