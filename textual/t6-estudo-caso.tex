@@ -213,127 +213,6 @@ Os requisitos a seguir foram organizados em duas categorias: \textbf{funcionais}
 \end{itemize}
 
 
-\subsection{Fluxo de Navegação - SSR/MPA}
-\label{subsec:fluxo-ssr}
-
-Na abordagem baseada em \textbf{Server-Side Rendering (SSR)} com \textbf{Multi-Page Application (MPA)}, cada página é gerada no servidor a partir de uma requisição HTTP completa. Esse modelo favorece aspectos como \textit{SEO}, pois o conteúdo chega pré-renderizado ao navegador, sendo interpretável por motores de busca.
-
-O fluxo típico da visualização de notícias na plataforma WallTech segue os seguintes passos:
-
-\begin{itemize}
-  \item O \textbf{usuário} acessa o site da WallTech;
-  \item O \textbf{navegador} realiza uma requisição \texttt{GET /} ao \textbf{servidor Next.js};
-  \item O servidor consulta a \textbf{API externa (NewsAPI)} para obter as notícias mais recentes e em destaque;
-  \item Com os dados recebidos, o servidor renderiza a página inicial em HTML;
-  \item A página completa é enviada ao navegador e exibida ao usuário;
-  \item Quando o usuário clica para ver os detalhes de uma notícia, uma nova requisição HTTP é feita para uma rota do tipo \texttt{/noticias/detalhes/...};
-  \item O servidor realiza uma nova chamada à \textbf{NewsAPI} para buscar os dados da notícia específica;
-  \item A página de detalhes é então renderizada e enviada como HTML ao navegador;
-  \item Após o carregamento, um script no cliente pode salvar ou ler o acesso recente no \textbf{LocalStorage}.
-\end{itemize}
-
-Esse fluxo garante uma experiência sólida mesmo em conexões lentas, com boa previsibilidade de carregamento, e permite que os motores de busca indexem o conteúdo diretamente.
-
-\begin{figure}[H]
-  \centering
-  \caption{Diagrama de sequência da plataforma WallTech - SSR/MPA}
-  \includegraphics[width=1\textwidth]{media/wall_tech_sequence_diagram.jpeg}
-  \legend{Fonte: os autores.}
-  \label{fig:sequence-diagram}
-\end{figure}
-
-\subsection{Fluxo de Navegação - CSR/SPA}
-\label{subsec:fluxo-csr}
-
-Na abordagem baseada em \textbf{Client-Side Rendering (CSR)} com \textbf{Single Page Application (SPA)}, a aplicação é carregada inicialmente como um conjunto de componentes React, e toda a navegação subsequente ocorre sem recarregamentos de página — tornando a experiência mais fluida e rápida.
-
-O comportamento da plataforma WallTech nesse modelo ocorre da seguinte forma:
-
-\begin{itemize}
-  \item O \textbf{usuário} acessa o site da WallTech;
-  \item O \textbf{navegador} carrega o \textbf{aplicativo React} e monta o componente da página inicial;
-  \item O componente dispara uma ação para o \textbf{gerenciador de estado} requisitar os dados iniciais da aplicação;
-  \item O gerenciador aciona o \textbf{serviço de API}, que realiza uma chamada à \textbf{NewsAPI} para buscar notícias em destaque e recentes;
-  \item Os dados retornados são entregues ao gerenciador de estado, que os armazena e notifica a interface para renderizar a UI;
-  \item O usuário então visualiza a página inicial com os dados carregados;
-  \item Ao clicar em uma notícia, o \textbf{roteador do React} intercepta o evento e atualiza a URL sem recarregar a página;
-  \item O gerenciador de estado busca os dados da notícia específica (já presentes em cache);
-  \item Os dados são entregues ao componente de detalhes, e a interface é atualizada dinamicamente;
-  \item O acesso recente é salvo ou lido do \textbf{LocalStorage}, sem nova requisição externa.
-\end{itemize}
-
-Este fluxo aproveita o carregamento inicial para melhorar a performance da navegação interna e reduzir o tráfego com a API externa.
-
-\begin{figure}[H]
-  \centering
-  \caption{Diagrama de sequência da plataforma WallTech - CSR/SPA}
-  \includegraphics[width=1\textwidth]{media/wall_tech_detail_sequence_diagram.jpeg}
-  \legend{Fonte: os autores.}
-  \label{fig:sequence-diagram-details}
-\end{figure}
-
-
-
-
-\subsection{Diagrama de Componentes}
-\label{subsec:diagrama-componentes}
-
-O diagrama de componentes tem como objetivo apresentar a estrutura modular da plataforma WallTech, evidenciando os principais elementos envolvidos em sua arquitetura e a forma como interagem entre si. A modelagem foi realizada para duas abordagens distintas de renderização e navegação: \textbf{SPA (Single Page Application)} com React e \textbf{MPA (Multi Page Application)} com Next.js.
-
-\subsubsection{Arquitetura SPA com React - Detalhamento do Diagrama}
-
-A Figura~\ref{fig:component-diagram-react} ilustra os principais componentes da arquitetura \textbf{SPA (Single Page Application)} da plataforma WallTech, implementada com React. Nesse modelo, toda a lógica de renderização, navegação e atualização da interface ocorre no navegador do usuário, após o carregamento inicial da aplicação.
-
-A aplicação é estruturada em torno de um \textbf{Roteador de Páginas (React Router)}, responsável por controlar qual componente de view será renderizado: a \textbf{Página Inicial (Home)} ou a \textbf{Página de Detalhes da Notícia}. Esses componentes disparam ações para o \textbf{Gerenciador de Estado}, que coordena o armazenamento e recuperação dos dados utilizados na interface.
-
-O \textbf{Gerenciador de Estado} atua como intermediário entre as views e o \textbf{Serviço de API}, responsável por realizar chamadas à \textbf{NewsAPI.org} para obter as notícias em destaque ou os detalhes de uma notícia específica. Além disso, é ele quem gerencia a persistência de dados temporários no \textbf{LocalStorage}, como o histórico de notícias acessadas.
-
-Ao centralizar a lógica no cliente e evitar recarregamentos de página, essa arquitetura proporciona:
-\begin{itemize}
-  \item Maior fluidez na navegação;
-  \item Redução do número de requisições HTTP ao servidor;
-  \item Melhor experiência de uso após o carregamento inicial.
-\end{itemize}
-
-
-\begin{figure}[H]
-  \centering
-  \caption{Diagrama de Componentes da Plataforma WallTech - SPA (React)}
-  \includegraphics[width=1\textwidth]{media/component-diagram-react.jpeg}
-  \legend{Fonte: os autores.}
-  \label{fig:component-diagram-react}
-\end{figure}
-
-
-
-
-\subsubsection{Arquitetura MPA com Next.js - Detalhamento do Diagrama}
-
-A Figura~\ref{fig:component-diagram-next} apresenta o diagrama de componentes da abordagem \textbf{MPA (Multi Page Application)} com \textbf{Server-Side Rendering}, implementada com Next.js. Nessa arquitetura, a renderização de cada página ocorre no servidor a partir de uma requisição completa realizada pelo navegador do usuário.
-
-O processo inicia-se quando o \textbf{usuário} realiza uma ação de navegação (por exemplo, clicar em uma notícia), o que resulta em uma nova requisição HTTP. Essa requisição é interceptada pelo sistema de \textbf{Roteamento por Arquivos} do Next.js, que determina qual componente de página será responsável pelo conteúdo da URL requisitada.
-
-O componente selecionado então invoca a função \texttt{getServerSideProps}, aqui representada como \textbf{Lógica de Busca de Dados}, que realiza a coleta dos dados necessários junto à \textbf{API externa (NewsAPI.org)}. Após obter os dados, o servidor executa a renderização completa da página HTML com os conteúdos dinâmicos integrados. Essa página é então enviada ao navegador do usuário, que a exibe diretamente.
-
-Por fim, scripts embutidos na página utilizam o \textbf{LocalStorage} para salvar ou recuperar o histórico de acessos recentes, melhorando a experiência de navegação sem a necessidade de consultas adicionais ao servidor.
-
-Essa arquitetura favorece aspectos como:
-\begin{itemize}
-  \item Otimização para motores de busca (\textit{SEO});
-  \item Redução de tempo de carregamento inicial em conexões lentas;
-  \item Maior previsibilidade de renderização e acessibilidade.
-\end{itemize}
-
-
-\begin{figure}[H]
-  \centering
-  \caption{Diagrama de Componentes da Plataforma WallTech - MPA (Next.js)}
-  \includegraphics[width=1\textwidth]{media/component-diagram-next.jpeg}
-  \legend{Fonte: os autores.}
-  \label{fig:component-diagram-next}
-\end{figure}
-
-
 
 
 \section{Design do Sistema}
@@ -352,21 +231,94 @@ As decisões de design foram fundamentadas em boas práticas para renderização
 
 Segundo \cite{osmani2025}, a escolha entre renderização no cliente ou no servidor deve considerar o contexto da aplicação, os requisitos de desempenho e os objetivos de SEO. Já o artigo da \cite{atori2024} destaca que SPAs tendem a oferecer maior fluidez e interatividade, enquanto MPAs são mais eficazes em aplicações que dependem de indexação e acessibilidade.
 
-\subsection{Arquitetura SPA}
+\section{Abordagens de Renderização e Navegação}
+\label{section:abordagens-renderizacao}
 
-A versão \acrshort{spa} da aplicação foi projetada com foco em responsividade e fluidez de interação. Utilizando bibliotecas como React, a renderização do conteúdo é feita inteiramente no navegador, após o carregamento inicial de um documento \texttt{HTML} mínimo. Todas as requisições são feitas dinamicamente via \texttt{fetch} para a \textit{NewsAPI}, permitindo uma experiência de uso imersiva sem recarregamentos completos de página.
+Para o estudo comparativo, a plataforma foi desenvolvida em duas arquiteturas distintas de renderização e navegação: 
+\acrfull{ssr} com \acrfull{mpa} e \acrfull{csr} com \acrfull{spa}.  
+Cada abordagem foi implementada com tecnologias adequadas ao seu paradigma — Next.js para \acrshort{ssr}/\acrshort{mpa} e React para \acrshort{csr}/\acrshort{spa} — permitindo observar diferenças de desempenho, interatividade e otimização para mecanismos de busca (\acrshort{seo}).
 
-Essa abordagem reduz a carga no servidor, melhora a experiência de usuário em conexões rápidas e facilita a manutenção do código por meio de componentes reutilizáveis. Por outro lado, apresenta desafios quanto à indexação por mecanismos de busca, dado que o conteúdo depende da execução de JavaScript, conforme destacado por \cite{osmani2025}. Essa limitação pode ser parcialmente mitigada com técnicas como \textit{pre-rendering} e \textit{hydration} progressiva.
+A seguir, cada abordagem é apresentada com seu fluxo típico de funcionamento, diagrama de componentes (representando a estrutura modular) e diagrama de sequência (detalhando as interações passo a passo).
 
-O diagrama de componentes da SPA evidencia a centralização da lógica no navegador, enquanto o diagrama de sequência demonstra o ciclo de vida de requisições e renderização client-side.
+\subsection{SSR/MPA - Fluxo e Arquitetura}
+\label{subsec:ssr-mpa}
 
-\subsection{Arquitetura MPA}
+Na abordagem \acrfull{ssr} com \acrfull{mpa}, cada página é renderizada no servidor a partir de uma requisição HTTP completa. O HTML final já é entregue com os dados integrados, permitindo que o navegador exiba o conteúdo imediatamente, favorecendo o tempo de carregamento inicial e a indexação por \textit{crawlers} \cite{atori2024}.
 
-A versão \acrshort{mpa}, por sua vez, simula a renderização \acrshort{ssr}, em que cada rota representa uma nova página entregue já montada. Neste modelo, cada requisição à aplicação resulta na obtenção de uma nova instância de HTML contendo os dados pré-processados. Frameworks como Next.js permitem implementar essa estratégia, mesmo quando os dados provêm de APIs externas como a \textit{NewsAPI}.
+\begin{itemize}
+  \item O \textbf{usuário} acessa o site;
+  \item O \textbf{navegador} envia uma requisição \texttt{GET} ao \textbf{servidor Next.js};
+  \item O servidor obtém os dados mais recentes na \textbf{NewsAPI};
+  \item O servidor monta a página HTML já com os dados;
+  \item O HTML é enviado ao navegador e exibido;
+  \item Cada navegação subsequente gera nova requisição completa ao servidor;
+  \item Scripts no cliente utilizam \textbf{LocalStorage} para melhorar a experiência.
+\end{itemize}
+  
+A Figura \ref{fig:component-diagram-next} ilustra como, nesta arquitetura, o \textbf{navegador} interage diretamente com o \textbf{Servidor Next.js} para cada página requisitada. O servidor, por sua vez:
+\begin{enumerate}
+  \item Identifica a rota usando o \textbf{roteamento baseado em arquivos};
+  \item Executa a lógica de busca de dados (\texttt{getServerSideProps});
+  \item Faz chamadas à \textbf{NewsAPI} para obter o conteúdo;
+  \item Renderiza o HTML e o envia ao cliente.
+\end{enumerate}
 
-Esse tipo de renderização favorece o desempenho inicial (menor \acrshort{fcp}) e melhora a indexação do conteúdo pelos mecanismos de busca, como discutido pela \cite{atori2024}. Na aplicação, isso se traduz em páginas com conteúdo estático inicial pronto para rastreamento, mesmo que a interatividade seja ativada posteriormente via JavaScript (\textit{hydration}).
+A Figura \ref{fig:sequence-diagram-ssr} detalha a ordem das interações. O usuário inicia a navegação, o servidor processa a requisição, consulta a API externa, renderiza o HTML e envia a resposta pronta para o cliente. O uso de \textit{hydration} ativa a interatividade após o carregamento inicial.
 
-O diagrama de componentes da MPA demonstra a responsabilidade do servidor em montar o HTML completo, enquanto o diagrama de sequência mostra o papel da API externa na geração do conteúdo antes da entrega ao navegador.
+\begin{figure}[H]
+  \centering
+  \caption{Diagrama de sequência - \acrshort{ssr}/\acrshort{mpa}}
+  \includegraphics[width=1\textwidth]{media/wall_tech_sequence_diagram.jpeg}
+  \legend{Fonte: os autores.}
+  \label{fig:sequence-diagram-ssr}
+\end{figure}
+
+
+A Figura \ref{fig:component-diagram-next} mostra que, nessa arquitetura, o \textbf{servidor Next.js} centraliza o roteamento, a obtenção de dados e a renderização das páginas, entregando ao navegador HTML já pré-renderizado. Após o carregamento, scripts ativam a interatividade e permitem o uso do \textbf{LocalStorage}.
+
+\begin{figure}[H]
+  \centering
+  \caption{Diagrama de Componentes - \acrshort{mpa} (\acrshort{ssr} em Next.js)}
+  \includegraphics[width=1\textwidth]{media/component-diagram-next.jpeg}
+  \legend{Fonte: os autores.}
+  \label{fig:component-diagram-next}
+\end{figure}
+
+
+\subsection{CSR/SPA - Fluxo e Arquitetura}
+\label{subsec:csr-spa}
+
+Na abordagem \acrfull{csr} com \acrfull{spa}, o carregamento inicial envia um HTML mínimo e um pacote JavaScript que contém toda a lógica da aplicação. A partir daí, a navegação e renderização são executadas no navegador, sem recarregar a página.
+
+\begin{itemize}
+  \item O \textbf{usuário} acessa o site;
+  \item O navegador baixa o \textbf{bundle React} e monta a interface inicial;
+  \item O \textbf{gerenciador de estado} solicita dados à \textbf{NewsAPI};
+  \item A interface é atualizada dinamicamente com os dados recebidos;
+  \item Ao navegar, o \textbf{roteador do React} altera a URL e renderiza novos componentes;
+  \item Dados podem ser lidos ou salvos no \textbf{LocalStorage}.
+\end{itemize}
+
+A Figura \ref{fig:sequence-diagram-csr} descreve como o navegador processa as interações: primeiro carrega a aplicação, depois solicita dados conforme necessário e atualiza a interface sem recarregar a página, garantindo uma navegação contínua.
+
+\begin{figure}[H]
+  \centering
+  \caption{Diagrama de sequência - \acrshort{csr}/\acrshort{spa}}
+  \includegraphics[width=1\textwidth]{media/wall_tech_detail_sequence_diagram.jpeg}
+  \legend{Fonte: os autores.}
+  \label{fig:sequence-diagram-csr}
+\end{figure}
+
+
+A Figura \ref{fig:component-diagram-react} mostra que, nessa arquitetura, o navegador concentra toda a lógica de renderização. O \textbf{Roteador React} decide quais componentes de página serão exibidos, enquanto o \textbf{Gerenciador de Estado} controla o fluxo de dados entre a interface e a \textbf{NewsAPI}.
+
+\begin{figure}[H]
+  \centering
+  \caption{Diagrama de Componentes - \acrshort{spa} (React)}
+  \includegraphics[width=1\textwidth]{media/component-diagram-react.jpeg}
+  \legend{Fonte: os autores.}
+  \label{fig:component-diagram-react}
+\end{figure}
 
 
 
