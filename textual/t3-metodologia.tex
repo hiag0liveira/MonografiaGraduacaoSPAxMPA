@@ -45,37 +45,61 @@ Durante o desenvolvimento, serão seguidas boas práticas de acessibilidade, res
 
 A coleta de dados será realizada por meio de ferramentas como Google Lighthouse, PageSpeed Insights e WebPageTest, além de testes manuais com usuários, a fim de observar qualitativamente a experiência de uso. Esses dados fundamentarão a análise comparativa e a discussão dos resultados, que serão apresentados nas seções seguintes.
 
-
 \section{Coleta de Dados e Testes}
 \label{sec:coleta-de-dados-e-testes}
 
-Após o desenvolvimento das versões da aplicação com \english{\acrshort{csr}} e \english{\acrshort{ssr}}, será realizada a coleta de dados com o objetivo de mensurar o desempenho e a qualidade da experiência do usuário em cada abordagem.
+Esta seção descreve o procedimento de coleta e análise dos dados obtidos a partir da comparação entre as aplicações desenvolvidas com \english{\acrshort{csr}} e \english{\acrshort{ssr}}. O objetivo é mensurar o desempenho, a eficiência e a experiência do usuário proporcionada por cada aplicação.
 
-As aplicações serão hospedadas em ambientes equivalentes, com configurações idênticas de hardware e rede, a fim de garantir condições justas para os testes.
+\subsection{Definição das Métricas}
 
-A coleta de dados utilizará as seguintes ferramentas:
-
-\begin{itemize}
-    \item \textbf{Google Lighthouse}: Avaliação de desempenho, acessibilidade, melhores práticas e \english{\acrshort{seo}};
-    \item \textbf{PageSpeed Insights}: Medição de tempo de carregamento, \textit{First Contentful Paint} (FCP), \textit{Largest Contentful Paint} (LCP), \textit{Time to Interactive} (TTI);
-    \item \textbf{Core Web Vitals}: Conjunto de métricas essenciais propostas pelo Google para mensurar a qualidade da experiência do usuário, incluindo LCP (tempo de renderização do maior elemento visível), FID (atraso na primeira interação) e CLS (estabilidade visual da página);
-    \item \textbf{WebPageTest}: Análise do tempo de resposta, número de requisições e uso de cache;
-    \item \textbf{Chrome DevTools}: Inspeção do tempo de execução de scripts e verificação do processo de hidratação na abordagem \acrshort{ssr}.
-\end{itemize}
-
-Além disso, será realizada uma etapa de testes manuais com usuários em diferentes dispositivos e conexões, com o intuito de observar a fluidez da navegação, percepção de velocidade, clareza das interfaces e responsividade.
-
-As principais métricas a serem analisadas incluirão:
+As métricas utilizadas para a avaliação foram selecionadas com base nas recomendações do Google e nos indicadores mais relevantes para mensurar a performance e a experiência do usuário em aplicações web modernas. São elas:
 
 \begin{itemize}
-\item Tempo total de carregamento;
-\item Tempo até a primeira exibição de conteúdo visível (FCP);
-\item Tempo até a interatividade plena (TTI);
-\item Número de requisições HTTP;
-\item Compatibilidade com práticas de \acrshort{seo};
-\item Consumo de recursos do navegador (memória e CPU);
-\item Percepção subjetiva da experiência do usuário.
+    \item \textbf{Time to First Byte (TTFB)}: Tempo até o primeiro byte da resposta ser recebido;
+    \item \textbf{First Contentful Paint (FCP)}: Tempo até a exibição do primeiro conteúdo visível;
+    \item \textbf{Largest Contentful Paint (LCP)}: Tempo até o carregamento do maior bloco de conteúdo;
+    \item \textbf{Time to Interactive (TTI)}: Tempo até a página estar completamente interativa;
+    \item \textbf{Cumulative Layout Shift (CLS)}: Medida de estabilidade visual da interface;
+    \item \textbf{Número de Requisições HTTP} e \textbf{Uso de Cache};
+    \item \textbf{Consumo de recursos do navegador}: Memória e CPU;
 \end{itemize}
+
+\subsection{Ferramentas de Teste}
+
+Para a análise do desempenho das aplicações, foram utilizadas ferramentas amplamente reconhecidas no diagnóstico de aplicações web. Essas ferramentas permitiram a coleta de métricas técnicas relevantes, tanto do ponto de vista do usuário quanto do comportamento interno das aplicações:
+
+\begin{itemize}
+    \item \textbf{Google Lighthouse}: Ferramenta automatizada de código aberto para auditoria de desempenho, acessibilidade, SEO e melhores práticas em aplicações web;
+    \item \textbf{PageSpeed Insights}: Serviço do Google que avalia o desempenho da página em dispositivos móveis e desktops, destacando métricas como FCP, LCP e TTI;
+    \item \textbf{WebPageTest}: Utilizada para testes avançados de tempo de carregamento, número de requisições e análise de cache em diferentes condições de rede;
+    \item \textbf{Core Web Vitals}: Conjunto de métricas essenciais definido pelo Google para mensurar a qualidade da experiência do usuário, incluindo LCP, FID e CLS;
+    \item \textbf{Chrome DevTools}: Ferramenta integrada ao navegador Google Chrome que possibilita a análise detalhada de rede, execução de scripts, uso de memória e inspeção do processo de hidratação no SSR.
+\end{itemize}
+
+\subsection{Ambiente de Testes}
+
+Os testes foram executados localmente, com as aplicações rodando diretamente na máquina do desenvolvedor. A máquina utilizada foi um notebook \textbf{Asus Vivobook M1502IA}, com as seguintes configurações:
+
+\begin{itemize}
+    \item Processador \textbf{AMD Ryzen 5 4600H}, 6 núcleos e 12 threads;
+    \item \textbf{20GB de memória RAM DDR4, 3200 MHz};
+    \item \textbf{SSD de 256GB};
+    \item Sistema operacional \textbf{Ubuntu 24.04.2 LTS}, ambiente GNOME;
+    \item Kernel \textbf{Linux 6.14.0-27-generic}.
+\end{itemize}
+
+
+\subsection{Execução dos Testes}
+
+Os testes foram realizados em diferentes horários do dia, em rede Wi-Fi com largura de banda média de 15 Mbps. Para cada versão (\acrshort{csr} e \acrshort{ssr}), os testes foram repetidos \textbf{cinco vezes} por métrica, com o objetivo de reduzir variações nos resultados e garantir maior confiabilidade estatística.
+
+\subsection{Registro e Organização dos Dados}
+
+Todos os dados coletados foram registrados em planilhas estruturadas, organizadas por data, horário, métrica e tipo de abordagem. As informações foram categorizadas para facilitar a posterior análise comparativa.
+
+\subsection{Método de Análise}
+
+Os valores obtidos foram analisados por meio do \textbf{cálculo de médias}, \textbf{desvios padrão} e \textbf{comparações diretas} entre \acrshort{csr} e \acrshort{ssr}. As principais conclusões foram representadas graficamente e sintetizadas em tabelas, conforme apresentado na Seção de Resultados e Discussões.
 
 \section{Síntese e Discussão}
 \label{sec:sintese-e-discussao}
