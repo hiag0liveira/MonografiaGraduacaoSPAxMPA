@@ -44,6 +44,7 @@ Cada versão é implementada conforme os princípios da respectiva abordagem de 
 Durante o desenvolvimento, seguem-se boas práticas de acessibilidade, responsividade e otimização para \acrshort{seo}, garantindo que ambas as versões possam ser avaliadas com base em critérios equivalentes. As métricas analisadas incluem tempo de carregamento, tempo até a interatividade, consumo de recursos, desempenho percebido, qualidade do código e compatibilidade com ferramentas de análise de \acrshort{seo}.
 
 A coleta de dados ocorre por meio de ferramentas como Google Lighthouse, PageSpeed Insights e WebPageTest, além de testes manuais com usuários, a fim de observar qualitativamente a experiência de uso. Esses dados fundamentam a análise comparativa e a discussão dos resultados, que são apresentados nas seções seguintes.
+
 \section{Coleta de Dados e Testes}
 \label{sec:coleta-de-dados-e-testes}
 
@@ -77,20 +78,27 @@ Para a análise do desempenho das aplicações, foram utilizadas ferramentas amp
 
 \subsection{Ambiente de Testes}
 
-Os testes foram executados localmente, com as aplicações rodando diretamente na máquina do desenvolvedor. A máquina utilizada foi um notebook \textbf{Asus Vivobook M1502IA}, com as seguintes configurações:
+Os testes foram realizados em ambiente de produção controlado, com ambas as aplicações \acrshort{csr} e \acrshort{ssr} implantadas na plataforma \textbf{Railway}, utilizando o plano de hospedagem \textit{Pro} (US\$20/mês). Esse plano foi escolhido por ser voltado a desenvolvedores profissionais e equipes que estão implantando aplicações em produção, simulando um cenário realista de trabalho colaborativo.
+
+A escolha por esse plano visa representar um ambiente típico de desenvolvimento e entrega contínua, como encontrado em times ágeis modernos. O plano Pro permite múltiplos colaboradores e oferece suporte prioritário, sendo ideal para refletir as condições reais de implantação e testes de aplicações web em equipe.
+
+A infraestrutura e os recursos disponíveis no plano \textit{Pro} incluem:
 
 \begin{itemize}
-    \item Processador \textbf{AMD Ryzen 5 4600H}, 6 núcleos e 12 threads;
-    \item \textbf{20GB de memória RAM DDR4, 3200 MHz};
-    \item \textbf{SSD de 256GB};
-    \item Sistema operacional \textbf{Ubuntu 24.04.2 LTS}, ambiente GNOME;
-    \item Kernel \textbf{Linux 6.14.0-27-generic}.
+    \item \textbf{Até 32 GB de RAM} e \textbf{32 vCPU por serviço}, com escalabilidade sob demanda;
+    \item \textbf{100 GB de armazenamento efêmero} e \textbf{até 250 GB de volume persistente} por autoatendimento;
+    \item \textbf{Deploy simultâneo em regiões globais}, com datacenters otimizados para baixa latência;
+    \item \textbf{Ambiente Node.js 18} compatível com as tecnologias empregadas nos projetos CSR e SSR;
+    \item \textbf{Integração contínua com GitHub} para deploy automatizado e versionamento;
+    \item \textbf{Histórico de logs com retenção de até 120 horas} e \textbf{monitoramento embutido};
+    \item \textbf{Suporte colaborativo com assentos ilimitados} e possibilidade de organização por equipes;
 \end{itemize}
-
 
 \subsection{Execução dos Testes}
 
-Os testes foram realizados em diferentes horários do dia, em rede Wi-Fi com largura de banda média de 15 Mbps. Para cada versão (\acrshort{csr} e \acrshort{ssr}), os testes foram repetidos \textbf{cinco vezes} por métrica, com o objetivo de reduzir variações nos resultados e garantir maior confiabilidade estatística.
+A execução dos testes foi realizada acessando os \textit{endpoints} públicos das aplicações diretamente via navegador, utilizando uma conexão doméstica de 15 Mbps, em diferentes horários do dia. Essa abordagem permitiu simular cenários reais de uso, possibilitando a obtenção de dados sobre desempenho, tempo de resposta e estabilidade das aplicações em ambiente próximo ao de produção.
+
+Para cada versão (\acrshort{csr} e \acrshort{ssr}), os testes foram repetidos \textbf{cinco vezes} por métrica, com o objetivo de reduzir variações nos resultados e garantir maior confiabilidade estatística. 
 
 \subsection{Registro e Organização dos Dados}
 
@@ -103,7 +111,7 @@ Os valores obtidos foram analisados por meio do \textbf{cálculo de médias}, \t
 \section{Síntese e Discussão}
 \label{sec:sintese-e-discussao}
 
-De maneira geral, será feita uma análise comparativa entre as abordagens \english{\acrshort{csr}} e \english{\acrshort{ssr}}, com base nas informações que serão obtidas ao longo da implementação descrita no Capítulo \ref{cap:estudo_caso1}. Essa análise terá como foco os aspectos técnicos e funcionais relacionados ao desempenho, tempo de carregamento, interatividade, experiência do usuário e compatibilidade com mecanismos de busca.
+De maneira geral, será feita uma análise comparativa entre as abordagens \english{\acrshort{csr}} e \english{\acrshort{ssr}}, com base nas informações que serão obtidas ao longo da implementação descrita no Capítulo \ref{cap:estudo_caso}. Essa análise terá como foco os aspectos técnicos e funcionais relacionados ao desempenho, tempo de carregamento, interatividade, experiência do usuário e compatibilidade com mecanismos de busca.
 
 A discussão será conduzida de forma imparcial, considerando os dados coletados por meio de ferramentas especializadas, como Google Lighthouse, PageSpeed Insights e WebPageTest, bem como possíveis observações manuais obtidas em testes de usabilidade. A intenção será compreender como cada abordagem impacta diferentes requisitos de projeto e quais implicações essas escolhas podem trazer no contexto do desenvolvimento de aplicações web.
 
