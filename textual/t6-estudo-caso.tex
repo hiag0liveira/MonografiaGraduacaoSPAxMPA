@@ -3,17 +3,29 @@
 \label{cap:estudo_caso}
 Este capítulo apresenta o contexto, os requisitos, a organização, os métodos, o design, a implementação e os testes realizados no desenvolvimento do estudo de caso em uma plataforma de notícias sobre tecnologia chamada WallTech.
 
+
 \section{Contexto}
 \label{section:contexto}
-Este estudo de caso é realizado em uma empresa fictícia do setor de notícias sobre tecnologia, com foco em fornecer conteúdos atualizados e relevantes sobre inovações e tendências. O público-alvo inclui entusiastas de tecnologia, profissionais da área e usuários que desejam acompanhar novidades do setor, podendo acessar a plataforma em dispositivos móveis ou computadores graças ao design responsivo.
 
-Para a análise, foram desenvolvidos dois protótipos da aplicação, um utilizando \acrfull{csr} com React e outro utilizando \acrfull{ssr} com Next.js, com o objetivo de comparar o desempenho, a interatividade e o \english{\acrfull{seo}} de cada abordagem.
+Este estudo de caso parte do cenário de uma empresa fictícia do setor de notícias sobre tecnologia, cujo objetivo é fornecer conteúdos atualizados e relevantes sobre inovações e tendências do mercado. O público-alvo inclui entusiastas de tecnologia, profissionais da área e usuários que desejam acompanhar as novidades do setor em diferentes dispositivos, graças a uma interface responsiva.
 
-A Figura \ref{fig:caso-uso-walltech} apresenta o diagrama de caso de uso da plataforma, mostrando as principais funcionalidades disponíveis para o usuário anônimo. O diagrama ilustra as interações do usuário com o sistema, permitindo que ele visualize a lista de notícias mais recentes, acesse os detalhes de uma notícia ao clicar nela ou realize buscas específicas utilizando palavras-chave.  
+A Figura \ref{fig:wireframe-walltech} apresenta o \textit{wireframe} da plataforma \textbf{WallTech}, gerado com o auxílio da ferramenta \textbf{V0.dev}, que utiliza inteligência artificial para criar protótipos de interfaces a partir de descrições textuais. Esse modelo visual orienta a organização dos elementos na interface antes da implementação das versões em \acrshort{csr} e \acrshort{ssr}.
 
 \begin{figure}[H]
   \centering
-  \caption{Diagrama de caso de uso}
+  \caption{Wireframe da plataforma WallTech}
+  \includegraphics[width=0.7\textwidth]{media/wall_tech_wireframe.png}
+  \legend{Fonte: os autores.}
+  \label{fig:wireframe-walltech}
+\end{figure}
+
+Para analisar o impacto de diferentes abordagens de renderização web, foram desenvolvidos dois protótipos independentes da plataforma \textbf{WallTech}. O primeiro segue a abordagem de \acrfull{csr}, estruturado como uma \acrfull{spa} utilizando a biblioteca \textit{React}. O segundo utiliza \acrfull{ssr}, implementado como uma \acrfull{mpa} com o framework \textit{Next.js}.
+
+A Figura \ref{fig:caso-uso-walltech} apresenta o diagrama de caso de uso da plataforma, destacando as principais funcionalidades acessíveis a usuários anônimos, como visualizar notícias recentes, acessar detalhes e realizar buscas por palavras-chave.
+
+\begin{figure}[H]
+  \centering
+  \caption{Diagrama de caso de uso da plataforma WallTech}
   \includegraphics[width=0.7\textwidth]{media/wall_tech_use_case.png}
   \legend{Fonte: os autores.}
   \label{fig:caso-uso-walltech}
