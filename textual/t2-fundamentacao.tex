@@ -799,3 +799,217 @@ O \textbf{shadcn/ui} é uma biblioteca de componentes open source baseada em Rad
 \label{subsec:integracao-v0-shadcn}
 
 A integração entre \textbf{v0} e \textbf{shadcn/ui} proporciona uma experiência otimizada para geração de interfaces. Ao utilizar a plataforma \textbf{v0}, os componentes gerados são construídos com base na arquitetura do \textbf{shadcn/ui}, incluindo as práticas recomendadas de acessibilidade e estilização com Tailwind CSS \cite{v0_docs, shadcn_docs}. Essa integração permite que desenvolvedores iniciem com protótipos gerados automaticamente e, em seguida, façam ajustes diretamente no código dos componentes, mantendo um alto grau de personalização e performance. Além disso, ela favorece o uso de estratégias modernas como \acrshort{ssr} e \acrshort{csr}, oferecendo compatibilidade com frameworks como Next.js e Vite.
+
+
+\section{Contêineres e Docker}
+\label{cap:docker}
+
+Este capítulo apresenta os conceitos fundamentais de contêineres e da plataforma \textbf{Docker}, incluindo sua arquitetura, objetos principais (imagens, camadas, contêineres, redes e volumes) e o processo de construção de imagens por meio do \textbf{Dockerfile}. Também são discutidas boas práticas de construção (multi-stage builds, cache, uso de \texttt{.dockerignore} e \textit{secrets}) e a integração com o estudo comparativo \acrshort{csr} x \acrshort{ssr}. \cite{docker_overview,dockerfile_ref} 
+
+\subsection{Visão Geral da Plataforma Docker}
+\label{sec:docker-overview}
+
+O \textbf{Docker} é uma plataforma de código aberto que permite empacotar, distribuir e executar aplicações em ambientes isolados chamados \textbf{contêineres}. Esses contêineres são leves, portáveis e contêm tudo o que é necessário para executar a aplicação (bibliotecas, dependências e configurações), reduzindo a variação entre ambientes e acelerando ciclos de \acrshort{ci}/\acrshort{cd} \cite{docker_overview}. 
+
+\subsection{Arquitetura: cliente–servidor}
+\label{subsec:docker-arquitetura}
+
+A arquitetura do Docker segue o modelo cliente–servidor: o \textbf{cliente} (\texttt{docker}) envia comandos para o \textbf{daemon} (\texttt{dockerd}), que executa as operações de \textit{build}, execução e distribuição de imagens e contêineres. A comunicação ocorre via \acrshort{api} do Docker, por \textit{Unix sockets} ou interface de rede. O \textbf{Docker Desktop} integra esses componentes e ferramentas correlatas (Compose, Kubernetes opcional, etc.) \cite{docker_overview}. 
+
+\begin{figure}[H]
+  \centering
+  \caption{Arquitetura simplificada do Docker (cliente, daemon, registries e objetos).}
+  \includegraphics[width=0.8\textwidth]{media/docker_architecture.png}
+  \legend{Fonte: Adaptado da documentação oficial do Docker \cite{docker_overview}.}
+  \label{fig:docker-arquitetura}
+\end{figure}
+
+\subsection{Registries e distribuição de imagens}
+\label{subsec:docker-registries}
+
+Imagens são armazenadas em \textbf{registries} (\textit{e.g.}, Docker Hub público ou registries privados). Comandos como \texttt{docker pull}, \texttt{docker push} e \texttt{docker run} interagem com o registry configurado. Essa camada viabiliza portabilidade entre ambientes locais, datacenters e nuvens \cite{docker_overview}. 
+
+\section{Objetos do Docker: imagens, camadas e contêineres}
+\label{sec:docker-objetos}
+
+\subsection{Imagens em camadas}
+\label{subsec:docker-imagens}
+
+Uma \textbf{imagem} é um \textit{template} somente leitura, composto por \textbf{camadas} (\textit{layers}). Cada instrução no \textbf{Dockerfile} cria uma nova camada. Em uma reconstrução, apenas camadas alteradas são recompostas, o que torna as imagens mais leves e o \textit{build} mais eficiente \cite{docker_overview}. 
+
+\subsection{Contêineres}
+\label{subsec:docker-containers}
+
+Um \textbf{contêiner} é uma instância executável de uma imagem. Ele pode ser criado, iniciado, parado, removido e conectado a redes e volumes. Por padrão, um contêiner é isolado, mas o nível de isolamento de rede, armazenamento e \textit{namespaces} pode ser configurado. Alterações não persistentes são descartadas quando o contêiner é removido \cite{docker_overview}. 
+
+\begin{codigo}[H]
+\begin{lstlisting}[language=bash]
+# Exemplo simples: criar um container Ubuntu e entrar em /bin/bash
+docker run -it ubuntu /bin/bash
+\end{lstlisting}
+\caption{Exemplo de execução interativa de contêiner}
+\label{lst:docker-run}
+\end{codigo}
+
+\section{Dockerfile: referência e instruções principais}
+\label{sec:dockerfile}
+
+O \textbf{Dockerfile} é um arquivo de texto que descreve, passo a passo, como montar uma imagem: cada instrução corresponde a um comando executado durante o \textit{build}. Entre as instruções mais comuns estão: \texttt{FROM}, \texttt{RUN}, \texttt{COPY}, \texttt{ADD}, \texttt{CMD}, \texttt{ENTRYPOINT}, \texttt{ENV}, \texttt{ARG}, \texttt{EXPOSE}, \texttt{WORKDIR}, \texttt{USER}, \texttt{VOLUME}, \texttt{HEALTHCHECK}, \texttt{LABEL} e \texttt{ONBUILD} \cite{dockerfile_ref}. 
+
+\subsection{Formato, substituição de variáveis e \textit{.dockerignore}}
+\label{subsec:dockerfile-format}
+
+As instruções suportam formas \textit{shell} e \textit{exec} (JSON). Variáveis de ambiente podem ser interpoladas em várias instruções, respeitando o escopo e a ordem de avaliação. O arquivo \texttt{.dockerignore} exclui caminhos do contexto de \textit{build}, reduzindo tamanho de envio e prevenindo inclusão indevida de arquivos \cite{dockerfile_ref}. 
+
+\subsection{Instruções essenciais}
+\label{subsec:dockerfile-core}
+
+\begin{itemize}
+    \item \textbf{\texttt{FROM}}: define a imagem base e pode nomear estágios (\texttt{AS}). Suporta interação com \texttt{ARG} na seleção da base (por exemplo, plataforma/versão). \cite{dockerfile_ref} 
+    
+    \item \textbf{\texttt{RUN}}: executa comandos e compõe camadas; com BuildKit, permite \texttt{RUN --mount} para \textit{cache}, \textit{bind}, \textit{tmpfs}, \textit{secret} e \textit{ssh}, acelerando \textit{builds} e protegendo segredos. \cite{dockerfile_ref} 
+    \item \textbf{\texttt{COPY}/\texttt{ADD}}: copiam arquivos do contexto; \texttt{COPY --from} permite copiar de outro estágio/imagem (\textit{multi-stage}). Flags como \texttt{--chown} e \texttt{--chmod} controlam propriedade e permissões. \cite{dockerfile_ref}
+    \item \textbf{\texttt{CMD}/\texttt{ENTRYPOINT}}: definem o processo padrão; podem ser combinadas (por exemplo, \texttt{ENTRYPOINT} como executável e \texttt{CMD} como argumentos). \cite{dockerfile_ref}
+    \item \textbf{\texttt{ENV}/\texttt{ARG}}: definem variáveis para \textit{build} e \textit{runtime} (sendo \texttt{ARG} não persistente na imagem final; cuidado para não vazar \textit{secrets} via \texttt{ENV}). \cite{dockerfile_ref}
+    \item \textbf{\texttt{WORKDIR}/\texttt{USER}/\texttt{EXPOSE}/\texttt{VOLUME}}: definem diretório de trabalho, usuário não privilegiado, portas documentadas e pontos de montagem. \cite{dockerfile_ref}
+    \item \textbf{\texttt{HEALTHCHECK}}: verifica saúde do contêiner; útil para orquestração e \acrshort{slo}s. \cite{dockerfile_ref}
+\end{itemize}
+
+\subsection{Boas Práticas de Construção}
+\label{sec:docker-best-practices}
+
+\subsection{Multi-stage builds e imagens enxutas}
+\label{subsec:multi-stage}
+
+\textbf{Multi-stage builds} permitem compilar artefatos em um estágio (com \textit{toolchains} pesadas) e copiar apenas o resultado para um estágio final mínimo (por exemplo, \texttt{alpine} ou \texttt{scratch}), reduzindo tamanho, superfície de ataque e tempo de transferência \cite{dockerfile_ref}.
+
+\begin{codigo}[H]
+\begin{lstlisting}[language=Dockerfile]
+# syntax=docker/dockerfile:1
+FROM node:20-alpine AS build
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --omit=dev
+COPY . .
+RUN npm run build
+
+FROM node:20-alpine AS runtime
+WORKDIR /app
+ENV NODE_ENV=production
+# copia somente o que precisa para rodar
+COPY --from=build /app/.next ./.next
+COPY --from=build /app/package*.json ./
+EXPOSE 3000
+CMD ["node", ".next/standalone/server.js"]
+\end{lstlisting}
+\caption{Exemplo de multi-stage build para aplicação \acrshort{ssr} com Node/Next.js}
+\label{lst:dockerfile-multistage}
+\end{codigo}
+
+\subsection{Cache de build e \texttt{RUN --mount}}
+\label{subsec:cache-build}
+
+Organize instruções do Dockerfile para maximizar \textbf{cache} (mudar menos camadas de cima). Com BuildKit, \texttt{RUN --mount=type=cache} cria caches persistentes para gerenciadores de pacotes (\textit{e.g.}, \texttt{apt}, \texttt{pip}, \texttt{go}) sem invalidar camadas, acelerando builds subsequentes \cite{dockerfile_ref}. 
+
+\begin{codigo}[H]
+\begin{lstlisting}[language=Dockerfile]
+# syntax=docker/dockerfile:1
+FROM ubuntu:24.04
+RUN rm -f /etc/apt/apt.conf.d/docker-clean; \
+    echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' \
+    > /etc/apt/apt.conf.d/keep-cache
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    --mount=type=cache,target=/var/lib/apt,sharing=locked \
+    apt-get update && apt-get install -y curl ca-certificates
+\end{lstlisting}
+\caption{Uso de cache de \texttt{apt} com BuildKit}
+\label{lst:dockerfile-cache}
+\end{codigo}
+
+\subsection{\texttt{.dockerignore} e redução do contexto}
+\label{subsec:dockerignore}
+
+Use \texttt{.dockerignore} para excluir arquivos como \texttt{node\_modules}, \texttt{.git}, testes e artefatos locais. Isso reduz o contexto enviado ao daemon e evita vazamento de dados no \textit{build} \cite{dockerfile_ref}. 
+
+\begin{codigo}[H]
+\begin{lstlisting}[language=bash]
+# .dockerignore (exemplo)
+.git
+node_modules
+*.log
+.env
+tests/
+docs/
+\end{lstlisting}
+\caption{Exemplo de \texttt{.dockerignore}}
+\label{lst:dockerignore}
+\end{codigo}
+
+\subsection{Segredos e credenciais no build}
+\label{subsec:secrets}
+
+Evite inserir \textit{secrets} na imagem via \texttt{ENV}/\texttt{ARG}. Prefira \texttt{RUN --mount=type=secret} ou \texttt{--mount=type=ssh} para acesso temporário a chaves e tokens durante o \textit{build}. Esses valores não são gravados nas camadas finais \cite{dockerfile_ref}. 
+
+\subsection{Rede, portas, volumes e saúde}
+\label{sec:network-storage}
+
+\textbf{Portas} podem ser documentadas com \texttt{EXPOSE}, enquanto o mapeamento real é definido em \texttt{docker run -p}. \textbf{Volumes} permitem persistência de dados; \textbf{redes} conectam múltiplos contêineres. \textbf{Healthchecks} ajudam a detectar falhas de \textit{runtime} e são úteis em composição e orquestração \cite{dockerfile_ref,docker_overview}.
+
+\begin{codigo}[H]
+\begin{lstlisting}[language=bash]
+# Exemplo de execução com mapeamento de porta e volume
+docker run -d --name web -p 8080:80 -v data:/var/lib/app myimage:1.0
+\end{lstlisting}
+\caption{Mapeamento de porta e volume em um contêiner}
+\label{lst:docker-run-ports-vol}
+\end{codigo}
+
+\subsection{Fluxo de Trabalho: construir, \textit{taguear}, publicar e executar}
+\label{sec:workflow}
+
+O ciclo típico envolve: escrever o Dockerfile, \textbf{construir} (\texttt{docker build}), \textbf{taguear}, \textbf{publicar} a imagem (\texttt{docker push}) e \textbf{executar} (\texttt{docker run}). Com \textit{buildx}, pode-se produzir imagens multi-arquitetura e usar recursos avançados de cache \cite{docker_overview,dockerfile_ref}.
+
+\begin{codigo}[H]
+\begin{lstlisting}[language=bash]
+# Build e tag
+docker build -t ghcr.io/usuario/minhaapp:1.0 .
+
+# Login e push no registry escolhido
+docker login ghcr.io
+docker push ghcr.io/usuario/minhaapp:1.0
+
+# Execução mapeando porta
+docker run -d -p 3000:3000 ghcr.io/usuario/minhaapp:1.0
+\end{lstlisting}
+\caption{Ciclo de construção, publicação e execução}
+\label{lst:docker-workflow}
+\end{codigo}
+
+\subsection{Integração com o Estudo CSR x SSR}
+\label{sec:docker-csr-ssr}
+
+No contexto do seu trabalho, contêineres simplificam a comparação entre \acrshort{csr} e \acrshort{ssr} ao padronizar ambiente, dependências e execução:
+
+\begin{itemize}
+  \item \textbf{CSR/SSG (estático + CDN):} \textit{build} do frontend (React/Vite/Next SSG) em um estágio e \textbf{Nginx} no estágio final para servir arquivos estáticos.  
+  \item \textbf{SSR (Node/Next):} multi-stage com instalação apenas das dependências de produção e \textbf{imagem enxuta} (\texttt{alpine} ou \texttt{distroless}), expondo a porta do servidor \acrshort{ssr}.
+  \item \textbf{Medições reprodutíveis:} ao encapsular as variantes em imagens, é possível rodar os mesmos testes de desempenho (FCP, TTFB, INP, TTI) em hardware idêntico e com \textit{network shaping}, isolando o impacto da estratégia de renderização.
+\end{itemize}
+
+\begin{codigo}[H]
+\begin{lstlisting}[language=Dockerfile]
+# Nginx para app CSR/SSG (estático)
+FROM nginx:1.27-alpine
+COPY ./dist/ /usr/share/nginx/html
+# (Opcional) Copiar nginx.conf customizado
+# COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+\end{lstlisting}
+\caption{Servidor estático para aplicação CSR/SSG}
+\label{lst:dockerfile-nginx-static}
+\end{codigo}
+
+\subsection{Síntese}
+\label{sec:docker-sintese}
+
+O Docker fornece uma base consistente para empacotar e executar aplicações, com \textbf{isolamento leve}, portabilidade e \textbf{ciclo de vida} claro (construir, distribuir, executar). O \textbf{Dockerfile} e as boas práticas descritas — \textit{multi-stage}, cache de build, \texttt{.dockerignore} e \textit{secrets} — viabilizam imagens menores, \textit{builds} mais rápidos e maior segurança. Tudo isso contribui diretamente para a reprodutibilidade e a comparabilidade dos experimentos entre \acrshort{csr} e \acrshort{ssr} \cite{docker_overview,dockerfile_ref}. 
