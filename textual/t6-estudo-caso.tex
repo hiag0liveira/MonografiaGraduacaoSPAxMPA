@@ -350,9 +350,30 @@ Para a estruturação inicial do projeto e o gerenciamento do ambiente de desenv
 
 O roteamento no lado do cliente, uma característica fundamental da arquitetura SPA, implementa-se com a biblioteca \textbf{React Router}. Trata-se da solução padrão para navegação em aplicações React, que possibilita a criação de uma experiência de usuário fluida e sem recarregamentos de página ao manipular a \acrshort{api} de Histórico do navegador \cite{react_router_docs}. A comunicação com a News API é realizada por meio da \acrshort{api} \texttt{fetch}, nativa dos navegadores modernos.
 
+A \autoref{fig:app-react-csr} mostra a \textbf{página inicial} da plataforma WallTech na implementação \acrshort{spa} com \acrshort{csr}, em conformidade com o wireframe (\autoref{fig:wireframe-walltech}). Nessa página, o usuário visualiza a notícia mais visitada em destaque, três outras recentemente acessadas ao lado, uma lista com as cinco últimas notícias publicadas, além de barra de pesquisa e filtro por país (Brasil ou EUA).
+
+\begin{figure}[H]
+  \centering
+  \caption{Aplicação SPA com React (\acrshort{csr})}
+  \includegraphics[width=0.9\textwidth]{media/app_react_csr.png}
+  \legend{Fonte: os autores.}
+  \label{fig:app-react-csr}
+\end{figure}
+
 \subsection{Implementação da Aplicação MPA}
 \label{ssec:implementacao_mpa}
 
 A implementação da \acrfull{mpa}, com foco em \acrfull{ssr}, é desenvolvida com o \emph{framework} \textbf{Next.js} na versão 14. O Next.js é um meta-framework baseado em React, mantido pela Vercel, que se posiciona como uma solução completa para a construção de aplicações web de produção. Sua escolha para este estudo de caso justifica-se por ser a principal referência de mercado para a implementação de \acrshort{ssr} no ecossistema React, oferecendo uma estrutura robusta e opinativa \cite{nextjs2024}.
 
 O \emph{framework} opera sobre um ambiente \textbf{Node.js}, o que permite a execução de código JavaScript no lado do servidor \cite{nodejs2025}. Essa capacidade é a base da renderização no servidor, onde o Next.js utiliza funções específicas, como a \texttt{getServerSideProps}, para buscar dados de fontes externas e pré-renderizar o HTML completo de uma página antes de enviá-la ao navegador. Além disso, o Next.js implementa um sistema de roteamento baseado no sistema de arquivos, onde a estrutura de diretórios da pasta \texttt{pages} define automaticamente as rotas da aplicação, simplificando a configuração e a manutenção do projeto.
+
+
+A \autoref{fig:app-next-ssr} mostra a \textbf{página de detalhes} de uma notícia na plataforma WallTech, na implementação \acrshort{mpa} com \acrshort{ssr}. Ao clicar em uma notícia na listagem, o usuário é direcionado para esta tela, onde pode visualizar imagem, fonte, título, metadados (agência e data/hora) e resumo. Também é possível acessar a matéria original pelo botão “Ler na fonte” e retornar à página anterior pelo botão “Voltar”.
+
+\begin{figure}[H]
+  \centering
+  \caption{Aplicação MPA com Next.js (\acrshort{ssr})}
+  \includegraphics[width=0.9\textwidth]{media/app_next_ssr.png}
+  \legend{Fonte: os autores.}
+  \label{fig:app-next-ssr}
+\end{figure}
