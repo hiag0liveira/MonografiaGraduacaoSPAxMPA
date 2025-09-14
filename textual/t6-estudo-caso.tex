@@ -377,3 +377,274 @@ A \autoref{fig:app-next-ssr} mostra a \textbf{página de detalhes} de uma notíc
   \legend{Fonte: os autores.}
   \label{fig:app-next-ssr}
 \end{figure}
+
+
+\section{Ambiente de Execução, Instrumentação e Empacotamento}
+\label{sec:ambiente-instrumentacao-empacotamento}
+
+Esta seção detalha como as duas versões da plataforma \textbf{WallTech} uma \acrshort{mpa} com \acrshort{ssr} (Next.js) e uma \acrshort{spa} com \acrshort{csr} (React+Vite) foram instrumentadas para coleta de \textit{Web Vitals}, empacotadas em contêineres \textit{Docker} com \textbf{paridade de recursos} e executadas em ambiente \textbf{local controlado} para assegurar reprodutibilidade do estudo.
+
+\subsection{Limitações de Execução e Decisão Metodológica}
+\label{ssec:limitacoes-execucao}
+
+Durante o desenvolvimento, a \textit{NewsAPI} impôs restrições de uso em produção (por exemplo, políticas de CORS e/ou limitações do plano vigentes no período do estudo), o que impactaria a coleta de dados em ambiente hospedado. Para \textbf{eliminar interferências externas} e garantir \textbf{controle experimental}, decidiu-se executar ambos os protótipos \textbf{localmente} em contêineres \textit{Docker}, com os \textbf{mesmos limites de CPU e memória}, sistema de arquivos \textit{read-only} e partições temporárias (\textit{tmpfs}) para reduzir variações de I/O. Assim, a comparação \acrshort{csr}~vs.~\acrshort{ssr} foca no \textit{modelo de renderização} e não em diferenças de \textit{hosting}.
+
+\subsection{Instrumentação de Web Vitals}
+\label{ssec:instrumentacao-webvitals}
+
+Em ambos os protótipos, a instrumentação é realizada \textbf{no cliente}, e os dados são enviados para um \textbf{endpoint interno} exposto pelo próprio contêiner. Utiliza-se \texttt{navigator.sendBeacon} como via principal (por não bloquear a navegação) e \texttt{fetch} como \textit{fallback} com \texttt{keepalive}. As métricas coletadas são os \textit{Core Web Vitals} atuais: \textbf{TTFB}, \textbf{FCP}, \textbf{LCP}, \textbf{CLS} e \textbf{INP}. 
+
+Os registros são persistidos em \textbf{NDJSON} (uma linha por métrica), contendo, dentre outros, os campos:
+\texttt{\{id, name, value, rating, navigationType, attribution, entries, ts\}}. A análise estatística (p.\,ex., \textbf{p50}/\textbf{p95}) está \textit{deliberadamente breve} aqui e será desenvolvida em capítulos posteriores.
+
+\paragraph{SSR/MPA (Next.js).}
+Na versão \acrshort{ssr} (App Router), um \textit{Client Component} global usa \texttt{useReportWebVitals} para escutar e enviar as métricas ao endpoint \texttt{/api/vitals}. No servidor, a rota grava o NDJSON em um caminho configurável: por padrão \texttt{/tmp/webvitals.ndjson} (partição \textit{tmpfs}), ou no caminho definido por \texttt{\$METRICS\_PATH} quando se deseja persistência via volume.
+
+\begin{lstlisting}[language=TypeScript,caption={Endpoint de métricas no SSR/Next.js (visão de servidor)}]
+// src/app/api/vitals/route.ts
+import { NextRequest, NextResponse } from "next/server";
+import { appendFile } from "node:fs/promises";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+const filePath = process.env.METRICS_PATH ?? "/tmp/webvitals.ndjson";
+
+export async function POST(req: NextRequest) {
+  const metric = await req.json();
+  const doc = { ...metric, ts: new Date().toISOString() };
+  await appendFile(filePath, JSON.stringify(doc) + "\n", "utf8");
+  return NextResponse.json({ ok: true });
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=TypeScript,caption={Envio de métricas no cliente (SSR/Next.js)}]
+"use client";
+import { useReportWebVitals } from "next/web-vitals";
+import { useCallback } from "react";
+
+export default function WebVitals() {
+  const report = useCallback((metric: any) => {
+    const body = JSON.stringify({
+      id: metric.id, name: metric.name, value: metric.value,
+      rating: metric.rating, navigationType: metric.navigationType,
+      attribution: metric.attribution, entries: metric.entries, ts: Date.now(),
+    });
+
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon("/api/vitals",
+        new Blob([body], { type: "application/json" }));
+    } else {
+      fetch("/api/vitals", {
+        method: "POST", body, keepalive: true,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+  }, []);
+
+  useReportWebVitals(report);
+  return null;
+}
+\end{lstlisting}
+
+\paragraph{CSR/SPA (React+Vite).}
+Na versão \acrshort{csr}, a coleta usa \texttt{web-vitals/attribution} (para enriquecer \textit{attribution} em \texttt{LCP}/\texttt{CLS}/\texttt{INP}). O envio é feito para \texttt{/api/web-vitals}. Como não há servidor \textit{framework} (p.\,ex., Next), a aplicação é servida por um \textbf{processo Node.js} simples (\texttt{server.cjs}) que entrega o \texttt{dist/} e expõe o endpoint de métricas, gravando no mesmo esquema (\texttt{/tmp} ou \texttt{\$METRICS\_PATH}).
+
+\begin{lstlisting}[language=TypeScript,caption={Envio de métricas no cliente (CSR/React+Vite)}]
+import { useEffect } from "react";
+import { onCLS, onINP, onLCP, onFCP, onTTFB, type MetricWithAttribution } from "web-vitals/attribution";
+
+export default function WebVitals() {
+  useEffect(() => {
+    const report = (m: MetricWithAttribution) => {
+      const body = JSON.stringify({
+        id: m.id, name: m.name, value: m.value, rating: m.rating,
+        navigationType: m.navigationType, attribution: m.attribution,
+        entries: m.entries, ts: Date.now(),
+      });
+
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon("/api/web-vitals",
+          new Blob([body], { type: "application/json" }));
+      } else {
+        fetch("/api/web-vitals", {
+          method: "POST", body, keepalive: true,
+          headers: { "Content-Type": "application/json" },
+        });
+      }
+    };
+
+    onCLS(report); onINP(report); onLCP(report); onFCP(report); onTTFB(report);
+  }, []);
+
+  return null;
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=Java,caption={Servidor estático + endpoint (CSR/React+Vite)}]
+// server.cjs - Node HTTP simples (serve dist/ e expõe /api/web-vitals)
+const http = require("node:http");
+const { appendFile, readFile, stat } = require("node:fs/promises");
+const { createReadStream } = require("node:fs");
+const path = require("node:path");
+
+const PORT = process.env.PORT || 3000;
+const DIST = path.join(process.cwd(), "dist");
+const METRICS_PATH = process.env.METRICS_PATH || "/tmp/webvitals.ndjson";
+
+const server = http.createServer(async (req, res) => {
+  const url = new URL(req.url, `http://${req.headers.host}`);
+
+  if (url.pathname === "/api/web-vitals") {
+    if (req.method === "POST") {
+      const chunks = []; req.on("data", c => chunks.push(c));
+      req.on("end", async () => {
+        const json = JSON.parse(Buffer.concat(chunks).toString("utf8") || "{}");
+        await appendFile(METRICS_PATH, JSON.stringify({ ...json, ts: Date.now() }) + "\n", "utf8");
+        res.writeHead(200, { "Content-Type": "application/json" });
+        res.end(JSON.stringify({ ok: true }));
+      });
+      return;
+    }
+    if (req.method === "GET") {
+      const data = await readFile(METRICS_PATH, "utf8").catch(() => "");
+      res.writeHead(200, { "Content-Type": "application/x-ndjson" });
+      res.end(data); return;
+    }
+    res.writeHead(405).end(); return;
+  }
+
+  // estático + fallback SPA
+  let p = decodeURIComponent(url.pathname);
+  if (p === "/") p = "/index.html";
+  const file = path.join(DIST, p);
+  try {
+    const s = await stat(file); if (s.isDirectory()) throw 0;
+    createReadStream(file).pipe(res);
+  } catch {
+    createReadStream(path.join(DIST, "index.html")).pipe(res);
+  }
+});
+server.listen(PORT);
+\end{lstlisting}
+
+\subsection{Empacotamento Docker: SSR/MPA (Next.js)}
+\label{ssec:ssr-docker}
+
+Para \acrshort{ssr}, adotou-se o \textbf{modo standalone} do Next.js e \textit{multi-stage build}: (i) instalação de dependências, (ii) \textit{build} e (iii) \textit{runner} minimalista. O contêiner expõe a porta \texttt{3000}, roda como usuário \texttt{node} e lê variáveis em tempo de execução (importante para segredos e chaves).
+
+\begin{lstlisting}[language=Dockerfile,caption={Dockerfile da aplicação SSR/MPA (Next.js)}]
+# ---------- 1) deps ----------
+FROM node:20-alpine AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --ignore-scripts
+
+FROM node:20-alpine AS builder
+WORKDIR /app
+ENV NEXT_TELEMETRY_DISABLED=1
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/static ./.next/static
+
+USER node
+EXPOSE 3000
+CMD ["node", "server.js"]
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash,caption={Build e execução do container SSR com limites e volume de métricas}]
+docker build --no-cache -t next-ssr:prod .
+
+docker run --name next-ssr \
+  -p 3001:3000 \
+  -e METRICS_PATH=/data/webvitals.ndjson \
+  -v "$PWD/metrics:/data:rw" \
+  --cpus="1.00" --cpuset-cpus="0" \
+  --memory="1g" --memory-swap="1g" \
+  --pids-limit=256 \
+  --read-only \
+  --tmpfs /tmp \
+  --tmpfs /app/.next/cache \
+  next-ssr:prod
+\end{lstlisting}
+
+\subsection{Empacotamento Docker: CSR/SPA (React+Vite)}
+\label{ssec:csr-docker}
+
+Para \acrshort{csr}, o \textit{build} é produzido pelo Vite e servido por \texttt{server.cjs}. Diferentemente do \acrshort{ssr}, as variáveis \texttt{VITE\_*} são resolvidas em \textbf{tempo de build}; por isso, a \texttt{.env} é copiada para o estágio \textit{builder} (ou alternativamente injetada com \texttt{--build-arg}). Em execução, o caminho do arquivo de métricas é definido por \texttt{\$METRICS\_PATH}.
+
+\begin{lstlisting}[language=Dockerfile,caption={Dockerfile da aplicação CSR/SPA (React+Vite)}]
+# ---------- 1) deps ----------
+FROM node:20-alpine AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --ignore-scripts
+
+# ---------- 2) build ----------
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+# 👇 garante que o Vite leia suas VITE_* do host
+COPY .env ./.env
+RUN npm run build
+
+# ---------- 3) runner ----------
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+ENV TZ=UTC
+ENV NODE_OPTIONS=--max-old-space-size=512
+COPY --from=builder /app/dist ./dist
+COPY server.cjs ./server.cjs
+USER node
+EXPOSE 3000
+CMD ["node", "server.cjs"]
+\end{lstlisting}
+
+\begin{lstlisting}[language=bash,caption={Build e execução do container CSR com limites e volume de métricas}]
+docker build -t react-csr:prod .
+
+docker run --name react-csr \
+  -p 3002:3000 \
+  -e METRICS_PATH=/data/webvitals.ndjson \
+  -v "$PWD/metrics-csr:/data:rw" \
+  --cpus="1.00" --cpuset-cpus="0" \
+  --memory="1g" --memory-swap="1g" \
+  --pids-limit=256 --read-only --tmpfs /tmp \
+  react-csr:prod
+\end{lstlisting}
+
+\subsection{Paridade de Recursos, Observabilidade e Procedimento de Coleta}
+\label{ssec:paridade-observabilidade}
+
+Para evitar viés de ambiente, ambos os contêineres executam com \textbf{paridade de recursos}: \texttt{--cpus="1.0"}, \texttt{--cpuset-cpus="0"} (fixação na CPU 0), \texttt{--memory="1g"}, \texttt{--memory-swap="1g"}, \texttt{--pids-limit=256}, \texttt{--read-only} e \texttt{--tmpfs /tmp} (arquivo de métricas em memória quando não houver volume). No \acrshort{ssr}, \texttt{/app/.next/cache} é montado em \texttt{tmpfs} para reduzir variações de disco.
+
+Durante os testes, o uso de recursos foi acompanhado com:
+\begin{lstlisting}[language=bash]
+docker stats next-ssr
+docker stats react-csr
+\end{lstlisting}
+Esse monitoramento fornece CPU\% e memória em tempo real, complementando a coleta de \textit{Web Vitals}. O \textbf{procedimento} adotado foi:
+(i) \textit{warm-up} com 2 acessos iniciais à mesma rota para estabilizar caches;
+(ii) coleta de 10--15 carregamentos por cenário (janela anônima);
+(iii) persistência NDJSON por cenário em volumes distintos (por exemplo, \texttt{./metrics} para \acrshort{ssr} e \texttt{./metrics-csr} para \acrshort{csr}).
+A \textbf{análise de métricas} (estatísticas descritivas e percentis como p50 e p95) será apresentada em capítulo específico.
+
+\subsection{Repositórios e Reprodutibilidade}
+\label{ssec:repositorios-repro}
+O código-fonte, instruções de execução e artefatos de instrumentação estão disponíveis nos repositórios públicos da empresa fictícia \textbf{WallTech}:
+\begin{itemize}
+  \item \textbf{CSR/SPA (React+Vite)}: \url{https://github.com/WallTechTCC/React-CSR}
+  \item \textbf{SSR/MPA (Next.js)}: \url{https://github.com/WallTechTCC/Next-SSR}
+\end{itemize}
+Esses repositórios permitem reproduzir o experimento localmente com os mesmos limites de CPU/RAM, sistema de arquivos \textit{read-only} e coleta de \textit{Web Vitals} no formato NDJSON, preservando a comparabilidade entre \acrshort{csr} e \acrshort{ssr}.
