@@ -70,7 +70,7 @@ Adicionalmente, foram observados: \textbf{número de requisições HTTP} e \text
 Foram utilizadas ferramentas complementares, com ênfase na coleta contínua no navegador (\textit{field}) e apoio de auditoria em \textit{laboratório}:
 
 \begin{itemize}
-    \item \textbf{Web Vitals (RUM)}: Instrumentação no cliente para TTFB, FCP, LCP, CLS e INP, com envio via \texttt{navigator.sendBeacon} a um endpoint interno e persistência em formato NDJSON;
+    \item \textbf{Web Vitals (\acrfull{rum})}: Instrumentação no cliente para TTFB, FCP, LCP, CLS e INP, com envio via \texttt{navigator.sendBeacon} a um endpoint interno e persistência em formato NDJSON;
     \item \textbf{Google Lighthouse} (auxiliar): Auditoria em \textit{laboratório} para Performance (incluindo FCP, LCP, CLS, Speed Index e TBT), executada localmente sobre os serviços em Docker;
     \item \textbf{Chrome DevTools}: Inspeção de rede, \textit{waterfall}, cache e verificação dos \textit{POSTs} de métricas;
     \item \textbf{docker stats}: Acompanhamento do uso de CPU e memória dos contêineres durante a execução dos testes.
@@ -78,7 +78,7 @@ Foram utilizadas ferramentas complementares, com ênfase na coleta contínua no 
 
 \subsection{Ambiente de Testes}
 
-Os testes foram realizados em \textbf{ambiente local controlado} com contêineres \textit{Docker} para as duas versões (\acrshort{csr} e \acrshort{ssr}). Essa decisão decorre de limitações práticas da \textbf{NewsAPI} em produção (e.g., políticas de CORS/uso do plano), e visa garantir controle experimental e reprodutibilidade. Ambos os serviços foram executados com \textbf{paridade de recursos}:
+Os testes foram realizados em \textbf{ambiente local controlado} com contêineres \textit{Docker} para as duas versões (\acrshort{csr} e \acrshort{ssr}). Essa decisão decorre de limitações práticas da \textbf{NewsAPI} em produção ( políticas de CORS/uso do plano), e visa garantir controle experimental e reprodutibilidade. Ambos os serviços foram executados com \textbf{paridade de recursos}:
 
 \begin{itemize}
     \item \textbf{CPU}: \texttt{--cpus="1.0"} e \texttt{--cpuset-cpus="0"};
@@ -105,11 +105,11 @@ A execução foi conduzida da seguinte forma:
 \end{enumerate}
 
 \noindent
-Para reduzir variabilidade, cada teste foi repetido \textbf{no mínimo cinco vezes} por cenário. A quantidade total de repetições e o método de agregação (e.g., mediana/p50 e p95) são detalhados em seção específica de resultados.
+Para reduzir variabilidade, cada teste foi repetido \textbf{no mínimo cinco vezes} por cenário. A quantidade total de repetições e o método de agregação (mediana/p50 e p95) são detalhados em seção específica de resultados.
 
 \subsection{Registro e Organização dos Dados}
 
-Os dados coletados pela instrumentação (RUM) foram armazenados em arquivos \textbf{NDJSON} separados por abordagem, contendo os campos de identificação da métrica, valor e carimbo temporal. As auditorias do Lighthouse foram salvas em arquivos JSON/HTML para futura referência. Em seguida, os dados foram consolidados em planilhas, organizados por data, métrica e abordagem (CSR/SSR), para posterior análise comparativa.
+Os dados coletados pela instrumentação (\acrshort{rum}) foram armazenados em arquivos \textbf{NDJSON} separados por abordagem, contendo os campos de identificação da métrica, valor e carimbo temporal. As auditorias do Lighthouse foram salvas em arquivos JSON/HTML para futura referência. Em seguida, os dados foram consolidados em planilhas, organizados por data, métrica e abordagem (CSR/SSR), para posterior análise comparativa.
 
 \subsection{Método de Análise}
 
