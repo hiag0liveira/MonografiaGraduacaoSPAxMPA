@@ -397,7 +397,7 @@ Em ambos os protótipos, a instrumentação é realizada \textbf{no cliente}, e 
 Os registros são persistidos em \textbf{NDJSON} (uma linha por métrica), contendo, dentre outros, os campos:
 \texttt{\{id, name, value, rating, navigationType, attribution, entries, ts\}}. A análise estatística (p.\,ex., \textbf{p50}/\textbf{p95}) está \textit{deliberadamente breve} aqui e será desenvolvida em capítulos posteriores.
 
-\paragraph{SSR/MPA (Next.js).}
+\subsubsection{SSR/MPA (Next.js).}
 Na versão \acrshort{ssr} (App Router), um \textit{Client Component} global usa \texttt{useReportWebVitals} para escutar e enviar as métricas ao endpoint \texttt{/api/vitals}. No servidor, a rota grava o NDJSON em um caminho configurável: por padrão \texttt{/tmp/webvitals.ndjson} (partição \textit{tmpfs}), ou no caminho definido por \texttt{\$METRICS\_PATH} quando se deseja persistência via volume.
 
 \begin{lstlisting}[language=TypeScript,caption={Endpoint de métricas no SSR/Next.js (visão de servidor)}]
@@ -447,7 +447,7 @@ export default function WebVitals() {
 }
 \end{lstlisting}
 
-\paragraph{CSR/SPA (React+Vite).}
+\subsubsection{CSR/SPA (React+Vite).}
 Na versão \acrshort{csr}, a coleta usa \texttt{web-vitals/attribution} (para enriquecer \textit{attribution} em \texttt{LCP}/\texttt{CLS}/\texttt{INP}). O envio é feito para \texttt{/api/web-vitals}. Como não há servidor \textit{framework} (p.\,ex., Next), a aplicação é servida por um \textbf{processo Node.js} simples (\texttt{server.cjs}) que entrega o \texttt{dist/} e expõe o endpoint de métricas, gravando no mesmo esquema (\texttt{/tmp} ou \texttt{\$METRICS\_PATH}).
 
 \begin{lstlisting}[language=TypeScript,caption={Envio de métricas no cliente (CSR/React+Vite)}]
@@ -648,3 +648,58 @@ O código-fonte, instruções de execução e artefatos de instrumentação est�
   \item \textbf{SSR/MPA (Next.js)}: \url{https://github.com/WallTechTCC/Next-SSR}
 \end{itemize}
 Esses repositórios permitem reproduzir o experimento localmente com os mesmos limites de CPU/RAM, sistema de arquivos \textit{read-only} e coleta de \textit{Web Vitals} no formato NDJSON, preservando a comparabilidade entre \acrshort{csr} e \acrshort{ssr}.
+
+
+\subsection{Coleta de CPU/RAM do contêiner e exportação em CSV}
+\label{ssec:coleta-host-docker-stats}
+
+Para registrar uso de CPU, memória e número de \textit{PIDs} dos contêineres durante os cenários de teste, foi utilizada a telemetria do próprio Docker via \texttt{docker stats} (sem streaming contínuo). As amostras foram coletadas a cada 1\,s e gravadas em arquivos CSV separados por aplicação, no diretório \texttt{metrics-host/}.
+
+\subsubsection{Colunas dos CSVs.}
+Cada linha contém:
+\begin{itemize}
+  \item \textbf{ts}: timestamp da coleta no host (\texttt{YYYY-MM-DD HH:MM:SS});
+  \item \textbf{name}: nome do contêiner;
+  \item \textbf{cpu\_perc}: percentual de CPU do contêiner (string com ``\%'' conforme \texttt{docker stats});
+  \item \textbf{mem\_usage}: uso de memória reportado (formato humano, ex.: ``123.4MiB / 1.00GiB'');
+  \item \textbf{mem\_perc}: percentual de memória (string com ``\%'');
+  \item \textbf{pids}: quantidade de processos/threads visíveis ao cgroup do contêiner.
+\end{itemize}
+
+\subsubsection{Coleta para o contêiner SSR (\texttt{next-ssr}).}
+O comando abaixo cria o diretório de métricas (se não existir) e inicia a captura contínua em \texttt{metrics-host/docker-stats-ssr.csv}:
+\begin{lstlisting}[language=bash,caption={Captura de CPU/RAM do contêiner SSR e exportação para CSV}]
+mkdir -p metrics-host
+(
+  echo "ts,name,cpu_perc,mem_usage,mem_perc,pids";
+  while true; do
+    TS=$(date +"%F %T");
+    docker stats --no-stream \
+      --format "{{.Name}},{{.CPUPerc}},{{.MemUsage}},{{.MemPerc}},{{.PIDs}}" \
+      next-ssr | sed "s/^/$TS,/";
+    sleep 1;
+  done
+) >> metrics-host/docker-stats-ssr.csv
+\end{lstlisting}
+
+\subsubsection{Coleta para o contêiner CSR (\texttt{react-csr}).}
+De forma análoga, a coleta do contêiner CSR grava em \\ \texttt{metrics-host/docker-stats-csr.csv}:
+\\
+\\
+\begin{lstlisting}[language=bash,caption={Captura de CPU/RAM do contêiner CSR e exportação para CSV}]
+(
+  echo "ts,name,cpu_perc,mem_usage,mem_perc,pids";
+  while true; do
+    TS=$(date +"%F %T");
+    docker stats --no-stream \
+      --format "{{.Name}},{{.CPUPerc}},{{.MemUsage}},{{.MemPerc}},{{.PIDs}}" \
+      react-csr | sed "s/^/$TS,/";
+    sleep 1;
+  done
+) >> metrics-host/docker-stats-csr.csv
+\end{lstlisting}
+
+
+
+
+
