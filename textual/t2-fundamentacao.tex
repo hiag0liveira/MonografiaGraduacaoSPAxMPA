@@ -827,7 +827,7 @@ A arquitetura do Docker segue o modelo cliente–servidor: o \textbf{cliente} (\
 \subsection{Registries e distribuição de imagens}
 \label{subsec:docker-registries}
 
-Imagens são armazenadas em \textbf{registries} (\textit{e.g.}, Docker Hub público ou registries privados). Comandos como \texttt{docker pull}, \texttt{docker push} e \texttt{docker run} interagem com o registry configurado. Essa camada viabiliza portabilidade entre ambientes locais, datacenters e nuvens \cite{docker_overview}. 
+Imagens são armazenadas em \textbf{registries} (Docker Hub público ou registries privados). Comandos como \texttt{docker pull}, \texttt{docker push} e \texttt{docker run} interagem com o registry configurado. Essa camada viabiliza portabilidade entre ambientes locais, datacenters e nuvens \cite{docker_overview}. 
 
 \section{Objetos do Docker: imagens, camadas e contêineres}
 \label{sec:docker-objetos}
@@ -909,7 +909,7 @@ CMD ["node", ".next/standalone/server.js"]
 \subsection{Cache de build e \texttt{RUN --mount}}
 \label{subsec:cache-build}
 
-Organize instruções do Dockerfile para maximizar \textbf{cache} (mudar menos camadas de cima). Com BuildKit, \texttt{RUN --mount=type=cache} cria caches persistentes para gerenciadores de pacotes (\textit{e.g.}, \texttt{apt}, \texttt{pip}, \texttt{go}) sem invalidar camadas, acelerando builds subsequentes \cite{dockerfile_ref}. 
+Organize instruções do Dockerfile para maximizar \textbf{cache} (mudar menos camadas de cima). Com BuildKit, \texttt{RUN --mount=type=cache} cria caches persistentes para gerenciadores de pacotes (\texttt{apt}, \texttt{pip}, \texttt{go}) sem invalidar camadas, acelerando builds subsequentes \cite{dockerfile_ref}. 
 
 \begin{codigo}[H]
 \begin{lstlisting}[language=Dockerfile]

@@ -48,7 +48,7 @@ A coleta de dados ocorre por meio de ferramentas como Google Lighthouse, PageSpe
 \section{Coleta de Dados e Testes}
 \label{sec:coleta-de-dados-e-testes}
 
-Esta seção descreve o procedimento de coleta e análise dos dados obtidos a partir da comparação entre as aplicações desenvolvidas com \english{\acrshort{csr}} e \english{\acrshort{ssr}}. O objetivo é mensurar o desempenho, a eficiência e a experiência do usuário proporcionada por cada aplicação.
+Esta seção descreve o procedimento de coleta e análise dos dados obtidos a partir da comparação entre as aplicações desenvolvidas com \english{\acrshort{csr}} e \english{\acrshort{ssr}}. O objetivo é mensurar o desempenho, a eficiência e a experiência do usuário proporcionada por cada aplicação sob condições controladas.
 
 \subsection{Definição das Métricas}
 
@@ -58,63 +58,59 @@ As métricas utilizadas para a avaliação foram selecionadas com base nas recom
     \item \textbf{Time to First Byte (TTFB)}: Tempo até o primeiro byte da resposta ser recebido;
     \item \textbf{First Contentful Paint (FCP)}: Tempo até a exibição do primeiro conteúdo visível;
     \item \textbf{Largest Contentful Paint (LCP)}: Tempo até o carregamento do maior bloco de conteúdo;
-    \item \textbf{Time to Interactive (TTI)}: Tempo até a página estar completamente interativa;
     \item \textbf{Cumulative Layout Shift (CLS)}: Medida de estabilidade visual da interface;
-    \item \textbf{Número de Requisições HTTP} e \textbf{Uso de Cache};
-    \item \textbf{Consumo de recursos do navegador}: Memória e CPU;
+    \item \textbf{Interaction to Next Paint (INP)}: Latência de interação (Core Web Vital atual para responsividade);
 \end{itemize}
+
+\noindent
+Adicionalmente, foram observados: \textbf{número de requisições HTTP} e \textbf{uso de cache} (no cliente), bem como \textbf{consumo de recursos} do contêiner (CPU e memória) durante os testes. O \textbf{Time to Interactive (TTI)} foi empregado apenas como métrica de \textit{laboratório} via Lighthouse, não integrando o conjunto atual de Core Web Vitals. O tratamento estatístico detalhado das métricas será apresentado posteriormente.
 
 \subsection{Ferramentas de Teste}
 
-Para a análise do desempenho das aplicações, foram utilizadas ferramentas amplamente reconhecidas no diagnóstico de aplicações web. Essas ferramentas permitiram a coleta de métricas técnicas relevantes, tanto do ponto de vista do usuário quanto do comportamento interno das aplicações:
+Foram utilizadas ferramentas complementares, com ênfase na coleta contínua no navegador (\textit{field}) e apoio de auditoria em \textit{laboratório}:
 
 \begin{itemize}
-    \item \textbf{Google Lighthouse}: Ferramenta automatizada de código aberto para auditoria de desempenho, acessibilidade, SEO e melhores práticas em aplicações web;
-    \item \textbf{PageSpeed Insights}: Serviço do Google que avalia o desempenho da página em dispositivos móveis e desktops, destacando métricas como FCP, LCP e TTI;
-    \item \textbf{WebPageTest}: Utilizada para testes avançados de tempo de carregamento, número de requisições e análise de cache em diferentes condições de rede;
-    \item \textbf{Core Web Vitals}: Conjunto de métricas essenciais definido pelo Google para mensurar a qualidade da experiência do usuário, incluindo LCP, FID e CLS;
-    \item \textbf{Chrome DevTools}: Ferramenta integrada ao navegador Google Chrome que possibilita a análise detalhada de rede, execução de scripts, uso de memória e inspeção do processo de hidratação no SSR.
+    \item \textbf{Web Vitals (\acrfull{rum})}: Instrumentação no cliente para TTFB, FCP, LCP, CLS e INP, com envio via \texttt{navigator.sendBeacon} a um endpoint interno e persistência em formato NDJSON;
+    \item \textbf{Google Lighthouse} (auxiliar): Auditoria em \textit{laboratório} para Performance (incluindo FCP, LCP, CLS, Speed Index e TBT), executada localmente sobre os serviços em Docker;
+    \item \textbf{Chrome DevTools}: Inspeção de rede, \textit{waterfall}, cache e verificação dos \textit{POSTs} de métricas;
+    \item \textbf{docker stats}: Acompanhamento do uso de CPU e memória dos contêineres durante a execução dos testes.
 \end{itemize}
 
 \subsection{Ambiente de Testes}
 
-Os testes foram realizados em ambiente de produção controlado, com ambas as aplicações \acrshort{csr} e \acrshort{ssr} implantadas na plataforma \textbf{Railway}, utilizando o plano de hospedagem \textit{Pro} (US\$20/mês). Esse plano foi escolhido por ser voltado a desenvolvedores profissionais e equipes que estão implantando aplicações em produção, simulando um cenário realista de trabalho colaborativo.
-
-A escolha por esse plano visa representar um ambiente típico de desenvolvimento e entrega contínua, como encontrado em times ágeis modernos. O plano Pro permite múltiplos colaboradores e oferece suporte prioritário, sendo ideal para refletir as condições reais de implantação e testes de aplicações web em equipe.
-
-A infraestrutura e os recursos disponíveis no plano \textit{Pro} incluem:
+Os testes foram realizados em \textbf{ambiente local controlado} com contêineres \textit{Docker} para as duas versões (\acrshort{csr} e \acrshort{ssr}). Essa decisão decorre de limitações práticas da \textbf{NewsAPI} em produção ( políticas de CORS/uso do plano), e visa garantir controle experimental e reprodutibilidade. Ambos os serviços foram executados com \textbf{paridade de recursos}:
 
 \begin{itemize}
-    \item \textbf{Até 32 GB de RAM} e \textbf{32 vCPU por serviço}, com escalabilidade sob demanda;
-    \item \textbf{100 GB de armazenamento efêmero} e \textbf{até 250 GB de volume persistente} por autoatendimento;
-    \item \textbf{Deploy simultâneo em regiões globais}, com datacenters otimizados para baixa latência;
-    \item \textbf{Ambiente Node.js 18} compatível com as tecnologias empregadas nos projetos CSR e SSR;
-    \item \textbf{Integração contínua com GitHub} para deploy automatizado e versionamento;
-    \item \textbf{Histórico de logs com retenção de até 120 horas} e \textbf{monitoramento embutido};
-    \item \textbf{Suporte colaborativo com assentos ilimitados} e possibilidade de organização por equipes;
+    \item \textbf{CPU}: \texttt{--cpus="1.0"} e \texttt{--cpuset-cpus="0"};
+    \item \textbf{Memória}: \texttt{--memory="1g"} e \texttt{--memory-swap="1g"};
+    \item \textbf{Sistema de arquivos}: \texttt{--read-only} com \texttt{--tmpfs /tmp};
+    \item \textbf{Persistência de métricas}: volume em \texttt{/data} com \texttt{METRICS\_PATH=/data/webvitals.ndjson}.
+\end{itemize}
+
+\noindent
+A aplicação \acrshort{ssr} (Next.js) foi empacotada em modo \textit{standalone}. A aplicação \acrshort{csr} (React + Vite) foi servida por um processo \texttt{Node.js} simples que também expõe o endpoint de métricas. Os serviços públicos locais utilizados nos testes foram:
+\begin{itemize}
+    \item \textbf{SSR/Next.js}: \texttt{http://localhost:3001}
+    \item \textbf{CSR/React}: \texttt{http://localhost:3002}
 \end{itemize}
 
 \subsection{Execução dos Testes}
 
-A execução dos testes foi realizada acessando os \textit{endpoints} públicos das aplicações diretamente via navegador, utilizando uma conexão doméstica de 15 Mbps, em diferentes horários do dia. Essa abordagem permitiu simular cenários reais de uso, possibilitando a obtenção de dados sobre desempenho, tempo de resposta e estabilidade das aplicações em ambiente próximo ao de produção.
+A execução foi conduzida da seguinte forma:
+\begin{enumerate}
+    \item \textbf{Aquecimento}: duas visitas iniciais à mesma rota em cada aplicação, para estabilização de caches e recursos;
+    \item \textbf{Coleta principal (Web Vitals)}: navegação real em janela anônima, registrando TTFB, FCP, LCP, CLS e INP por meio do endpoint interno e persistindo em arquivo NDJSON;
+    \item \textbf{Coleta auxiliar (Lighthouse)}: auditorias repetidas em modo desktop, com parâmetros de \textit{throttling} consistentes entre cenários, para fornecer referência de \textit{laboratório};
+    \item \textbf{Observabilidade do contêiner}: monitoramento pontual com \texttt{docker stats} para CPU e memória durante as execuções.
+\end{enumerate}
 
-Para cada versão (\acrshort{csr} e \acrshort{ssr}), os testes foram repetidos \textbf{cinco vezes} por métrica, com o objetivo de reduzir variações nos resultados e garantir maior confiabilidade estatística. 
+\noindent
+Para reduzir variabilidade, cada teste foi repetido \textbf{no mínimo cinco vezes} por cenário. A quantidade total de repetições e o método de agregação (mediana/p50 e p95) são detalhados em seção específica de resultados.
 
 \subsection{Registro e Organização dos Dados}
 
-Todos os dados coletados foram registrados em planilhas estruturadas, organizadas por data, horário, métrica e tipo de abordagem. As informações foram categorizadas para facilitar a posterior análise comparativa.
+Os dados coletados pela instrumentação (\acrshort{rum}) foram armazenados em arquivos \textbf{NDJSON} separados por abordagem, contendo os campos de identificação da métrica, valor e carimbo temporal. As auditorias do Lighthouse foram salvas em arquivos JSON/HTML para futura referência. Em seguida, os dados foram consolidados em planilhas, organizados por data, métrica e abordagem (CSR/SSR), para posterior análise comparativa.
 
 \subsection{Método de Análise}
 
-Os valores obtidos foram analisados por meio do \textbf{cálculo de médias}, \textbf{desvios padrão} e \textbf{comparações diretas} entre \acrshort{csr} e \acrshort{ssr}. As principais conclusões foram representadas graficamente e sintetizadas em tabelas, conforme apresentado na Seção de Resultados e Discussões.
-
-\section{Síntese e Discussão}
-\label{sec:sintese-e-discussao}
-
-De maneira geral, será feita uma análise comparativa entre as abordagens \english{\acrshort{csr}} e \english{\acrshort{ssr}}, com base nas informações que serão obtidas ao longo da implementação descrita no Capítulo \ref{cap:estudo_caso}. Essa análise terá como foco os aspectos técnicos e funcionais relacionados ao desempenho, tempo de carregamento, interatividade, experiência do usuário e compatibilidade com mecanismos de busca.
-
-A discussão será conduzida de forma imparcial, considerando os dados coletados por meio de ferramentas especializadas, como Google Lighthouse, PageSpeed Insights e WebPageTest, bem como possíveis observações manuais obtidas em testes de usabilidade. A intenção será compreender como cada abordagem impacta diferentes requisitos de projeto e quais implicações essas escolhas podem trazer no contexto do desenvolvimento de aplicações web.
-
-Além da comparação direta entre {\acrshort{csr}} e {\acrshort{ssr}}, poderá ser explorada, conforme a relevância no decorrer da análise, a viabilidade de estratégias híbridas, como o uso de \english{\acrshort{ssg}} e \english{\acrshort{isr}}, no sentido de identificar soluções que conciliem desempenho, escalabilidade e experiência do usuário.
-
-Essa etapa terá caráter investigativo e descritivo, sem antecipar conclusões, e servirá como base para reflexões futuras e para a elaboração de recomendações alinhadas aos objetivos definidos neste trabalho.
+Os valores foram analisados por meio de \textbf{estatísticas descritivas}, com foco em \textbf{mediana (p50)} e \textbf{p95}, além de médias e desvios padrão quando apropriado. As comparações entre \acrshort{csr} e \acrshort{ssr} foram conduzidas métrica a métrica (TTFB, FCP, LCP, CLS e INP), considerando os \textit{trade-offs} de cada abordagem. Gráficos e tabelas de síntese são apresentados na seção de Resultados e Discussões.
