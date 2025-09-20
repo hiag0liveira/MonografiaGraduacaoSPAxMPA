@@ -701,5 +701,61 @@ De forma análoga, a coleta do contêiner CSR grava em \\ \texttt{metrics-host/d
 
 
 
+\subsection{Uso complementar do Lighthouse (Chrome DevTools)}
+\label{ssec:lighthouse}
 
+O \textit{Lighthouse} foi utilizado como apoio diagnóstico em ambiente laboratorial, para identificar gargalos e oportunidades que expliquem diferenças observadas nas medições de campo.
 
+\subsubsection{Objetivo e escopo}
+O foco do uso do Lighthouse foi:
+\begin{itemize}
+  \item \textbf{Interatividade em laboratório}: leitura do \textbf{TBT} (\textit{Total Blocking Time}) como indicador de trabalho bloqueante no \textit{main thread};
+  \item \textbf{Oportunidades/Auditorias}: insumos para orientar correções de build e de carregamento (JS/CSS, imagens, dicas de rede);
+  \item \textbf{Acessibilidade e SEO}: verificação rápida de barreiras e sinalização para mecanismos de busca.
+\end{itemize}
+
+\subsubsection{Procedimento no Chrome DevTools}
+Os testes foram executados no Google Chrome, em \textit{DevTools} \textrightarrow{} \textbf{Lighthouse}, no modo \textit{Navigation}, com \textbf{throttling padrão} de rede/CPU, em \textit{Mobile} e, quando pertinente, \textit{Desktop}. Para cada cenário (página inicial, resultados de busca, detalhes da notícia) foram feitas \textbf{3 execuções}, registrando-se a \textbf{mediana do TBT} e as \textbf{principais oportunidades} reportadas. Os relatórios foram exportados em \textbf{JSON} e \textbf{HTML}.
+
+\subsubsection{Diagnóstico de performance}
+As leituras priorizadas foram:
+\begin{itemize}
+  \item \textbf{TBT} (\textit{numericValue} e evidências de \textit{long tasks});
+  \item \textbf{Oportunidades e auditorias} diretamente relacionadas a custo de carregamento e execução:
+  \begin{itemize}
+    \item \textit{render-blocking-resources};
+    \item \textit{unused-javascript} e \textit{unused-css-rules};
+    \item \textit{total-byte-weight} e \textit{legacy-javascript};
+    \item \textit{mainthread-work-breakdown} e \textit{diagnostics};
+    \item \textit{modern-image-formats}, \textit{uses-text-compression}, \textit{preload}, \textit{preconnect}.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{Diagnóstico de acessibilidade}
+Foram verificados itens que impactam navegação por teclado, leitores de tela e clareza de interface:
+\begin{itemize}
+  \item \textbf{Semântica e estrutura}: hierarquia de \textit{headings} e \textit{landmarks} (banner, main, nav);
+  \item \textbf{Foco e tabulação}: ordem lógica, foco visível, ausência de \textit{focus traps};
+  \item \textbf{Rótulos e nomes acessíveis}: uso adequado de \texttt{label} e atributos \texttt{aria-*};
+  \item \textbf{Contraste e legibilidade}: verificação de contraste de cor e tamanhos de fonte;
+  \item \textbf{Alternativos de mídia}: textos alternativos em imagens e propósito claro de links/botões.
+\end{itemize}
+Dos relatórios JSON, foram lidos os \texttt{audits} mais acionáveis, como
+\texttt{color-contrast}, \texttt{image-alt}, \texttt{label}, \texttt{link-name},
+\texttt{heading-order}, \texttt{landmark-one-main}, \texttt{focus-traps} e \texttt{logical-tab-order}.
+
+\subsubsection{Diagnóstico de SEO}
+A verificação concentrou-se em sinalização técnica e rastreabilidade:
+\begin{itemize}
+  \item \textbf{Sinalização}: título e meta description presentes; \texttt{rel=canonical} consistente;
+  \item \textbf{Rastreabilidade}: links rastreáveis, \texttt{robots.txt}/meta robots válidos;
+  \item \textbf{Internacionalização e dados estruturados}: \texttt{hreflang} (quando aplicável) e \textit{structured data} sem erros;
+  \item \textbf{Compatibilidade móvel}: viewport configurado, fontes legíveis e \textit{tap targets} adequados.
+\end{itemize}
+Foram consultados, entre outros, os \texttt{audits}: \texttt{document-title}, \texttt{meta-description}, \texttt{canonical}, \texttt{is-crawlable}, \texttt{robots-txt}, \texttt{hreflang}, \texttt{structured-data}, \texttt{viewport}, \texttt{font-size} e \texttt{tap-targets}.
+
+\subsubsection{Exportação e integração com os artefatos do estudo}
+Os relatórios foram versionados com convenção por cenário (\textit{ex.}, \texttt{lighthouse\_csr\_home\_mobile\_run\_1.json}). Do JSON, foram consumidos apenas campos necessários para explicar diferenças observadas nos resultados de campo e para orientar correções de implementação.
+
+\subsubsection{Limitações}
+Resultados do Lighthouse são \textbf{laboratoriais}, dependentes de emulação de CPU/rede e do ambiente local do avaliador. Por isso, são utilizados como \textbf{indícios de causa} e para priorização de melhorias, e não como substitutos das medições coletadas em execução real.
