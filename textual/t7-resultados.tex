@@ -183,6 +183,9 @@ Esta seção compara, de forma integrada, experiência do usuário (\emph{Web Vi
 (ii) \textbf{Sinais de SEO.} Escores \textasciitilde83\% na home (Lighthouse) indicam metadados/sinalizações a completar (p.\,ex., \emph{meta description}, \texttt{rel=canonical}, \texttt{robots}, \texttt{hreflang} quando aplicável).  
 (iii) \textbf{Dependência de JS no cliente.} Em dispositivos muito modestos, o custo de montar a aplicação pode afetar \textit{FCP}/\textit{LCP} se o \emph{bundle} não for estritamente otimizado.
 
+\subsubsection{Observação sobre a Ausência do FID em CSR.} 
+No \acrshort{csr}, o \acrfull{fid} não é capturado da maneira tradicional, pois a página precisa ser 'hidratada' pelo JavaScript antes de se tornar completamente interativa. Esse processo de hidratação impede que o \acrshort{fid} meça corretamente a primeira interação do usuário, tornando-o menos relevante em ambientes \acrshort{csr}. Por isso, o \acrfull{inp} é utilizado como métrica alternativa, já que ele captura o tempo de resposta entre a interação do usuário e a atualização visual da página, oferecendo uma avaliação mais precisa da interatividade contínua, o que é especialmente importante em páginas altamente dinâmicas como as renderizadas no cliente.
+
 \subsection{Discussão}
 \label{subsec:discussao-comparativa}
 \textbf{(i) Recursos do servidor.} O \acrshort{ssr} consumiu levemente mais \textbf{CPU/memória} (ainda baixos) do que o \acrshort{csr}, resultado esperado do processamento por requisição. O \acrshort{csr}, por sua vez, opera praticamente como \emph{static hosting}, com custo mínimo no host. \\
