@@ -162,23 +162,23 @@ Esta seção compara, de forma integrada, experiência do usuário (\emph{Web Vi
 \end{tabular}
 \end{table}
 
-\paragraph{Pontos fortes do SSR.}
+\subsubsection{Pontos fortes do SSR.}
 (i) \textbf{Tempo até primeira resposta/primeiro conteúdo.} O HTML pré-renderizado reduz o tempo de exibição inicial, o que se refletiu em \textit{TTFB}/\textit{FCP} consistentes e \textbf{TBT} residual nas auditorias.  
 (ii) \textbf{Descoberta e rastreabilidade.} \textbf{SEO} com 100\% nas rotas testadas, reforçando a adequação do SSR para páginas públicas e conteúdo editorial.  
 (iii) \textbf{Acessibilidade.} Escores elevados (95--100\%) indicam que a estrutura entregue pelo servidor chega semanticamente “pronta” ao cliente.  
 (iv) \textbf{Previsibilidade de performance.} Em cenários com rede/CPU do cliente mais limitados, a renderização no servidor reduz o risco de longas tarefas no \emph{main thread} do navegador.
 
-\paragraph{Pontos fracos do SSR.}
+\subsubsection{Pontos fracos do SSR.}
 (i) \textbf{Custo de hidratação.} Após o HTML inicial, a ativação dos componentes pode degradar \textbf{LCP}/\textbf{FCP} em páginas com imagens \emph{hero} e muito JS.  
 (ii) \textbf{Custo no servidor (ainda que baixo).} O processamento por requisição eleva discretamente \textbf{CPU}/\textbf{memória} no host frente ao CSR.  
 (iii) \textbf{Complexidade de build/deploy.} Estratégias como \emph{streaming}, \emph{partial/targeted hydration} e \emph{Server Components} elevam a complexidade de arquitetura.
 
-\paragraph{Pontos fortes do CSR.}
+\subsubsection{Pontos fortes do CSR.}
 (i) \textbf{Interatividade contínua.} Navegação sem recarregar página, com \textbf{TBT/INP} baixos nas auditorias e nos dados de campo.  
 (ii) \textbf{Custo operacional.} \textbf{CPU/memória} do servidor permanecem muito baixos: entrega estática + execução no cliente.  
 (iii) \textbf{Escalabilidade horizontal simples.} Conteúdo estático facilita cache/CDN, reduzindo pressão no backend.
 
-\paragraph{Pontos fracos do CSR.}
+\subsubsection{Pontos fracos do CSR.}
 (i) \textbf{Estabilidade visual.} \textbf{CLS} apresentou ocorrências \textit{poor}; o risco de \emph{layout shifts} aumenta quando não há reserva de espaço para mídia e quando há inserções acima da dobra na hidratação.  
 (ii) \textbf{Sinais de SEO.} Escores \textasciitilde83\% na home (Lighthouse) indicam metadados/sinalizações a completar (p.\,ex., \emph{meta description}, \texttt{rel=canonical}, \texttt{robots}, \texttt{hreflang} quando aplicável).  
 (iii) \textbf{Dependência de JS no cliente.} Em dispositivos muito modestos, o custo de montar a aplicação pode afetar \textit{FCP}/\textit{LCP} se o \emph{bundle} não for estritamente otimizado.
