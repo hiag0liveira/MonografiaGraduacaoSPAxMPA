@@ -1,6 +1,9 @@
 \chapter{Metodologia}
 \label{cap:metodologia}
 
+Este capítulo detalha a abordagem metodológica adotada para a condução do trabalho. A metodologia foi estruturada em quatro etapas principais: o levantamento teórico para fundamentar a pesquisa, o mapeamento sistemático da literatura para identificar o estado da arte, o desenvolvimento de um estudo de caso prático para a coleta de dados empíricos e, por fim, os procedimentos de teste e análise utilizados para comparar as arquiteturas \acrshort{csr} e \acrshort{ssr}.
+
+
 \section{Levantamento Teórico}
 \label{sec:levantamento-teorico}
 
@@ -12,11 +15,9 @@ Em seguida, foram estudadas em detalhes as abordagens \acrshort{csr} e \acrshort
 
 Por outro lado, a renderização no lado do servidor (\acrshort{ssr}) foi abordada sob a ótica de desempenho inicial otimizado e maior compatibilidade com \acrshort{seo}, pois o conteúdo é entregue já renderizado ao navegador. Essa abordagem é comumente utilizada em aplicações do tipo \english{\acrfull{mpa}}, que possuem múltiplas páginas distintas e se beneficiam da pré-renderização para melhorar a performance inicial, a acessibilidade e a visibilidade em mecanismos de busca. Como contraponto, o SSR demanda maior processamento no servidor e pode aumentar a complexidade da infraestrutura.
 
-Além dessas duas abordagens principais, o estudo também incluiu métodos híbridos como o \english{\acrfull{ssg}}, \english{\acrfull{isr}} e {\acrfull{dsg}}, que visam equilibrar performance, escalabilidade e atualizações de conteúdo dinâmico, especialmente em aplicações que exigem alta eficiência e atualizações frequentes.
+O levantamento teórico foi aprofundado com uma análise dos principais \textit{frameworks} e bibliotecas que materializam as arquiteturas \acrshort{csr} e \acrshort{ssr}. Foi dada ênfase especial ao \textit{React}, como principal expoente da renderização no lado do cliente, e ao \textit{Next.js}, \textit{framework} que o estende para possibilitar uma renderização robusta no lado do servidor. A discussão foi enriquecida com o estudo do ecossistema de outras ferramentas, como \textit{Vue.js} e \textit{Angular}, para consolidar a compreensão sobre os impactos de cada abordagem na experiência do usuário (\acrshort{ux}), no \acrshort{seo}, na acessibilidade e na interatividade.
 
-O levantamento teórico foi complementado por uma análise dos principais \textit{frameworks} e bibliotecas utilizados no desenvolvimento web atual, como \textit{React}, \textit{Vue.js}, \textit{Angular}, \textit{Next.js}, \textit{Nuxt} e \textit{SvelteKit}, e por uma discussão sobre os impactos de cada abordagem na experiência do usuário (\acrshort{ux}), incluindo aspectos como \acrshort{seo}, acessibilidade, tempo de carregamento e interatividade.
-
-Esse base teórica serviu para as próximas etapas da pesquisa, em especial o mapeamento sistemático da literatura e a condução do estudo de caso prático.
+Essa base teórica consolidada foi, portanto, essencial para embasar as escolhas metodológicas, delimitar o escopo do mapeamento da literatura e, principalmente, para orientar o desenvolvimento e a avaliação do estudo de caso prático detalhado a seguir.
 
 \section{Mapeamento Sistemático da Literatura}
 \label{sec:mapemento-sistematico-da-literatura}
@@ -35,15 +36,12 @@ Como resultado, foi possível consolidar uma visão abrangente sobre os desafios
 \section{Estudo de Caso Prático}
 \label{sec:estudo-de-caso-pratico}
 
-O escopo da aplicação desenvolvida visa avaliar os impactos das abordagens de renderização \english{\acrshort{csr}} e \english{\acrshort{ssr}} no desenvolvimento de aplicações web. Para isso, considera-se o contexto de uma empresa fictícia cujo time de gestores precisa decidir qual modelo de renderização adotar para a criação de sua nova aplicação web. Desenvolvem-se duas versões de uma mesma aplicação: uma utilizando \acrshort{csr} e outra baseada em \acrshort{ssr}. Ambas as implementações possuem as mesmas funcionalidades, aparência visual e estrutura de dados, de modo a permitir uma análise equitativa quanto ao desempenho, à experiência do usuário e à otimização para mecanismos de busca.
+Para materializar a análise comparativa proposta, esta pesquisa se baseia em um estudo de caso prático: o desenvolvimento de uma aplicação web de notícias sobre tecnologia. Este contexto foi escolhido por ser altamente representativo de um vasto segmento de aplicações focadas em conteúdo, onde a velocidade de carregamento inicial e a otimização para mecanismos de busca (\acrshort{seo}) são fatores críticos para a retenção de usuários e o sucesso do produto.
 
-A aplicação simula um catálogo de produtos, com navegação por páginas, carregamento de dados via \textit{API} e exibição de informações detalhadas. Esse modelo é escolhido por representar um cenário comum na web moderna, abrangendo interações usuais como carregamento dinâmico de conteúdo, roteamento entre páginas e exibição de listas e detalhes.
+Com o objetivo de garantir uma comparação justa e controlada, foram desenvolvidas duas versões funcionalmente idênticas da plataforma. A primeira utiliza \acrfull{csr}, implementada com a biblioteca \textit{React} (\acrshort{spa}), enquanto a segunda adota \acrfull{ssr}, com o \textit{framework Next.js} (\acrshort{mpa}). Ambas as versões consomem dados da mesma \textit{API} externa de notícias e apresentam a mesma interface e funcionalidades — como listagem de artigos, busca e visualização de detalhes —, assegurando que as diferenças de desempenho observadas possam ser diretamente atribuídas à arquitetura de renderização empregada.
 
-Cada versão é implementada conforme os princípios da respectiva abordagem de renderização: a versão \acrshort{csr} tem a interface renderizada predominantemente no navegador do usuário, enquanto a versão \acrshort{ssr} conta com o conteúdo renderizado no servidor e enviado ao cliente já montado.
+Cada versão foi implementada seguindo os princípios fundamentais da sua respectiva abordagem. Na aplicação \acrshort{csr}, a renderização ocorre predominantemente no navegador do usuário, ao passo que na versão \acrshort{ssr}, o conteúdo HTML é pré-renderizado no servidor e enviado pronto ao cliente. Ambas as implementações foram submetidas a um protocolo de testes rigoroso para a coleta de dados, conforme detalhado na seção seguinte, permitindo uma análise equitativa e baseada em evidências.
 
-Durante o desenvolvimento, seguem-se boas práticas de acessibilidade, responsividade e otimização para \acrshort{seo}, garantindo que ambas as versões possam ser avaliadas com base em critérios equivalentes. As métricas analisadas incluem tempo de carregamento, tempo até a interatividade, consumo de recursos, desempenho percebido, qualidade do código e compatibilidade com ferramentas de análise de \acrshort{seo}.
-
-A coleta de dados ocorre por meio de ferramentas como Google Lighthouse, PageSpeed Insights e WebPageTest, além de testes manuais com usuários, a fim de observar qualitativamente a experiência de uso. Esses dados fundamentam a análise comparativa e a discussão dos resultados, que são apresentados nas seções seguintes.
 
 \section{Coleta de Dados e Testes}
 \label{sec:coleta-de-dados-e-testes}
@@ -52,15 +50,20 @@ Esta seção descreve o procedimento de coleta e análise dos dados obtidos a pa
 
 \subsection{Definição das Métricas}
 
-As métricas utilizadas para a avaliação foram selecionadas com base nas recomendações do Google e nos indicadores mais relevantes para mensurar a performance e a experiência do usuário em aplicações web modernas. São elas:
+A medição de desempenho em aplicações web modernas evoluiu de uma simples análise do tempo de carregamento total para uma avaliação multifacetada da experiência do usuário (UX). Para padronizar essa medição, o Google introduziu a iniciativa Web Vitals, um conjunto de métricas que quantificam aspectos cruciais da jornada do usuário. O subconjunto mais importante, conhecido como Core Web Vitals, foca em três pilares da experiência: o carregamento (medido pelo \acrshort{lcp}), a interatividade (medida pelo \acrshort{inp}) e a estabilidade visual (medida pelo \acrshort{cls}).
+
+Adotando essa metodologia como padrão de mercado, este trabalho selecionou um conjunto de indicadores para realizar uma avaliação completa, abrangendo não apenas a percepção do usuário, mas também os custos computacionais no servidor. Para garantir uma análise estruturada, as métricas foram categorizadas da seguinte forma:
 
 \begin{itemize}
-    \item \textbf{Time to First Byte (TTFB)}: Tempo até o primeiro byte da resposta ser recebido;
-    \item \textbf{First Contentful Paint (FCP)}: Tempo até a exibição do primeiro conteúdo visível;
-    \item \textbf{Largest Contentful Paint (LCP)}: Tempo até o carregamento do maior bloco de conteúdo;
-    \item \textbf{Cumulative Layout Shift (CLS)}: Medida de estabilidade visual da interface;
-    \item \textbf{Interaction to Next Paint (INP)}: Latência de interação (Core Web Vital atual para responsividade);
+\item \textbf{Web Vitals (Núcleo):} Representam a base da análise de experiência do usuário. Foram coletadas as métricas \acrshort{ttfb}, \acrshort{fcp}, \acrshort{lcp}, \acrshort{cls} e \acrshort{inp}. Esses dados foram registrados diretamente no cliente durante a navegação real e persistidos em formato NDJSON para análise posterior.
+
+\item \textbf{Auditoria de Laboratório (Apoio):} Utilizando o Lighthouse, foram realizadas auditorias complementares para analisar o \textit{Total Blocking Time} (\acrshort{tbt}) e identificar oportunidades de otimização. As auditorias também validaram aspectos de Acessibilidade e \acrshort{seo} de forma automatizada.
+
+\item \textbf{Recursos do Servidor (Custo):} Para contextualizar o custo de execução de cada abordagem, o consumo de recursos dos contêineres foi monitorado com o comando \texttt{docker stats}, registrando o uso de CPU e memória durante os testes.
 \end{itemize}
+
+
+
 
 \noindent
 Adicionalmente, foram observados: \textbf{número de requisições HTTP} e \textbf{uso de cache} (no cliente), bem como \textbf{consumo de recursos} do contêiner (CPU e memória) durante os testes. O \textbf{Time to Interactive (TTI)} foi empregado apenas como métrica de \textit{laboratório} via Lighthouse, não integrando o conjunto atual de Core Web Vitals. O tratamento estatístico detalhado das métricas será apresentado posteriormente.
