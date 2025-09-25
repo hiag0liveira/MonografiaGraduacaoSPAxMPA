@@ -18,23 +18,21 @@ Contudo, essas técnicas são frequentemente empregadas de maneira inadequada em
 
 Paralelamente a esses casos, identifica-se uma carência de estudos de caso reais que analisem de forma aprofundada o impacto da adoção de \acrshort{csr} e \acrshort{ssr}, principalmente no contexto nacional. Enquanto algumas publicações se concentram em apenas uma dessas abordagens, outras fornecem exemplos excessivamente simplificados, limitando a compreensão dos desafios técnicos e de negócios ao combinar essas estratégias em sistemas complexos.
 
-Diante desse cenário, o presente trabalho busca contribuir na análise detalhada sobre a implementação de \acrshort{csr} e \acrshort{ssr}, avaliando de forma introdutória seus efeitos no desempenho, na experiência do usuário, otimização do \acrshort{seo} e na escalabilidade de aplicações web modernas. Por meio de um estudo de caso abrangente, espera-se fornecer subsídios que possam orientar equipes de desenvolvimento e gestores na seleção e aplicação dessas técnicas, auxiliando na construção de sistemas mais robustos e eficientes, em sintonia com as demandas atuais do mercado.
-
+Diante desse cenário, o presente trabalho se propõe a preencher essa lacuna por meio de uma análise detalhada e prática. Para isso, foi desenvolvido um estudo de caso focado em uma aplicação de notícias, implementada em duas versões funcionalmente idênticas: uma com \acrshort{csr} e outra com \acrshort{ssr}. Ao comparar diretamente os efeitos de cada abordagem no desempenho, na experiência do usuário, na otimização para \acrshort{seo} e na escalabilidade, espera-se fornecer subsídios concretos que possam orientar equipes de desenvolvimento e gestores na seleção da arquitetura de renderização mais adequada, auxiliando na construção de sistemas mais robustos e eficientes.
 \section{Objetivos}
 
 \subsection{Objetivo Geral}
 
-O objetivo geral deste trabalho de conclusão de curso é apresentar uma análise comparativa detalhada sobre a implementação de casos com \acrfull{csr}, geralmente aplicado em arquiteturas do tipo \acrfull{spa}, e \acrfull{ssr}, tradicionalmente associado a \acrfull{mpa}. A análise busca avaliar os efeitos de cada abordagem no desempenho, na experiência do usuário, segurança, otimização do \acrfull{seo} e na escalabilidade de aplicações web modernas.
+O objetivo geral deste trabalho de conclusão de curso é realizar uma análise comparativa detalhada entre \acrfull{csr}, aplicado em uma arquitetura \acrfull{spa}, e \acrfull{ssr}, associado a uma \acrfull{mpa}, materializada através do desenvolvimento e teste de um estudo de caso prático: uma aplicação de notícias implementada em ambas as arquiteturas. A análise busca avaliar, com base em dados empíricos, os efeitos de cada abordagem no desempenho, na experiência do usuário, na otimização do \acrfull{seo} e na escalabilidade de aplicações web modernas.
 
 \subsection{Objetivos Específicos}
 \begin{itemize}
-\item Apresentar estratégias de escolhas entre \acrshort{csr}, geralmente aplicado em \acrshort{spa}, e \acrshort{ssr}, tradicionalmente associado a \acrshort{mpa}, analisando métricas de desempenho, tempo de resposta, experiência do usuário e carga no servidor.
+\item Realizar uma análise comparativa do desempenho das abordagens \acrshort{csr} e \acrshort{ssr}, avaliando métricas focadas na experiência do usuário, como tempo de carregamento e interatividade, e o impacto no consumo de recursos do servidor (CPU e memória).
 
-\item Identificar as principais limitações e desafios enfrentados na escolha entre \acrshort{csr} e \acrshort{ssr}, considerando otimização de \acrshort{seo}, escalabilidade e requisitos de infraestrutura.
+\item Identificar as principais limitações e desafios de cada arquitetura, especialmente no que se refere à otimização para mecanismos de busca (\acrshort{seo}) e à escalabilidade da aplicação.
 
-\item Apresentar recomendações práticas para desenvolvedores e gestores, auxiliando na tomada de decisão sobre qual abordagem utilizar com base nos objetivos do projeto e nas demandas do mercado.
+\item Apresentar recomendações práticas, baseadas nos dados coletados, para auxiliar equipes de desenvolvimento a decidir qual abordagem de renderização se alinha melhor aos requisitos de um projeto web.
 \end{itemize}
-
 % \section{Metodologia}
 % Pode-se observar na \autoref{fig:metodo_recurso} as etapas de execução desta pesquisa. Inicialmente, o escopo é definido e o primeiro capítulo é elaborado, onde são apresentados o contexto do estudo, as justificativas e os objetivos a serem atingidos. Em seguida, constrói-se a fundamentação teórica, buscando fornecer uma base sólida para o desenvolvimento do estudo de caso por meio da discussão dos principais conceitos e tecnologias envolvidos.
 
