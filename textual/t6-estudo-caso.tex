@@ -1,14 +1,18 @@
-\chapter{Estudo de Caso }
-% : Requisitos, Organização, Métodos, Design, Implementação e Testes
-\label{cap:estudo_caso}
-Este capítulo detalha a construção do estudo de caso prático, que se baseia no cenário de uma empresa fictícia e no desenvolvimento de sua plataforma de notícias sobre tecnologia, a "WallTech". Serão apresentados o contexto do projeto, os requisitos funcionais, a organização do processo de desenvolvimento, os métodos de design, a implementação das arquiteturas \acrshort{csr} e \acrshort{ssr}, e os testes comparativos realizados.
+\chapter{Estudo de Caso: Desenvolvimento da Plataforma WallTech}
+\label{cap:estudo_caso_dev}
 
+Este capítulo detalha a construção do estudo de caso prático, que se baseia no cenário de uma empresa fictícia e no desenvolvimento de sua plataforma de notícias sobre tecnologia, a "WallTech". Serão apresentados o contexto do projeto, os requisitos funcionais, a organização do processo de desenvolvimento, os métodos de design, a implementação das arquiteturas \acrshort{csr} e \acrshort{ssr}, e os testes comparativos realizados.
 \section{Contexto}
 \label{section:contexto}
 
 Este estudo de caso parte do cenário de uma empresa fictícia do setor de notícias sobre tecnologia, cujo objetivo é fornecer conteúdos atualizados e relevantes sobre inovações e tendências do mercado. O público-alvo inclui entusiastas de tecnologia, profissionais da área e usuários que desejam acompanhar as novidades do setor em diferentes dispositivos, graças a uma interface responsiva.
 
 A Figura \ref{fig:wireframe-walltech} apresenta o \textit{wireframe} da plataforma \textbf{WallTech}, gerado com o auxílio da ferramenta \textbf{V0.dev}, que utiliza inteligência artificial para criar protótipos de interfaces a partir de descrições textuais. Esse modelo visual orienta a organização dos elementos na interface antes da implementação das versões em \acrshort{csr} e \acrshort{ssr}.
+
+\textbf{Para analisar o impacto de diferentes abordagens de renderização web, foram desenvolvidos dois protótipos funcionalmente idênticos da plataforma WallTech. O primeiro segue a abordagem de \acrfull{csr}, estruturado como uma \acrfull{spa} utilizando a biblioteca \textit{React}, enquanto o segundo utiliza \acrfull{ssr}, implementado como uma \acrfull{mpa} com o framework \textit{Next.js}. As funcionalidades essenciais da aplicação  como a visualização de notícias em destaque, o sistema de busca e a filtragem por país  foram diretamente derivadas dos requisitos levantados para o projeto, com o intuito de garantir uma experiência de usuário rica, intuitiva e performática.}
+
+A Figura \ref{fig:caso-uso-walltech} apresenta o diagrama de caso de uso da plataforma, destacando as principais funcionalidades acessíveis a usuários anônimos, como visualizar notícias recentes, acessar detalhes e realizar buscas por palavras-chave.
+
 
 \begin{figure}[H]
   \centering
@@ -247,7 +251,7 @@ Segundo \cite{osmani2025}, a escolha entre renderização no cliente ou no servi
 
 Para o estudo comparativo, a plataforma foi desenvolvida em duas arquiteturas distintas de renderização e navegação: 
 \acrfull{ssr} com \acrfull{mpa} e \acrfull{csr} com \acrfull{spa}.  
-Cada abordagem foi implementada com tecnologias adequadas ao seu paradigma — Next.js para \acrshort{ssr}/\acrshort{mpa} e React para \acrshort{csr}/\acrshort{spa} — permitindo observar diferenças de desempenho, interatividade e otimização para mecanismos de busca (\acrshort{seo}).
+Cada abordagem foi implementada com tecnologias adequadas ao seu paradigma Next.js para \acrshort{ssr}/\acrshort{mpa} e React para \acrshort{csr}/\acrshort{spa}  permitindo observar diferenças de desempenho, interatividade e otimização para mecanismos de busca (\acrshort{seo}).
 
 A seguir, cada abordagem é apresentada com seu fluxo típico de funcionamento, diagrama de componentes (representando a estrutura modular) e diagrama de sequência (detalhando as interações passo a passo).
 
@@ -378,8 +382,21 @@ A \autoref{fig:app-next-ssr} mostra a \textbf{página de detalhes} de uma notíc
 \end{figure}
 
 
-\section{Ambiente de Execução, Instrumentação e Empacotamento}
-\label{sec:ambiente-instrumentacao-empacotamento}
+
+\vspace{1cm}
+Com as duas versões da plataforma WallTech implementadas e funcionais, o alicerce para a análise comparativa foi estabelecido. O capítulo seguinte detalha a metodologia experimental rigorosa empregada para a execução dos testes, a configuração do ambiente controlado e os procedimentos de coleta de dados, garantindo que a comparação entre as abordagens \acrshort{csr} e \acrshort{ssr} seja justa, precisa e reprodutível.
+
+
+
+\chapter{Metodologia Experimental e Coleta de Dados}
+\label{cap:metodologia_experimental}
+
+Após o desenvolvimento das duas versões da plataforma WallTech, este capítulo descreve os procedimentos metodológicos adotados para conduzir a análise de desempenho comparativa. O objetivo aqui é detalhar o ambiente de testes controlado, as ferramentas de instrumentação para coleta de métricas, o processo de empacotamento das aplicações e os protocolos de execução. A adoção de um rigor metodológico é fundamental para assegurar a validade, a confiabilidade e a reprodutibilidade dos dados que serão apresentados e discutidos no capítulo de Resultados.
+
+
+
+\section{Configuração do Ambiente Experimental}
+\label{sec:ambiente-experimental}
 
 Esta seção detalha como as duas versões da plataforma \textbf{WallTech} uma \acrshort{mpa} com \acrshort{ssr} (Next.js) e uma \acrshort{spa} com \acrshort{csr} (React+Vite) foram instrumentadas para coleta de \textit{Web Vitals}, empacotadas em contêineres \textit{Docker} com \textbf{paridade de recursos} e executadas em ambiente \textbf{local controlado} para assegurar reprodutibilidade do estudo.
 
