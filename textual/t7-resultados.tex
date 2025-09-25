@@ -1,27 +1,26 @@
 \chapter{Resultados e Discussões}
 \label{cap:resultados}
 
-Este capítulo apresenta os achados empíricos do estudo, com foco na experiência do usuário medida por \textit{Core Web Vitals} (coleta em campo, no cliente) e, de forma complementar, em diagnósticos laboratoriais do Lighthouse. Como contexto operacional, reporta-se também o consumo de CPU, memória e PIDs dos contêineres durante as execuções. A metodologia, o ambiente controlado e os procedimentos de coleta já foram descritos no Cap.~\ref{cap:estudo_caso}; aqui concentramos a atenção em resultados e implicações.
+Este capítulo apresenta os achados empíricos do estudo, com foco na experiência do usuário medida por \textit{Core Web Vitals} (coleta em campo, no cliente) e, de forma complementar, em diagnósticos laboratoriais do Lighthouse. Como contexto operacional, reporta-se também o consumo de CPU, memória e PIDs dos contêineres durante as execuções. A metodologia, o ambiente controlado e os procedimentos de coleta já foram descritos no Cap.~\ref{cap:estudo_caso_dev}; aqui concentramos a atenção em resultados e implicações.
 
 \section{Resultados}
 Os testes cobriram as duas variantes da WallTech (\acrshort{ssr}/\acrshort{mpa} em Next.js e \acrshort{csr}/\acrshort{spa} em React) nas páginas: inicial, resultados de busca e detalhes da notícia. Para cada cenário, foram realizados 10--15 carregamentos após \textit{warm-up}, e as leituras são analisadas por mediana (p50) e, quando pertinente, p95.
 
 \subsubsection*{Fontes de dados}
 \begin{itemize}
-  \item \textbf{Web Vitals (núcleo)}: \acrshort{ttfb}, \acrshort{fcp}, \acrshort{lcp}, \acrshort{cls}, \acrshort{inp} registrados no cliente e persistidos em NDJSON.
-  \item \textbf{Lighthouse (apoio)}: \textbf{TBT} e principais \textbf{oportunidades/auditorias} de desempenho, além de verificações de \textbf{Acessibilidade} e \textbf{SEO}.
-  \item \textbf{Recursos do servidor}: CPU/memória/PIDs via \texttt{docker stats}, como contexto de custo de execução.
+    \item \textbf{Web Vitals (núcleo)}: \acrshort{ttfb}, \acrshort{fcp}, \acrshort{lcp}, \acrshort{cls}, \acrshort{inp} registrados no cliente e persistidos em NDJSON.
+    \item \textbf{Lighthouse (apoio)}: \textbf{TBT} e principais \textbf{oportunidades/auditorias} de desempenho, além de verificações de \textbf{Acessibilidade} e \textbf{SEO}.
+    \item \textbf{Recursos do servidor}: CPU/memória/PIDs via \texttt{docker stats}, como contexto de custo de execução.
 \end{itemize}
 
 \subsubsection*{Análise e Visualização dos Dados}
 Os dados coletados, incluindo as métricas de \textit{Web Vitals} e as medições de recursos do servidor, foram exportados e analisados com o auxílio do Power BI. A ferramenta foi utilizada para gerar gráficos e visualizações interativas que facilitam a interpretação dos resultados e a comparação entre os diferentes cenários (\acrshort{ssr} e \acrshort{csr}). O uso do Power BI permitiu a criação de dashboards dinâmicos que ilustram claramente as tendências das métricas ao longo das execuções e facilitam a análise de variações nas diferentes páginas testadas.
 
-
 \subsubsection*{Metas de referência}
 Adotaram-se os seguintes alvos para interpretação:
 \begin{itemize}
-  \item \textbf{LCP} $\leq 2{,}5$\,s;\quad \textbf{CLS} $\leq 0{,}10$;\quad \textbf{INP} $\leq 200$\,ms;\quad \textbf{TTFB} $\leq 800$\,ms.
-  \item \textbf{TBT (Lighthouse)} $<200$\,ms;\quad \textbf{Acessibilidade (LH)} $\geq 90$;\quad \textbf{SEO (LH)} $\geq 90$.
+    \item \textbf{LCP} $\leq 2{,}5$\,s;\quad \textbf{CLS} $\leq 0{,}10$;\quad \textbf{INP} $\leq 200$\,ms;\quad \textbf{TTFB} $\leq 800$\,ms.
+    \item \textbf{TBT (Lighthouse)} $<200$\,ms;\quad \textbf{Acessibilidade (LH)} $\geq 90$;\quad \textbf{SEO (LH)} $\geq 90$.
 \end{itemize}
 
 \subsection{Resultados para SSR}
@@ -31,30 +30,30 @@ Adotaram-se os seguintes alvos para interpretação:
 Ao longo dos cenários, o contêiner \textit{Next.js} manteve \textbf{CPU} baixa e estável (aprox.\ 8--13\%), sem picos relevantes; a queda ao final da série coincide com o término do experimento (\autoref{fig:ssr-cpu}). A \textbf{memória} permaneceu em patamar quase constante, com variação estreita e redução apenas no encerramento das execuções (\autoref{fig:ssr-mem}). Esse comportamento é compatível com o processamento por requisição do SSR e não sinaliza saturação.
 
 \begin{figure}[H]
-  \centering
-  \caption{Média de uso de CPU por tempo (\acrshort{ssr})}
-  \includegraphics[width=0.9\textwidth]{media/uso_cpu_ssr.jpeg}
-  \legend{Fonte: os autores.}
-  \label{fig:ssr-cpu}
+    \centering
+    \caption{Média de uso de CPU por tempo (\acrshort{ssr})}
+    \includegraphics[width=0.9\textwidth]{media/uso_cpu_ssr.jpeg}
+    \legend{Fonte: os autores.}
+    \label{fig:ssr-cpu}
 \end{figure}
 
 \begin{figure}[H]
-  \centering
-  \caption{Média de uso de memória por tempo (\acrshort{ssr})}
-  \includegraphics[width=0.9\textwidth]{media/uso_memoria_ssr.jpeg}
-  \legend{Fonte: os autores.}
-  \label{fig:ssr-mem}
+    \centering
+    \caption{Média de uso de memória por tempo (\acrshort{ssr})}
+    \includegraphics[width=0.9\textwidth]{media/uso_memoria_ssr.jpeg}
+    \legend{Fonte: os autores.}
+    \label{fig:ssr-mem}
 \end{figure}
 
 \subsubsection*{Web Vitals (cliente)}
 Conforme a \autoref{fig:ssr-webvitals}, as leituras de campo foram, em sua maioria, classificadas como \textit{good}. Os poucos casos de \textit{needs-improvement} concentraram-se em \acrshort{lcp} e \acrshort{inp}, e houve uma fração reduzida de \acrshort{fcp} em \textit{poor} efeito compatível com custos de \textit{hydration} e com elementos visuais de grande porte na dobra (imagens \emph{hero}). Em relação às metas adotadas, os resultados situam-se, em geral, próximos ou dentro dos limiares de referência: \acrshort{lcp} $\leq 2{,}5$\,s; \acrshort{cls} $\leq 0{,}10$; \acrshort{inp} $\leq 200$\,ms; \acrshort{ttfb} $\leq 800$\,ms.
 
 \begin{figure}[H]
-  \centering
-  \caption{Classificação das métricas de desempenho (\acrshort{ssr}) com Web Vitals}
-  \includegraphics[width=0.9\textwidth]{media/metricas_ssr_web_vitals.jpeg}
-  \legend{Fonte: os autores.}
-  \label{fig:ssr-webvitals}
+    \centering
+    \caption{Classificação das métricas de desempenho (\acrshort{ssr}) com Web Vitals}
+    \includegraphics[width=0.9\textwidth]{media/metricas_ssr_web_vitals.jpeg}
+    \legend{Fonte: os autores.}
+    \label{fig:ssr-webvitals}
 \end{figure}
 
 \subsubsection*{Lighthouse (apoio diagnóstico)}
@@ -84,9 +83,6 @@ Detalhe & 0--7\footnotemark[1] & 100 & 100 \\
 
 \subsubsection*{Síntese (SSR)}
 Servidor com CPU/RAM contidos; \emph{Web Vitals} majoritariamente \textit{good}, com atenção pontual a \acrshort{lcp}/\acrshort{fcp} em páginas com imagens destacadas e pós-hidratação; \emph{Lighthouse} confirma \textbf{TBT} reduzido e \textbf{altos escores} de \textbf{Acessibilidade} e \textbf{SEO}, sustentando o SSR para páginas públicas sensíveis à descoberta.
-
-
-
 
 \subsection{Resultados para CSR}
 \label{subsec:resultados-csr}
@@ -126,9 +122,9 @@ Para explicar oscilações residuais e orientar priorizações, auditamos as rot
 
 \noindent \textit{Achados.}
 \begin{itemize}
-  \item \textbf{TBT}: manteve-se em patamar \textbf{muito baixo} (dezenas de milissegundos) nas páginas inspecionadas, consistente com \acrshort{inp} \textit{good}.
-  \item \textbf{Acessibilidade}: escores altos na \emph{home} (93--94\,\%), com ajustes residuais (hierarquia de \emph{headings}, foco visível, rótulos/\textit{alt}) valores observados nos relatórios “Home (Web)” e “Home (Mobile)”.
-  \item \textbf{SEO}: a \emph{home} registrou \textasciitilde{}83\,\% (Web e Mobile), sugerindo oportunidades pontuais (por exemplo, \emph{meta description}/\texttt{canonical}/\texttt{robots}/\texttt{hreflang}, quando aplicável).
+    \item \textbf{TBT}: manteve-se em patamar \textbf{muito baixo} (dezenas de milissegundos) nas páginas inspecionadas, consistente com \acrshort{inp} \textit{good}.
+    \item \textbf{Acessibilidade}: escores altos na \emph{home} (93--94\,\%), com ajustes residuais (hierarquia de \emph{headings}, foco visível, rótulos/\textit{alt}) valores observados nos relatórios “Home (Web)” e “Home (Mobile)”.
+    \item \textbf{SEO}: a \emph{home} registrou \textasciitilde{}83\,\% (Web e Mobile), sugerindo oportunidades pontuais (por exemplo, \emph{meta description}/\texttt{canonical}/\texttt{robots}/\texttt{hreflang}, quando aplicável).
 \end{itemize}
 
 \noindent \textit{Leitura.} Em conjunto, os relatórios apontam que o gargalo do \textbf{CSR} não está em bloqueio de \emph{main thread} (TBT baixo), mas em \textbf{estabilidade visual} e em alguns sinais de \textbf{SEO}. Na prática, os seguintes ajustes tendem a capturar os ganhos: (i) reservar dimensões de imagens e \emph{cards} acima da dobra (\texttt{width}/\texttt{height} ou \texttt{aspect-ratio}); (ii) \emph{preload} de fontes e imagens \emph{hero} (com \texttt{font-display: swap}); (iii) evitar inserções DOM acima da dobra durante a hidratação; (iv) completar metadados de SEO (título/descrição/\texttt{canonical}/\texttt{robots}) e revisar indexabilidade.
@@ -139,7 +135,7 @@ Servidor praticamente ocioso (CPU e RAM baixos); \emph{Web Vitals} em boa forma 
 \subsection{Comparação entre SSR e CSR}
 \label{subsec:comparacao-ssr-csr}
 
-Esta seção compara, de forma integrada, experiência do usuário (\emph{Web Vitals} em campo), diagnóstico laboratorial (Lighthouse: TBT, Acessibilidade e SEO) e custo operacional (CPU/Memória nos contêineres). A leitura está ancorada nas medianas (p50) e, quando pertinente, no p95 dos cenários \textbf{home}, \textbf{busca} e \textbf{detalhe}.
+Esta seção compara, de forma integrada, experiência do usuário (\emph{Web Vitals} em campo), diagnóstico laboratorial (Lighthouse: TBT, Acessibilidade e SEO) e custo operacional (CPU/Memória nos contêineres). A análise revela que a escolha arquitetônica representa um trade-off fundamental sobre onde a carga computacional deve residir: no servidor ou no cliente. A leitura está ancorada nas medianas (p50) e, quando pertinente, no p95 dos cenários \textbf{home}, \textbf{busca} e \textbf{detalhe}.
 
 \begin{table}[H]
 \centering
@@ -167,39 +163,44 @@ Esta seção compara, de forma integrada, experiência do usuário (\emph{Web Vi
 \end{table}
 
 \subsubsection{Pontos fortes do SSR.}
-(i) \textbf{Tempo até primeira resposta/primeiro conteúdo.} O HTML pré-renderizado reduz o tempo de exibição inicial, o que se refletiu em \textit{TTFB}/\textit{FCP} consistentes e \textbf{TBT} residual nas auditorias.  
-(ii) \textbf{Descoberta e rastreabilidade.} \textbf{SEO} com 100\% nas rotas testadas, reforçando a adequação do SSR para páginas públicas e conteúdo editorial.  
-(iii) \textbf{Acessibilidade.} Escores elevados (95--100\%) indicam que a estrutura entregue pelo servidor chega semanticamente “pronta” ao cliente.  
+(i) \textbf{Tempo até primeira resposta/primeiro conteúdo.} O HTML pré-renderizado acelera a exibição inicial, refletindo-se em \textit{TTFB}/\textit{FCP} consistentes e \textbf{TBT} residual. Essa agilidade é um fator psicológico poderoso, transmitindo eficiência e sendo crucial para reter a atenção do usuário nos primeiros segundos.
+(ii) \textbf{Descoberta e rastreabilidade.} \textbf{SEO} com 100\% nas rotas testadas, reforçando a adequação do SSR para páginas públicas e conteúdo editorial.
+(iii) \textbf{Estabilidade Visual.} O índice de \acrshort{cls} praticamente nulo garantiu que a experiência não fosse interrompida por mudanças de layout abruptas.
 (iv) \textbf{Previsibilidade de performance.} Em cenários com rede/CPU do cliente mais limitados, a renderização no servidor reduz o risco de longas tarefas no \emph{main thread} do navegador.
 
 \subsubsection{Pontos fracos do SSR.}
-(i) \textbf{Custo de hidratação.} Após o HTML inicial, a ativação dos componentes pode degradar \textbf{LCP}/\textbf{FCP} em páginas com imagens \emph{hero} e muito JS.  
-(ii) \textbf{Custo no servidor (ainda que baixo).} O processamento por requisição eleva discretamente \textbf{CPU}/\textbf{memória} no host frente ao CSR.  
-(iii) \textbf{Complexidade de build/deploy.} Estratégias como \emph{streaming}, \emph{partial/targeted hydration} e \emph{Server Components} elevam a complexidade de arquitetura.
+(i) \textbf{Custo de hidratação e navegação.} Após o HTML inicial, a ativação dos componentes pode degradar \textbf{LCP}/\textbf{FCP} em páginas com muito JS. A navegação subsequente, ao exigir uma nova requisição completa ao servidor, pode quebrar a sensação de fluidez contínua.
+(ii) \textbf{Custo no servidor (ainda que baixo).} O processamento por requisição eleva discretamente \textbf{CPU}/\textbf{memória} no host, implicando maiores custos de infraestrutura e complexidade de escalonamento.
+(iii) \textbf{Complexidade de build/deploy.} Estratégias como \emph{streaming} e \emph{Server Components} elevam a complexidade de arquitetura.
 
 \subsubsection{Pontos fortes do CSR.}
-(i) \textbf{Interatividade contínua.} Navegação sem recarregar página, com \textbf{TBT/INP} baixos nas auditorias e nos dados de campo.  
-(ii) \textbf{Custo operacional.} \textbf{CPU/memória} do servidor permanecem muito baixos: entrega estática + execução no cliente.  
-(iii) \textbf{Escalabilidade horizontal simples.} Conteúdo estático facilita cache/CDN, reduzindo pressão no backend.
+(i) \textbf{Interatividade contínua.} Após o carregamento inicial, a navegação entre seções ocorre de forma quase instantânea, com \textbf{TBT/INP} muito baixos, emulando a agilidade de um aplicativo nativo.
+(ii) \textbf{Custo operacional.} \textbf{CPU/memória} do servidor permanecem muito baixos, já que o servidor atua majoritariamente como um provedor de arquivos estáticos, resultando em custos operacionais menores.
+(iii) \textbf{Escalabilidade horizontal simples.} Conteúdo estático facilita o uso de cache e CDNs, reduzindo a pressão sobre o backend.
 
 \subsubsection{Pontos fracos do CSR.}
-(i) \textbf{Estabilidade visual.} \textbf{CLS} apresentou ocorrências \textit{poor}; o risco de \emph{layout shifts} aumenta quando não há reserva de espaço para mídia e quando há inserções acima da dobra na hidratação.  
-(ii) \textbf{Sinais de SEO.} Escores \textasciitilde83\% na home (Lighthouse) indicam metadados/sinalizações a completar (p.\,ex., \emph{meta description}, \texttt{rel=canonical}, \texttt{robots}, \texttt{hreflang} quando aplicável).  
-(iii) \textbf{Dependência de JS no cliente.} Em dispositivos muito modestos, o custo de montar a aplicação pode afetar \textit{FCP}/\textit{LCP} se o \emph{bundle} não for estritamente otimizado.
+(i) \textbf{Estabilidade visual.} O \textbf{CLS} apresentou ocorrências \textit{poor}. O processo de hidratação e a renderização dinâmica podem causar mudanças de layout que frustram o usuário e comprometem a usabilidade.
+(ii) \textbf{Sinais de SEO.} Escores de \textasciitilde83\% no Lighthouse indicam a necessidade de completar metadados e sinalizações essenciais para a indexabilidade.
+(iii) \textbf{Dependência de JS no cliente.} O tempo de carregamento inicial (LCP) é mais lento, pois depende do download e execução do \textit{bundle} JavaScript. Em dispositivos modestos, isso pode comprometer a performance se o \textit{bundle} não for estritamente otimizado.
 
-\subsubsection{Observação sobre a Ausência do FID em CSR.} 
+\subsubsection{Observação sobre a Ausência do FID em CSR.}
 No \acrshort{csr}, o \acrfull{fid} não é capturado da maneira tradicional, pois a página precisa ser 'hidratada' pelo JavaScript antes de se tornar completamente interativa. Esse processo de hidratação impede que o \acrshort{fid} meça corretamente a primeira interação do usuário, tornando-o menos relevante em ambientes \acrshort{csr}. Por isso, o \acrfull{inp} é utilizado como métrica alternativa, já que ele captura o tempo de resposta entre a interação do usuário e a atualização visual da página, oferecendo uma avaliação mais precisa da interatividade contínua, o que é especialmente importante em páginas altamente dinâmicas como as renderizadas no cliente.
 
 \subsection{Discussão}
 \label{subsec:discussao-comparativa}
-\textbf{(i) Recursos do servidor.} O \acrshort{ssr} consumiu levemente mais \textbf{CPU/memória} (ainda baixos) do que o \acrshort{csr}, resultado esperado do processamento por requisição. O \acrshort{csr}, por sua vez, opera praticamente como \emph{static hosting}, com custo mínimo no host. \\
-\textbf{(ii) Experiência do usuário.} Em \acrshort{ssr}, a entrega inicial é perceptivelmente rápida e os escores de \textbf{SEO} e \textbf{Acessibilidade} são superiores; as pequenas perdas em \textbf{LCP}/\textbf{FCP} aparecem em páginas com imagens grandes e após a hidratação. Em \acrshort{csr}, \textbf{TTFB}/\textbf{FCP}/\textbf{LCP}/\textbf{INP} resultaram majoritariamente \textit{good}, e o \textbf{TBT} foi baixo; o principal cuidado é a \textbf{CLS}. \\
-\textbf{(iii) Coerência entre campo e laboratório.} Os \textit{Web Vitals} em campo (usuário real) e o \textbf{TBT} do Lighthouse (laboratório) convergiram: baixo bloqueio de \emph{main thread} nos dois modelos. As divergências localizam-se em \textbf{CLS} (CSR) e \textbf{SEO} (CSR $<$ SSR), que são áreas classicamente sensíveis à estratégia de renderização.
+Os resultados alinham-se e fornecem validação empírica para as recomendações consolidadas na literatura, confirmando que não existe uma solução universalmente superior. A escolha é uma decisão estratégica que transcende a tecnologia.
+
+\textbf{(i) Recursos do servidor.} O \acrshort{ssr} consumiu levemente mais \textbf{CPU/memória} (ainda baixos), resultado do processamento por requisição. O \acrshort{csr}, por outro lado, opera como \emph{static hosting}, com custo mínimo no host, transferindo a carga computacional para o dispositivo do usuário.
+
+\textbf{(ii) Experiência do usuário.} Em \acrshort{ssr}, a entrega inicial é perceptivelmente rápida e os escores de \textbf{SEO} e \textbf{Acessibilidade} são superiores. Em \acrshort{csr}, a interatividade após o carregamento é o grande trunfo, mas o principal cuidado é a \textbf{CLS}, que pode degradar a experiência.
+
+\textbf{(iii) Coerência entre campo e laboratório.} Os \textit{Web Vitals} em campo e o \textbf{TBT} do Lighthouse convergiram, indicando baixo bloqueio de \emph{main thread} em ambos os modelos. As divergências em \textbf{CLS} (CSR) e \textbf{SEO} (CSR $<$ SSR) são áreas classicamente sensíveis à estratégia de renderização.
 
 \subsection{Implicações práticas}
+A decisão entre as arquiteturas deve ser ponderada à luz dos objetivos do produto, das expectativas do usuário e das capacidades da equipe de desenvolvimento.
 \begin{itemize}
-  \item \textbf{Priorizar SSR} quando: páginas públicas dependentes de \textbf{SEO}, conteúdo editorial/comercial, catálogos indexáveis e cenários em que \textbf{TTFB} e \textbf{exibição inicial} são críticos para engajamento e descoberta.
-  \item \textbf{Priorizar CSR} quando: aplicações altamente interativas (dashboards, sistemas internos), requisitos fortes de navegação fluida no cliente e \textbf{custo de servidor} deve permanecer mínimo.
+    \item \textbf{Priorizar SSR} para aplicações de conteúdo, como \textbf{portais de notícias, plataformas de e-commerce e blogs}, onde a otimização para mecanismos de busca (\textbf{SEO}) é vital, e a velocidade da primeira impressão (\textbf{TTFB} e \textbf{FCP}) é um fator determinante para o sucesso do negócio.
+    \item \textbf{Priorizar CSR} para aplicações web ricas e complexas, como \textbf{dashboards analíticos, sistemas de gestão interna (ERPs) e plataformas de software como serviço (SaaS)}, que geralmente são acessadas após autenticação e onde a fluidez da interatividade contínua (\textbf{INP}) é mais valorizada do que a indexabilidade de páginas individuais.
 \end{itemize}
 
 \subsection{Ajustes recomendados}
@@ -207,4 +208,4 @@ No \acrshort{csr}, o \acrfull{fid} não é capturado da maneira tradicional, poi
 \textbf{CSR (mitigar CLS e elevar SEO).} Reservar dimensões de mídia (\texttt{width}/\texttt{height} ou \texttt{aspect-ratio}); evitar inserções acima da dobra durante a hidratação; \texttt{font-display: swap} com \emph{preload} de fontes e imagens \emph{hero}; placeholders do tamanho final; completar metadados e sinalizações (\emph{title}/\emph{description}/\texttt{canonical}/\texttt{robots}/\texttt{hreflang} quando aplicável).
 
 \subsection{Síntese}
-No cenário testado, \textbf{SSR} e \textbf{CSR} entregaram boa experiência de uso com \textbf{baixa pressão de recursos}. O \textbf{SSR} destacou-se por \textbf{SEO} e \textbf{exibição inicial} mais previsível; o \textbf{CSR} reduziu o \textbf{custo no servidor} e manteve \textbf{TBT/INP} baixos, com a contrapartida de maior propensão a \textbf{CLS} e sinais de \textbf{SEO} a complementar. A decisão deve considerar \textbf{perfil de tráfego}, \textbf{exigência de descoberta} e \textbf{tipo de interação}, aplicando as otimizações para mitigar os pontos fracos identificados em cada abordagem.
+No cenário testado, \textbf{SSR} e \textbf{CSR} entregaram boa experiência de uso com \textbf{baixa pressão de recursos}. O \textbf{SSR} destacou-se por \textbf{SEO} e \textbf{exibição inicial} mais previsível, sendo ideal para aplicações de conteúdo. O \textbf{CSR} reduziu o \textbf{custo no servidor} e garantiu interatividade fluida, com a contrapartida de maior propensão a \textbf{CLS} e desafios de \textbf{SEO}, mostrando-se adequado para aplicações ricas e logadas. A decisão final deve considerar o \textbf{perfil de tráfego}, a \textbf{exigência de descoberta} e o \textbf{tipo de interação}, aplicando as otimizações para mitigar os pontos fracos identificados em cada abordagem.
