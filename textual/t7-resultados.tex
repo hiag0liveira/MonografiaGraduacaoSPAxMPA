@@ -47,7 +47,7 @@ Ao longo dos cenários, o contêiner \textit{Next.js} manteve \textbf{CPU} baixa
 \end{figure}
 
 \subsubsection*{Web Vitals (cliente)}
-Conforme a \autoref{fig:ssr-webvitals}, as leituras de campo foram, em sua maioria, classificadas como \textit{good}. Os poucos casos de \textit{needs-improvement} concentraram-se em \acrshort{lcp} e \acrshort{inp}, e houve uma fração reduzida de \acrshort{fcp} em \textit{poor} — efeito compatível com custos de \textit{hydration} e com elementos visuais de grande porte na dobra (imagens \emph{hero}). Em relação às metas adotadas, os resultados situam-se, em geral, próximos ou dentro dos limiares de referência: \acrshort{lcp} $\leq 2{,}5$\,s; \acrshort{cls} $\leq 0{,}10$; \acrshort{inp} $\leq 200$\,ms; \acrshort{ttfb} $\leq 800$\,ms.
+Conforme a \autoref{fig:ssr-webvitals}, as leituras de campo foram, em sua maioria, classificadas como \textit{good}. Os poucos casos de \textit{needs-improvement} concentraram-se em \acrshort{lcp} e \acrshort{inp}, e houve uma fração reduzida de \acrshort{fcp} em \textit{poor} efeito compatível com custos de \textit{hydration} e com elementos visuais de grande porte na dobra (imagens \emph{hero}). Em relação às metas adotadas, os resultados situam-se, em geral, próximos ou dentro dos limiares de referência: \acrshort{lcp} $\leq 2{,}5$\,s; \acrshort{cls} $\leq 0{,}10$; \acrshort{inp} $\leq 200$\,ms; \acrshort{ttfb} $\leq 800$\,ms.
 
 \begin{figure}[H]
   \centering
@@ -80,7 +80,7 @@ Detalhe & 0--7\footnotemark[1] & 100 & 100 \\
 \noindent \textit{Leitura.}
 (i) \textbf{TBT} muito abaixo da meta interna ($<200$\,ms) em todas as rotas, corroborando \acrshort{inp} em \textit{good};
 (ii) \textbf{Acessibilidade} alta (95--100\%), com ajustes residuais (hierarquia de headings, foco visível, rótulos) de fácil endereçamento;
-(iii) \textbf{SEO} consistente (100\%), indicando sinalização adequada (título, \emph{meta description}, \texttt{canonical}, \texttt{robots}, \texttt{viewport}) — aspecto particularmente relevante no fluxo SSR.
+(iii) \textbf{SEO} consistente (100\%), indicando sinalização adequada (título, \emph{meta description}, \texttt{canonical}, \texttt{robots}, \texttt{viewport}) aspecto particularmente relevante no fluxo SSR.
 
 \subsubsection*{Síntese (SSR)}
 Servidor com CPU/RAM contidos; \emph{Web Vitals} majoritariamente \textit{good}, com atenção pontual a \acrshort{lcp}/\acrshort{fcp} em páginas com imagens destacadas e pós-hidratação; \emph{Lighthouse} confirma \textbf{TBT} reduzido e \textbf{altos escores} de \textbf{Acessibilidade} e \textbf{SEO}, sustentando o SSR para páginas públicas sensíveis à descoberta.
@@ -127,7 +127,7 @@ Para explicar oscilações residuais e orientar priorizações, auditamos as rot
 \noindent \textit{Achados.}
 \begin{itemize}
   \item \textbf{TBT}: manteve-se em patamar \textbf{muito baixo} (dezenas de milissegundos) nas páginas inspecionadas, consistente com \acrshort{inp} \textit{good}.
-  \item \textbf{Acessibilidade}: escores altos na \emph{home} (93--94\,\%), com ajustes residuais (hierarquia de \emph{headings}, foco visível, rótulos/\textit{alt}) — valores observados nos relatórios “Home (Web)” e “Home (Mobile)”.
+  \item \textbf{Acessibilidade}: escores altos na \emph{home} (93--94\,\%), com ajustes residuais (hierarquia de \emph{headings}, foco visível, rótulos/\textit{alt}) valores observados nos relatórios “Home (Web)” e “Home (Mobile)”.
   \item \textbf{SEO}: a \emph{home} registrou \textasciitilde{}83\,\% (Web e Mobile), sugerindo oportunidades pontuais (por exemplo, \emph{meta description}/\texttt{canonical}/\texttt{robots}/\texttt{hreflang}, quando aplicável).
 \end{itemize}
 
