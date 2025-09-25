@@ -132,92 +132,6 @@ A interação entre essas três tecnologias pode ser compreendida por meio de um
 Portanto, o domínio dessas três tecnologias é indispensável para qualquer desenvolvedor web. Elas formam o alicerce sobre o qual se constroem interfaces acessíveis, performáticas e envolventes, sendo empregadas tanto em aplicações renderizadas no servidor (\acrshort{ssr}) quanto no cliente (\acrshort{csr}), com adaptações específicas conforme a abordagem escolhida.
 
 
-\section{Controle de Versão com Git e GitHub}
-\label{sec:git-github}
-
-O desenvolvimento de aplicações web modernas exige práticas que garantam organização, rastreabilidade e colaboração eficiente entre desenvolvedores. Nesse contexto, ferramentas de controle de versão como o \textbf{Git} e plataformas de hospedagem como o \textbf{GitHub} são fundamentais para o gerenciamento do ciclo de vida do software \cite{github_official}.
-
-\subsection{Git}
-\label{subsec:git}
-
-O \textbf{Git} é um sistema de controle de versão distribuído criado por Linus Torvalds em 2005 com o objetivo de gerenciar projetos de forma rápida e eficiente, independentemente do tamanho ou complexidade \cite{chacon_git}. Ele permite que múltiplos desenvolvedores trabalhem simultaneamente em um projeto, mantendo o histórico de alterações de forma segura e auditável.
-
-Entre os conceitos fundamentais do Git, destacam-se:
-
-\begin{itemize}
-\item \textbf{Repositório (\textit{Repository}):} Estrutura que armazena o histórico completo do projeto, incluindo arquivos, diretórios e suas versões ao longo do tempo.
-\item \textbf{Commits:} Registros de alterações no projeto. Cada commit possui um identificador único (hash) e uma mensagem descritiva \cite{chacon_git}.
-\item \textbf{Branches:} Ramificações independentes do repositório que permitem o desenvolvimento paralelo de funcionalidades, correções ou experimentos sem impactar o código principal.
-\item \textbf{Merge:} Integração de alterações realizadas em diferentes branches.
-\item \textbf{Clone e Pull:} Operações que permitem obter uma cópia local do repositório e sincronizar com atualizações remotas.
-\end{itemize}
-
-O modelo distribuído do Git permite que cada colaborador mantenha uma cópia completa do repositório em sua máquina local, o que garante maior resiliência e independência em relação ao servidor central \cite{chacon_git}.
-
-\subsection{GitHub}
-\label{subsec:github}
-
-O \textbf{GitHub} é uma plataforma de hospedagem de código baseada em Git, que amplia suas funcionalidades com recursos colaborativos e integração contínua \cite{github_official}. Fundada em 2008, a plataforma popularizou-se como um ambiente de colaboração para projetos de software de código aberto e privado.
-
-Além de hospedar repositórios Git, o GitHub oferece funcionalidades como:
-
-\begin{itemize}
-\item \textbf{Issues:} Ferramenta para rastreamento de tarefas, bugs e melhorias \cite{github_official}.
-\item \textbf{Pull Requests (PR):} Fluxo de revisão e integração de código, permitindo que contribuições sejam analisadas antes de serem incorporadas ao branch principal.
-\item \textbf{Actions:} Automatização de processos com integração contínua (CI) e entrega contínua (CD).
-\item \textbf{Wikis e Documentação:} Área para criação de páginas informativas sobre o projeto.
-\end{itemize}
-
-\subsection{GitHub Projects}
-\label{subsec:github-projects}
-
-O \textbf{GitHub Projects} é uma funcionalidade integrada à plataforma que possibilita o gerenciamento de projetos utilizando quadros visuais baseados em metodologias ágeis, como Kanban e Scrum \cite{github_projects}. Essa ferramenta permite organizar tarefas, acompanhar o progresso e priorizar demandas de maneira colaborativa.
-
-Entre os recursos oferecidos pelo GitHub Projects, destacam-se:
-
-\begin{itemize}
-\item \textbf{Quadros Kanban:} Visualização de tarefas em colunas (como \textit{To Do}, \textit{In Progress} e \textit{Done}), facilitando o acompanhamento do fluxo de trabalho.
-\item \textbf{Automação:} Regras automáticas que movem cartões entre colunas com base em eventos, como o fechamento de issues ou merge de pull requests \cite{github_projects}.
-\item \textbf{Customização:} Campos personalizados e filtros para adaptar o quadro às necessidades do projeto.
-\item \textbf{Integração com Issues e Pull Requests:} Possibilidade de vincular tarefas diretamente ao código, permitindo rastreabilidade completa entre planejamento e implementação.
-\end{itemize}
-
-
-
-
-
-
-\section{News API}
-\label{sec:news-api}
-
-A \textbf{News API} é uma interface de programação que disponibiliza fluxos de notícias e artigos de forma estruturada, permitindo o acesso a conteúdos de mais de 150\,000 fontes jornalísticas ao redor do mundo. Seu propósito é fornecer informações publicadas em tempo real, facilitando o desenvolvimento de soluções de agregação, análise e visualização de notícias \cite{newsapi_docs}.
-
-\subsection{Escopo e cobertura}
-A plataforma oferece dois principais tipos de consulta: 
-
-\begin{itemize}
-    \item \textbf{Busca por artigos (\texttt{/everything}):} permite pesquisar notícias com base em termos, operadores booleanos, intervalos de datas, domínios específicos e critérios de ordenação, como relevância, popularidade ou data de publicação \cite{newsapi_docs}.
-    \item \textbf{Manchetes principais (\texttt{/top-headlines}):} retorna as notícias mais recentes, com filtros por país, categoria jornalística e fontes específicas.
-\end{itemize}
-
-Além disso, a \textbf{News API} disponibiliza o endpoint \texttt{/sources}, que fornece metadados sobre os veículos indexados, como nome, idioma, categoria e URL oficial.
-
-\subsection{Autenticação e formato de resposta}
-Para utilizar os endpoints, é necessário um \acrshort{api} key, que autentica as requisições e controla o uso da plataforma. As respostas são retornadas no formato \acrshort{json}, contendo campos como \texttt{status}, \texttt{totalResults} e uma lista de objetos \texttt{articles}, com atributos como título, autor, descrição, \acrshort{url} e data de publicação \cite{newsapi_docs}.
-
-\subsection{Funcionalidade e integração}
-A \textbf{News API} suporta buscas avançadas com:
-
-\begin{itemize}
-    \item termos exatos ou operadores lógicos (\texttt{AND}, \texttt{OR}, \texttt{NOT});
-    \item filtros por idioma, domínios específicos e intervalos de datas (\texttt{from}, \texttt{to});
-    \item paginação e controle de volume de resultados, com limite máximo de 100 artigos por página.
-\end{itemize}
-
-Essas características permitem integração tanto em aplicações com \acrshort{csr}, que realizam chamadas diretamente do navegador após o carregamento, quanto em soluções com \acrshort{ssr}, onde as requisições são feitas na camada servidor, possibilitando que o conteúdo seja renderizado previamente antes de ser entregue ao cliente.
-
-
-
 
 \section{Renderização na Web}
 \label{sec:renderizacao-web}
@@ -799,6 +713,97 @@ O \textbf{shadcn/ui} é uma biblioteca de componentes open source baseada em Rad
 \label{subsec:integracao-v0-shadcn}
 
 A integração entre \textbf{v0} e \textbf{shadcn/ui} proporciona uma experiência otimizada para geração de interfaces. Ao utilizar a plataforma \textbf{v0}, os componentes gerados são construídos com base na arquitetura do \textbf{shadcn/ui}, incluindo as práticas recomendadas de acessibilidade e estilização com Tailwind CSS \cite{v0_docs, shadcn_docs}. Essa integração permite que desenvolvedores iniciem com protótipos gerados automaticamente e, em seguida, façam ajustes diretamente no código dos componentes, mantendo um alto grau de personalização e performance. Além disso, ela favorece o uso de estratégias modernas como \acrshort{ssr} e \acrshort{csr}, oferecendo compatibilidade com frameworks como Next.js e Vite.
+
+
+
+
+\section{Processo de Desenvolvimento e Controle de Gestão de Software}
+\label{sec:git-github}
+
+O desenvolvimento de aplicações web modernas exige práticas que garantam organização, rastreabilidade e colaboração eficiente entre desenvolvedores. Nesse contexto, ferramentas de controle de versão como o \textbf{Git} e plataformas de hospedagem como o \textbf{GitHub} são fundamentais para o gerenciamento do ciclo de vida do software \cite{github_official}.
+
+\subsection{Git}
+\label{subsec:git}
+
+O \textbf{Git} é um sistema de controle de versão distribuído criado por Linus Torvalds em 2005 com o objetivo de gerenciar projetos de forma rápida e eficiente, independentemente do tamanho ou complexidade \cite{chacon_git}. Ele permite que múltiplos desenvolvedores trabalhem simultaneamente em um projeto, mantendo o histórico de alterações de forma segura e auditável.
+
+Entre os conceitos fundamentais do Git, destacam-se:
+
+\begin{itemize}
+\item \textbf{Repositório (\textit{Repository}):} Estrutura que armazena o histórico completo do projeto, incluindo arquivos, diretórios e suas versões ao longo do tempo.
+\item \textbf{Commits:} Registros de alterações no projeto. Cada commit possui um identificador único (hash) e uma mensagem descritiva \cite{chacon_git}.
+\item \textbf{Branches:} Ramificações independentes do repositório que permitem o desenvolvimento paralelo de funcionalidades, correções ou experimentos sem impactar o código principal.
+\item \textbf{Merge:} Integração de alterações realizadas em diferentes branches.
+\item \textbf{Clone e Pull:} Operações que permitem obter uma cópia local do repositório e sincronizar com atualizações remotas.
+\end{itemize}
+
+O modelo distribuído do Git permite que cada colaborador mantenha uma cópia completa do repositório em sua máquina local, o que garante maior resiliência e independência em relação ao servidor central \cite{chacon_git}.
+
+\subsection{GitHub}
+\label{subsec:github}
+
+O \textbf{GitHub} é uma plataforma de hospedagem de código baseada em Git, que amplia suas funcionalidades com recursos colaborativos e integração contínua \cite{github_official}. Fundada em 2008, a plataforma popularizou-se como um ambiente de colaboração para projetos de software de código aberto e privado.
+
+Além de hospedar repositórios Git, o GitHub oferece funcionalidades como:
+
+\begin{itemize}
+\item \textbf{Issues:} Ferramenta para rastreamento de tarefas, bugs e melhorias \cite{github_official}.
+\item \textbf{Pull Requests (PR):} Fluxo de revisão e integração de código, permitindo que contribuições sejam analisadas antes de serem incorporadas ao branch principal.
+\item \textbf{Actions:} Automatização de processos com integração contínua (CI) e entrega contínua (CD).
+\item \textbf{Wikis e Documentação:} Área para criação de páginas informativas sobre o projeto.
+\end{itemize}
+
+\subsection{GitHub Projects}
+\label{subsec:github-projects}
+
+O \textbf{GitHub Projects} é uma funcionalidade integrada à plataforma que possibilita o gerenciamento de projetos utilizando quadros visuais baseados em metodologias ágeis, como Kanban e Scrum \cite{github_projects}. Essa ferramenta permite organizar tarefas, acompanhar o progresso e priorizar demandas de maneira colaborativa.
+
+Entre os recursos oferecidos pelo GitHub Projects, destacam-se:
+
+\begin{itemize}
+\item \textbf{Quadros Kanban:} Visualização de tarefas em colunas (como \textit{To Do}, \textit{In Progress} e \textit{Done}), facilitando o acompanhamento do fluxo de trabalho.
+\item \textbf{Automação:} Regras automáticas que movem cartões entre colunas com base em eventos, como o fechamento de issues ou merge de pull requests \cite{github_projects}.
+\item \textbf{Customização:} Campos personalizados e filtros para adaptar o quadro às necessidades do projeto.
+\item \textbf{Integração com Issues e Pull Requests:} Possibilidade de vincular tarefas diretamente ao código, permitindo rastreabilidade completa entre planejamento e implementação.
+\end{itemize}
+
+
+
+
+
+
+\section{News API}
+\label{sec:news-api}
+
+A \textbf{News API} é uma interface de programação que disponibiliza fluxos de notícias e artigos de forma estruturada, permitindo o acesso a conteúdos de mais de 150\,000 fontes jornalísticas ao redor do mundo. Seu propósito é fornecer informações publicadas em tempo real, facilitando o desenvolvimento de soluções de agregação, análise e visualização de notícias \cite{newsapi_docs}.
+
+\subsection{Escopo e cobertura}
+A plataforma oferece dois principais tipos de consulta: 
+
+\begin{itemize}
+    \item \textbf{Busca por artigos (\texttt{/everything}):} permite pesquisar notícias com base em termos, operadores booleanos, intervalos de datas, domínios específicos e critérios de ordenação, como relevância, popularidade ou data de publicação \cite{newsapi_docs}.
+    \item \textbf{Manchetes principais (\texttt{/top-headlines}):} retorna as notícias mais recentes, com filtros por país, categoria jornalística e fontes específicas.
+\end{itemize}
+
+Além disso, a \textbf{News API} disponibiliza o endpoint \texttt{/sources}, que fornece metadados sobre os veículos indexados, como nome, idioma, categoria e URL oficial.
+
+\subsection{Autenticação e formato de resposta}
+Para utilizar os endpoints, é necessário um \acrshort{api} key, que autentica as requisições e controla o uso da plataforma. As respostas são retornadas no formato \acrshort{json}, contendo campos como \texttt{status}, \texttt{totalResults} e uma lista de objetos \texttt{articles}, com atributos como título, autor, descrição, \acrshort{url} e data de publicação \cite{newsapi_docs}.
+
+\subsection{Funcionalidade e integração}
+A \textbf{News API} suporta buscas avançadas com:
+
+\begin{itemize}
+    \item termos exatos ou operadores lógicos (\texttt{AND}, \texttt{OR}, \texttt{NOT});
+    \item filtros por idioma, domínios específicos e intervalos de datas (\texttt{from}, \texttt{to});
+    \item paginação e controle de volume de resultados, com limite máximo de 100 artigos por página.
+\end{itemize}
+
+Essas características permitem integração tanto em aplicações com \acrshort{csr}, que realizam chamadas diretamente do navegador após o carregamento, quanto em soluções com \acrshort{ssr}, onde as requisições são feitas na camada servidor, possibilitando que o conteúdo seja renderizado previamente antes de ser entregue ao cliente.
+
+
+
+
 
 
 \section{Contêineres e Docker}
