@@ -177,14 +177,42 @@ Segundo \citeonline{osmani2025}, é importante distinguir os principais modelos:
 Além dessas abordagens, destaca-se o conceito de \textbf{reidratação}, que consiste em ativar a interatividade de páginas SSR ou SSG no cliente. Esse processo utiliza JavaScript para associar os eventos dinâmicos à estrutura HTML previamente renderizada, sendo essencial para tornar a página interativa após a exibição inicial \cite{osmani2025}.
 
 
-Esses métodos influenciam diretamente métricas como:
+\subsection*{Métricas de Desempenho em Aplicações Web}
+
+A avaliação de desempenho em aplicações web modernas vai além do tempo de carregamento total da página. A experiência do usuário \acrshort{ux}, a capacidade de resposta da interface e a estabilidade visual são aspectos fundamentais. Com o intuito de padronizar essas medições, o Google propôs o conjunto \textbf{Core Web Vitals}, que inclui métricas focadas na percepção do usuário real \cite{osmani2025}. Essas métricas são amplamente aplicadas em ferramentas como \textit{Google Lighthouse}, \textit{PageSpeed Insights} e \textit{WebPageTest} \cite{webvitals2025}.
+
+Entre as principais métricas de desempenho utilizadas na literatura e em auditorias de performance, destacam-se:
+
+\begin{description}
+    \item[\textbf{TTFB (Time to First Byte)}] Representa o tempo entre a solicitação do navegador e o recebimento do primeiro byte da resposta do servidor. É um indicativo da latência do backend e da eficiência da entrega do conteúdo inicial.
+
+    \item[\textbf{FCP (First Contentful Paint)}] Indica o tempo necessário para que qualquer parte visível do conteúdo como texto ou imagem seja renderizada na tela. É essencial para avaliar a percepção inicial de carregamento.
+
+    \item[\textbf{LCP (Largest Contentful Paint)}] Mede o tempo até o maior elemento visível da página ser exibido, geralmente o conteúdo principal. Um valor abaixo de 2,5 segundos é considerado ideal para uma boa experiência visual inicial.
+
+    \item[\textbf{TTI (Time to Interactive)}] Reflete o momento em que a página está completamente carregada e pronta para responder às interações do usuário. Um TTI alto pode sinalizar bloqueios na thread principal ou scripts pesados.
+
+    \item[\textbf{TBT (Total Blocking Time)}] Soma o tempo em que a thread principal esteve ocupada com tarefas longas, impedindo que o usuário interagisse com a página. É um complemento importante ao TTI.
+
+    \item[\textbf{CLS (Cumulative Layout Shift)}] Avalia a estabilidade visual da página durante o carregamento, medindo alterações inesperadas no layout. Valores acima de 0,1 indicam problemas de usabilidade.
+\end{description}
+
+Outras métricas relevantes, embora não tão amplamente adotadas nos Core Web Vitals, também são úteis em contextos específicos:
 
 \begin{itemize}
-    \item \textbf{TTFB (Time to First Byte)}: tempo até o primeiro byte da resposta.
-    \item \textbf{FCP (First Contentful Paint)}: quando o conteúdo começa a ser exibido.
-    \item \textbf{TTI (Time to Interactive)}: quando a página se torna responsiva.
-    \item \textbf{INP (Interaction to Next Paint)} e \textbf{TBT (Total Blocking Time)}: indicadores de interatividade e bloqueio da thread principal.
+    \item \textbf{FID (First Input Delay)}: mede o tempo entre a primeira interação do usuário e a resposta do navegador. Substituído pelo INP nas abordagens mais recentes.
+    
+    \item \textbf{INP (Interaction to Next Paint)}: métrica que avalia a latência de todas as interações, fornecendo uma visão mais completa da responsividade.
+
+    \item \textbf{SI (Speed Index)}: calcula a velocidade com que o conteúdo visível é exibido durante o carregamento.
+
+    \item \textbf{LCPu (LCP under user timing)}: variação do LCP que considera marcações personalizadas de performance.
+
+    \item \textbf{RTT (Round-Trip Time)}: tempo de ida e volta da requisição na rede, relevante em diagnósticos de conectividade.
 \end{itemize}
+
+O domínio dessas métricas é essencial para a compreensão do desempenho percebido pelo usuário final e serve como base para decisões técnicas sobre otimização de aplicações web e escolha de estratégias de renderização.
+
 
 \subsection*{Desempenho e Compensações}
 
