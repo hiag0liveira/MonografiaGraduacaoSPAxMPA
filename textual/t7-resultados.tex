@@ -6,17 +6,37 @@ Este capítulo apresenta os achados empíricos do estudo, com foco na experiênc
 \section{Resultados}
 Os testes cobriram as duas variantes da WallTech (\acrshort{ssr}/\acrshort{mpa} em Next.js e \acrshort{csr}/\acrshort{spa} em React) nas páginas: inicial, resultados de busca e detalhes da notícia. Para cada cenário, foram realizados 10--15 carregamentos após \textit{warm-up}, e as leituras são analisadas por mediana (p50) e, quando pertinente, p95.
 
-\subsubsection*{Fontes de dados}
+\subsection{Fontes de dados}
 \begin{itemize}
     \item \textbf{Web Vitals (núcleo)}: \acrshort{ttfb}, \acrshort{fcp}, \acrshort{lcp}, \acrshort{cls}, \acrshort{inp} registrados no cliente e persistidos em NDJSON.
     \item \textbf{Lighthouse (apoio)}: \textbf{TBT} e principais \textbf{oportunidades/auditorias} de desempenho, além de verificações de \textbf{Acessibilidade} e \textbf{SEO}.
     \item \textbf{Recursos do servidor}: CPU/memória/PIDs via \texttt{docker stats}, como contexto de custo de execução.
 \end{itemize}
 
-\subsubsection*{Análise e Visualização dos Dados}
+\subsection{Análise e Visualização dos Dados}
 Os dados coletados, incluindo as métricas de \textit{Web Vitals} e as medições de recursos do servidor, foram exportados e analisados com o auxílio do Power BI. A ferramenta foi utilizada para gerar gráficos e visualizações interativas que facilitam a interpretação dos resultados e a comparação entre os diferentes cenários (\acrshort{ssr} e \acrshort{csr}). O uso do Power BI permitiu a criação de dashboards dinâmicos que ilustram claramente as tendências das métricas ao longo das execuções e facilitam a análise de variações nas diferentes páginas testadas.
 
-\subsubsection*{Metas de referência}
+\subsection{Tratamento dos Dados}
+Os dados do Web Vitals foram coletados no formato NDJSON (Newline Delimited JSON) e importados como arquivos de texto no Power BI. Cada linha do arquivo correspondia a um objeto JSON individual representando uma métrica registrada no navegador.
+
+Para estruturar essas informações, foi utilizada a funcionalidade de transformação de dados do Power BI. Cada linha foi analisada como um objeto JSON, e, em seguida, esses objetos foram expandidos em colunas, convertendo os campos internos de cada métrica em atributos tabulares.
+
+Essa expansão resultou nas seguintes colunas principais:
+
+\begin{itemize}
+    \item \textbf{id}: identificador da interação registrada.
+    \item \textbf{name}: nome da métrica (por exemplo, \texttt{INP}, \texttt{CLS}, \texttt{LCP}).
+    \item \textbf{value}: valor numérico observado para a métrica.
+    \item \textbf{rating}: classificação qualitativa (\textit{good}, \textit{needs improvement}, \textit{poor}).
+    \item \textbf{navigationType}: tipo de navegação associada à métrica (ex: reload, back/forward).
+    \item \textbf{attribution}: detalhes adicionais sobre o elemento ou evento associado à métrica.
+    \item \textbf{entries}: informações brutas sobre a entrada original da medição.
+    \item \textbf{ts}: timestamp da coleta.
+\end{itemize}
+
+Com os dados estruturados dessa forma, foi possível aplicar filtros, agregações e análises comparativas entre SSR e CSR, utilizando os recursos visuais e analíticos do Power BI de maneira eficiente.
+
+\subsection{Metas de referência}
 Adotaram-se os seguintes alvos para interpretação:
 \begin{itemize}
     \item \textbf{LCP} $\leq 2{,}5$\,s;\quad \textbf{CLS} $\leq 0{,}10$;\quad \textbf{INP} $\leq 200$\,ms;\quad \textbf{TTFB} $\leq 800$\,ms.
@@ -26,7 +46,7 @@ Adotaram-se os seguintes alvos para interpretação:
 \subsection{Resultados para SSR}
 \label{subsec:resultados-ssr}
 
-\subsubsection*{Recursos do servidor}
+\subsubsection{Recursos do servidor}
 Ao longo dos cenários, o contêiner \textit{Next.js} manteve \textbf{CPU} baixa e estável (aprox.\ 8--13\%), sem picos relevantes; a queda ao final da série coincide com o término do experimento (\autoref{fig:ssr-cpu}). A \textbf{memória} permaneceu em patamar quase constante, com variação estreita e redução apenas no encerramento das execuções (\autoref{fig:ssr-mem}). Esse comportamento é compatível com o processamento por requisição do SSR e não sinaliza saturação.
 
 \begin{figure}[H]
@@ -45,7 +65,7 @@ Ao longo dos cenários, o contêiner \textit{Next.js} manteve \textbf{CPU} baixa
     \label{fig:ssr-mem}
 \end{figure}
 
-\subsubsection*{Web Vitals (cliente)}
+\subsubsection{Web Vitals (cliente)}
 Conforme a \autoref{fig:ssr-webvitals}, as leituras de campo foram, em sua maioria, classificadas como \textit{good}. Os poucos casos de \textit{needs-improvement} concentraram-se em \acrshort{lcp} e \acrshort{inp}, e houve uma fração reduzida de \acrshort{fcp} em \textit{poor} efeito compatível com custos de \textit{hydration} e com elementos visuais de grande porte na dobra (imagens \emph{hero}). Em relação às metas adotadas, os resultados situam-se, em geral, próximos ou dentro dos limiares de referência: \acrshort{lcp} $\leq 2{,}5$\,s; \acrshort{cls} $\leq 0{,}10$; \acrshort{inp} $\leq 200$\,ms; \acrshort{ttfb} $\leq 800$\,ms.
 
 \begin{figure}[H]
@@ -56,7 +76,7 @@ Conforme a \autoref{fig:ssr-webvitals}, as leituras de campo foram, em sua maior
     \label{fig:ssr-webvitals}
 \end{figure}
 
-\subsubsection*{Lighthouse (apoio diagnóstico)}
+\subsubsection{Lighthouse (apoio diagnóstico)}
 Para explicar variações residuais e priorizar melhorias, auditamos as rotas \emph{home}, \emph{busca} e \emph{detalhe} no modo \emph{Navigation} do Chrome DevTools, considerando três indicadores: \textbf{TBT}, \textbf{Acessibilidade} e \textbf{SEO}.
 A Tabela~\ref{tab:lh-ssr} consolida as \textbf{medianas} observadas nos relatórios HTML anexados (\texttt{ssrMobile.html}, \texttt{ssrMobileBusca.html}, \texttt{ssrtestePage.html}).
 
@@ -81,13 +101,13 @@ Detalhe & 0--7\footnotemark[1] & 100 & 100 \\
 (ii) \textbf{Acessibilidade} alta (95--100\%), com ajustes residuais (hierarquia de headings, foco visível, rótulos) de fácil endereçamento;
 (iii) \textbf{SEO} consistente (100\%), indicando sinalização adequada (título, \emph{meta description}, \texttt{canonical}, \texttt{robots}, \texttt{viewport}) aspecto particularmente relevante no fluxo SSR.
 
-\subsubsection*{Síntese (SSR)}
+\subsection{Síntese (SSR)}
 Servidor com CPU/RAM contidos; \emph{Web Vitals} majoritariamente \textit{good}, com atenção pontual a \acrshort{lcp}/\acrshort{fcp} em páginas com imagens destacadas e pós-hidratação; \emph{Lighthouse} confirma \textbf{TBT} reduzido e \textbf{altos escores} de \textbf{Acessibilidade} e \textbf{SEO}, sustentando o SSR para páginas públicas sensíveis à descoberta.
 
 \subsection{Resultados para CSR}
 \label{subsec:resultados-csr}
 
-\subsubsection*{Recursos do servidor}
+\subsubsection{Recursos do servidor}
 O contêiner da \emph{SPA} apresentou \textbf{CPU} muito baixa e estável, com oscilações discretas e picos inferiores a 5\% (\autoref{fig:csr-cpu}). A \textbf{memória} permaneceu praticamente constante e em patamar reduzido durante todo o ensaio, coerente com a entrega estática e a execução da lógica no cliente (\autoref{fig:csr-mem}). Não se observaram sinais de saturação.
 
 \begin{figure}[H]
@@ -106,7 +126,7 @@ O contêiner da \emph{SPA} apresentou \textbf{CPU} muito baixa e estável, com o
 \label{fig:csr-mem}
 \end{figure}
 
-\subsubsection*{Web Vitals (cliente)}
+\subsubsection{Web Vitals (cliente)}
 As leituras de campo indicam \textbf{predomínio de \textit{good}} em \acrshort{ttfb}, \acrshort{fcp}, \acrshort{lcp} e \acrshort{inp} (\autoref{fig:csr-webvitals}). O ponto fora da curva é a \textbf{\acrshort{cls}}, com concentrações em \textit{poor}. O padrão é típico de SPAs quando ocorrem \emph{layout shifts} durante a hidratação ou quando imagens/slots não reservam espaço antes do carregamento (dimensões ausentes, fontes sem \emph{preload}, inserções acima da dobra). Em relação às metas, as leituras ficaram, em geral, dentro ou próximas dos limiares de referência (\acrshort{lcp} $\leq 2{,}5$\,s; \acrshort{cls} $\leq 0{,}10$; \acrshort{inp} $\leq 200$\,ms; \acrshort{ttfb} $\leq 800$\,ms), com a ressalva da \acrshort{cls}.
 
 \begin{figure}[H]
@@ -117,7 +137,7 @@ As leituras de campo indicam \textbf{predomínio de \textit{good}} em \acrshort{
 \label{fig:csr-webvitals}
 \end{figure}
 
-\subsubsection*{Lighthouse (apoio diagnóstico)}
+\subsubsection{Lighthouse (apoio diagnóstico)}
 Para explicar oscilações residuais e orientar priorizações, auditamos as rotas críticas no \emph{Chrome DevTools} (modo \emph{Navigation}), com três indicadores: \textbf{TBT}, \textbf{Acessibilidade} e \textbf{SEO}.
 
 \noindent \textit{Achados.}
@@ -129,7 +149,7 @@ Para explicar oscilações residuais e orientar priorizações, auditamos as rot
 
 \noindent \textit{Leitura.} Em conjunto, os relatórios apontam que o gargalo do \textbf{CSR} não está em bloqueio de \emph{main thread} (TBT baixo), mas em \textbf{estabilidade visual} e em alguns sinais de \textbf{SEO}. Na prática, os seguintes ajustes tendem a capturar os ganhos: (i) reservar dimensões de imagens e \emph{cards} acima da dobra (\texttt{width}/\texttt{height} ou \texttt{aspect-ratio}); (ii) \emph{preload} de fontes e imagens \emph{hero} (com \texttt{font-display: swap}); (iii) evitar inserções DOM acima da dobra durante a hidratação; (iv) completar metadados de SEO (título/descrição/\texttt{canonical}/\texttt{robots}) e revisar indexabilidade.
 
-\subsubsection*{Síntese (CSR)}
+\subsubsection{Síntese (CSR)}
 Servidor praticamente ocioso (CPU e RAM baixos); \emph{Web Vitals} em boa forma para \acrshort{ttfb}/\acrshort{fcp}/\acrshort{lcp}/\acrshort{inp}, com atenção especial à \textbf{\acrshort{cls}}. O \emph{Lighthouse} confirmou \textbf{TBT reduzido}, \textbf{Acessibilidade} alta e \textbf{SEO} com melhorias de rápida implementação, coerentes com o perfil de \textbf{SPA} e suas responsabilidades no cliente.
 
 \subsection{Comparação entre SSR e CSR}
