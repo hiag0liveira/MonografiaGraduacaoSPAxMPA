@@ -1,11 +1,10 @@
 \begin{resumo}[Abstract]
- \begin{otherlanguage*}{english}
+\begin{otherlanguage*}{english}
+    
+With the growing complexity of web applications and the demand for rich, high-performance user experiences, the choice of a content rendering strategy has become a fundamental architectural decision. In this context, \textit{Client-Side Rendering} (CSR) and \textit{Server-Side Rendering} (SSR) emerge as the main approaches, each with significant \textit{trade-offs}: CSR favors continuous interactivity, while SSR optimizes initial load times and search engine optimization (SEO). The literature, however, lacks practical case studies that directly and controllably compare their impacts.
 
-% O comando lipsum abaixo é um gerador automático de texto, e deve ser substituído pelo seu abstract.
+Aiming to fill this gap, this work presents a detailed comparative analysis based on a realistic case study: the development of a news platform in two functionally identical versions, one with React (CSR) and the other with Next.js (SSR). Through the collection of \textit{Core Web Vitals} metrics in a controlled environment using Docker containers, the research empirically evaluates the effects of each architecture on performance and user experience. The study thus seeks to offer a clear contribution to understanding the application scenarios for each approach, helping development teams make more informed and strategic decisions.
 
-The exponential growth of the web, with thousands of new websites emerging daily, has increased the complexity of web application development and highlighted the importance of choosing the appropriate content rendering strategy. Among the main approaches are Client-Side Rendering (CSR) and Server-Side Rendering (SSR), each with distinct characteristics that directly affect performance, user experience (UX), scalability, and search engine optimization (SEO). This work aims to conduct a comparative analysis between CSR and SSR, emphasizing their technical and functional effects on modern web applications. The justification lies in the lack of practical and in-depth case studies, especially in the Brazilian context, that critically examine the real impact of adopting these strategies. The methodology included a theoretical foundation, a systematic literature review using the PICOC technique, and the implementation of a realistic case study, collecting performance metrics, load times, SEO impact, and UX data. The results show that while CSR is more advantageous for highly interactive applications, SSR provides better initial performance and greater indexability. It is concluded that the choice between CSR and SSR should consider the system profile, infrastructure, and strategic goals, with hybrid solutions often being the most appropriate.
-
-\textbf{Keywords: } Client-side rendering, CSR, Server-side rendering, SSR, Web Rendering, Performance, SEO, UX.
-
+\textbf{Keywords:} Client-side rendering, CSR, Server-side rendering, SSR, Web Rendering, Performance, SEO, UX.
 \end{otherlanguage*}
 \end{resumo}
