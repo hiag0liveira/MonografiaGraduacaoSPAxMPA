@@ -9,11 +9,6 @@ Este estudo de caso parte do cenário de uma empresa fictícia do setor de notí
 
 A Figura \ref{fig:wireframe-walltech} apresenta o \textit{wireframe} da plataforma \textbf{WallTech}, gerado com o auxílio da ferramenta \textbf{V0.dev}, que utiliza inteligência artificial para criar protótipos de interfaces a partir de descrições textuais. Esse modelo visual orienta a organização dos elementos na interface antes da implementação das versões em \acrshort{csr} e \acrshort{ssr}.
 
-\textbf{Para analisar o impacto de diferentes abordagens de renderização web, foram desenvolvidos dois protótipos funcionalmente idênticos da plataforma WallTech. O primeiro segue a abordagem de \acrfull{csr}, estruturado como uma \acrfull{spa} utilizando a biblioteca \textit{React}, enquanto o segundo utiliza \acrfull{ssr}, implementado como uma \acrfull{mpa} com o framework \textit{Next.js}. As funcionalidades essenciais da aplicação  como a visualização de notícias em destaque, o sistema de busca e a filtragem por país  foram diretamente derivadas dos requisitos levantados para o projeto, com o intuito de garantir uma experiência de usuário rica, intuitiva e performática.}
-
-A Figura \ref{fig:caso-uso-walltech} apresenta o diagrama de caso de uso da plataforma, destacando as principais funcionalidades acessíveis a usuários anônimos, como visualizar notícias recentes, acessar detalhes e realizar buscas por palavras-chave.
-
-
 \begin{figure}[H]
   \centering
   \caption{Wireframe da plataforma WallTech}
@@ -388,7 +383,7 @@ Com as duas versões da plataforma WallTech implementadas e funcionais, o alicer
 
 
 
-\chapter{Metodologia Experimental e Coleta de Dados}
+\chapter{Coleta de Dados}
 \label{cap:metodologia_experimental}
 
 Após o desenvolvimento das duas versões da plataforma WallTech, este capítulo descreve os procedimentos metodológicos adotados para conduzir a análise de desempenho comparativa. O objetivo aqui é detalhar o ambiente de testes controlado, as ferramentas de instrumentação para coleta de métricas, o processo de empacotamento das aplicações e os protocolos de execução. A adoção de um rigor metodológico é fundamental para assegurar a validade, a confiabilidade e a reprodutibilidade dos dados que serão apresentados e discutidos no capítulo de Resultados.
