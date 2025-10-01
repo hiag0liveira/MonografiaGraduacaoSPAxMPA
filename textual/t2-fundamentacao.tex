@@ -152,9 +152,10 @@ A escolha entre \acrshort{spa} e \acrshort{mpa} está diretamente ligada à estr
 
 
 
-\subsection*{Conceitos e Terminologia}
+\subsection{Estratégias e Terminologias de Renderização}
+\label{subsec:estrategias-terminologias}
 
-Segundo \citeonline{osmani2025}, é importante distinguir os principais modelos:
+Segundo \citeonline{osmani2025}, é importante distinguir os principais modelos de renderização:
 
 
 \begin{description}
@@ -177,54 +178,54 @@ Segundo \citeonline{osmani2025}, é importante distinguir os principais modelos:
 Além dessas abordagens, destaca-se o conceito de \textbf{reidratação}, que consiste em ativar a interatividade de páginas SSR ou SSG no cliente. Esse processo utiliza JavaScript para associar os eventos dinâmicos à estrutura HTML previamente renderizada, sendo essencial para tornar a página interativa após a exibição inicial \cite{osmani2025}.
 
 
-\subsection*{Métricas de Desempenho em Aplicações Web}
+% \subsection*{Métricas de Desempenho em Aplicações Web}
 
-A avaliação de desempenho em aplicações web modernas vai além do tempo de carregamento total da página. A experiência do usuário \acrshort{ux}, a capacidade de resposta da interface e a estabilidade visual são aspectos fundamentais. Com o intuito de padronizar essas medições, o Google propôs o conjunto \textbf{Core Web Vitals}, que inclui métricas focadas na percepção do usuário real \cite{osmani2025}. Essas métricas são amplamente aplicadas em ferramentas como \textit{Google Lighthouse}, \textit{PageSpeed Insights} e \textit{WebPageTest} \cite{webvitals2025}.
+% A avaliação de desempenho em aplicações web modernas vai além do tempo de carregamento total da página. A experiência do usuário \acrshort{ux}, a capacidade de resposta da interface e a estabilidade visual são aspectos fundamentais. Com o intuito de padronizar essas medições, o Google propôs o conjunto \textbf{Core Web Vitals}, que inclui métricas focadas na percepção do usuário real \cite{osmani2025}. Essas métricas são amplamente aplicadas em ferramentas como \textit{Google Lighthouse}, \textit{PageSpeed Insights} e \textit{WebPageTest} \cite{webvitals2025}.
 
-Entre as principais métricas de desempenho utilizadas na literatura e em auditorias de performance, destacam-se:
+% Entre as principais métricas de desempenho utilizadas na literatura e em auditorias de performance, destacam-se:
 
-\begin{description}
-    \item[\textbf{TTFB (Time to First Byte)}] Representa o tempo entre a solicitação do navegador e o recebimento do primeiro byte da resposta do servidor. É um indicativo da latência do backend e da eficiência da entrega do conteúdo inicial.
+% \begin{description}
+%     \item[\textbf{TTFB (Time to First Byte)}] Representa o tempo entre a solicitação do navegador e o recebimento do primeiro byte da resposta do servidor. É um indicativo da latência do backend e da eficiência da entrega do conteúdo inicial.
 
-    \item[\textbf{FCP (First Contentful Paint)}] Indica o tempo necessário para que qualquer parte visível do conteúdo como texto ou imagem seja renderizada na tela. É essencial para avaliar a percepção inicial de carregamento.
+%     \item[\textbf{FCP (First Contentful Paint)}] Indica o tempo necessário para que qualquer parte visível do conteúdo como texto ou imagem seja renderizada na tela. É essencial para avaliar a percepção inicial de carregamento.
 
-    \item[\textbf{LCP (Largest Contentful Paint)}] Mede o tempo até o maior elemento visível da página ser exibido, geralmente o conteúdo principal. Um valor abaixo de 2,5 segundos é considerado ideal para uma boa experiência visual inicial.
+%     \item[\textbf{LCP (Largest Contentful Paint)}] Mede o tempo até o maior elemento visível da página ser exibido, geralmente o conteúdo principal. Um valor abaixo de 2,5 segundos é considerado ideal para uma boa experiência visual inicial.
 
-    \item[\textbf{TTI (Time to Interactive)}] Reflete o momento em que a página está completamente carregada e pronta para responder às interações do usuário. Um TTI alto pode sinalizar bloqueios na thread principal ou scripts pesados.
+%     \item[\textbf{TTI (Time to Interactive)}] Reflete o momento em que a página está completamente carregada e pronta para responder às interações do usuário. Um TTI alto pode sinalizar bloqueios na thread principal ou scripts pesados.
 
-    \item[\textbf{TBT (Total Blocking Time)}] Soma o tempo em que a thread principal esteve ocupada com tarefas longas, impedindo que o usuário interagisse com a página. É um complemento importante ao TTI.
+%     \item[\textbf{TBT (Total Blocking Time)}] Soma o tempo em que a thread principal esteve ocupada com tarefas longas, impedindo que o usuário interagisse com a página. É um complemento importante ao TTI.
 
-    \item[\textbf{CLS (Cumulative Layout Shift)}] Avalia a estabilidade visual da página durante o carregamento, medindo alterações inesperadas no layout. Valores acima de 0,1 indicam problemas de usabilidade.
-\end{description}
+%     \item[\textbf{CLS (Cumulative Layout Shift)}] Avalia a estabilidade visual da página durante o carregamento, medindo alterações inesperadas no layout. Valores acima de 0,1 indicam problemas de usabilidade.
+% \end{description}
 
-Outras métricas relevantes, embora não tão amplamente adotadas nos Core Web Vitals, também são úteis em contextos específicos:
+% Outras métricas relevantes, embora não tão amplamente adotadas nos Core Web Vitals, também são úteis em contextos específicos:
 
-\begin{itemize}
-    \item \textbf{FID (First Input Delay)}: mede o tempo entre a primeira interação do usuário e a resposta do navegador. Substituído pelo INP nas abordagens mais recentes.
+% \begin{itemize}
+%     \item \textbf{FID (First Input Delay)}: mede o tempo entre a primeira interação do usuário e a resposta do navegador. Substituído pelo INP nas abordagens mais recentes.
     
-    \item \textbf{INP (Interaction to Next Paint)}: métrica que avalia a latência de todas as interações, fornecendo uma visão mais completa da responsividade.
+%     \item \textbf{INP (Interaction to Next Paint)}: métrica que avalia a latência de todas as interações, fornecendo uma visão mais completa da responsividade.
 
-    \item \textbf{SI (Speed Index)}: calcula a velocidade com que o conteúdo visível é exibido durante o carregamento.
+%     \item \textbf{SI (Speed Index)}: calcula a velocidade com que o conteúdo visível é exibido durante o carregamento.
 
-    \item \textbf{LCPu (LCP under user timing)}: variação do LCP que considera marcações personalizadas de performance.
+%     \item \textbf{LCPu (LCP under user timing)}: variação do LCP que considera marcações personalizadas de performance.
 
-    \item \textbf{RTT (Round-Trip Time)}: tempo de ida e volta da requisição na rede, relevante em diagnósticos de conectividade.
-\end{itemize}
+%     \item \textbf{RTT (Round-Trip Time)}: tempo de ida e volta da requisição na rede, relevante em diagnósticos de conectividade.
+% \end{itemize}
 
-O domínio dessas métricas é essencial para a compreensão do desempenho percebido pelo usuário final e serve como base para decisões técnicas sobre otimização de aplicações web e escolha de estratégias de renderização.
+% O domínio dessas métricas é essencial para a compreensão do desempenho percebido pelo usuário final e serve como base para decisões técnicas sobre otimização de aplicações web e escolha de estratégias de renderização.
 
 
-\subsection*{Desempenho e Compensações}
+\subsubsection{Desempenho e Compensações}
 
 A renderização do lado do servidor tende a exibir conteúdo mais rapidamente (menor FCP), favorecendo acessibilidade e \textit{SEO}. No entanto, pode aumentar o TTFB, já que a página precisa ser processada antes de ser enviada \cite{osmani2025}. Já a renderização no cliente pode reduzir o tempo de resposta inicial do servidor, mas exige mais do navegador e aumenta o tempo até a página estar interativa (TTI), especialmente em dispositivos móveis.
 
 Modelos híbridos como SSR com \textit{hydration} tentam unir os benefícios de ambas as abordagens, mas podem causar atrasos na interatividade. Técnicas como \textit{hydration progressiva} ou \textit{streaming} reduzem esses impactos ao ativar partes da interface conforme necessário \cite{osmani2025}.
 
-\subsection*{Avanços Recentes}
+\subsubsection{Avanços Recentes}
 
 Estratégias mais recentes, como a \textbf{renderização trimórfica}, permitem que a renderização ocorra em três camadas: servidor, cliente e \textit{service worker}. Isso possibilita desempenho superior em acessos repetidos e melhor controle sobre o cache e atualização de conteúdo dinâmico \cite{osmani2025}.
 
-\subsection*{Impacto em SEO e Indexação}
+\subsubsection{Impacto em SEO e Indexação}
 
 Segundo \citeonline{osmani2025}, abordagens que entregam HTML completo como SSR e SSG são mais eficazes para indexação por mecanismos de busca. Já modelos que dependem fortemente de JavaScript (CSR) exigem testes adicionais e podem comprometer a visibilidade em sistemas como o Googlebot, especialmente quando há falhas na execução dos scripts.
 
@@ -235,6 +236,7 @@ Segundo \citeonline{osmani2025}, abordagens que entregam HTML completo como SSR 
   \legend{Fonte: Adaptado de \cite{osmani2025}}
   \label{fig:comparativo_renderizacao}
 \end{figure}
+
 
 
 
@@ -519,6 +521,62 @@ exports.createPages = async ({ actions }) => {
 \end{codigo}
 
 Assim como o \acrshort{isr}, o \acrshort{dsg} busca combinar desempenho, escalabilidade e atualizações eficientes. No entanto, sua particularidade está em adiar completamente o custo da renderização até o momento da primeira requisição, tornando-o ideal em contextos onde o tempo de build precisa ser otimizado sem prejudicar a entrega do conteúdo a longo prazo.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Métricas e Ferramentas de Análise de Desempenho}
+\label{sec:metricas-e-ferramentas}
+A avaliação de desempenho em aplicações web modernas é um pilar fundamental para garantir a qualidade da experiência do usuário e o sucesso de um projeto. A análise vai muito além do simples tempo de carregamento total, abrangendo a percepção de velocidade, a capacidade de resposta a interações e a estabilidade visual da interface. Para quantificar esses aspectos de forma padronizada e acionável, o ecossistema de desenvolvimento web dispõe de um conjunto robusto de métricas e ferramentas, que foram essenciais para a coleta de dados e a análise comparativa deste trabalho.
+
+\subsection{Ferramentas de Análise de Mercado}
+\label{subsec:ferramentas-analise}
+Existem diversas ferramentas consolidadas para a análise de performance web. Soluções como o \textbf{PageSpeed Insights}, \textbf{GTmetrix} e \textbf{WebPageTest} oferecem diagnósticos detalhados sobre a velocidade de carregamento e a experiência do usuário, simulando diferentes condições de rede, dispositivos e localizações geográficas \cite{webabsoluta_ferramentas}. Enquanto o PageSpeed Insights se destaca por integrar dados de campo (do Chrome User Experience Report) e de laboratório, o GTmetrix é conhecido por seus relatórios detalhados com gráficos em cascata (\textit{waterfall charts}) que ajudam a identificar gargalos no carregamento de recursos \cite{gtmetrix_vitals}. O WebPageTest, por sua vez, oferece uma flexibilidade granular nos testes. Para este trabalho, a análise foi centrada em duas iniciativas principais do Google: o Lighthouse e, principalmente, os Core Web Vitals.
+
+\subsection{Google Lighthouse}
+\label{subsec:google-lighthouse}
+O \textbf{Google Lighthouse} é uma ferramenta de auditoria automatizada e de código aberto, integrada às ferramentas de desenvolvedor do Google Chrome. Ele é projetado para analisar a qualidade de páginas web em cinco categorias principais: Performance, Acessibilidade, Boas Práticas, SEO e \textit{Progressive Web App} (PWA). Ao final da análise, o Lighthouse gera um relatório com pontuações de 0 a 100 para cada categoria e apresenta um conjunto de oportunidades e diagnósticos acionáveis. No contexto deste estudo, o Lighthouse foi utilizado como uma ferramenta de apoio diagnóstico em ambiente de laboratório, essencial para identificar gargalos de renderização, analisar o tempo de bloqueio da \textit{thread} principal (\textit{Total Blocking Time}) e validar aspectos técnicos de SEO e acessibilidade das aplicações desenvolvidas.
+
+\subsection{Core Web Vitals}
+\label{subsec:core-web-vitals}
+O pilar da coleta de dados empíricos deste trabalho foi o conjunto de métricas conhecido como \textbf{Core Web Vitals}. Proposto pelo Google, este subconjunto dos Web Vitals foi projetado para medir a experiência do usuário no mundo real (\textit{field data}), focando em três aspectos que impactam diretamente a percepção do usuário: velocidade de carregamento, interatividade e estabilidade visual \cite{osmani2025}. A importância dessas métricas é reforçada pelo fato de serem um fator de ranqueamento nos resultados de busca do Google \cite{google_cwv_search}.
+
+\subsubsection{Principais Métricas do Web Vitals}
+As métricas a seguir, que compõem os Core Web Vitals atuais, foram essenciais para a análise comparativa:
+\begin{description}
+    \item[\textbf{LCP (\acrfull{lcp})}] Mede o tempo, em segundos, desde o início do carregamento da página até a renderização do maior elemento de conteúdo (imagem ou bloco de texto) visível na tela. É a principal métrica para a percepção de velocidade de carregamento.
+    \item[\textbf{INP (\acrfull{inp})}] Avalia a latência de todas as interações do usuário (cliques, toques e digitação) com a página, medindo a capacidade de resposta geral da aplicação. Um baixo INP indica que a página responde rapidamente às ações do usuário.
+    \item[\textbf{CLS (\acrfull{cls})}] Quantifica a instabilidade visual da página. Mede a soma de todas as mudanças inesperadas de layout que ocorrem durante o carregamento, garantindo que os elementos não "pulem" na tela e frustrem a interação do usuário.
+\end{description}
+
+\subsubsection{Métricas Complementares}
+Além dos Core Web Vitals, outras métricas foram observadas para fornecer um diagnóstico mais completo do processo de carregamento:
+\begin{description}
+    \item[\textbf{TTFB (\acrfull{ttfb})}] Indica a responsividade do servidor. Mede o tempo entre a requisição de um recurso e o momento em que o primeiro byte da resposta chega ao navegador. É um indicador crucial da saúde do \textit{backend}.
+    \item[\textbf{FCP (\acrfull{fcp})}] Marca o tempo em que o primeiro conteúdo do \acrshort{dom} (texto, imagem, etc.) é renderizado na tela, dando ao usuário o primeiro feedback visual de que a página está carregando.
+    \item[\textbf{TBT (Total Blocking Time)}] Medido em ambiente de laboratório (via Lighthouse), soma o tempo em que a \textit{thread} principal ficou bloqueada por tarefas longas, impedindo a resposta a interações do usuário. É um bom proxy para a métrica de campo INP.
+\end{description}
+O domínio e a correta interpretação dessas métricas foram fundamentais para a análise comparativa entre as arquiteturas CSR e SSR, permitindo uma compreensão aprofundada do desempenho percebido pelo usuário e servindo como base para as conclusões técnicas apresentadas neste estudo.
+
+
+
+
+
+
+
 
 
 
