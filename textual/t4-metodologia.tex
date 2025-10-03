@@ -66,7 +66,7 @@ Adotando essa metodologia como padrão de mercado, este trabalho selecionou um c
 
 
 \noindent
-Adicionalmente, foram observados: \textbf{número de requisições HTTP} e \textbf{uso de cache} (no cliente), bem como \textbf{consumo de recursos} do contêiner (CPU e memória) durante os testes. O \acrfull{tti} foi empregado apenas como métrica de \textit{laboratório} via Lighthouse, não integrando o conjunto atual de Core Web Vitals. O tratamento estatístico detalhado das métricas será apresentado posteriormente.
+Adicionalmente, foram observados: número de requisições HTTP e uso de cache (no cliente), bem como consumo de recursos do contêiner (CPU e memória) durante os testes. O \acrfull{tti} foi empregado apenas como métrica de \textit{laboratório} via Lighthouse, não integrando o conjunto atual de Core Web Vitals. O tratamento estatístico detalhado das métricas será apresentado posteriormente.
 
 \subsection{Ferramentas de Teste}
 
@@ -81,7 +81,7 @@ Foram utilizadas ferramentas complementares, com ênfase na coleta contínua no 
 
 \subsection{Ambiente de Testes}
 
-Os testes foram realizados em \textbf{ambiente local controlado} com contêineres \textit{Docker} para as duas versões (\acrshort{csr} e \acrshort{ssr}). Essa decisão decorre de limitações práticas da \textbf{NewsAPI} em produção ( políticas de CORS/uso do plano), e visa garantir controle experimental e reprodutibilidade. Ambos os serviços foram executados com \textbf{paridade de recursos}:
+Os testes foram realizados em ambiente local controlado com contêineres \textit{Docker} para as duas versões (\acrshort{csr} e \acrshort{ssr}). Essa decisão decorre de limitações práticas da NewsAPI em produção ( políticas de CORS/uso do plano), e visa garantir controle experimental e reprodutibilidade. Ambos os serviços foram executados com paridade de recursos:
 
 \begin{itemize}
     \item \textbf{CPU}: \texttt{--cpus="1.0"} e \texttt{--cpuset-cpus="0"};
@@ -108,12 +108,12 @@ A execução foi conduzida da seguinte forma:
 \end{enumerate}
 
 \noindent
-Para reduzir variabilidade, cada teste foi repetido \textbf{no mínimo cinco vezes} por cenário. A quantidade total de repetições e o método de agregação (mediana/p50 e p95) são detalhados em seção específica de resultados.
+Para reduzir variabilidade, cada teste foi repetido no mínimo cinco vezes por cenário. A quantidade total de repetições e o método de agregação (mediana/p50 e p95) são detalhados em seção específica de resultados.
 
 \subsection{Registro e Organização dos Dados}
 
-Os dados coletados pela instrumentação (\acrshort{rum}) foram armazenados em arquivos \textbf{NDJSON} separados por abordagem, contendo os campos de identificação da métrica, valor e carimbo temporal. As auditorias do Lighthouse foram salvas em arquivos JSON/HTML para futura referência. Em seguida, os dados foram consolidados em planilhas, organizados por data, métrica e abordagem (CSR/SSR), para posterior análise comparativa.
+Os dados coletados pela instrumentação (\acrshort{rum}) foram armazenados em arquivos NDJSON separados por abordagem, contendo os campos de identificação da métrica, valor e carimbo temporal. As auditorias do Lighthouse foram salvas em arquivos JSON/HTML para futura referência. Em seguida, os dados foram consolidados em planilhas, organizados por data, métrica e abordagem (CSR/SSR), para posterior análise comparativa.
 
 \subsection{Método de Análise}
 
-Os valores foram analisados por meio de \textbf{estatísticas descritivas}, com foco em \textbf{mediana (p50)} e \textbf{p95}, além de médias e desvios padrão quando apropriado. As comparações entre \acrshort{csr} e \acrshort{ssr} foram conduzidas métrica a métrica (TTFB, FCP, LCP, CLS e INP), considerando os \textit{trade-offs} de cada abordagem. Gráficos e tabelas de síntese são apresentados na seção de Resultados e Discussões.
+Os valores foram analisados por meio de estatísticas descritivas, com foco em mediana (p50) e p95, além de médias e desvios padrão quando apropriado. As comparações entre \acrshort{csr} e \acrshort{ssr} foram conduzidas métrica a métrica (TTFB, FCP, LCP, CLS e INP), considerando os \textit{trade-offs} de cada abordagem. Gráficos e tabelas de síntese são apresentados na seção de Resultados e Discussões.

@@ -16,7 +16,7 @@ As tecnologias fundamentais incluem \english{\acrfull{html}} para estruturação
 \subsection{Arquitetura Cliente-Servidor}
 \label{subsec:Arquitetura Cliente-Servidor}
 
-A arquitetura cliente-servidor é um modelo amplamente adotado no desenvolvimento de aplicações web, caracterizado pela separação entre dois componentes principais: o \textbf{cliente}, responsável pela interface com o usuário, e o \textbf{servidor}, que processa solicitações e fornece os recursos necessários \cite{clienteServidorControlNet}.
+A arquitetura cliente-servidor é um modelo amplamente adotado no desenvolvimento de aplicações web, caracterizado pela separação entre dois componentes principais: cliente, responsável pela interface com o usuário, e o servidor, que processa solicitações e fornece os recursos necessários \cite{clienteServidorControlNet}.
 
 Nesse modelo, os clientes como navegadores em diferentes dispositivos enviam requisições através da internet, enquanto os servidores respondem disponibilizando dados, arquivos e serviços. Essa divisão de responsabilidades favorece a escalabilidade, facilita a manutenção e permite que cliente e servidor operem em plataformas distintas~\cite{fundamentosDevWeb}.
 
@@ -31,19 +31,19 @@ A Figura~\ref{fig:cliente-servidor} ilustra, de forma simplificada, esse fluxo d
 \end{figure}
 
 
-A arquitetura cliente-servidor apresenta características que contribuem para sua ampla adoção em aplicações web. Entre elas, destaca-se a \textbf{distribuição de responsabilidades}, onde o servidor gerencia dados e processos mais complexos, enquanto o cliente lida com a interface e a interação com o usuário. 
+A arquitetura cliente-servidor apresenta características que contribuem para sua ampla adoção em aplicações web. Entre elas, destaca-se a distribuição de responsabilidades, onde o servidor gerencia dados e processos mais complexos, enquanto o cliente lida com a interface e a interação com o usuário. 
 
-Outro ponto relevante é a \textbf{independência entre plataformas}, possibilitada pelo uso de protocolos padronizados, o que permite a comunicação entre diferentes dispositivos e sistemas operacionais. Além disso, esse modelo favorece a \textbf{facilidade de manutenção}, já que atualizações podem ser feitas no servidor sem necessidade de intervenção nos dispositivos dos usuários.
+Outro ponto relevante é a independência entre plataformas, possibilitada pelo uso de protocolos padronizados, o que permite a comunicação entre diferentes dispositivos e sistemas operacionais. Além disso, esse modelo favorece a facilidade de manutenção, já que atualizações podem ser feitas no servidor sem necessidade de intervenção nos dispositivos dos usuários.
 
 Na web, essa arquitetura é implementada por padrão: navegadores atuam como clientes, enviando requisições \acrshort{http} que são processadas por servidores, os quais respondem com páginas e recursos solicitados~\cite{fundamentosDevWeb}.
 
 
 \subsection{Protocolo \acrshort{http}}
 \label{subsec:http}
-O \textbf{Protocolo de Transferência de Hipertexto} (\acrshort{http}) é a base da comunicação na World Wide Web, definindo como clientes (navegadores) e servidores trocam informações. Ele especifica a estrutura das requisições e respostas, permitindo a recuperação de recursos como documentos \acrshort(html), imagens e vídeos \cite{mdn_http}.
+O Protocolo de Transferência de Hipertexto (\acrshort{http}) é a base da comunicação na World Wide Web, definindo como clientes (navegadores) e servidores trocam informações. Ele especifica a estrutura das requisições e respostas, permitindo a recuperação de recursos como documentos \acrshort(html), imagens e vídeos \cite{mdn_http}.
 
 
- O \textbf{Funcionamento do \acrshort{http}}opera no modelo cliente-servidor, onde o cliente inicia uma requisição e o servidor responde com os recursos solicitados ou mensagens de erro, se aplicável. Cada interação consiste em uma mensagem de requisição do cliente e uma mensagem de resposta do servidor. As mensagens \acrshort{http} são compostas por:
+ O Funcionamento do \acrshort{http} opera no modelo cliente-servidor, onde o cliente inicia uma requisição e o servidor responde com os recursos solicitados ou mensagens de erro, se aplicável. Cada interação consiste em uma mensagem de requisição do cliente e uma mensagem de resposta do servidor. As mensagens \acrshort{http} são compostas por:
 
 \begin{itemize}
     \item \textbf{Linha de início:} Indica o método \acrshort{http} (como \texttt{GET} ou \texttt{POST}) e o caminho do recurso.
@@ -56,7 +56,7 @@ O \textbf{Protocolo de Transferência de Hipertexto} (\acrshort{http}) é a base
 \end{flushright}
 
 
-\textbf{Métodos \acrshort{http}} são operações definidas pelo protocolo que especificam a ação a ser realizada em um recurso. Os métodos mais comuns incluem:
+Métodos \acrshort{http} são operações definidas pelo protocolo que especificam a ação a ser realizada em um recurso. Os métodos mais comuns incluem:
 
 \begin{itemize}
     \item \textbf{GET:} Solicita a representação de um recurso específico. Requisições GET devem ser utilizadas apenas para recuperar dados.
@@ -68,7 +68,7 @@ O \textbf{Protocolo de Transferência de Hipertexto} (\acrshort{http}) é a base
 Cada método possui uma finalidade específica e deve ser utilizado conforme a necessidade da aplicação \cite{wikipedia_http}.
 
 
-\textbf{Códigos de Status \acrshort{http}} são códigos de três dígitos que indicam o resultado de uma requisição feita pelo cliente ao servidor. Eles são agrupados em cinco classes principais:
+Códigos de Status \acrshort{http} são códigos de três dígitos que indicam o resultado de uma requisição feita pelo cliente ao servidor. Eles são agrupados em cinco classes principais:
 
 \begin{itemize}
     \item \textbf{1xx (Informativo):} Indica que a requisição foi recebida e o processo continua.
@@ -81,7 +81,7 @@ Cada método possui uma finalidade específica e deve ser utilizado conforme a n
 Esses códigos auxiliam na identificação e resolução de problemas durante a comunicação \acrshort{http} \cite{mdn_http}.
 
 
-\textbf{Evolução do \acrshort{http}} refere-se às revisões progressivas do protocolo com o objetivo de aprimorar sua eficiência e desempenho ao longo do tempo. As principais versões são:
+Evolução do \acrshort{http} refere-se às revisões progressivas do protocolo com o objetivo de aprimorar sua eficiência e desempenho ao longo do tempo. As principais versões são:
 
 \begin{itemize}
     \item \textbf{HTTP/1.0:} Primeira versão oficial do protocolo, em que cada requisição exigia uma nova conexão com o servidor.
@@ -113,7 +113,7 @@ O desenvolvimento frontend, conforme definido por \citeonline{aws_frontend_backe
 
 Entre os recursos modernos do \acrshort{css}, destacam-se os seletores avançados, variáveis \acrshort{css}, pseudo-classes, animações e as funcionalidades de \textit{Flexbox} e \textit{Grid}, que facilitam a criação de interfaces ricas e adaptáveis~\cite{herocode_diferencas}.
 
-\textbf{JavaScript} é uma linguagem de programação interpretada, orientada a objetos e baseada em eventos, amplamente utilizada para adicionar interatividade e dinamismo às páginas web. Por meio da manipulação da \textit{\acrfull{dom}}, permite implementar funcionalidades como respostas a cliques, envio de formulários, movimentações do mouse, digitação, animações, validações e atualizações em tempo real, enriquecendo significativamente a experiência do usuário~\cite{alura_htmlcssjs}. Além disso, possibilita o carregamento assíncrono de dados com a técnica \textit{AJAX} (\textit{Asynchronous JavaScript and XML}), evitando recarregamentos completos da página.
+JavaScript é uma linguagem de programação interpretada, orientada a objetos e baseada em eventos, amplamente utilizada para adicionar interatividade e dinamismo às páginas web. Por meio da manipulação da \textit{\acrfull{dom}}, permite implementar funcionalidades como respostas a cliques, envio de formulários, movimentações do mouse, digitação, animações, validações e atualizações em tempo real, enriquecendo significativamente a experiência do usuário~\cite{alura_htmlcssjs}. Além disso, possibilita o carregamento assíncrono de dados com a técnica \textit{AJAX} (\textit{Asynchronous JavaScript and XML}), evitando recarregamentos completos da página.
 
 JavaScript é uma das três principais tecnologias da World Wide Web, juntamente com \acrshort{html} e \acrshort{css}, sendo essencial tanto em abordagens tradicionais quanto modernas. Nas aplicações baseadas em \acrshort{csr}, essa linguagem tem papel central, pois a renderização das páginas ocorre diretamente no navegador do usuário. Com a evolução do ecossistema JavaScript, surgiram bibliotecas e frameworks robustos como a biblioteca React e os frameworks Vue.js e Angular que facilitam o desenvolvimento de aplicações complexas com componentes reutilizáveis e gerenciamento eficiente de estado.
 
@@ -175,7 +175,7 @@ Segundo \citeonline{osmani2025}, é importante distinguir os principais modelos 
   Proposto pelo Gatsby, o DSG difere do ISR por não gerar certas páginas no momento do build. Em vez disso, elas são geradas apenas na primeira requisição (on-demand). Após isso, são armazenadas em cache e servidas como estáticas nas requisições seguintes. É útil em projetos com milhares de páginas de baixo acesso, reduzindo significativamente o tempo de build.
 \end{description}
 
-Além dessas abordagens, destaca-se o conceito de \textbf{reidratação}, que consiste em ativar a interatividade de páginas SSR ou SSG no cliente. Esse processo utiliza JavaScript para associar os eventos dinâmicos à estrutura HTML previamente renderizada, sendo essencial para tornar a página interativa após a exibição inicial \cite{osmani2025}.
+Além dessas abordagens, destaca-se o conceito de reidratação, que consiste em ativar a interatividade de páginas SSR ou SSG no cliente. Esse processo utiliza JavaScript para associar os eventos dinâmicos à estrutura HTML previamente renderizada, sendo essencial para tornar a página interativa após a exibição inicial \cite{osmani2025}.
 
 
 \subsubsection{Desempenho e Compensações}
@@ -186,7 +186,7 @@ Modelos híbridos como \acrshort{ssr} com \textit{hydration} tentam unir os bene
 
 \subsubsection{Impacto em SEO e Indexação}
 
-Segundo \citeonline{osmani2025}, abordagens que entregam HTML completo como SSR e SSG são mais eficazes para indexação por mecanismos de busca. Já modelos que dependem fortemente de JavaScript (CSR) exigem testes adicionais e podem comprometer a visibilidade em sistemas como o Googlebot, especialmente quando há falhas na execução dos scripts.
+Segundo \citeonline{osmani2025}, abordagens que entregam HTML completo como \acrshort{ssr} e \acrshort{ssg} são mais eficazes para indexação por mecanismos de busca. Já modelos que dependem fortemente de JavaScript (\acrshort{csr}) exigem testes adicionais e podem comprometer a visibilidade em sistemas como o Googlebot, especialmente quando há falhas na execução dos scripts.
 
 \begin{figure}[H]
   \centering
@@ -195,8 +195,6 @@ Segundo \citeonline{osmani2025}, abordagens que entregam HTML completo como SSR 
   \legend{Fonte: Adaptado de \cite{osmani2025}}
   \label{fig:comparativo_renderizacao}
 \end{figure}
-
-Segundo \citeonline{osmani2025}, abordagens que entregam HTML completo como \acrshort{ssr} e \acrshort{ssg} são mais eficazes para indexação por mecanismos de busca. Já modelos que dependem fortemente de JavaScript (\acrshort{csr}) exigem testes adicionais e podem comprometer a visibilidade em sistemas como o Googlebot, especialmente quando há falhas na execução dos scripts.
 
 A Figura~\ref{fig:comparativo_renderizacao} oferece uma visão consolidada e detalhada de cinco estratégias de renderização web, do modelo puramente do servidor ao puramente do cliente. A tabela ilustra os \textit{trade-offs} de cada abordagem em relação a aspectos como o papel do servidor, o tipo de HTML gerado e os impactos em desempenho e escala.
 
@@ -217,7 +215,7 @@ Em resumo, a figura demonstra que a escolha da renderização é um compromisso 
 \subsection{\english{Client-Side Rendering} (\acrshort{csr})}
 \label{subsec:csr}
 
-A \textbf{\english{\acrfull{csr}}} é uma técnica em que a geração da interface e do conteúdo final ocorre diretamente no navegador do usuário, utilizando JavaScript. Nessa abordagem, o servidor envia um arquivo \english{\acrfull{html}} mínimo, contendo apenas a estrutura básica da página e referências a arquivos de estilo e scripts.{\cite{atori2024}}
+ \english{\acrfull{csr}} é uma técnica em que a geração da interface e do conteúdo final ocorre diretamente no navegador do usuário, utilizando JavaScript. Nessa abordagem, o servidor envia um arquivo \english{\acrfull{html}} mínimo, contendo apenas a estrutura básica da página e referências a arquivos de estilo e scripts.{\cite{atori2024}}
 
 Segundo \citeonline{atori2024}, o processo de renderização no cliente segue as seguintes etapas:
 
@@ -281,7 +279,7 @@ Esse padrão é típico de aplicações \acrshort{spa}, onde todo o conteúdo é
 \subsection{\english{Server-Side Rendering} (\acrshort{ssr})}
 \label{subsec:ssr}
 
-A \textbf{\english{\acrfull{ssr}}} é uma abordagem em que a geração do conteúdo e da interface ocorre integralmente no servidor antes de ser enviada ao navegador do cliente. Ou seja, o servidor processa a lógica da aplicação, obtém dados necessários (por exemplo, em bancos de dados ou \emph{APIs}) e retorna ao cliente um arquivo \english{\acrshort{html}} já renderizado. Dessa forma, o navegador exibe imediatamente a página completa, sem precisar executar \emph{scripts} para montar o conteúdo inicial \cite{atori2024}. 
+ \english{\acrfull{ssr}} é uma abordagem em que a geração do conteúdo e da interface ocorre integralmente no servidor antes de ser enviada ao navegador do cliente. Ou seja, o servidor processa a lógica da aplicação, obtém dados necessários (por exemplo, em bancos de dados ou \emph{APIs}) e retorna ao cliente um arquivo \english{\acrshort{html}} já renderizado. Dessa forma, o navegador exibe imediatamente a página completa, sem precisar executar \emph{scripts} para montar o conteúdo inicial \cite{atori2024}. 
 
 Segundo \citeonline{atori2024}, o processo típico de renderização no lado do servidor pode ser descrito em quatro etapas principais:
 
@@ -352,7 +350,7 @@ Por fim, aplicações \acrshort{ssr} tendem a apresentar melhor performance em t
 \subsection{\english{Static Site Generation} (\acrshort{ssg})}
 \label{subsec:ssg}
 
-A \textbf{\english{\acrfull{ssg}}} é uma técnica de pré-renderização na qual as páginas da aplicação são geradas estaticamente em tempo de *build* (compilação) e armazenadas como arquivos \acrshort{html}. Ao contrário de abordagens como \acrshort{csr} e \acrshort{ssr}, onde a renderização ocorre no navegador ou sob demanda no servidor, o \acrshort{ssg} permite que o conteúdo já esteja pronto e otimizado para ser entregue diretamente ao navegador, reduzindo a carga do servidor e otimizando o desempenho de carregamento \cite{pahan2021}.
+\english{\acrfull{ssg}} é uma técnica de pré-renderização na qual as páginas da aplicação são geradas estaticamente em tempo de *build* (compilação) e armazenadas como arquivos \acrshort{html}. Ao contrário de abordagens como \acrshort{csr} e \acrshort{ssr}, onde a renderização ocorre no navegador ou sob demanda no servidor, o \acrshort{ssg} permite que o conteúdo já esteja pronto e otimizado para ser entregue diretamente ao navegador, reduzindo a carga do servidor e otimizando o desempenho de carregamento \cite{pahan2021}.
 
 Segundo \citeonline{bose2022}, a renderização no modelo \acrshort{ssg} segue estas etapas principais:
 
@@ -401,7 +399,7 @@ A principal limitação do \acrshort{ssg} é a dificuldade em lidar com conteúd
 \subsection{\english{Incremental Static Regeneration} (\acrshort{isr})}
 \label{subsec:isr}
 
-A \textbf{\english{\acrfull{isr}}} é uma estratégia híbrida introduzida por frameworks como o Next.js, que combina os benefícios da geração estática (\acrshort{ssg}) com a flexibilidade de atualização dinâmica. Com \acrshort{isr}, as páginas são inicialmente geradas estaticamente em tempo de build, mas podem ser revalidadas e regeneradas no servidor de forma incremental e automática, com base em uma estratégia de tempo (ex: a cada 10 segundos) ou conforme novas requisições são feitas \cite{pahan2021}.
+\english{\acrfull{isr}} é uma estratégia híbrida introduzida por frameworks como o Next.js, que combina os benefícios da geração estática (\acrshort{ssg}) com a flexibilidade de atualização dinâmica. Com \acrshort{isr}, as páginas são inicialmente geradas estaticamente em tempo de build, mas podem ser revalidadas e regeneradas no servidor de forma incremental e automática, com base em uma estratégia de tempo (ex: a cada 10 segundos) ou conforme novas requisições são feitas \cite{pahan2021}.
 
 De acordo com \citeonline{bose2022}, o fluxo típico do \acrshort{isr} inclui as seguintes etapas:
 
@@ -450,7 +448,7 @@ O \acrshort{isr} representa um meio-termo eficiente entre a performance do \acrs
 \subsection{\english{Deferred Static Generation} (\acrshort{dsg})}
 \label{subsec:deferred-dsg}
 
-A \textbf{\english{Deferred Static Generation} (DSG)} é uma extensão da estratégia de geração estática proposta pelo framework Gatsby. Essa abordagem permite que certas páginas do site sejam geradas sob demanda ( ou seja, somente no momento em que forem requisitadas pela primeira vez ) em vez de serem construídas durante o processo inicial de build, como ocorre no \acrshort{ssg} tradicional \cite{gatsby2023}.
+\english{Deferred Static Generation} (DSG) é uma extensão da estratégia de geração estática proposta pelo framework Gatsby. Essa abordagem permite que certas páginas do site sejam geradas sob demanda ( ou seja, somente no momento em que forem requisitadas pela primeira vez ) em vez de serem construídas durante o processo inicial de build, como ocorre no \acrshort{ssg} tradicional \cite{gatsby2023}.
 
 Segundo a \citeonline{gatsby2023}, o \acrshort{dsg} tem como principal vantagem a capacidade de reduzir significativamente o tempo de build em projetos com um número elevado de páginas, ao evitar a pré-renderização de rotas que têm baixo tráfego ou que não precisam estar imediatamente disponíveis. Após a primeira solicitação, a página é armazenada em cache e, a partir daí, servida como conteúdo estático em acessos subsequentes.
 
@@ -518,15 +516,15 @@ A avaliação de desempenho em aplicações web modernas é um pilar fundamental
 
 \subsection{Ferramentas de Análise de Mercado}
 \label{subsec:ferramentas-analise}
-Existem diversas ferramentas consolidadas para a análise de performance web. Soluções como o \textbf{PageSpeed Insights}, \textbf{GTmetrix} e \textbf{WebPageTest} oferecem diagnósticos detalhados sobre a velocidade de carregamento e a experiência do usuário, simulando diferentes condições de rede, dispositivos e localizações geográficas \cite{webabsoluta_ferramentas}. Enquanto o PageSpeed Insights se destaca por integrar dados de campo (do Chrome User Experience Report) e de laboratório, o GTmetrix é conhecido por seus relatórios detalhados com gráficos em cascata (\textit{waterfall charts}) que ajudam a identificar gargalos no carregamento de recursos \cite{gtmetrix_vitals}. O WebPageTest, por sua vez, oferece uma flexibilidade granular nos testes. Para este trabalho, a análise foi centrada em duas iniciativas principais do Google: o Lighthouse e, principalmente, os Core Web Vitals.
+Existem diversas ferramentas consolidadas para a análise de performance web. Soluções como o PageSpeed Insights, GTmetrix e WebPageTest oferecem diagnósticos detalhados sobre a velocidade de carregamento e a experiência do usuário, simulando diferentes condições de rede, dispositivos e localizações geográficas \cite{webabsoluta_ferramentas}. Enquanto o PageSpeed Insights se destaca por integrar dados de campo (do Chrome User Experience Report) e de laboratório, o GTmetrix é conhecido por seus relatórios detalhados com gráficos em cascata (\textit{waterfall charts}) que ajudam a identificar gargalos no carregamento de recursos \cite{gtmetrix_vitals}. O WebPageTest, por sua vez, oferece uma flexibilidade granular nos testes. Para este trabalho, a análise foi centrada em duas iniciativas principais do Google: o Lighthouse e, principalmente, os Core Web Vitals.
 
 \subsection{Google Lighthouse}
 \label{subsec:google-lighthouse}
-O \textbf{Google Lighthouse} é uma ferramenta de auditoria automatizada e de código aberto, integrada às ferramentas de desenvolvedor do Google Chrome. Ele é projetado para analisar a qualidade de páginas web em cinco categorias principais: Performance, Acessibilidade, Boas Práticas, SEO e \textit{Progressive Web App} (PWA). Ao final da análise, o Lighthouse gera um relatório com pontuações de 0 a 100 para cada categoria e apresenta um conjunto de oportunidades e diagnósticos acionáveis. No contexto deste estudo, o Lighthouse foi utilizado como uma ferramenta de apoio diagnóstico em ambiente de laboratório, essencial para identificar gargalos de renderização, analisar o tempo de bloqueio da \textit{thread} principal (\textit{Total Blocking Time}) e validar aspectos técnicos de SEO e acessibilidade das aplicações desenvolvidas.
+O Google Lighthouse é uma ferramenta de auditoria automatizada e de código aberto, integrada às ferramentas de desenvolvedor do Google Chrome. Ele é projetado para analisar a qualidade de páginas web em cinco categorias principais: Performance, Acessibilidade, Boas Práticas, SEO e \textit{Progressive Web App} (PWA). Ao final da análise, o Lighthouse gera um relatório com pontuações de 0 a 100 para cada categoria e apresenta um conjunto de oportunidades e diagnósticos acionáveis. No contexto deste estudo, o Lighthouse foi utilizado como uma ferramenta de apoio diagnóstico em ambiente de laboratório, essencial para identificar gargalos de renderização, analisar o tempo de bloqueio da \textit{thread} principal (\textit{Total Blocking Time}) e validar aspectos técnicos de SEO e acessibilidade das aplicações desenvolvidas.
 
 \subsection{Core Web Vitals}
 \label{subsec:core-web-vitals}
-O pilar da coleta de dados empíricos deste trabalho foi o conjunto de métricas conhecido como \textbf{Core Web Vitals}. Proposto pelo Google, este subconjunto dos Web Vitals foi projetado para medir a experiência do usuário no mundo real (\textit{field data}), focando em três aspectos que impactam diretamente a percepção do usuário: velocidade de carregamento, interatividade e estabilidade visual \cite{osmani2025}. A importância dessas métricas é reforçada pelo fato de serem um fator de ranqueamento nos resultados de busca do Google \cite{google_cwv_search}.
+O pilar da coleta de dados empíricos deste trabalho foi o conjunto de métricas conhecido como Core Web Vitals. Proposto pelo Google, este subconjunto dos Web Vitals foi projetado para medir a experiência do usuário no mundo real (\textit{field data}), focando em três aspectos que impactam diretamente a percepção do usuário: velocidade de carregamento, interatividade e estabilidade visual \cite{osmani2025}. A importância dessas métricas é reforçada pelo fato de serem um fator de ranqueamento nos resultados de busca do Google \cite{google_cwv_search}.
 
 \subsubsection{Principais Métricas do Web Vitals}
 As métricas a seguir, que compõem os Core Web Vitals atuais, foram essenciais para a análise comparativa:
@@ -728,22 +726,22 @@ Assim, embora o \acrshort{ssr} ofereça uma base naturalmente mais acessível, a
 \section{Ferramentas Modernas para Prototipação e Interfaces}
 \label{sec:ferramentas-modernas}
 
-Nesta seção são apresentadas duas ferramentas inovadoras utilizadas para acelerar o desenvolvimento frontend: a plataforma \textbf{v0} e a biblioteca de componentes \textbf{shadcn/ui}. Ambas representam abordagens modernas para construção de interfaces dinâmicas, acessíveis e escaláveis.
+Nesta seção são apresentadas duas ferramentas inovadoras utilizadas para acelerar o desenvolvimento frontend: a plataforma v0 e a biblioteca de componentes shadcn/ui. Ambas representam abordagens modernas para construção de interfaces dinâmicas, acessíveis e escaláveis.
 
 \subsection{v0}
 \label{subsec:v0}
 
-A \textbf{v0} é uma plataforma assistida por Inteligência Artificial projetada para transformar descrições em linguagem natural em aplicações web funcionais. A partir de prompts descritivos, a ferramenta gera código utilizando tecnologias modernas como React, Next.js e Tailwind CSS, permitindo prototipação rápida e iteração sobre interfaces \cite{v0_docs}. O fluxo básico inclui: escrever a ideia em texto, gerar a interface automaticamente, revisar e ajustar os elementos e exportar o código para integração no projeto.
+A v0 é uma plataforma assistida por Inteligência Artificial projetada para transformar descrições em linguagem natural em aplicações web funcionais. A partir de prompts descritivos, a ferramenta gera código utilizando tecnologias modernas como React, Next.js e Tailwind CSS, permitindo prototipação rápida e iteração sobre interfaces \cite{v0_docs}. O fluxo básico inclui: escrever a ideia em texto, gerar a interface automaticamente, revisar e ajustar os elementos e exportar o código para integração no projeto.
 
 \subsection{shadcn/ui}
 \label{subsec:shadcn}
 
-O \textbf{shadcn/ui} é uma biblioteca de componentes open source baseada em Radix UI e estilizada com Tailwind CSS. Ao contrário de bibliotecas tradicionais, os componentes do \textbf{shadcn/ui} são copiados diretamente para o projeto, oferecendo ao desenvolvedor total controle sobre o código e possibilitando personalizações profundas \cite{shadcn_docs}. Essa abordagem favorece flexibilidade e consistência visual no desenvolvimento de aplicações modernas.
+O shadcn/ui é uma biblioteca de componentes open source baseada em Radix UI e estilizada com Tailwind CSS. Ao contrário de bibliotecas tradicionais, os componentes do shadcn/ui são copiados diretamente para o projeto, oferecendo ao desenvolvedor total controle sobre o código e possibilitando personalizações profundas \cite{shadcn_docs}. Essa abordagem favorece flexibilidade e consistência visual no desenvolvimento de aplicações modernas.
 
 \subsection{Integração entre v0 e shadcn/ui}
 \label{subsec:integracao-v0-shadcn}
 
-A integração entre \textbf{v0} e \textbf{shadcn/ui} proporciona uma experiência otimizada para geração de interfaces. Ao utilizar a plataforma \textbf{v0}, os componentes gerados são construídos com base na arquitetura do \textbf{shadcn/ui}, incluindo as práticas recomendadas de acessibilidade e estilização com Tailwind CSS \cite{v0_docs, shadcn_docs}. Essa integração permite que desenvolvedores iniciem com protótipos gerados automaticamente e, em seguida, façam ajustes diretamente no código dos componentes, mantendo um alto grau de personalização e performance. Além disso, ela favorece o uso de estratégias modernas como \acrshort{ssr} e \acrshort{csr}, oferecendo compatibilidade com frameworks como Next.js e Vite.
+A integração entre v0 e shadcn/ui proporciona uma experiência otimizada para geração de interfaces. Ao utilizar a plataforma v0, os componentes gerados são construídos com base na arquitetura do shadcn/ui, incluindo as práticas recomendadas de acessibilidade e estilização com Tailwind CSS \cite{v0_docs, shadcn_docs}. Essa integração permite que desenvolvedores iniciem com protótipos gerados automaticamente e, em seguida, façam ajustes diretamente no código dos componentes, mantendo um alto grau de personalização e performance. Além disso, ela favorece o uso de estratégias modernas como \acrshort{ssr} e \acrshort{csr}, oferecendo compatibilidade com frameworks como Next.js e Vite.
 
 
 
@@ -751,12 +749,12 @@ A integração entre \textbf{v0} e \textbf{shadcn/ui} proporciona uma experiênc
 \section{Processo de Desenvolvimento e Controle de Gestão de Software}
 \label{sec:git-github}
 
-O desenvolvimento de aplicações web modernas exige práticas que garantam organização, rastreabilidade e colaboração eficiente entre desenvolvedores. Nesse contexto, ferramentas de controle de versão como o \textbf{Git} e plataformas de hospedagem como o \textbf{GitHub} são fundamentais para o gerenciamento do ciclo de vida do software \cite{github_official}.
+O desenvolvimento de aplicações web modernas exige práticas que garantam organização, rastreabilidade e colaboração eficiente entre desenvolvedores. Nesse contexto, ferramentas de controle de versão como o Git e plataformas de hospedagem como o GitHub são fundamentais para o gerenciamento do ciclo de vida do software \cite{github_official}.
 
 \subsection{Git}
 \label{subsec:git}
 
-O \textbf{Git} é um sistema de controle de versão distribuído criado por Linus Torvalds em 2005 com o objetivo de gerenciar projetos de forma rápida e eficiente, independentemente do tamanho ou complexidade \cite{chacon_git}. Ele permite que múltiplos desenvolvedores trabalhem simultaneamente em um projeto, mantendo o histórico de alterações de forma segura e auditável.
+O Git é um sistema de controle de versão distribuído criado por Linus Torvalds em 2005 com o objetivo de gerenciar projetos de forma rápida e eficiente, independentemente do tamanho ou complexidade \cite{chacon_git}. Ele permite que múltiplos desenvolvedores trabalhem simultaneamente em um projeto, mantendo o histórico de alterações de forma segura e auditável.
 
 Entre os conceitos fundamentais do Git, destacam-se:
 
@@ -773,7 +771,7 @@ O modelo distribuído do Git permite que cada colaborador mantenha uma cópia co
 \subsection{GitHub}
 \label{subsec:github}
 
-O \textbf{GitHub} é uma plataforma de hospedagem de código baseada em Git, que amplia suas funcionalidades com recursos colaborativos e integração contínua \cite{github_official}. Fundada em 2008, a plataforma popularizou-se como um ambiente de colaboração para projetos de software de código aberto e privado.
+O GitHub é uma plataforma de hospedagem de código baseada em Git, que amplia suas funcionalidades com recursos colaborativos e integração contínua \cite{github_official}. Fundada em 2008, a plataforma popularizou-se como um ambiente de colaboração para projetos de software de código aberto e privado.
 
 Além de hospedar repositórios Git, o GitHub oferece funcionalidades como:
 
@@ -787,7 +785,7 @@ Além de hospedar repositórios Git, o GitHub oferece funcionalidades como:
 \subsection{GitHub Projects}
 \label{subsec:github-projects}
 
-O \textbf{GitHub Projects} é uma funcionalidade integrada à plataforma que possibilita o gerenciamento de projetos utilizando quadros visuais baseados em metodologias ágeis, como Kanban e Scrum \cite{github_projects}. Essa ferramenta permite organizar tarefas, acompanhar o progresso e priorizar demandas de maneira colaborativa.
+O GitHub Projects é uma funcionalidade integrada à plataforma que possibilita o gerenciamento de projetos utilizando quadros visuais baseados em metodologias ágeis, como Kanban e Scrum \cite{github_projects}. Essa ferramenta permite organizar tarefas, acompanhar o progresso e priorizar demandas de maneira colaborativa.
 
 Entre os recursos oferecidos pelo GitHub Projects, destacam-se:
 
@@ -806,7 +804,7 @@ Entre os recursos oferecidos pelo GitHub Projects, destacam-se:
 \section{News API}
 \label{sec:news-api}
 
-A \textbf{News API} é uma interface de programação que disponibiliza fluxos de notícias e artigos de forma estruturada, permitindo o acesso a conteúdos de mais de 150\,000 fontes jornalísticas ao redor do mundo. Seu propósito é fornecer informações publicadas em tempo real, facilitando o desenvolvimento de soluções de agregação, análise e visualização de notícias \cite{newsapi_docs}.
+A News API é uma interface de programação que disponibiliza fluxos de notícias e artigos de forma estruturada, permitindo o acesso a conteúdos de mais de 150\,000 fontes jornalísticas ao redor do mundo. Seu propósito é fornecer informações publicadas em tempo real, facilitando o desenvolvimento de soluções de agregação, análise e visualização de notícias \cite{newsapi_docs}.
 
 \subsection{Escopo e cobertura}
 A plataforma oferece dois principais tipos de consulta: 
@@ -816,13 +814,13 @@ A plataforma oferece dois principais tipos de consulta:
     \item \textbf{Manchetes principais (\texttt{/top-headlines}):} retorna as notícias mais recentes, com filtros por país, categoria jornalística e fontes específicas.
 \end{itemize}
 
-Além disso, a \textbf{News API} disponibiliza o endpoint \texttt{/sources}, que fornece metadados sobre os veículos indexados, como nome, idioma, categoria e URL oficial.
+Além disso, a News API disponibiliza o endpoint \texttt{/sources}, que fornece metadados sobre os veículos indexados, como nome, idioma, categoria e URL oficial.
 
 \subsection{Autenticação e formato de resposta}
 Para utilizar os endpoints, é necessário um \acrshort{api} key, que autentica as requisições e controla o uso da plataforma. As respostas são retornadas no formato \acrshort{json}, contendo campos como \texttt{status}, \texttt{totalResults} e uma lista de objetos \texttt{articles}, com atributos como título, autor, descrição, \acrshort{url} e data de publicação \cite{newsapi_docs}.
 
 \subsection{Funcionalidade e integração}
-A \textbf{News API} suporta buscas avançadas com:
+A News API suporta buscas avançadas com:
 
 \begin{itemize}
     \item termos exatos ou operadores lógicos (\texttt{AND}, \texttt{OR}, \texttt{NOT});
@@ -840,17 +838,17 @@ Essas características permitem integração tanto em aplicações com \acrshort
 \section{Contêineres e Docker}
 \label{cap:docker}
 
-Este capítulo apresenta os conceitos fundamentais de contêineres e da plataforma \textbf{Docker}, incluindo sua arquitetura, objetos principais (imagens, camadas, contêineres, redes e volumes) e o processo de construção de imagens por meio do \textbf{Dockerfile}. Também são discutidas boas práticas de construção (multi-stage builds, cache, uso de \texttt{.dockerignore} e \textit{secrets}) e a integração com o estudo comparativo \acrshort{csr} x \acrshort{ssr}. \cite{docker_overview,dockerfile_ref} 
+Este capítulo apresenta os conceitos fundamentais de contêineres e da plataforma Docker, incluindo sua arquitetura, objetos principais (imagens, camadas, contêineres, redes e volumes) e o processo de construção de imagens por meio do Dockerfile. Também são discutidas boas práticas de construção (multi-stage builds, cache, uso de \texttt{.dockerignore} e \textit{secrets}) e a integração com o estudo comparativo \acrshort{csr} x \acrshort{ssr}. \cite{docker_overview,dockerfile_ref} 
 
 \subsection{Visão Geral da Plataforma Docker}
 \label{sec:docker-overview}
 
-O \textbf{Docker} é uma plataforma de código aberto que permite empacotar, distribuir e executar aplicações em ambientes isolados chamados \textbf{contêineres}. Esses contêineres são leves, portáveis e contêm tudo o que é necessário para executar a aplicação (bibliotecas, dependências e configurações), reduzindo a variação entre ambientes e acelerando ciclos de \acrshort{ci}/\acrshort{cd} \cite{docker_overview}. 
+O Docker é uma plataforma de código aberto que permite empacotar, distribuir e executar aplicações em ambientes isolados chamados contêineres. Esses contêineres são leves, portáveis e contêm tudo o que é necessário para executar a aplicação (bibliotecas, dependências e configurações), reduzindo a variação entre ambientes e acelerando ciclos de \acrshort{ci}/\acrshort{cd} \cite{docker_overview}. 
 
 \subsection{Arquitetura: cliente–servidor}
 \label{subsec:docker-arquitetura}
 
-A arquitetura do Docker segue o modelo cliente–servidor: o \textbf{cliente} (\texttt{docker}) envia comandos para o \textbf{daemon} (\texttt{dockerd}), que executa as operações de \textit{build}, execução e distribuição de imagens e contêineres. A comunicação ocorre via \acrshort{api} do Docker, por \textit{Unix sockets} ou interface de rede. O \textbf{Docker Desktop} integra esses componentes e ferramentas correlatas (Compose, Kubernetes opcional, etc.) \cite{docker_overview}. 
+A arquitetura do Docker segue o modelo cliente–servidor: o cliente (\texttt{docker}) envia comandos para o daemon (\texttt{dockerd}), que executa as operações de \textit{build}, execução e distribuição de imagens e contêineres. A comunicação ocorre via \acrshort{api} do Docker, por \textit{Unix sockets} ou interface de rede. O Docker Desktop integra esses componentes e ferramentas correlatas (Compose, Kubernetes opcional, etc.) \cite{docker_overview}. 
 
 \begin{figure}[H]
   \centering
@@ -863,7 +861,7 @@ A arquitetura do Docker segue o modelo cliente–servidor: o \textbf{cliente} (\
 \subsection{Registries e distribuição de imagens}
 \label{subsec:docker-registries}
 
-Imagens são armazenadas em \textbf{registries} (Docker Hub público ou registries privados). Comandos como \texttt{docker pull}, \texttt{docker push} e \texttt{docker run} interagem com o registry configurado. Essa camada viabiliza portabilidade entre ambientes locais, datacenters e nuvens \cite{docker_overview}. 
+Imagens são armazenadas em registries (Docker Hub público ou registries privados). Comandos como \texttt{docker pull}, \texttt{docker push} e \texttt{docker run} interagem com o registry configurado. Essa camada viabiliza portabilidade entre ambientes locais, datacenters e nuvens \cite{docker_overview}. 
 
 \section{Objetos do Docker: imagens, camadas e contêineres}
 \label{sec:docker-objetos}
@@ -871,12 +869,12 @@ Imagens são armazenadas em \textbf{registries} (Docker Hub público ou registri
 \subsection{Imagens em camadas}
 \label{subsec:docker-imagens}
 
-Uma \textbf{imagem} é um \textit{template} somente leitura, composto por \textbf{camadas} (\textit{layers}). Cada instrução no \textbf{Dockerfile} cria uma nova camada. Em uma reconstrução, apenas camadas alteradas são recompostas, o que torna as imagens mais leves e o \textit{build} mais eficiente \cite{docker_overview}. 
+Uma imagem é um \textit{template} somente leitura, composto por camadas (\textit{layers}). Cada instrução no Dockerfile cria uma nova camada. Em uma reconstrução, apenas camadas alteradas são recompostas, o que torna as imagens mais leves e o \textit{build} mais eficiente \cite{docker_overview}. 
 
 \subsection{Contêineres}
 \label{subsec:docker-containers}
 
-Um \textbf{contêiner} é uma instância executável de uma imagem. Ele pode ser criado, iniciado, parado, removido e conectado a redes e volumes. Por padrão, um contêiner é isolado, mas o nível de isolamento de rede, armazenamento e \textit{namespaces} pode ser configurado. Alterações não persistentes são descartadas quando o contêiner é removido \cite{docker_overview}. 
+Um contêiner é uma instância executável de uma imagem. Ele pode ser criado, iniciado, parado, removido e conectado a redes e volumes. Por padrão, um contêiner é isolado, mas o nível de isolamento de rede, armazenamento e \textit{namespaces} pode ser configurado. Alterações não persistentes são descartadas quando o contêiner é removido \cite{docker_overview}. 
 
 \begin{codigo}[H]
 \begin{lstlisting}[language=bash]
@@ -890,7 +888,7 @@ docker run -it ubuntu /bin/bash
 \section{Dockerfile: referência e instruções principais}
 \label{sec:dockerfile}
 
-O \textbf{Dockerfile} é um arquivo de texto que descreve, passo a passo, como montar uma imagem: cada instrução corresponde a um comando executado durante o \textit{build}. Entre as instruções mais comuns estão: \texttt{FROM}, \texttt{RUN}, \texttt{COPY}, \texttt{ADD}, \texttt{CMD}, \texttt{ENTRYPOINT}, \texttt{ENV}, \texttt{ARG}, \texttt{EXPOSE}, \texttt{WORKDIR}, \texttt{USER}, \texttt{VOLUME}, \texttt{HEALTHCHECK}, \texttt{LABEL} e \texttt{ONBUILD} \cite{dockerfile_ref}. 
+O Dockerfile é um arquivo de texto que descreve, passo a passo, como montar uma imagem: cada instrução corresponde a um comando executado durante o \textit{build}. Entre as instruções mais comuns estão: \texttt{FROM}, \texttt{RUN}, \texttt{COPY}, \texttt{ADD}, \texttt{CMD}, \texttt{ENTRYPOINT}, \texttt{ENV}, \texttt{ARG}, \texttt{EXPOSE}, \texttt{WORKDIR}, \texttt{USER}, \texttt{VOLUME}, \texttt{HEALTHCHECK}, \texttt{LABEL} e \texttt{ONBUILD} \cite{dockerfile_ref}. 
 
 \subsection{Formato, substituição de variáveis e \textit{.dockerignore}}
 \label{subsec:dockerfile-format}
@@ -917,7 +915,7 @@ As instruções suportam formas \textit{shell} e \textit{exec} (JSON). Variávei
 \subsection{Multi-stage builds e imagens enxutas}
 \label{subsec:multi-stage}
 
-\textbf{Multi-stage builds} permitem compilar artefatos em um estágio (com \textit{toolchains} pesadas) e copiar apenas o resultado para um estágio final mínimo (por exemplo, \texttt{alpine} ou \texttt{scratch}), reduzindo tamanho, superfície de ataque e tempo de transferência \cite{dockerfile_ref}.
+Multi-stage builds permitem compilar artefatos em um estágio (com \textit{toolchains} pesadas) e copiar apenas o resultado para um estágio final mínimo (por exemplo, \texttt{alpine} ou \texttt{scratch}), reduzindo tamanho, superfície de ataque e tempo de transferência \cite{dockerfile_ref}.
 
 \begin{codigo}[H]
 \begin{lstlisting}[language=Dockerfile]
@@ -945,7 +943,7 @@ CMD ["node", ".next/standalone/server.js"]
 \subsection{Cache de build e \texttt{RUN --mount}}
 \label{subsec:cache-build}
 
-Organize instruções do Dockerfile para maximizar \textbf{cache} (mudar menos camadas de cima). Com BuildKit, \texttt{RUN --mount=type=cache} cria caches persistentes para gerenciadores de pacotes (\texttt{apt}, \texttt{pip}, \texttt{go}) sem invalidar camadas, acelerando builds subsequentes \cite{dockerfile_ref}. 
+Organize instruções do Dockerfile para maximizar cache (mudar menos camadas de cima). Com BuildKit, \texttt{RUN --mount=type=cache} cria caches persistentes para gerenciadores de pacotes (\texttt{apt}, \texttt{pip}, \texttt{go}) sem invalidar camadas, acelerando builds subsequentes \cite{dockerfile_ref}. 
 
 \begin{codigo}[H]
 \begin{lstlisting}[language=Dockerfile]
@@ -989,7 +987,7 @@ Evite inserir \textit{secrets} na imagem via \texttt{ENV}/\texttt{ARG}. Prefira 
 \subsection{Rede, portas, volumes e saúde}
 \label{sec:network-storage}
 
-\textbf{Portas} podem ser documentadas com \texttt{EXPOSE}, enquanto o mapeamento real é definido em \texttt{docker run -p}. \textbf{Volumes} permitem persistência de dados; \textbf{redes} conectam múltiplos contêineres. \textbf{Healthchecks} ajudam a detectar falhas de \textit{runtime} e são úteis em composição e orquestração \cite{dockerfile_ref,docker_overview}.
+Portas podem ser documentadas com \texttt{EXPOSE}, enquanto o mapeamento real é definido em \texttt{docker run -p}. Volumes permitem persistência de dados; redes conectam múltiplos contêineres. Healthchecks ajudam a detectar falhas de \textit{runtime} e são úteis em composição e orquestração \cite{dockerfile_ref,docker_overview}.
 
 \begin{codigo}[H]
 \begin{lstlisting}[language=bash]
@@ -1027,8 +1025,8 @@ docker run -d -p 3000:3000 ghcr.io/usuario/minhaapp:1.0
 No contexto do seu trabalho, contêineres simplificam a comparação entre \acrshort{csr} e \acrshort{ssr} ao padronizar ambiente, dependências e execução:
 
 \begin{itemize}
-  \item \textbf{CSR/SSG (estático + CDN):} \textit{build} do frontend (React/Vite/Next SSG) em um estágio e \textbf{Nginx} no estágio final para servir arquivos estáticos.  
-  \item \textbf{SSR (Node/Next):} multi-stage com instalação apenas das dependências de produção e \textbf{imagem enxuta} (\texttt{alpine} ou \texttt{distroless}), expondo a porta do servidor \acrshort{ssr}.
+  \item \textbf{CSR/SSG (estático + CDN):} \textit{build} do frontend (React/Vite/Next SSG) em um estágio e Nginx no estágio final para servir arquivos estáticos.  
+  \item \textbf{SSR (Node/Next):} multi-stage com instalação apenas das dependências de produção e imagem enxuta (\texttt{alpine} ou \texttt{distroless}), expondo a porta do servidor \acrshort{ssr}.
   \item \textbf{Medições reprodutíveis:} ao encapsular as variantes em imagens, é possível rodar os mesmos testes de desempenho (\acrshort{fcp}, \acrshort{ttfb}, \acrshort{inp}, \acrshort{tti}) em hardware idêntico e com \textit{network shaping}, isolando o impacto da estratégia de renderização.
 \end{itemize}
 
@@ -1048,4 +1046,4 @@ EXPOSE 80
 \subsection{Síntese}
 \label{sec:docker-sintese}
 
-O Docker fornece uma base consistente para empacotar e executar aplicações, com \textbf{isolamento leve}, portabilidade e \textbf{ciclo de vida} claro (construir, distribuir, executar). O \textbf{Dockerfile} e as boas práticas descritas \textit{multi-stage}, cache de build, \texttt{.dockerignore} e \textit{secrets} viabilizam imagens menores, \textit{builds} mais rápidos e maior segurança. Tudo isso contribui diretamente para a reprodutibilidade e a comparabilidade dos experimentos entre \acrshort{csr} e \acrshort{ssr} \cite{docker_overview,dockerfile_ref}. 
+O Docker fornece uma base consistente para empacotar e executar aplicações, com isolamento leve, portabilidade e ciclo de vida claro (construir, distribuir, executar). O Dockerfile e as boas práticas descritas multi-stage, cache de build, \texttt{.dockerignore} e secrets viabilizam imagens menores, builds mais rápidos e maior segurança. Tudo isso contribui diretamente para a reprodutibilidade e a comparabilidade dos experimentos entre \acrshort{csr} e \acrshort{ssr} \cite{docker_overview,dockerfile_ref}.

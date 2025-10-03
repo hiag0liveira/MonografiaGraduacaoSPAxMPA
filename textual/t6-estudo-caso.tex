@@ -63,16 +63,16 @@ A Figura \ref{fig:kanban-userstories} mostra um exemplo de cartão \english{issu
 
 \subsection{Planejamento Funcional: Épico e Histórias de Usuário}
 
-Para guiar o desenvolvimento da plataforma \textbf{WallTech}, foi adotada uma abordagem baseada em práticas ágeis, especialmente no uso de \textit{épicos} e \textit{histórias de usuário}. Essa técnica visa descrever funcionalidades a partir da perspectiva do usuário, proporcionando clareza sobre o propósito e os objetivos de cada componente da aplicação.
+Para guiar o desenvolvimento da plataforma WallTech, foi adotada uma abordagem baseada em práticas ágeis, especialmente no uso de \textit{épicos} e \textit{histórias de usuário}. Essa técnica visa descrever funcionalidades a partir da perspectiva do usuário, proporcionando clareza sobre o propósito e os objetivos de cada componente da aplicação.
 
-As histórias de usuário foram redigidas segundo o modelo dos \textbf{3Ws (Who, What, Why)}, uma técnica comum em análise de requisitos que busca responder:
+As histórias de usuário foram redigidas segundo o modelo dos 3Ws (Who, What, Why), uma técnica comum em análise de requisitos que busca responder:
 \begin{itemize}
   \item \textbf{Who (Quem):} Quem está solicitando ou interagindo com a funcionalidade?
   \item \textbf{What (O quê):} Qual é a ação ou funcionalidade desejada?
   \item \textbf{Why (Por quê):} Qual é o benefício ou valor esperado para o usuário?
 \end{itemize}
 
-Esse modelo torna a narrativa mais centrada no usuário e contribui para um entendimento compartilhado entre desenvolvedores, designers e partes interessadas. Além disso, as funcionalidades foram agrupadas em \textbf{épicos}, que representam blocos de funcionalidades coesas e de maior escala dentro do sistema.
+Esse modelo torna a narrativa mais centrada no usuário e contribui para um entendimento compartilhado entre desenvolvedores, designers e partes interessadas. Além disso, as funcionalidades foram agrupadas em épicos, que representam blocos de funcionalidades coesas e de maior escala dentro do sistema.
 
 A seguir, apresenta-se o \textbf{EPIC-01}, responsável por organizar as funcionalidades relacionadas à visualização pública de notícias na plataforma WallTech, seguido de suas respectivas histórias de usuário.
 
@@ -195,9 +195,9 @@ A seguir, apresenta-se o \textbf{EPIC-01}, responsável por organizar as funcion
 \section{Requisitos}
 \label{section:requisitos}
 
-O levantamento e a definição dos requisitos da plataforma \textbf{WallTech} foram guiados pelas necessidades dos usuários e organizados por meio da técnica de \textit{histórias de usuário}, agrupadas em \textit{épicos}. A partir da análise funcional do \textbf{EPIC-01 — Visualização de Notícias (Público)}, foram identificadas as principais funcionalidades esperadas para a aplicação, considerando tanto o fluxo de interação do visitante quanto os objetivos de usabilidade, desempenho e escalabilidade.
+O levantamento e a definição dos requisitos da plataforma WallTech foram guiados pelas necessidades dos usuários e organizados por meio da técnica de \textit{histórias de usuário}, agrupadas em \textit{épicos}. A partir da análise funcional do \textbf{EPIC-01 — Visualização de Notícias (Público)}, foram identificadas as principais funcionalidades esperadas para a aplicação, considerando tanto o fluxo de interação do visitante quanto os objetivos de usabilidade, desempenho e escalabilidade.
 
-Os requisitos a seguir foram organizados em duas categorias: \textbf{funcionais}, que representam as funcionalidades diretamente percebidas pelos usuários, e \textbf{não funcionais}, que tratam de atributos como desempenho, acessibilidade e responsividade.
+Os requisitos a seguir foram organizados em duas categorias: funcionais, que representam as funcionalidades diretamente percebidas pelos usuários, e não funcionais, que tratam de atributos como desempenho, acessibilidade e responsividade.
 
 \subsection{Requisitos Funcionais}
 \label{subsec:requisitos-funcionais}
@@ -256,20 +256,21 @@ A seguir, cada abordagem é apresentada com seu fluxo típico de funcionamento, 
 Na abordagem \acrfull{ssr} com \acrfull{mpa}, cada página é renderizada no servidor a partir de uma requisição HTTP completa. O HTML final já é entregue com os dados integrados, permitindo que o navegador exiba o conteúdo imediatamente, favorecendo o tempo de carregamento inicial e a indexação por \textit{crawlers} \cite{atori2024}.
 
 \begin{itemize}
-  \item O \textbf{usuário} acessa o site;
-  \item O \textbf{navegador} envia uma requisição \texttt{GET} ao \textbf{servidor Next.js};
-  \item O servidor obtém os dados mais recentes na \textbf{NewsAPI};
+  \item O usuário acessa o site;
+  \item O navegador envia uma requisição \texttt{GET} ao servidor Next.};
+  \item O servidor obtém os dados mais recentes na NewsAPI;
   \item O servidor monta a página HTML já com os dados;
   \item O HTML é enviado ao navegador e exibido;
   \item Cada navegação subsequente gera nova requisição completa ao servidor;
-  \item Scripts no cliente utilizam \textbf{LocalStorage} para melhorar a experiência.
+  \item Scripts no cliente utilizam LocalStorage para melhorar a experiência.
 \end{itemize}
   
-A Figura \ref{fig:component-diagram-next} ilustra como, nesta arquitetura, o \textbf{navegador} interage diretamente com o \textbf{Servidor Next.js} para cada página requisitada. O servidor, por sua vez:
+A Figura \ref{fig:component-diagram-next} ilustra como, nesta arquitetura, o navegador interage diretamente com o Servidor Next.js para cada página requisitada. O servidor, por sua vez:
+
 \begin{enumerate}
-  \item Identifica a rota usando o \textbf{roteamento baseado em arquivos};
+  \item Identifica a rota usando o roteamento baseado em arquivos;
   \item Executa a lógica de busca de dados (\texttt{getServerSideProps});
-  \item Faz chamadas à \textbf{NewsAPI} para obter o conteúdo;
+  \item Faz chamadas à NewsAPI para obter o conteúdo;
   \item Renderiza o HTML e o envia ao cliente.
 \end{enumerate}
 
@@ -284,7 +285,7 @@ A Figura \ref{fig:sequence-diagram-ssr} detalha a ordem das interações. O usu�
 \end{figure}
 
 
-A Figura \ref{fig:component-diagram-next} mostra que, nessa arquitetura, o \textbf{servidor Next.js} centraliza o roteamento, a obtenção de dados e a renderização das páginas, entregando ao navegador HTML já pré-renderizado. Após o carregamento, scripts ativam a interatividade e permitem o uso do \textbf{LocalStorage}.
+A Figura \ref{fig:component-diagram-next} mostra que, nessa arquitetura, o servidor Next.js centraliza o roteamento, a obtenção de dados e a renderização das páginas, entregando ao navegador HTML já pré-renderizado. Após o carregamento, scripts ativam a interatividade e permitem o uso do LocalStorage.
 
 \begin{figure}[H]
   \centering
@@ -301,12 +302,12 @@ A Figura \ref{fig:component-diagram-next} mostra que, nessa arquitetura, o \text
 Na abordagem \acrfull{csr} com \acrfull{spa}, o carregamento inicial envia um HTML mínimo e um pacote JavaScript que contém toda a lógica da aplicação. A partir daí, a navegação e renderização são executadas no navegador, sem recarregar a página.
 
 \begin{itemize}
-  \item O \textbf{usuário} acessa o site;
-  \item O navegador baixa o \textbf{bundle React} e monta a interface inicial;
-  \item O \textbf{gerenciador de estado} solicita dados à \textbf{NewsAPI};
+  \item O usuário acessa o site;
+  \item O navegador baixa o bundle React e monta a interface inicial;
+  \item O gerenciador de estado solicita dados à NewsAPI;
   \item A interface é atualizada dinamicamente com os dados recebidos;
-  \item Ao navegar, o \textbf{roteador do React} altera a URL e renderiza novos componentes;
-  \item Dados podem ser lidos ou salvos no \textbf{LocalStorage}.
+  \item Ao navegar, o roteador do React altera a URL e renderiza novos componentes;
+  \item Dados podem ser lidos ou salvos no LocalStorage.
 \end{itemize}
 
 A Figura \ref{fig:sequence-diagram-csr} descreve como o navegador processa as interações: primeiro carrega a aplicação, depois solicita dados conforme necessário e atualiza a interface sem recarregar a página, garantindo uma navegação contínua.
@@ -320,7 +321,7 @@ A Figura \ref{fig:sequence-diagram-csr} descreve como o navegador processa as in
 \end{figure}
 
 
-A Figura \ref{fig:component-diagram-react} mostra que, nessa arquitetura, o navegador concentra toda a lógica de renderização. O \textbf{Roteador React} decide quais componentes de página serão exibidos, enquanto o \textbf{Gerenciador de Estado} controla o fluxo de dados entre a interface e a \textbf{NewsAPI}.
+A Figura \ref{fig:component-diagram-react} mostra que, nessa arquitetura, o navegador concentra toda a lógica de renderização. O Roteador React decide quais componentes de página serão exibidos, enquanto o Gerenciador de Estado controla o fluxo de dados entre a interface e a NewsAPI.
 
 \begin{figure}[H]
   \centering
@@ -335,20 +336,20 @@ A Figura \ref{fig:component-diagram-react} mostra que, nessa arquitetura, o nave
 \section{Implementação}
 \label{sec:implementacao}
 
-Esta seção descreve o conjunto de tecnologias, bibliotecas e ferramentas que são empregadas para a construção das duas versões do sistema de prova de conceito, detalhando a fundamentação para a escolha de cada componente do ecossistema de desenvolvimento. O gerenciamento do código-fonte e do ciclo de vida do projeto é realizado com o sistema de controle de versão \textbf{Git} e a plataforma de hospedagem \textbf{GitHub}, conforme as práticas descritas na Seção~\ref{sec:git-github}.
+Esta seção descreve o conjunto de tecnologias, bibliotecas e ferramentas que são empregadas para a construção das duas versões do sistema de prova de conceito, detalhando a fundamentação para a escolha de cada componente do ecossistema de desenvolvimento. O gerenciamento do código-fonte e do ciclo de vida do projeto é realizado com o sistema de controle de versão Git e a plataforma de hospedagem GitHub, conforme as práticas descritas na Seção~\ref{sec:git-github}.
 
-Ambas as implementações consomem dados da mesma fonte externa, a \textbf{News API}, uma \acrshort{api} RESTful que fornece o conteúdo jornalístico para a aplicação, como detalhado na Seção~\ref{sec:news-api}. Para garantir a consistência visual e a qualidade da interface entre as duas arquiteturas, utiliza-se a biblioteca de componentes \textbf{shadcn/ui}, que oferece um conjunto de componentes acessíveis e personalizáveis, conforme apresentado na Seção~\ref{sec:ferramentas-modernas}.
+Ambas as implementações consomem dados da mesma fonte externa, a News API, uma \acrshort{api} RESTful que fornece o conteúdo jornalístico para a aplicação, como detalhado na Seção~\ref{sec:news-api}. Para garantir a consistência visual e a qualidade da interface entre as duas arquiteturas, utiliza-se a biblioteca de componentes shadcn/ui, que oferece um conjunto de componentes acessíveis e personalizáveis, conforme apresentado na Seção~\ref{sec:ferramentas-modernas}.
 
 \subsection{Implementação da Aplicação SPA}
 \label{ssec:implementacao_spa}
 
-A implementação da \acrfull{spa} é desenvolvida utilizando a biblioteca \textbf{React} na sua versão 18. O React é uma biblioteca JavaScript declarativa, mantida pela Meta, focada na construção de interfaces de usuário a partir de componentes reutilizáveis. Sua adoção neste projeto se dá por sua vasta popularidade no mercado e ao seu paradigma de componentização, que facilita a criação de UIs modulares e de fácil manutenção \cite{react2025}. A eficiência da renderização é otimizada pelo uso de um DOM Virtual, um conceito central da biblioteca que minimiza as manipulações diretas no navegador.
+A implementação da \acrfull{spa} é desenvolvida utilizando a biblioteca React na sua versão 18. O React é uma biblioteca JavaScript declarativa, mantida pela Meta, focada na construção de interfaces de usuário a partir de componentes reutilizáveis. Sua adoção neste projeto se dá por sua vasta popularidade no mercado e ao seu paradigma de componentização, que facilita a criação de UIs modulares e de fácil manutenção \cite{react2025}. A eficiência da renderização é otimizada pelo uso de um DOM Virtual, um conceito central da biblioteca que minimiza as manipulações diretas no navegador.
 
-Para a estruturação inicial do projeto e o gerenciamento do ambiente de desenvolvimento, utiliza-se a ferramenta de \textit{build} \textbf{Vite}. O Vite é um ecossistema de desenvolvimento frontend moderno que oferece um servidor de desenvolvimento com recarregamento rápido (\textit{Hot Module Replacement}) e um processo de compilação (\textit{build}) otimizado, que resulta em pacotes de produção menores e mais eficientes \cite{vite_docs}.
+Para a estruturação inicial do projeto e o gerenciamento do ambiente de desenvolvimento, utiliza-se a ferramenta de \textit{build} Vite. O Vite é um ecossistema de desenvolvimento frontend moderno que oferece um servidor de desenvolvimento com recarregamento rápido (\textit{Hot Module Replacement}) e um processo de compilação (\textit{build}) otimizado, que resulta em pacotes de produção menores e mais eficientes \cite{vite_docs}.
 
-O roteamento no lado do cliente, uma característica fundamental da arquitetura SPA, implementa-se com a biblioteca \textbf{React Router}. Trata-se da solução padrão para navegação em aplicações React, que possibilita a criação de uma experiência de usuário fluida e sem recarregamentos de página ao manipular a \acrshort{api} de Histórico do navegador \cite{react_router_docs}. A comunicação com a News API é realizada por meio da \acrshort{api} \texttt{fetch}, nativa dos navegadores modernos.
+O roteamento no lado do cliente, uma característica fundamental da arquitetura SPA, implementa-se com a biblioteca React Router. Trata-se da solução padrão para navegação em aplicações React, que possibilita a criação de uma experiência de usuário fluida e sem recarregamentos de página ao manipular a \acrshort{api} de Histórico do navegador \cite{react_router_docs}. A comunicação com a News API é realizada por meio da \acrshort{api} \texttt{fetch}, nativa dos navegadores modernos.
 
-A \autoref{fig:app-react-csr} mostra a \textbf{página inicial} da plataforma WallTech na implementação \acrshort{spa} com \acrshort{csr}, em conformidade com o wireframe (\autoref{fig:wireframe-walltech}). Nessa página, o usuário visualiza a notícia mais visitada em destaque, três outras recentemente acessadas ao lado, uma lista com as cinco últimas notícias publicadas, além de barra de pesquisa e filtro por país (Brasil ou EUA).
+A \autoref{fig:app-react-csr} mostra a página inicial da plataforma WallTech na implementação \acrshort{spa} com \acrshort{csr}, em conformidade com o wireframe (\autoref{fig:wireframe-walltech}). Nessa página, o usuário visualiza a notícia mais visitada em destaque, três outras recentemente acessadas ao lado, uma lista com as cinco últimas notícias publicadas, além de barra de pesquisa e filtro por país (Brasil ou EUA).
 
 \begin{figure}[H]
   \centering
@@ -361,12 +362,12 @@ A \autoref{fig:app-react-csr} mostra a \textbf{página inicial} da plataforma Wa
 \subsection{Implementação da Aplicação MPA}
 \label{ssec:implementacao_mpa}
 
-A implementação da \acrfull{mpa}, com foco em \acrfull{ssr}, é desenvolvida com o \emph{framework} \textbf{Next.js} na versão 14. O Next.js é um meta-framework baseado em React, mantido pela Vercel, que se posiciona como uma solução completa para a construção de aplicações web de produção. Sua escolha para este estudo de caso justifica-se por ser a principal referência de mercado para a implementação de \acrshort{ssr} no ecossistema React, oferecendo uma estrutura robusta e opinativa \cite{nextjs2024}.
+A implementação da \acrfull{mpa}, com foco em \acrfull{ssr}, é desenvolvida com o \emph{framework} Next.js na versão 14. O Next.js é um meta-framework baseado em React, mantido pela Vercel, que se posiciona como uma solução completa para a construção de aplicações web de produção. Sua escolha para este estudo de caso justifica-se por ser a principal referência de mercado para a implementação de \acrshort{ssr} no ecossistema React, oferecendo uma estrutura robusta e opinativa \cite{nextjs2024}.
 
-O \emph{framework} opera sobre um ambiente \textbf{Node.js}, o que permite a execução de código JavaScript no lado do servidor \cite{nodejs2025}. Essa capacidade é a base da renderização no servidor, onde o Next.js utiliza funções específicas, como a \texttt{getServerSideProps}, para buscar dados de fontes externas e pré-renderizar o HTML completo de uma página antes de enviá-la ao navegador. Além disso, o Next.js implementa um sistema de roteamento baseado no sistema de arquivos, onde a estrutura de diretórios da pasta \texttt{pages} define automaticamente as rotas da aplicação, simplificando a configuração e a manutenção do projeto.
+O \emph{framework} opera sobre um ambiente Node.js, o que permite a execução de código JavaScript no lado do servidor \cite{nodejs2025}. Essa capacidade é a base da renderização no servidor, onde o Next.js utiliza funções específicas, como a \texttt{getServerSideProps}, para buscar dados de fontes externas e pré-renderizar o HTML completo de uma página antes de enviá-la ao navegador. Além disso, o Next.js implementa um sistema de roteamento baseado no sistema de arquivos, onde a estrutura de diretórios da pasta \texttt{pages} define automaticamente as rotas da aplicação, simplificando a configuração e a manutenção do projeto.
 
 
-A \autoref{fig:app-next-ssr} mostra a \textbf{página de detalhes} de uma notícia na plataforma WallTech, na implementação \acrshort{mpa} com \acrshort{ssr}. Ao clicar em uma notícia na listagem, o usuário é direcionado para esta tela, onde pode visualizar imagem, fonte, título, metadados (agência e data/hora) e resumo. Também é possível acessar a matéria original pelo botão “Ler na fonte” e retornar à página anterior pelo botão “Voltar”.
+A \autoref{fig:app-next-ssr} mostra a página de detalhes de uma notícia na plataforma WallTech, na implementação \acrshort{mpa} com \acrshort{ssr}. Ao clicar em uma notícia na listagem, o usuário é direcionado para esta tela, onde pode visualizar imagem, fonte, título, metadados (agência e data/hora) e resumo. Também é possível acessar a matéria original pelo botão “Ler na fonte” e retornar à página anterior pelo botão “Voltar”.
 
 \begin{figure}[H]
   \centering
@@ -383,6 +384,10 @@ Com as duas versões da plataforma WallTech implementadas e funcionais, o alicer
 
 
 
+
+
+
+
 \chapter{Coleta de Dados}
 \label{cap:metodologia_experimental}
 
@@ -393,20 +398,20 @@ Após o desenvolvimento das duas versões da plataforma WallTech, este capítulo
 \section{Configuração do Ambiente Experimental}
 \label{sec:ambiente-experimental}
 
-Esta seção detalha como as duas versões da plataforma \textbf{WallTech} uma \acrshort{mpa} com \acrshort{ssr} (Next.js) e uma \acrshort{spa} com \acrshort{csr} (React+Vite) foram instrumentadas para coleta de \textit{Web Vitals}, empacotadas em contêineres \textit{Docker} com \textbf{paridade de recursos} e executadas em ambiente \textbf{local controlado} para assegurar reprodutibilidade do estudo.
+Esta seção detalha como as duas versões da plataforma WallTech uma \acrshort{mpa} com \acrshort{ssr} (Next.js) e uma \acrshort{spa} com \acrshort{csr} (React+Vite) foram instrumentadas para coleta de \textit{Web Vitals}, empacotadas em contêineres \textit{Docker} com paridade de recursos e executadas em ambiente local controlado para assegurar reprodutibilidade do estudo.
 
 \subsection{Limitações de Execução e Decisão Metodológica}
 \label{ssec:limitacoes-execucao}
 
-Durante o desenvolvimento, a \textit{NewsAPI} impôs restrições de uso em produção (por exemplo, políticas de CORS e/ou limitações do plano vigentes no período do estudo), o que impactaria a coleta de dados em ambiente hospedado. Para \textbf{eliminar interferências externas} e garantir \textbf{controle experimental}, decidiu-se executar ambos os protótipos \textbf{localmente} em contêineres \textit{Docker}, com os \textbf{mesmos limites de CPU e memória}, sistema de arquivos \textit{read-only} e partições temporárias (\textit{tmpfs}) para reduzir variações de I/O. Assim, a comparação \acrshort{csr}~vs.~\acrshort{ssr} foca no \textit{modelo de renderização} e não em diferenças de \textit{hosting}.
+Durante o desenvolvimento, a \textit{NewsAPI} impôs restrições de uso em produção (por exemplo, políticas de CORS e/ou limitações do plano vigentes no período do estudo), o que impactaria a coleta de dados em ambiente hospedado. Para eliminar interferências externas e garantir controle experimental, decidiu-se executar ambos os protótipos localmente em contêineres \textit{Docker}, com os mesmos limites de CPU e memória, sistema de arquivos \textit{read-only} e partições temporárias (\textit{tmpfs}) para reduzir variações de I/O. Assim, a comparação \acrshort{csr}~vs.~\acrshort{ssr} foca no \textit{modelo de renderização} e não em diferenças de \textit{hosting}.
 
 \subsection{Instrumentação de Web Vitals}
 \label{ssec:instrumentacao-webvitals}
 
-Em ambos os protótipos, a instrumentação é realizada \textbf{no cliente}, e os dados são enviados para um \textbf{endpoint interno} exposto pelo próprio contêiner. Utiliza-se \texttt{navigator.sendBeacon} como via principal (por não bloquear a navegação) e \texttt{fetch} como \textit{fallback} com \texttt{keepalive}. As métricas coletadas são os \textit{Core Web Vitals} atuais: \textbf{TTFB}, \textbf{FCP}, \textbf{LCP}, \textbf{CLS} e \textbf{INP}. 
+Em ambos os protótipos, a instrumentação é realizada no cliente, e os dados são enviados para um endpoint interno exposto pelo próprio contêiner. Utiliza-se \texttt{navigator.sendBeacon} como via principal (por não bloquear a navegação) e \texttt{fetch} como \textit{fallback} com \texttt{keepalive}. As métricas coletadas são os \textit{Core Web Vitals} atuais: \textbf{TTFB}, \textbf{FCP}, \textbf{LCP}, \textbf{CLS} e \textbf{INP}.
 
-Os registros são persistidos em \textbf{NDJSON} (uma linha por métrica), contendo, dentre outros, os campos:
-\texttt{\{id, name, value, rating, navigationType, attribution, entries, ts\}}. A análise estatística (p.\,ex., \textbf{p50}/\textbf{p95}) está \textit{deliberadamente breve} aqui e será desenvolvida em capítulos posteriores.
+Os registros são persistidos em NDJSON (uma linha por métrica), contendo, dentre outros, os campos:
+\texttt{\{id, name, value, rating, navigationType, attribution, entries, ts\}}. A análise estatística (p.\,ex., p50/p95) está \textit{deliberadamente breve} aqui e será desenvolvida em capítulos posteriores.
 
 \subsubsection{SSR/MPA (Next.js).}
 Na versão \acrshort{ssr} (App Router), um \textit{Client Component} global usa \texttt{useReportWebVitals} para escutar e enviar as métricas ao endpoint \texttt{/api/vitals}. No servidor, a rota grava o NDJSON em um caminho configurável: por padrão \texttt{/tmp/webvitals.ndjson} (partição \textit{tmpfs}), ou no caminho definido por \texttt{\$METRICS\_PATH} quando se deseja persistência via volume.
@@ -459,7 +464,7 @@ export default function WebVitals() {
 \end{lstlisting}
 
 \subsubsection{CSR/SPA (React+Vite).}
-Na versão \acrshort{csr}, a coleta usa \texttt{web-vitals/attribution} (para enriquecer \textit{attribution} em \texttt{LCP}/\texttt{CLS}/\texttt{INP}). O envio é feito para \texttt{/api/web-vitals}. Como não há servidor \textit{framework} (p.\,ex., Next), a aplicação é servida por um \textbf{processo Node.js} simples (\texttt{server.cjs}) que entrega o \texttt{dist/} e expõe o endpoint de métricas, gravando no mesmo esquema (\texttt{/tmp} ou \texttt{\$METRICS\_PATH}).
+Na versão \acrshort{csr}, a coleta usa \texttt{web-vitals/attribution} (para enriquecer \textit{attribution} em \texttt{LCP}/\texttt{CLS}/\texttt{INP}). O envio é feito para \texttt{/api/web-vitals}. Como não há servidor \textit{framework} (p.\,ex., Next), a aplicação é servida por um processo Node.js simples (\texttt{server.cjs}) que entrega o \texttt{dist/} e expõe o endpoint de métricas, gravando no mesmo esquema (\texttt{/tmp} ou \texttt{\$METRICS\_PATH}).
 
 \begin{lstlisting}[language=TypeScript,caption={Envio de métricas no cliente (CSR/React+Vite)}]
 import { useEffect } from "react";
@@ -542,7 +547,7 @@ server.listen(PORT);
 \subsection{Empacotamento Docker: SSR/MPA (Next.js)}
 \label{ssec:ssr-docker}
 
-Para \acrshort{ssr}, adotou-se o \textbf{modo standalone} do Next.js e \textit{multi-stage build}: (i) instalação de dependências, (ii) \textit{build} e (iii) \textit{runner} minimalista. O contêiner expõe a porta \texttt{3000}, roda como usuário \texttt{node} e lê variáveis em tempo de execução (importante para segredos e chaves).
+Para \acrshort{ssr}, adotou-se o modo standalone do Next.js e \textit{multi-stage build}: (i) instalação de dependências, (ii) \textit{build} e (iii) \textit{runner} minimalista. O contêiner expõe a porta \texttt{3000}, roda como usuário \texttt{node} e lê variáveis em tempo de execução (importante para segredos e chaves).
 
 \begin{lstlisting}[language=Dockerfile,caption={Dockerfile da aplicação SSR/MPA (Next.js)}]
 # ---------- 1) deps ----------
@@ -591,7 +596,7 @@ docker run --name next-ssr \
 \subsection{Empacotamento Docker: CSR/SPA (React+Vite)}
 \label{ssec:csr-docker}
 
-Para \acrshort{csr}, o \textit{build} é produzido pelo Vite e servido por \texttt{server.cjs}. Diferentemente do \acrshort{ssr}, as variáveis \texttt{VITE\_*} são resolvidas em \textbf{tempo de build}; por isso, a \texttt{.env} é copiada para o estágio \textit{builder} (ou alternativamente injetada com \texttt{--build-arg}). Em execução, o caminho do arquivo de métricas é definido por \texttt{\$METRICS\_PATH}.
+Para \acrshort{csr}, o \textit{build} é produzido pelo Vite e servido por \texttt{server.cjs}. Diferentemente do \acrshort{ssr}, as variáveis \texttt{VITE\_*} são resolvidas em tempo de build; por isso, a \texttt{.env} é copiada para o estágio \textit{builder} (ou alternativamente injetada com \texttt{--build-arg}). Em execução, o caminho do arquivo de métricas é definido por \texttt{\$METRICS\_PATH}.
 
 \begin{lstlisting}[language=Dockerfile,caption={Dockerfile da aplicação CSR/SPA (React+Vite)}]
 # ---------- 1) deps ----------
@@ -638,22 +643,22 @@ docker run --name react-csr \
 \subsection{Paridade de Recursos, Observabilidade e Procedimento de Coleta}
 \label{ssec:paridade-observabilidade}
 
-Para evitar viés de ambiente, ambos os contêineres executam com \textbf{paridade de recursos}: \texttt{--cpus="1.0"}, \texttt{--cpuset-cpus="0"} (fixação na CPU 0), \texttt{--memory="1g"}, \texttt{--memory-swap="1g"}, \texttt{--pids-limit=256}, \texttt{--read-only} e \texttt{--tmpfs /tmp} (arquivo de métricas em memória quando não houver volume). No \acrshort{ssr}, \texttt{/app/.next/cache} é montado em \texttt{tmpfs} para reduzir variações de disco.
+Para evitar viés de ambiente, ambos os contêineres executam com paridade de recursos: \texttt{--cpus="1.0"}, \texttt{--cpuset-cpus="0"} (fixação na CPU 0), \texttt{--memory="1g"}, \texttt{--memory-swap="1g"}, \texttt{--pids-limit=256}, \texttt{--read-only} e \texttt{--tmpfs /tmp} (arquivo de métricas em memória quando não houver volume). No \acrshort{ssr}, \texttt{/app/.next/cache} é montado em \texttt{tmpfs} para reduzir variações de disco.
 
 Durante os testes, o uso de recursos foi acompanhado com:
 \begin{lstlisting}[language=bash]
 docker stats next-ssr
 docker stats react-csr
 \end{lstlisting}
-Esse monitoramento fornece CPU\% e memória em tempo real, complementando a coleta de \textit{Web Vitals}. O \textbf{procedimento} adotado foi:
+Esse monitoramento fornece CPU\% e memória em tempo real, complementando a coleta de \textit{Web Vitals}. O procedimento adotado foi:
 (i) \textit{warm-up} com 2 acessos iniciais à mesma rota para estabilizar caches;
 (ii) coleta de 10--15 carregamentos por cenário (janela anônima);
 (iii) persistência NDJSON por cenário em volumes distintos (por exemplo, \texttt{./metrics} para \acrshort{ssr} e \texttt{./metrics-csr} para \acrshort{csr}).
-A \textbf{análise de métricas} (estatísticas descritivas e percentis como p50 e p95) será apresentada em capítulo específico.
+A análise de métricas (estatísticas descritivas e percentis como p50 e p95) será apresentada em capítulo específico.
 
 \subsection{Repositórios e Reprodutibilidade}
 \label{ssec:repositorios-repro}
-O código-fonte, instruções de execução e artefatos de instrumentação estão disponíveis nos repositórios públicos da empresa fictícia \textbf{WallTech}:
+O código-fonte, instruções de execução e artefatos de instrumentação estão disponíveis nos repositórios públicos da empresa fictícia WallTech:
 \begin{itemize}
   \item \textbf{CSR/SPA (React+Vite)}: \url{https://github.com/WallTechTCC/React-CSR}
   \item \textbf{SSR/MPA (Next.js)}: \url{https://github.com/WallTechTCC/Next-SSR}
@@ -720,13 +725,13 @@ O \textit{Lighthouse} foi utilizado como apoio diagnóstico em ambiente laborato
 \subsubsection{Objetivo e escopo}
 O foco do uso do Lighthouse foi:
 \begin{itemize}
-  \item \textbf{Interatividade em laboratório}: leitura do \textbf{TBT} (\textit{Total Blocking Time}) como indicador de trabalho bloqueante no \textit{main thread};
+  \item \textbf{Interatividade em laboratório}: leitura do TBT (\textit{Total Blocking Time}) como indicador de trabalho bloqueante no \textit{main thread};
   \item \textbf{Oportunidades/Auditorias}: insumos para orientar correções de build e de carregamento (JS/CSS, imagens, dicas de rede);
   \item \textbf{Acessibilidade e SEO}: verificação rápida de barreiras e sinalização para mecanismos de busca.
 \end{itemize}
 
 \subsubsection{Procedimento no Chrome DevTools}
-Os testes foram executados no Google Chrome, em \textit{DevTools} \textrightarrow{} \textbf{Lighthouse}, no modo \textit{Navigation}, com \textbf{throttling padrão} de rede/CPU, em \textit{Mobile} e, quando pertinente, \textit{Desktop}. Para cada cenário (página inicial, resultados de busca, detalhes da notícia) foram feitas \textbf{3 execuções}, registrando-se a \textbf{mediana do TBT} e as \textbf{principais oportunidades} reportadas. Os relatórios foram exportados em \textbf{JSON} e \textbf{HTML}.
+Os testes foram executados no Google Chrome, em \textit{DevTools} \textrightarrow{} Lighthouse, no modo \textit{Navigation}, com throttling padrão de rede/CPU, em \textit{Mobile} e, quando pertinente, \textit{Desktop}. Para cada cenário (página inicial, resultados de busca, detalhes da notícia) foram feitas 3 execuções, registrando-se a mediana do TBT e as principais oportunidades reportadas. Os relatórios foram exportados em JSON e HTML.
 
 \subsubsection{Diagnóstico de performance}
 As leituras priorizadas foram:
@@ -769,4 +774,4 @@ Foram consultados, entre outros, os \texttt{audits}: \texttt{document-title}, \t
 Os relatórios foram versionados com convenção por cenário (\textit{ex.}, \texttt{lighthouse\_csr\_home\_mobile\_run\_1.json}). Do JSON, foram consumidos apenas campos necessários para explicar diferenças observadas nos resultados de campo e para orientar correções de implementação.
 
 \subsubsection{Limitações}
-Resultados do Lighthouse são \textbf{laboratoriais}, dependentes de emulação de CPU/rede e do ambiente local do avaliador. Por isso, são utilizados como \textbf{indícios de causa} e para priorização de melhorias, e não como substitutos das medições coletadas em execução real.
+Resultados do Lighthouse são laboratoriais, dependentes de emulação de CPU/rede e do ambiente local do avaliador. Por isso, são utilizados como indícios de causa e para priorização de melhorias, e não como substitutos das medições coletadas em execução real.
