@@ -1,7 +1,8 @@
-\chapter{Estudo de Caso: Desenvolvimento da Plataforma WallTech}
+\chapter{Estudo de Caso}
 \label{cap:estudo_caso_dev}
 
-Este capítulo detalha a construção do estudo de caso prático, que se baseia no cenário de uma empresa fictícia e no desenvolvimento de sua plataforma de notícias sobre tecnologia, a "WallTech". Serão apresentados o contexto do projeto, os requisitos funcionais, a organização do processo de desenvolvimento, os métodos de design, a implementação das arquiteturas \acrshort{csr} e \acrshort{ssr}, e os testes comparativos realizados.
+Este capítulo detalha a construção do estudo de caso prático, que se baseia no cenário de uma empresa fictícia e no desenvolvimento de uma plataforma de notícias sobre tecnologia, denominada ''WallTech''. Serão apresentados o contexto do projeto, os requisitos funcionais, a organização do processo de desenvolvimento, os métodos de design, a implementação das arquiteturas \acrshort{csr} e \acrshort{ssr}, e os testes comparativos realizados.
+
 \section{Contexto}
 \label{section:contexto}
 
@@ -197,11 +198,9 @@ A seguir, apresenta-se o \textbf{EPIC-01}, responsável por organizar as funcion
 
 O levantamento e a definição dos requisitos da plataforma WallTech foram guiados pelas necessidades dos usuários e organizados por meio da técnica de \textit{histórias de usuário}, agrupadas em \textit{épicos}. A partir da análise funcional do \textbf{EPIC-01 — Visualização de Notícias (Público)}, foram identificadas as principais funcionalidades esperadas para a aplicação, considerando tanto o fluxo de interação do visitante quanto os objetivos de usabilidade, desempenho e escalabilidade.
 
-Os requisitos a seguir foram organizados em duas categorias: funcionais, que representam as funcionalidades diretamente percebidas pelos usuários, e não funcionais, que tratam de atributos como desempenho, acessibilidade e responsividade.
+A seguir, são apresentados os requisitos funcionais, que representam as funcionalidades diretamente percebidas pelos usuários, e os não funcionais, que tratam de atributos como desempenho, acessibilidade e responsividade.
 
-\subsection{Requisitos Funcionais}
-\label{subsec:requisitos-funcionais}
-
+\textbf{Requisitos Funcionais:}
 \begin{itemize}
   \item O sistema deve permitir que visitantes visualizem uma lista de notícias recentes e em destaque.
   \item O sistema deve disponibilizar uma barra de pesquisa por palavra-chave, título ou categoria.
@@ -211,9 +210,7 @@ Os requisitos a seguir foram organizados em duas categorias: funcionais, que rep
   \item O sistema deve apresentar mensagens claras em situações de ausência de conteúdo.
 \end{itemize}
 
-\subsection{Requisitos Não Funcionais}
-\label{subsec:requisitos-nao-funcionais}
-
+\textbf{Requisitos Não Funcionais:}
 \begin{itemize}
   \item A interface deve ser responsiva, adaptando-se corretamente a diferentes tamanhos de tela.
   \item O carregamento das páginas deve ser otimizado, proporcionando uma experiência fluida mesmo em conexões lentas.
@@ -284,8 +281,8 @@ A Figura \ref{fig:sequence-diagram-ssr} detalha a ordem das interações. O usu�
   \label{fig:sequence-diagram-ssr}
 \end{figure}
 
+A Figura \ref{fig:component-diagram-next} mostra que, nessa arquitetura, o servidor Next.js centraliza o roteamento, a obtenção de dados e a renderização das páginas, entregando ao navegador HTML já pré-renderizado. Após o carregamento, scripts ativam a interatividade e permitem o uso do LocalStorage, uma interface da Web Storage API que possibilita armazenar dados no formato chave-valor de forma persistente no navegador do usuário, ideal para guardar informações como o histórico de notícias acessadas.
 
-A Figura \ref{fig:component-diagram-next} mostra que, nessa arquitetura, o servidor Next.js centraliza o roteamento, a obtenção de dados e a renderização das páginas, entregando ao navegador HTML já pré-renderizado. Após o carregamento, scripts ativam a interatividade e permitem o uso do LocalStorage.
 
 \begin{figure}[H]
   \centering
@@ -343,7 +340,7 @@ Ambas as implementações consomem dados da mesma fonte externa, a News API, uma
 \subsection{Implementação da Aplicação SPA}
 \label{ssec:implementacao_spa}
 
-A implementação da \acrfull{spa} é desenvolvida utilizando a biblioteca React na sua versão 18. O React é uma biblioteca JavaScript declarativa, mantida pela Meta, focada na construção de interfaces de usuário a partir de componentes reutilizáveis. Sua adoção neste projeto se dá por sua vasta popularidade no mercado e ao seu paradigma de componentização, que facilita a criação de UIs modulares e de fácil manutenção \cite{react2025}. A eficiência da renderização é otimizada pelo uso de um DOM Virtual, um conceito central da biblioteca que minimiza as manipulações diretas no navegador.
+A implementação da \acrfull{spa} foi desenvolvida utilizando a biblioteca React na sua versão 18. O React é uma biblioteca JavaScript declarativa, mantida pela Meta, focada na construção de interfaces de usuário a partir de componentes reutilizáveis. Sua adoção neste projeto se dá por sua vasta popularidade no mercado e ao seu paradigma de componentização, que facilita a criação de UIs modulares e de fácil manutenção \cite{react2025}. A eficiência da renderização é otimizada pelo uso de um DOM Virtual, um conceito central da biblioteca que minimiza as manipulações diretas no navegador.
 
 Para a estruturação inicial do projeto e o gerenciamento do ambiente de desenvolvimento, utiliza-se a ferramenta de \textit{build} Vite. O Vite é um ecossistema de desenvolvimento frontend moderno que oferece um servidor de desenvolvimento com recarregamento rápido (\textit{Hot Module Replacement}) e um processo de compilação (\textit{build}) otimizado, que resulta em pacotes de produção menores e mais eficientes \cite{vite_docs}.
 
@@ -380,11 +377,7 @@ A \autoref{fig:app-next-ssr} mostra a página de detalhes de uma notícia na pla
 
 
 \vspace{1cm}
-Com as duas versões da plataforma WallTech implementadas e funcionais, o alicerce para a análise comparativa foi estabelecido. O capítulo seguinte detalha a metodologia experimental rigorosa empregada para a execução dos testes, a configuração do ambiente controlado e os procedimentos de coleta de dados, garantindo que a comparação entre as abordagens \acrshort{csr} e \acrshort{ssr} seja justa, precisa e reprodutível.
-
-
-
-
+Com as duas versões da plataforma WallTech implementadas e funcionais, o alicerce para a análise comparativa foi estabelecido. O capítulo seguinte detalha o protocolo experimental empregado para a execução dos testes, a configuração do ambiente controlado e os procedimentos de coleta de dados, garantindo que a comparação entre as abordagens \acrshort{csr} e \acrshort{ssr} seja precisa e reprodutível.
 
 
 
