@@ -402,12 +402,11 @@ Durante o desenvolvimento, a \textit{NewsAPI} impôs restrições de uso em prod
 \subsection{Instrumentação de Web Vitals}
 \label{ssec:instrumentacao-webvitals}
 
-Em ambos os protótipos, a instrumentação é realizada no cliente, e os dados são enviados para um endpoint interno exposto pelo próprio contêiner. Utiliza-se \texttt{navigator.sendBeacon} como via principal (por não bloquear a navegação) e \texttt{fetch} como \textit{fallback} com \texttt{keepalive}. As métricas coletadas são os \textit{Core Web Vitals} atuais: \textbf{TTFB}, \textbf{FCP}, \textbf{LCP}, \textbf{CLS} e \textbf{INP}.
+Em ambos os protótipos, a instrumentação é realizada no cliente, e os dados são enviados para um endpoint interno exposto pelo próprio contêiner. Utiliza-se \texttt{navigator.sendBeacon} como via principal (por não bloquear a navegação) e \texttt{fetch} como \textit{fallback} com \texttt{keepalive}. As métricas coletadas são os \textit{Core Web Vitals} atuais: \acrshort{ttfb}, \acrshort{fcp}, \acrshort{lcp}, \acrshort{cls} e \acrshort{inp}.
 
 Os registros são persistidos em NDJSON (uma linha por métrica), contendo, dentre outros, os campos:
 \texttt{\{id, name, value, rating, navigationType, attribution, entries, ts\}}. A análise estatística (p.\,ex., p50/p95) está \textit{deliberadamente breve} aqui e será desenvolvida em capítulos posteriores.
 
-\subsubsection{SSR/MPA (Next.js).}
 Na versão \acrshort{ssr} (App Router), um \textit{Client Component} global usa \texttt{useReportWebVitals} para escutar e enviar as métricas ao endpoint \texttt{/api/vitals}. No servidor, a rota grava o NDJSON em um caminho configurável: por padrão \texttt{/tmp/webvitals.ndjson} (partição \textit{tmpfs}), ou no caminho definido por \texttt{\$METRICS\_PATH} quando se deseja persistência via volume.
 
 \begin{lstlisting}[language=TypeScript,caption={Endpoint de métricas no SSR/Next.js (visão de servidor)}]
@@ -457,8 +456,7 @@ export default function WebVitals() {
 }
 \end{lstlisting}
 
-\subsubsection{CSR/SPA (React+Vite).}
-Na versão \acrshort{csr}, a coleta usa \texttt{web-vitals/attribution} (para enriquecer \textit{attribution} em \texttt{LCP}/\texttt{CLS}/\texttt{INP}). O envio é feito para \texttt{/api/web-vitals}. Como não há servidor \textit{framework} (p.\,ex., Next), a aplicação é servida por um processo Node.js simples (\texttt{server.cjs}) que entrega o \texttt{dist/} e expõe o endpoint de métricas, gravando no mesmo esquema (\texttt{/tmp} ou \texttt{\$METRICS\_PATH}).
+Na versão \acrshort{csr}, a coleta usa \texttt{web-vitals/attribution} (para enriquecer \textit{attribution} em \acrshort{lcp}/\acrshort{cls}/\acrshort{inp}). O envio é feito para \texttt{/api/web-vitals}. Como não há servidor \textit{framework} (p.\,ex., Next), a aplicação é servida por um processo Node.js simples (\texttt{server.cjs}) que entrega o \texttt{dist/} e expõe o endpoint de métricas, gravando no mesmo esquema (\texttt{/tmp} ou \texttt{\$METRICS\_PATH}).
 
 \begin{lstlisting}[language=TypeScript,caption={Envio de métricas no cliente (CSR/React+Vite)}]
 import { useEffect } from "react";
@@ -538,10 +536,10 @@ const server = http.createServer(async (req, res) => {
 server.listen(PORT);
 \end{lstlisting}
 
-\subsection{Empacotamento Docker: SSR/MPA (Next.js)}
-\label{ssec:ssr-docker}
+\subsection{Empacotamento Docker: SSR/MPA (Next.js) e CSR/SPA (React+Vite)}
+\label{ssec:docker-packaging}
 
-Para \acrshort{ssr}, adotou-se o modo standalone do Next.js e \textit{multi-stage build}: (i) instalação de dependências, (ii) \textit{build} e (iii) \textit{runner} minimalista. O contêiner expõe a porta \texttt{3000}, roda como usuário \texttt{node} e lê variáveis em tempo de execução (importante para segredos e chaves).
+Para a aplicação com \acrshort{ssr}, adotou-se o modo standalone do Next.js e \textit{multi-stage build}: (i) instalação de dependências, (ii) \textit{build} e (iii) \textit{runner} minimalista. O contêiner expõe a porta \texttt{3000}, roda como usuário \texttt{node} e lê variáveis em tempo de execução (importante para segredos e chaves).
 
 \begin{lstlisting}[language=Dockerfile,caption={Dockerfile da aplicação SSR/MPA (Next.js)}]
 # ---------- 1) deps ----------
@@ -587,10 +585,7 @@ docker run --name next-ssr \
   next-ssr:prod
 \end{lstlisting}
 
-\subsection{Empacotamento Docker: CSR/SPA (React+Vite)}
-\label{ssec:csr-docker}
-
-Para \acrshort{csr}, o \textit{build} é produzido pelo Vite e servido por \texttt{server.cjs}. Diferentemente do \acrshort{ssr}, as variáveis \texttt{VITE\_*} são resolvidas em tempo de build; por isso, a \texttt{.env} é copiada para o estágio \textit{builder} (ou alternativamente injetada com \texttt{--build-arg}). Em execução, o caminho do arquivo de métricas é definido por \texttt{\$METRICS\_PATH}.
+Já para a aplicação com \acrshort{csr}, o \textit{build} é produzido pelo Vite e servido por \texttt{server.cjs}. Diferentemente do \acrshort{ssr}, as variáveis \texttt{VITE\_*} são resolvidas em tempo de build; por isso, a \texttt{.env} é copiada para o estágio \textit{builder} (ou alternativamente injetada com \texttt{--build-arg}). Em execução, o caminho do arquivo de métricas é definido por \texttt{\$METRICS\_PATH}.
 
 \begin{lstlisting}[language=Dockerfile,caption={Dockerfile da aplicação CSR/SPA (React+Vite)}]
 # ---------- 1) deps ----------
@@ -706,29 +701,23 @@ De forma análoga, a coleta para o contêiner \textbf{CSR (\texttt{react-csr})} 
 ) >> metrics-host/docker-stats-csr.csv
 \end{lstlisting}
 
-
-
-
 \subsection{Uso complementar do Lighthouse (Chrome DevTools)}
 \label{ssec:lighthouse}
 
 O \textit{Lighthouse} foi utilizado como apoio diagnóstico em ambiente laboratorial, para identificar gargalos e oportunidades que expliquem diferenças observadas nas medições de campo.
 
-\subsubsection{Objetivo e escopo}
-O foco do uso do Lighthouse foi:
+No contexto deste estudo, o Lighthouse foi empregado com os seguintes propósitos:
 \begin{itemize}
   \item \textbf{Interatividade em laboratório}: leitura do TBT (\textit{Total Blocking Time}) como indicador de trabalho bloqueante no \textit{main thread};
   \item \textbf{Oportunidades/Auditorias}: insumos para orientar correções de build e de carregamento (JS/CSS, imagens, dicas de rede);
   \item \textbf{Acessibilidade e SEO}: verificação rápida de barreiras e sinalização para mecanismos de busca.
 \end{itemize}
 
-\subsubsection{Procedimento no Chrome DevTools}
 Os testes foram executados no Google Chrome, em \textit{DevTools} \textrightarrow{} Lighthouse, no modo \textit{Navigation}, com throttling padrão de rede/CPU, em \textit{Mobile} e, quando pertinente, \textit{Desktop}. Para cada cenário (página inicial, resultados de busca, detalhes da notícia) foram feitas 3 execuções, registrando-se a mediana do TBT e as principais oportunidades reportadas. Os relatórios foram exportados em JSON e HTML.
 
-\subsubsection{Diagnóstico de performance}
-As leituras priorizadas foram:
+Na análise de performance, priorizou-se:
 \begin{itemize}
-  \item \textbf{TBT} (\textit{numericValue} e evidências de \textit{long tasks});
+  \item \acrshort{tbt} (\textit{numericValue} e evidências de \textit{long tasks});
   \item \textbf{Oportunidades e auditorias} diretamente relacionadas a custo de carregamento e execução:
   \begin{itemize}
     \item \textit{render-blocking-resources};
@@ -739,8 +728,7 @@ As leituras priorizadas foram:
   \end{itemize}
 \end{itemize}
 
-\subsubsection{Diagnóstico de acessibilidade}
-Foram verificados itens que impactam navegação por teclado, leitores de tela e clareza de interface:
+Na parte de acessibilidade, foram verificados itens que impactam navegação por teclado, leitores de tela e clareza de interface:
 \begin{itemize}
   \item \textbf{Semântica e estrutura}: hierarquia de \textit{headings} e \textit{landmarks} (banner, main, nav);
   \item \textbf{Foco e tabulação}: ordem lógica, foco visível, ausência de \textit{focus traps};
@@ -752,8 +740,7 @@ Dos relatórios JSON, foram lidos os \texttt{audits} mais acionáveis, como
 \texttt{color-contrast}, \texttt{image-alt}, \texttt{label}, \texttt{link-name},
 \texttt{heading-order}, \texttt{landmark-one-main}, \texttt{focus-traps} e \texttt{logical-tab-order}.
 
-\subsubsection{Diagnóstico de SEO}
-A verificação concentrou-se em sinalização técnica e rastreabilidade:
+A verificação de \acrshort{seo} concentrou-se em sinalização técnica e rastreabilidade:
 \begin{itemize}
   \item \textbf{Sinalização}: título e meta description presentes; \texttt{rel=canonical} consistente;
   \item \textbf{Rastreabilidade}: links rastreáveis, \texttt{robots.txt}/meta robots válidos;
@@ -762,8 +749,6 @@ A verificação concentrou-se em sinalização técnica e rastreabilidade:
 \end{itemize}
 Foram consultados, entre outros, os \texttt{audits}: \texttt{document-title}, \texttt{meta-description}, \texttt{canonical}, \texttt{is-crawlable}, \texttt{robots-txt}, \texttt{hreflang}, \texttt{structured-data}, \texttt{viewport}, \texttt{font-size} e \texttt{tap-targets}.
 
-\subsubsection{Exportação e integração com os artefatos do estudo}
 Os relatórios foram versionados com convenção por cenário (\textit{ex.}, \texttt{lighthouse\_csr\_home\_mobile\_run\_1.json}). Do JSON, foram consumidos apenas campos necessários para explicar diferenças observadas nos resultados de campo e para orientar correções de implementação.
 
-\subsubsection{Limitações}
 Resultados do Lighthouse são laboratoriais, dependentes de emulação de CPU/rede e do ambiente local do avaliador. Por isso, são utilizados como indícios de causa e para priorização de melhorias, e não como substitutos das medições coletadas em execução real.
