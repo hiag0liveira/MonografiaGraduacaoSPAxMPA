@@ -40,7 +40,7 @@ Para materializar a análise comparativa proposta, esta pesquisa se baseia em um
 
 Com o objetivo de estabelecer condições equivalentes para comparação, foram desenvolvidas duas versões funcionalmente idênticas da plataforma. A primeira utiliza \acrfull{csr}, implementada com a biblioteca \textit{React} (\acrshort{spa}), enquanto a segunda adota \acrfull{ssr}, com o \textit{framework Next.js} (\acrshort{mpa}). Ambas as versões consomem dados da mesma \textit{API} externa de notícias e apresentam a mesma interface e funcionalidades como listagem de artigos, busca e visualização de detalhes, assegurando que as diferenças de desempenho observadas possam ser diretamente atribuídas à arquitetura de renderização empregada.
 
-Cada versão foi implementada seguindo os princípios fundamentais da sua respectiva abordagem. Na aplicação \acrshort{csr}, a renderização ocorre predominantemente no navegador do usuário, ao passo que na versão \acrshort{ssr}, o conteúdo HTML é pré-renderizado no servidor e enviado pronto ao cliente. Ambas as implementações foram submetidas a um protocolo de testes rigoroso para a coleta de dados, conforme detalhado na seção seguinte, permitindo uma análise equitativa e baseada em evidências.
+Cada versão foi implementada seguindo os princípios fundamentais da sua respectiva abordagem. Na aplicação \acrshort{csr}, a renderização ocorre predominantemente no navegador do usuário, ao passo que na versão \acrshort{ssr}, o conteúdo HTML é pré-renderizado no servidor e enviado pronto ao cliente. Ambas as implementações foram submetidas a um protocolo de testes para a coleta de dados, conforme detalhado na seção seguinte, permitindo uma análise equitativa e baseada em evidências.
 
 
 \section{Coleta de Dados e Testes}
@@ -55,17 +55,15 @@ A medição de desempenho em aplicações web modernas evoluiu de uma simples an
 Adotando essa metodologia como padrão de mercado, este trabalho selecionou um conjunto de indicadores para realizar uma avaliação completa, abrangendo não apenas a percepção do usuário, mas também os custos computacionais no servidor. Para garantir uma análise estruturada, as métricas foram categorizadas da seguinte forma:
 
 \begin{itemize}
-\item \textbf{Web Vitals (Núcleo):} Representam a base da análise de experiência do usuário. Foram coletadas as métricas \acrshort{ttfb}, \acrshort{fcp}, \acrshort{lcp}, \acrshort{cls} e \acrshort{inp}. Esses dados foram registrados diretamente no cliente durante a navegação real e persistidos em formato NDJSON para análise posterior.
+\item \textbf{Web Vitals (Núcleo):} Representam a base da análise de experiência do usuário. Foram coletadas as métricas \acrfull{ttfb}, \acrfull{fcp}, \acrfull{lcp}, \acrfull{cls} e \acrfull{inp}. Esses dados foram registrados diretamente no cliente durante a navegação real e persistidos em formato NDJSON para análise posterior.
 
-\item \textbf{Auditoria de Laboratório (Apoio):} Utilizando o Lighthouse, foram realizadas auditorias complementares para analisar o \textit{Total Blocking Time} (\acrshort{tbt}) e identificar oportunidades de otimização. As auditorias também validaram aspectos de Acessibilidade e \acrshort{seo} de forma automatizada.
+\item \textbf{Auditoria de Laboratório (Apoio):} Utilizando o Lighthouse, foram realizadas auditorias complementares para analisar o \acrfull{tbt} e identificar oportunidades de otimização. As auditorias também validaram aspectos de Acessibilidade e \acrshort{seo} de forma automatizada.
 
 \item \textbf{Recursos do Servidor (Custo):} Para contextualizar o custo de execução de cada abordagem, o consumo de recursos dos contêineres foi monitorado com o comando \texttt{docker stats}, registrando o uso de CPU e memória durante os testes.
 \end{itemize}
 
 
 
-
-\noindent
 Adicionalmente, foram observados: número de requisições HTTP e uso de cache (no cliente), bem como consumo de recursos do contêiner (CPU e memória) durante os testes. O \acrfull{tti} foi empregado apenas como métrica de \textit{laboratório} via Lighthouse, não integrando o conjunto atual de Core Web Vitals. O tratamento estatístico detalhado das métricas será apresentado posteriormente.
 
 \subsection{Ferramentas de Teste}
@@ -73,7 +71,8 @@ Adicionalmente, foram observados: número de requisições HTTP e uso de cache (
 Foram utilizadas ferramentas complementares, com ênfase na coleta contínua no navegador (\textit{field}) e apoio de auditoria em \textit{laboratório}:
 
 \begin{itemize}
-    \item \textbf{Web Vitals (\acrfull{rum})}: Instrumentação no cliente para TTFB, FCP, LCP, CLS e INP, com envio via \texttt{navigator.sendBeacon} a um endpoint interno e persistência em formato NDJSON;
+    \item \textbf{Web Vitals (\acrfull{rum})}: Instrumentação no cliente para coletar as métricas TTFB, FCP, LCP, CLS e INP. O envio dos dados a um endpoint interno é feito via \texttt{navigator.sendBeacon}, uma API que garante a transmissão confiável das métricas mesmo quando o usuário encerra a página, com os dados persistidos em formato NDJSON;
+
     \item \textbf{Google Lighthouse} (auxiliar): Auditoria em \textit{laboratório} para Performance (incluindo FCP, LCP, CLS, Speed Index e TBT), executada localmente sobre os serviços em Docker;
     \item \textbf{Chrome DevTools}: Inspeção de rede, \textit{waterfall}, cache e verificação dos \textit{POSTs} de métricas;
     \item \textbf{docker stats}: Acompanhamento do uso de CPU e memória dos contêineres durante a execução dos testes.
@@ -81,7 +80,7 @@ Foram utilizadas ferramentas complementares, com ênfase na coleta contínua no 
 
 \subsection{Ambiente de Testes}
 
-Os testes foram realizados em ambiente local controlado com contêineres \textit{Docker} para as duas versões (\acrshort{csr} e \acrshort{ssr}). Essa decisão decorre de limitações práticas da NewsAPI em produção ( políticas de CORS/uso do plano), e visa garantir controle experimental e reprodutibilidade. Ambos os serviços foram executados com paridade de recursos:
+Os testes para ambas as versões (\acrshort{csr} e \acrshort{ssr}) foram conduzidos em um ambiente local, utilizando contêineres \textit{Docker} para garantir a consistência. A escolha por essa abordagem foi uma consequência direta das restrições do plano de desenvolvedor (gratuito) da NewsAPI. Especificamente, a política de uso deste plano restringe as chamadas da API a requisições que partem de localhost, o que inviabilizou um teste em produção. No caso da versão \acrshort{csr}, a política de CORS bloquearia as chamadas diretas do navegador em um domínio público; já para a versão \acrshort{ssr}, as chamadas de servidor para servidor seriam igualmente bloqueadas, pois o servidor de produção não seria localhost. Portanto, a execução local não apenas contornou essa limitação, mas também assegurou um controle rigoroso sobre as variáveis do experimento e a total reprodutibilidade dos resultados. Ambos os serviços foram executados com paridade de recursos:
 
 \begin{itemize}
     \item \textbf{CPU}: \texttt{--cpus="1.0"} e \texttt{--cpuset-cpus="0"};
@@ -90,7 +89,6 @@ Os testes foram realizados em ambiente local controlado com contêineres \textit
     \item \textbf{Persistência de métricas}: volume em \texttt{/data} com \texttt{METRICS\_PATH=/data/webvitals.ndjson}.
 \end{itemize}
 
-\noindent
 A aplicação \acrshort{ssr} (Next.js) foi empacotada em modo \textit{standalone}. A aplicação \acrshort{csr} (React + Vite) foi servida por um processo \texttt{Node.js} simples que também expõe o endpoint de métricas. Os serviços públicos locais utilizados nos testes foram:
 \begin{itemize}
     \item \textbf{SSR/Next.js}: \texttt{http://localhost:3001}
@@ -99,7 +97,8 @@ A aplicação \acrshort{ssr} (Next.js) foi empacotada em modo \textit{standalone
 
 \subsection{Execução dos Testes}
 
-A execução foi conduzida da seguinte forma:
+A execução foi conduzida em quatro etapas, sendo:
+
 \begin{enumerate}
     \item \textbf{Aquecimento}: duas visitas iniciais à mesma rota em cada aplicação, para estabilização de caches e recursos;
     \item \textbf{Coleta principal (Web Vitals)}: navegação real em janela anônima, registrando TTFB, FCP, LCP, CLS e INP por meio do endpoint interno e persistindo em arquivo NDJSON;
@@ -107,13 +106,11 @@ A execução foi conduzida da seguinte forma:
     \item \textbf{Observabilidade do contêiner}: monitoramento pontual com \texttt{docker stats} para CPU e memória durante as execuções.
 \end{enumerate}
 
-\noindent
-Para reduzir variabilidade, cada teste foi repetido no mínimo cinco vezes por cenário. A quantidade total de repetições e o método de agregação (mediana/p50 e p95) são detalhados em seção específica de resultados.
 
-\subsection{Registro e Organização dos Dados}
+Para reduzir a variabilidade, cada teste foi repetido no mínimo cinco vezes por cenário. A análise detalhada dos dados coletados, incluindo a quantidade total de repetições e o método de agregação estatística (mediana/p50 e p95), é apresentada no \textbf{Capítulo de Resultados e Discussão (\autoref{cap:resultados})}.
 
-Os dados coletados pela instrumentação (\acrshort{rum}) foram armazenados em arquivos NDJSON separados por abordagem, contendo os campos de identificação da métrica, valor e carimbo temporal. As auditorias do Lighthouse foram salvas em arquivos JSON/HTML para futura referência. Em seguida, os dados foram consolidados em planilhas, organizados por data, métrica e abordagem (CSR/SSR), para posterior análise comparativa.
+\subsection{Tratamento e Análise dos Dados}
 
-\subsection{Método de Análise}
+Os dados coletados pela instrumentação (\acrshort{rum}) foram armazenados em arquivos NDJSON separados por abordagem, contendo os campos de identificação da métrica, valor e carimbo temporal. As auditorias do Lighthouse foram salvas em arquivos JSON/HTML para futura referência. Em seguida, os dados foram consolidados em planilhas, organizados por data, métrica e abordagem (CSR/SSR), preparando o conjunto de dados para a análise comparativa.
 
-Os valores foram analisados por meio de estatísticas descritivas, com foco em mediana (p50) e p95, além de médias e desvios padrão quando apropriado. As comparações entre \acrshort{csr} e \acrshort{ssr} foram conduzidas métrica a métrica (TTFB, FCP, LCP, CLS e INP), considerando os \textit{trade-offs} de cada abordagem. Gráficos e tabelas de síntese são apresentados na seção de Resultados e Discussões.
+A análise foi conduzida por meio de estatísticas descritivas, com foco nas medianas p50 e p95, além de médias e desvios padrão quando apropriado. As comparações entre \acrshort{csr} e \acrshort{ssr} foram realizadas métrica a métrica (TTFB, FCP, LCP, CLS e INP), considerando os \textit{trade-offs} de cada abordagem. Os gráficos e tabelas de síntese resultantes dessa análise são apresentados no capítulo de Resultados e Discussões.
