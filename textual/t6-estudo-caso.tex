@@ -384,7 +384,8 @@ Com as duas versões da plataforma WallTech implementadas e funcionais, o alicer
 \chapter{Coleta de Dados}
 \label{cap:metodologia_experimental}
 
-Após o desenvolvimento das duas versões da plataforma WallTech, este capítulo descreve os procedimentos metodológicos adotados para conduzir a análise de desempenho comparativa. O objetivo aqui é detalhar o ambiente de testes controlado, as ferramentas de instrumentação para coleta de métricas, o processo de empacotamento das aplicações e os protocolos de execução. A adoção de um rigor metodológico é fundamental para assegurar a validade, a confiabilidade e a reprodutibilidade dos dados que serão apresentados e discutidos no capítulo de Resultados.
+
+Com as duas versões da plataforma WallTech desenvolvidas, este capítulo descreve o processo prático de coleta de dados que fundamenta a análise de desempenho comparativa. O objetivo é detalhar o ambiente de testes controlado, as ferramentas de instrumentação, o empacotamento das aplicações e os protocolos de execução utilizados. A padronização e o detalhamento dessas etapas são fundamentais para assegurar a validade, a confiabilidade e a reprodutibilidade dos dados que serão apresentados no capítulo de Resultados.
 
 
 
@@ -662,10 +663,9 @@ Esses repositórios permitem reproduzir o experimento localmente com os mesmos l
 \subsection{Coleta de CPU/RAM do contêiner e exportação em CSV}
 \label{ssec:coleta-host-docker-stats}
 
-Para registrar uso de CPU, memória e número de \textit{PIDs} dos contêineres durante os cenários de teste, foi utilizada a telemetria do próprio Docker via \texttt{docker stats} (sem streaming contínuo). As amostras foram coletadas a cada 1\,s e gravadas em arquivos CSV separados por aplicação, no diretório \texttt{metrics-host/}.
+Para registrar o uso de CPU, memória e número de \textit{PIDs} dos contêineres durante os cenários de teste, foi utilizada a telemetria do próprio Docker via \texttt{docker stats} (sem streaming contínuo). As amostras foram coletadas a cada 1 segundo e gravadas em arquivos CSV separados por aplicação, no diretório \texttt{metrics-host/}.
 
-\subsubsection{Colunas dos CSVs.}
-Cada linha contém:
+Cada linha do arquivo CSV gerado contém as seguintes colunas para a análise dos dados:
 \begin{itemize}
   \item \textbf{ts}: timestamp da coleta no host (\texttt{YYYY-MM-DD HH:MM:SS});
   \item \textbf{name}: nome do contêiner;
@@ -675,8 +675,8 @@ Cada linha contém:
   \item \textbf{pids}: quantidade de processos/threads visíveis ao cgroup do contêiner.
 \end{itemize}
 
-\subsubsection{Coleta para o contêiner SSR (\texttt{next-ssr}).}
-O comando abaixo cria o diretório de métricas (se não existir) e inicia a captura contínua em \texttt{metrics-host/docker-stats-ssr.csv}:
+O comando utilizado para a coleta no contêiner \textbf{SSR (\texttt{next-ssr})}, que cria o diretório de métricas e inicia a captura contínua em \texttt{metrics-host/docker-stats-ssr.csv}, é apresentado a seguir.
+
 \begin{lstlisting}[language=bash,caption={Captura de CPU/RAM do contêiner SSR e exportação para CSV}]
 mkdir -p metrics-host
 (
@@ -691,10 +691,8 @@ mkdir -p metrics-host
 ) >> metrics-host/docker-stats-ssr.csv
 \end{lstlisting}
 
-\subsubsection{Coleta para o contêiner CSR (\texttt{react-csr}).}
-De forma análoga, a coleta do contêiner CSR grava em \\ \texttt{metrics-host/docker-stats-csr.csv}:
-\\
-\\
+De forma análoga, a coleta para o contêiner \textbf{CSR (\texttt{react-csr})} foi realizada com o script abaixo, gravando os dados em \texttt{metrics-host/docker-stats-csr.csv}.
+
 \begin{lstlisting}[language=bash,caption={Captura de CPU/RAM do contêiner CSR e exportação para CSV}]
 (
   echo "ts,name,cpu_perc,mem_usage,mem_perc,pids";
@@ -707,6 +705,7 @@ De forma análoga, a coleta do contêiner CSR grava em \\ \texttt{metrics-host/d
   done
 ) >> metrics-host/docker-stats-csr.csv
 \end{lstlisting}
+
 
 
 
