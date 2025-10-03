@@ -1,5 +1,7 @@
 \chapter{Introdução}
 \label{cap:introducao}
+Este capítulo apresenta o tema do trabalho, que visa analisar a complexidade crescente das aplicações web e a importância da escolha de uma estratégia de renderização. O estudo se aprofunda na avaliação das abordagens de \acrfull{csr} e \acrfull{ssr}, comparando sua eficácia para otimização de desempenho e experiência do usuário.
+
 
 \section{Problema e contexto}
 O crescimento acelerado da web e o aumento da complexidade das aplicações modernas impuseram novos desafios ao desenvolvimento e à entrega de conteúdos na internet. Com o crescimento exponencial da web, estima-se que aproximadamente 252 mil novos sites sejam desenvolvidos diariamente, demonstrando não apenas a rapidez com que aplicações são criadas, mas também a necessidade crescente de estratégias eficientes para otimização de desempenho e escalabilidade \cite{dataInternetUsage}. A escolha da abordagem de renderização tornou-se um fator determinante para a experiência do usuário e a escalabilidade dos sistemas. Inicialmente, os sites eram compostos por páginas estáticas, cujo conteúdo era carregado diretamente do servidor. Com a evolução das tecnologias frontend, novas abordagens surgiram, destacando-se \english{\acrfull{csr}} e \english{\acrfull{ssr}}. Cada uma dessas técnicas possui características específicas que influenciam diretamente o desempenho e a experiência do usuário.
@@ -19,10 +21,8 @@ Contudo, essas técnicas são frequentemente empregadas de maneira inadequada em
 Paralelamente a esses casos, identifica-se uma carência de estudos de caso reais que analisem de forma aprofundada o impacto da adoção de \acrshort{csr} e \acrshort{ssr}, principalmente no contexto nacional. Enquanto algumas publicações se concentram em apenas uma dessas abordagens, outras fornecem exemplos excessivamente simplificados, limitando a compreensão dos desafios técnicos e de negócios ao combinar essas estratégias em sistemas complexos.
 
 Diante desse cenário, o presente trabalho se propõe a preencher essa lacuna por meio de uma análise detalhada e prática. Para isso, foi desenvolvido um estudo de caso focado em uma aplicação de notícias, implementada em duas versões funcionalmente idênticas: uma com \acrshort{csr} e outra com \acrshort{ssr}. Ao comparar diretamente os efeitos de cada abordagem no desempenho, na experiência do usuário, na otimização para \acrshort{seo} e na escalabilidade, espera-se fornecer subsídios concretos que possam orientar equipes de desenvolvimento e gestores na seleção da arquitetura de renderização mais adequada, auxiliando na construção de sistemas mais robustos e eficientes.
+
 \section{Objetivos}
-
-\subsection{Objetivo Geral}
-
 O objetivo geral deste trabalho de conclusão de curso é realizar uma análise comparativa detalhada entre \acrfull{csr}, aplicado em uma arquitetura \acrfull{spa}, e \acrfull{ssr}, associado a uma \acrfull{mpa}, materializada através do desenvolvimento e teste de um estudo de caso prático: uma aplicação de notícias implementada em ambas as arquiteturas. A análise busca avaliar, com base em dados empíricos, os efeitos de cada abordagem no desempenho, na experiência do usuário, na otimização do \acrfull{seo} e na escalabilidade de aplicações web modernas.
 
 \subsection{Objetivos Específicos}

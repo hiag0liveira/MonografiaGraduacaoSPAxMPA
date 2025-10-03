@@ -178,52 +178,11 @@ Segundo \citeonline{osmani2025}, é importante distinguir os principais modelos 
 Além dessas abordagens, destaca-se o conceito de \textbf{reidratação}, que consiste em ativar a interatividade de páginas SSR ou SSG no cliente. Esse processo utiliza JavaScript para associar os eventos dinâmicos à estrutura HTML previamente renderizada, sendo essencial para tornar a página interativa após a exibição inicial \cite{osmani2025}.
 
 
-% \subsection*{Métricas de Desempenho em Aplicações Web}
-
-% A avaliação de desempenho em aplicações web modernas vai além do tempo de carregamento total da página. A experiência do usuário \acrshort{ux}, a capacidade de resposta da interface e a estabilidade visual são aspectos fundamentais. Com o intuito de padronizar essas medições, o Google propôs o conjunto \textbf{Core Web Vitals}, que inclui métricas focadas na percepção do usuário real \cite{osmani2025}. Essas métricas são amplamente aplicadas em ferramentas como \textit{Google Lighthouse}, \textit{PageSpeed Insights} e \textit{WebPageTest} \cite{webvitals2025}.
-
-% Entre as principais métricas de desempenho utilizadas na literatura e em auditorias de performance, destacam-se:
-
-% \begin{description}
-%     \item[\textbf{TTFB (Time to First Byte)}] Representa o tempo entre a solicitação do navegador e o recebimento do primeiro byte da resposta do servidor. É um indicativo da latência do backend e da eficiência da entrega do conteúdo inicial.
-
-%     \item[\textbf{FCP (First Contentful Paint)}] Indica o tempo necessário para que qualquer parte visível do conteúdo como texto ou imagem seja renderizada na tela. É essencial para avaliar a percepção inicial de carregamento.
-
-%     \item[\textbf{LCP (Largest Contentful Paint)}] Mede o tempo até o maior elemento visível da página ser exibido, geralmente o conteúdo principal. Um valor abaixo de 2,5 segundos é considerado ideal para uma boa experiência visual inicial.
-
-%     \item[\textbf{TTI (Time to Interactive)}] Reflete o momento em que a página está completamente carregada e pronta para responder às interações do usuário. Um TTI alto pode sinalizar bloqueios na thread principal ou scripts pesados.
-
-%     \item[\textbf{TBT (Total Blocking Time)}] Soma o tempo em que a thread principal esteve ocupada com tarefas longas, impedindo que o usuário interagisse com a página. É um complemento importante ao TTI.
-
-%     \item[\textbf{CLS (Cumulative Layout Shift)}] Avalia a estabilidade visual da página durante o carregamento, medindo alterações inesperadas no layout. Valores acima de 0,1 indicam problemas de usabilidade.
-% \end{description}
-
-% Outras métricas relevantes, embora não tão amplamente adotadas nos Core Web Vitals, também são úteis em contextos específicos:
-
-% \begin{itemize}
-%     \item \textbf{FID (First Input Delay)}: mede o tempo entre a primeira interação do usuário e a resposta do navegador. Substituído pelo INP nas abordagens mais recentes.
-    
-%     \item \textbf{INP (Interaction to Next Paint)}: métrica que avalia a latência de todas as interações, fornecendo uma visão mais completa da responsividade.
-
-%     \item \textbf{SI (Speed Index)}: calcula a velocidade com que o conteúdo visível é exibido durante o carregamento.
-
-%     \item \textbf{LCPu (LCP under user timing)}: variação do LCP que considera marcações personalizadas de performance.
-
-%     \item \textbf{RTT (Round-Trip Time)}: tempo de ida e volta da requisição na rede, relevante em diagnósticos de conectividade.
-% \end{itemize}
-
-% O domínio dessas métricas é essencial para a compreensão do desempenho percebido pelo usuário final e serve como base para decisões técnicas sobre otimização de aplicações web e escolha de estratégias de renderização.
-
-
 \subsubsection{Desempenho e Compensações}
 
-A renderização do lado do servidor tende a exibir conteúdo mais rapidamente (menor FCP), favorecendo acessibilidade e \textit{SEO}. No entanto, pode aumentar o TTFB, já que a página precisa ser processada antes de ser enviada \cite{osmani2025}. Já a renderização no cliente pode reduzir o tempo de resposta inicial do servidor, mas exige mais do navegador e aumenta o tempo até a página estar interativa (TTI), especialmente em dispositivos móveis.
+A renderização do lado do servidor tende a exibir conteúdo mais rapidamente (menor \acrshort{fcp}), favorecendo acessibilidade e \acrshort{seo}. No entanto, pode aumentar o \acrshort{ttfb}, já que a página precisa ser processada antes de ser enviada \cite{osmani2025}. Já a renderização no cliente pode reduzir o tempo de resposta inicial do servidor, mas exige mais do navegador e aumenta o tempo até a página estar interativa \acrfull{tti}, especialmente em dispositivos móveis.
 
-Modelos híbridos como SSR com \textit{hydration} tentam unir os benefícios de ambas as abordagens, mas podem causar atrasos na interatividade. Técnicas como \textit{hydration progressiva} ou \textit{streaming} reduzem esses impactos ao ativar partes da interface conforme necessário \cite{osmani2025}.
-
-\subsubsection{Avanços Recentes}
-
-Estratégias mais recentes, como a \textbf{renderização trimórfica}, permitem que a renderização ocorra em três camadas: servidor, cliente e \textit{service worker}. Isso possibilita desempenho superior em acessos repetidos e melhor controle sobre o cache e atualização de conteúdo dinâmico \cite{osmani2025}.
+Modelos híbridos como \acrshort{ssr} com \textit{hydration} tentam unir os benefícios de ambas as abordagens, mas podem causar atrasos na interatividade. Técnicas como \textit{hydration progressiva} ou \textit{streaming} reduzem esses impactos ao ativar partes da interface conforme necessário \cite{osmani2025}. Estratégias mais recentes, como a renderização trimórfica, permitem que a renderização ocorra em três camadas: servidor, cliente e \textit{service worker}. Isso possibilita desempenho superior em acessos repetidos e melhor controle sobre o cache e atualização de conteúdo dinâmico \cite{osmani2025}.
 
 \subsubsection{Impacto em SEO e Indexação}
 
@@ -237,8 +196,23 @@ Segundo \citeonline{osmani2025}, abordagens que entregam HTML completo como SSR 
   \label{fig:comparativo_renderizacao}
 \end{figure}
 
+Segundo \citeonline{osmani2025}, abordagens que entregam HTML completo como \acrshort{ssr} e \acrshort{ssg} são mais eficazes para indexação por mecanismos de busca. Já modelos que dependem fortemente de JavaScript (\acrshort{csr}) exigem testes adicionais e podem comprometer a visibilidade em sistemas como o Googlebot, especialmente quando há falhas na execução dos scripts.
 
+A Figura~\ref{fig:comparativo_renderizacao} oferece uma visão consolidada e detalhada de cinco estratégias de renderização web, do modelo puramente do servidor ao puramente do cliente. A tabela ilustra os \textit{trade-offs} de cada abordagem em relação a aspectos como o papel do servidor, o tipo de HTML gerado e os impactos em desempenho e escala.
 
+\begin{itemize}
+    \item \acrshort{ssr} com (Re)hydration: O servidor pré-renderiza a página, mas a aplicação completa também é carregada no cliente. Embora o HTML inicial seja dinâmico, o JavaScript é responsável por tornar a página interativa, o que pode resultar em um atraso considerável entre a exibição do conteúdo e a interatividade completa (\acrshort{tti} >> \acrshort{fcp}). Este modelo é mais flexível, mas pode levar a um \acrshort{ttfb} mais lento e a uma experiência "embaçada" (\textit{buffered}) para o usuário.
+
+    \item \acrshort{ssr} (Server Rendering): Neste modelo, a aplicação é inteiramente renderizada no servidor, que responde a cada requisição de navegação com um HTML dinâmico completo. A principal vantagem é que o tempo de interatividade (\acrshort{tti}) é igual ao tempo até o primeiro conteúdo (\acrshort{fcp}), e o conteúdo é totalmente transmitido em \textit{streaming}. Contudo, ele pode ter um \acrshort{ttfb} mais lento e é considerado inflexível.
+
+    \item "Static \acrshort{ssr}" (\acrshort{ssg}): As páginas são pré-renderizadas para HTML estático em tempo de \textit{build} e o JavaScript é removido. Essa abordagem é construída como um SPA, mas entrega um HTML estático que é servido diretamente ao cliente. Os benefícios incluem um rápido \acrshort{ttfb} e o \acrshort{tti} ser igual ao \acrshort{fcp}, com a desvantagem de ser inflexível e ter que passar pela \textit{hydration} para interatividade.
+
+    \item \acrshort{csr} com Prerendering: A página é um SPA onde um "esqueleto" ou \textit{shell} inicial é pré-renderizado para HTML estático durante o \textit{build}. O servidor entrega apenas esse HTML parcial e o JavaScript/DOM são injetados posteriormente para renderizar o conteúdo. É uma abordagem flexível e com um \acrshort{ttfb} rápido, mas o \acrshort{tti} ainda é maior que o \acrshort{fcp}.
+
+    \item Full \acrshort{csr}: Toda a lógica, renderização e inicialização da aplicação são feitas no cliente. O HTML enviado pelo servidor é basicamente um conjunto de \textit{tags} de \textit{script} e estilo. É uma abordagem flexível com um \acrshort{ttfb} rápido, mas sofre com um grande atraso entre a renderização inicial e a interatividade (\acrshort{tti} >>> \acrshort{fcp}).
+\end{itemize}
+
+Em resumo, a figura demonstra que a escolha da renderização é um compromisso estratégico entre a velocidade de exibição inicial do conteúdo e a interatividade, com cada abordagem influenciando a carga computacional no servidor ou no navegador.
 
 \subsection{\english{Client-Side Rendering} (\acrshort{csr})}
 \label{subsec:csr}
@@ -557,48 +531,19 @@ O pilar da coleta de dados empíricos deste trabalho foi o conjunto de métricas
 \subsubsection{Principais Métricas do Web Vitals}
 As métricas a seguir, que compõem os Core Web Vitals atuais, foram essenciais para a análise comparativa:
 \begin{description}
-    \item[\textbf{LCP (\acrfull{lcp})}] Mede o tempo, em segundos, desde o início do carregamento da página até a renderização do maior elemento de conteúdo (imagem ou bloco de texto) visível na tela. É a principal métrica para a percepção de velocidade de carregamento.
-    \item[\textbf{INP (\acrfull{inp})}] Avalia a latência de todas as interações do usuário (cliques, toques e digitação) com a página, medindo a capacidade de resposta geral da aplicação. Um baixo INP indica que a página responde rapidamente às ações do usuário.
-    \item[\textbf{CLS (\acrfull{cls})}] Quantifica a instabilidade visual da página. Mede a soma de todas as mudanças inesperadas de layout que ocorrem durante o carregamento, garantindo que os elementos não "pulem" na tela e frustrem a interação do usuário.
+    \item[\textbf{\acrfull{lcp}}] Mede o tempo, em segundos, desde o início do carregamento da página até a renderização do maior elemento de conteúdo (imagem ou bloco de texto) visível na tela. É a principal métrica para a percepção de velocidade de carregamento.
+    \item[\textbf{\acrfull{inp}}] Avalia a latência de todas as interações do usuário (cliques, toques e digitação) com a página, medindo a capacidade de resposta geral da aplicação. Um baixo INP indica que a página responde rapidamente às ações do usuário.
+    \item[\textbf{\acrfull{cls}}] Quantifica a instabilidade visual da página. Mede a soma de todas as mudanças inesperadas de layout que ocorrem durante o carregamento, garantindo que os elementos não "pulem" na tela e frustrem a interação do usuário.
 \end{description}
 
 \subsubsection{Métricas Complementares}
 Além dos Core Web Vitals, outras métricas foram observadas para fornecer um diagnóstico mais completo do processo de carregamento:
 \begin{description}
-    \item[\textbf{TTFB (\acrfull{ttfb})}] Indica a responsividade do servidor. Mede o tempo entre a requisição de um recurso e o momento em que o primeiro byte da resposta chega ao navegador. É um indicador crucial da saúde do \textit{backend}.
-    \item[\textbf{FCP (\acrfull{fcp})}] Marca o tempo em que o primeiro conteúdo do \acrshort{dom} (texto, imagem, etc.) é renderizado na tela, dando ao usuário o primeiro feedback visual de que a página está carregando.
-    \item[\textbf{TBT (Total Blocking Time)}] Medido em ambiente de laboratório (via Lighthouse), soma o tempo em que a \textit{thread} principal ficou bloqueada por tarefas longas, impedindo a resposta a interações do usuário. É um bom proxy para a métrica de campo INP.
+    \item[\textbf{\acrfull{ttfb}}] Indica a responsividade do servidor. Mede o tempo entre a requisição de um recurso e o momento em que o primeiro byte da resposta chega ao navegador. É um indicador crucial da saúde do \textit{backend}.
+    \item[\textbf{\acrfull{fcp}}] Marca o tempo em que o primeiro conteúdo do \acrshort{dom} (texto, imagem, etc.) é renderizado na tela, dando ao usuário o primeiro feedback visual de que a página está carregando.
+    \item[\textbf{\acrfull{ttfb}}] Medido em ambiente de laboratório (via Lighthouse), soma o tempo em que a \textit{thread} principal ficou bloqueada por tarefas longas, impedindo a resposta a interações do usuário. É um bom proxy para a métrica de campo INP.
 \end{description}
 O domínio e a correta interpretação dessas métricas foram fundamentais para a análise comparativa entre as arquiteturas CSR e SSR, permitindo uma compreensão aprofundada do desempenho percebido pelo usuário e servindo como base para as conclusões técnicas apresentadas neste estudo.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \section{Frameworks Web}
 \label{sec:frameworks-web}
@@ -1084,7 +1029,7 @@ No contexto do seu trabalho, contêineres simplificam a comparação entre \acrs
 \begin{itemize}
   \item \textbf{CSR/SSG (estático + CDN):} \textit{build} do frontend (React/Vite/Next SSG) em um estágio e \textbf{Nginx} no estágio final para servir arquivos estáticos.  
   \item \textbf{SSR (Node/Next):} multi-stage com instalação apenas das dependências de produção e \textbf{imagem enxuta} (\texttt{alpine} ou \texttt{distroless}), expondo a porta do servidor \acrshort{ssr}.
-  \item \textbf{Medições reprodutíveis:} ao encapsular as variantes em imagens, é possível rodar os mesmos testes de desempenho (FCP, TTFB, INP, TTI) em hardware idêntico e com \textit{network shaping}, isolando o impacto da estratégia de renderização.
+  \item \textbf{Medições reprodutíveis:} ao encapsular as variantes em imagens, é possível rodar os mesmos testes de desempenho (\acrshort{fcp}, \acrshort{ttfb}, \acrshort{inp}, \acrshort{tti}) em hardware idêntico e com \textit{network shaping}, isolando o impacto da estratégia de renderização.
 \end{itemize}
 
 \begin{codigo}[H]
