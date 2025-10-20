@@ -90,32 +90,41 @@ Detalhe & 0--7\footnotemark[1] & 100 & 100 \\
 \noindent \textit{Leitura.}
 (i) \textbf{TBT} muito abaixo da meta interna ($<200$\,ms) em todas as rotas, corroborando \acrshort{inp} em \textit{good};
 (ii) \textbf{Acessibilidade} alta (95--100\%), com ajustes residuais (hierarquia de headings, foco visível, rótulos) de fácil endereçamento;
-(iii) \textbf{SEO} consistente (100\%), indicando sinalização adequada (título, \emph{meta description}, \texttt{canonical}, \texttt{robots}, \texttt{viewport}) — aspecto particularmente relevante no fluxo SSR.
+(iii) \textbf{SEO} consistente (100\%), indicando sinalização adequada (título, \emph{meta description}, \texttt{canonical}, \texttt{robots}, \texttt{viewport}) aspecto particularmente relevante no fluxo SSR.
 
 \subsection{Resultados Aplicação CSR}
 \label{subsec:resultados-csr}
 
-O contêiner da \emph{SPA} apresentou \textbf{CPU} muito baixa e estável, com oscilações discretas e picos inferiores a 5\% (\autoref{fig:csr-cpu}). A \textbf{memória} permaneceu praticamente constante e em patamar reduzido durante todo o ensaio, coerente com a entrega estática e a execução da lógica no cliente (\autoref{fig:csr-mem}). Não se observaram sinais de saturação.
+O gráfico apresentado (\autoref{fig:csr-cpu}) mostra a média de uso de CPU ao longo do tempo para a aplicação \emph{SPA} utilizando a abordagem CSR. Observa-se que o uso da CPU permanece baixo e estável durante a maior parte do período analisado, com pequenas flutuações ocasionais, que não ultrapassam 5\%. Essas oscilações podem ser atribuídas a momentos específicos de interação mais intensiva ou carregamento de dados dinâmicos, mas, no geral, a aplicação apresenta um desempenho eficiente em termos de consumo de CPU.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \caption{Média de uso de CPU por tempo (\acrshort{csr})}
-\includegraphics[width=0.9\textwidth]{media/uso_cpu_csr.jpeg}
+\includegraphics[width=1.0\textwidth]{media/uso_cpu_csr.jpeg}
 \legend{Fonte: os autores.}
 \label{fig:csr-cpu}
 \end{figure}
 
-\begin{figure}[H]
+
+Os picos de uso da CPU observados são discretos e ocorrem em intervalos relativamente curtos, o que sugere que a aplicação é capaz de lidar com as operações de renderização e interação sem causar grandes sobrecargas no sistema. Esse comportamento é típico de aplicações bem otimizadas que não exigem processamento pesado durante a navegação e que priorizam a responsividade sem comprometer a estabilidade.
+
+Antes de analisarmos os resultados de CPU, é importante observar o uso de memória da aplicação com a abordagem CSR. A eficiência do consumo de memória é um indicador crucial para a performance da aplicação, especialmente em dispositivos com recursos limitados. O gráfico a seguir ilustra a média de uso de memória por tempo durante o ensaio.
+
+
+\begin{figure}[h]
 \centering
 \caption{Média de uso de memória por tempo (\acrshort{csr})}
-\includegraphics[width=0.9\textwidth]{media/uso_memoria_csr.jpeg}
+\includegraphics[width=1.0\textwidth]{media/uso_memoria_csr.jpeg}
 \legend{Fonte: os autores.}
 \label{fig:csr-mem}
 \end{figure}
 
+A \textbf{memória} permaneceu praticamente constante e em patamar reduzido durante todo o ensaio, coerente com a entrega estática e a execução da lógica no cliente (\autoref{fig:csr-mem}). Não se observaram sinais de saturação, o que indica uma boa otimização da aplicação para evitar o consumo excessivo de recursos, mesmo durante o uso prolongado. Esse comportamento sugere que a aplicação CSR está bem adaptada para dispositivos com diferentes capacidades de memória, oferecendo uma experiência estável sem sobrecarregar o sistema. Esse uso controlado de memória é uma característica importante para garantir que o desempenho da aplicação seja mantido, mesmo sob condições de uso intensivo.
+
+\clearpage
 As leituras de campo indicam predomínio de \textit{good} em \acrshort{ttfb}, \acrshort{fcp}, \acrshort{lcp} e \acrshort{inp} (\autoref{fig:csr-webvitals}). O ponto fora da curva é a \acrshort{cls}, com concentrações em \textit{poor}. Esse padrão é típico de SPAs quando ocorrem \emph{layout shifts} durante a hidratação ou quando imagens/slots não reservam espaço antes do carregamento (dimensões ausentes, fontes sem \emph{preload}, inserções acima da dobra). Em relação às metas, as leituras ficaram, em geral, dentro ou próximas dos limiares de referência (\acrshort{lcp} $\leq 2{,}5$\,s; \acrshort{cls} $\leq 0{,}10$; \acrshort{inp} $\leq 200$\,ms; \acrshort{ttfb} $\leq 800$\,ms), com a ressalva da \acrshort{cls}.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \caption{Classificação das métricas de desempenho (\acrshort{csr}) com Web Vitals}
 \includegraphics[width=0.9\textwidth]{media/metricas_csr_web_vitals.jpeg}
@@ -179,6 +188,8 @@ Os resultados alinham-se e fornecem validação empírica para as recomendaçõe
 \textbf{(ii) Experiência do usuário.} Em \acrshort{ssr}, a entrega inicial é perceptivelmente rápida e os escores de SEO e Acessibilidade são superiores. Em \acrshort{csr}, a interatividade após o carregamento é o grande trunfo, mas o principal cuidado é a CLS, que pode degradar a experiência.
 
 \textbf{(iii) Coerência entre campo e laboratório.} Os \textit{Web Vitals} em campo e o TBT do Lighthouse convergiram, indicando baixo bloqueio de \emph{main thread} em ambos os modelos. As divergências em CLS (CSR) e SEO(CSR $<$ SSR) são áreas classicamente sensíveis à estratégia de renderização.
+
+\textbf{(iv) Análise Econômica e Viabilidade.} A análise econômica dos recursos reforça o apelo do \acrshort{csr} em cenários de alto tráfego com orçamento restrito, devido ao seu modelo de \emph{static hosting}, que minimiza custos com servidores e escalabilidade. Em contraste, o \acrshort{ssr}, embora ofereça vantagens competitivas em SEO que podem resultar em maior retorno sobre o investimento (ROI) para plataformas dependentes de tráfego orgânico (como notícias), exige um investimento inicial e operacional maior em infraestrutura para processar a renderização no lado do servidor. A viabilidade econômica, portanto, está intrinsecamente ligada à fonte de receita e à escala de tráfego esperada.
 
 \subsection{Implicações práticas}
 A decisão entre as arquiteturas deve ser ponderada à luz dos objetivos do produto, das expectativas do usuário e das capacidades da equipe de desenvolvimento.
