@@ -55,11 +55,11 @@ A medição de desempenho em aplicações web modernas evoluiu de uma simples an
 Adotando essa metodologia como padrão de mercado, este trabalho selecionou um conjunto de indicadores para realizar uma avaliação completa, abrangendo não apenas a percepção do usuário, mas também os custos computacionais no servidor. Para garantir uma análise estruturada, as métricas foram categorizadas da seguinte forma:
 
 \begin{itemize}
-\item \textbf{Web Vitals (Núcleo):} Representam a base da análise de experiência do usuário. Foram coletadas as métricas \acrfull{ttfb}, \acrfull{fcp}, \acrfull{lcp}, \acrfull{cls} e \acrfull{inp}. Esses dados foram registrados diretamente no cliente durante a navegação real e persistidos em formato NDJSON para análise posterior.
+\item Web Vitals (Núcleo): Representam a base da análise de experiência do usuário. Foram coletadas as métricas \acrfull{ttfb}, \acrfull{fcp}, \acrfull{lcp}, \acrfull{cls} e \acrfull{inp}. Esses dados foram registrados diretamente no cliente durante a navegação real e persistidos em formato NDJSON para análise posterior.
 
-\item \textbf{Auditoria de Laboratório (Apoio):} Utilizando o Lighthouse, foram realizadas auditorias complementares para analisar o \acrfull{tbt} e identificar oportunidades de otimização. As auditorias também validaram aspectos de Acessibilidade e \acrshort{seo} de forma automatizada.
+\item Auditoria de Laboratório (Apoio): Utilizando o Lighthouse, foram realizadas auditorias complementares para analisar o \acrfull{tbt} e identificar oportunidades de otimização. As auditorias também validaram aspectos de Acessibilidade e \acrshort{seo} de forma automatizada.
 
-\item \textbf{Recursos do Servidor (Custo):} Para contextualizar o custo de execução de cada abordagem, o consumo de recursos dos contêineres foi monitorado com o comando \texttt{docker stats}, registrando o uso de CPU e memória durante os testes.
+\item Recursos do Servidor (Custo): Para contextualizar o custo de execução de cada abordagem, o consumo de recursos dos contêineres foi monitorado com o comando \texttt{docker stats}, registrando o uso de CPU e memória durante os testes.
 \end{itemize}
 
 
@@ -71,11 +71,11 @@ Adicionalmente, foram observados: número de requisições HTTP e uso de cache (
 Foram utilizadas ferramentas complementares, com ênfase na coleta contínua no navegador (\textit{field}) e apoio de auditoria em \textit{laboratório}:
 
 \begin{itemize}
-    \item \textbf{Web Vitals (\acrfull{rum})}: Instrumentação no cliente para coletar as métricas TTFB, FCP, LCP, CLS e INP. O envio dos dados a um endpoint interno é feito via \texttt{navigator.sendBeacon}, uma API que garante a transmissão confiável das métricas mesmo quando o usuário encerra a página, com os dados persistidos em formato NDJSON;
+    \item Web Vitals (\acrfull{rum}): Instrumentação no cliente para coletar as métricas TTFB, FCP, LCP, CLS e INP. O envio dos dados a um endpoint interno é feito via \texttt{navigator.sendBeacon}, uma API que garante a transmissão confiável das métricas mesmo quando o usuário encerra a página, com os dados persistidos em formato NDJSON;
 
-    \item \textbf{Google Lighthouse} (auxiliar): Auditoria em \textit{laboratório} para Performance (incluindo FCP, LCP, CLS, Speed Index e TBT), executada localmente sobre os serviços em Docker;
-    \item \textbf{Chrome DevTools}: Inspeção de rede, \textit{waterfall}, cache e verificação dos \textit{POSTs} de métricas;
-    \item \textbf{docker stats}: Acompanhamento do uso de CPU e memória dos contêineres durante a execução dos testes.
+    \item Google Lighthouse (auxiliar): Auditoria em \textit{laboratório} para Performance (incluindo FCP, LCP, CLS, Speed Index e TBT), executada localmente sobre os serviços em Docker;
+    \item Chrome DevTools: Inspeção de rede, \textit{waterfall}, cache e verificação dos \textit{POSTs} de métricas;
+    \item docker stats: Acompanhamento do uso de CPU e memória dos contêineres durante a execução dos testes.
 \end{itemize}
 
 \subsection{Ambiente de Testes}
@@ -84,16 +84,16 @@ Foram utilizadas ferramentas complementares, com ênfase na coleta contínua no 
 Os testes para ambas as versões (\acrshort{csr} e \acrshort{ssr}) foram conduzidos em um ambiente local, utilizando contêineres \textit{Docker} para garantir a consistência. A escolha por essa abordagem foi uma consequência direta das restrições do plano de desenvolvedor (gratuito) da NewsAPI. Especificamente, a política de uso deste plano restringe as chamadas da API a requisições que partem de localhost, o que inviabilizou um teste em produção. No caso da versão \acrshort{csr}, a política de CORS bloquearia as chamadas diretas do navegador em um domínio público; já para a versão \acrshort{ssr}, as chamadas de servidor para servidor seriam igualmente bloqueadas, pois o servidor de produção não seria localhost. Portanto, a execução local não apenas contornou essa limitação, mas também assegurou um maior controle sobre as variáveis do experimento e a total reprodutibilidade dos resultados. Ambos os serviços foram executados com paridade de recursos:
 
 \begin{itemize}
-    \item \textbf{CPU}: \texttt{--cpus="1.0"} e \texttt{--cpuset-cpus="0"};
-    \item \textbf{Memória}: \texttt{--memory="1g"} e \texttt{--memory-swap="1g"};
-    \item \textbf{Sistema de arquivos}: \texttt{--read-only} com \texttt{--tmpfs /tmp};
-    \item \textbf{Persistência de métricas}: volume em \texttt{/data} com \texttt{METRICS\_PATH=/data/webvitals.ndjson}.
+    \item CPU: \texttt{--cpus="1.0"} e \texttt{--cpuset-cpus="0"};
+    \item Memória: \texttt{--memory="1g"} e \texttt{--memory-swap="1g"};
+    \item Sistema de arquivos: \texttt{--read-only} com \texttt{--tmpfs /tmp};
+    \item Persistência de métricas: volume em \texttt{/data} com \texttt{METRICS\_PATH=/data/webvitals.ndjson}.
 \end{itemize}
 
 A aplicação \acrshort{ssr} (Next.js) foi empacotada em modo \textit{standalone}. A aplicação \acrshort{csr} (React + Vite) foi servida por um processo \texttt{Node.js} simples que também expõe o endpoint de métricas. Os serviços públicos locais utilizados nos testes foram:
 \begin{itemize}
-    \item \textbf{SSR/Next.js}: \texttt{http://localhost:3001}
-    \item \textbf{CSR/React}: \texttt{http://localhost:3002}
+    \item SSR/Next.js: \texttt{http://localhost:3001}
+    \item CSR/React: \texttt{http://localhost:3002}
 \end{itemize}
 
 \subsection{Execução dos Testes}
@@ -101,14 +101,14 @@ A aplicação \acrshort{ssr} (Next.js) foi empacotada em modo \textit{standalone
 A execução foi conduzida em quatro etapas, sendo:
 
 \begin{enumerate}
-    \item \textbf{Aquecimento}: duas visitas iniciais à mesma rota em cada aplicação, para estabilização de caches e recursos;
-    \item \textbf{Coleta principal (Web Vitals)}: navegação real em janela anônima, registrando TTFB, FCP, LCP, CLS e INP por meio do endpoint interno e persistindo em arquivo NDJSON;
-    \item \textbf{Coleta auxiliar (Lighthouse)}: auditorias repetidas em modo desktop, com parâmetros de \textit{throttling} consistentes entre cenários, para fornecer referência de \textit{laboratório};
-    \item \textbf{Observabilidade do contêiner}: monitoramento pontual com \texttt{docker stats} para CPU e memória durante as execuções.
+    \item Aquecimento: duas visitas iniciais à mesma rota em cada aplicação, para estabilização de caches e recursos;
+    \item Coleta principal (Web Vitals): navegação real em janela anônima, registrando TTFB, FCP, LCP, CLS e INP por meio do endpoint interno e persistindo em arquivo NDJSON;
+    \item Coleta auxiliar (Lighthouse): auditorias repetidas em modo desktop, com parâmetros de \textit{throttling} consistentes entre cenários, para fornecer referência de \textit{laboratório};
+    \item Observabilidade do contêiner: monitoramento pontual com \texttt{docker stats} para CPU e memória durante as execuções.
 \end{enumerate}
 
 
-Para reduzir a variabilidade, cada teste foi repetido no mínimo cinco vezes por cenário. A análise detalhada dos dados coletados, incluindo a quantidade total de repetições e o método de agregação estatística (mediana/p50 e p95), é apresentada no \textbf{Capítulo de Resultados e Discussão (\autoref{cap:resultados})}.
+Para reduzir a variabilidade, cada teste foi repetido no mínimo cinco vezes por cenário. A análise detalhada dos dados coletados, incluindo a quantidade total de repetições e o método de agregação estatística (mediana/p50 e p95), é apresentada no Capítulo de Resultados e Discussão (\autoref{cap:resultados}).
 
 \subsection{Tratamento e Análise dos Dados}
 
