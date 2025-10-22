@@ -8,7 +8,7 @@ Este capítulo detalha a construção do estudo de caso prático, que se baseia 
 
 Este estudo de caso parte do cenário de uma empresa fictícia do setor de notícias sobre tecnologia, cujo objetivo é fornecer conteúdos atualizados e relevantes sobre inovações e tendências do mercado. O público-alvo inclui entusiastas de tecnologia, profissionais da área e usuários que desejam acompanhar as novidades do setor em diferentes dispositivos, graças a uma interface responsiva.
 
-A Figura \ref{fig:wireframe-walltech} apresenta o \textit{wireframe} da plataforma \textbf{WallTech}, gerado com o auxílio da ferramenta \textbf{V0.dev}, que utiliza inteligência artificial para criar protótipos de interfaces a partir de descrições textuais. Esse modelo visual orienta a organização dos elementos na interface antes da implementação das versões em \acrshort{csr} e \acrshort{ssr}.
+A Figura \ref{fig:wireframe-walltech} apresenta o \textit{wireframe} da plataforma WallTech, gerado com o auxílio da ferramenta \textbf{V0.dev}, que utiliza inteligência artificial para criar protótipos de interfaces a partir de descrições textuais. Esse modelo visual orienta a organização dos elementos na interface antes da implementação das versões em \acrshort{csr} e \acrshort{ssr}.
 
 \begin{figure}[H]
   \centering
@@ -18,7 +18,7 @@ A Figura \ref{fig:wireframe-walltech} apresenta o \textit{wireframe} da platafor
   \label{fig:wireframe-walltech}
 \end{figure}
 
-Para analisar o impacto de diferentes abordagens de renderização web, foram desenvolvidos dois protótipos independentes da plataforma \textbf{WallTech}. O primeiro segue a abordagem de \acrfull{csr}, estruturado como uma \acrfull{spa} utilizando a biblioteca \textit{React}. O segundo utiliza \acrfull{ssr}, implementado como uma \acrfull{mpa} com o framework \textit{Next.js}.
+Para analisar o impacto de diferentes abordagens de renderização web, foram desenvolvidos dois protótipos independentes da plataforma WallTech. O primeiro segue a abordagem de \acrfull{csr}, estruturado como uma \acrfull{spa} utilizando a biblioteca \textit{React}. O segundo utiliza \acrfull{ssr}, implementado como uma \acrfull{mpa} com o framework \textit{Next.js}.
 
 A Figura \ref{fig:caso-uso-walltech} apresenta o diagrama de caso de uso da plataforma, destacando as principais funcionalidades acessíveis a usuários anônimos, como visualizar notícias recentes, acessar detalhes e realizar buscas por palavras-chave.
 
@@ -68,25 +68,25 @@ Para guiar o desenvolvimento da plataforma WallTech, foi adotada uma abordagem b
 
 As histórias de usuário foram redigidas segundo o modelo dos 3Ws (Who, What, Why), uma técnica comum em análise de requisitos que busca responder:
 \begin{itemize}
-  \item \textbf{Who (Quem):} Quem está solicitando ou interagindo com a funcionalidade?
-  \item \textbf{What (O quê):} Qual é a ação ou funcionalidade desejada?
-  \item \textbf{Why (Por quê):} Qual é o benefício ou valor esperado para o usuário?
+  \item Who (Quem): Quem está solicitando ou interagindo com a funcionalidade?
+  \item What (O quê): Qual é a ação ou funcionalidade desejada?
+  \item Why (Por quê): Qual é o benefício ou valor esperado para o usuário?
 \end{itemize}
 
 Esse modelo torna a narrativa mais centrada no usuário e contribui para um entendimento compartilhado entre desenvolvedores, designers e partes interessadas. Além disso, as funcionalidades foram agrupadas em épicos, que representam blocos de funcionalidades coesas e de maior escala dentro do sistema.
 
-A seguir, apresenta-se o \textbf{EPIC-01}, responsável por organizar as funcionalidades relacionadas à visualização pública de notícias na plataforma WallTech, seguido de suas respectivas histórias de usuário.
+A seguir, apresenta-se o EPIC-01, responsável por organizar as funcionalidades relacionadas à visualização pública de notícias na plataforma WallTech, seguido de suas respectivas histórias de usuário.
 
 \subsubsection*{EPIC-01: Visualização de Notícias (Público)}
 
 \begin{itemize}
-  \item \textbf{ID do Épico:} EPIC-01
-  \item \textbf{Persona Principal:} Leitor (Anônimo)
+  \item ID do Épico: EPIC-01
+  \item Persona Principal: Leitor (Anônimo)
 \end{itemize}
 
-\noindent \textbf{Descrição:} Este épico representa a “vitrine” da plataforma WallTech, onde visitantes anônimos podem explorar notícias de tecnologia de forma rápida, atrativa e segmentada por país. O fluxo foi pensado para maximizar o engajamento do usuário ao destacar as notícias mais relevantes e oferecer ferramentas intuitivas de busca e filtragem.
+\noindent Descrição: Este épico representa a “vitrine” da plataforma WallTech, onde visitantes anônimos podem explorar notícias de tecnologia de forma rápida, atrativa e segmentada por país. O fluxo foi pensado para maximizar o engajamento do usuário ao destacar as notícias mais relevantes e oferecer ferramentas intuitivas de busca e filtragem.
 
-\noindent \textbf{Funcionalidades Principais:}
+\noindent Funcionalidades Principais:
 \begin{itemize}
   \item Barra de pesquisa (por título, palavra-chave ou categoria);
   \item Destaque para a notícia mais visitada e outras três recentemente acessadas;
@@ -95,14 +95,14 @@ A seguir, apresenta-se o \textbf{EPIC-01}, responsável por organizar as funcion
   \item Página de detalhes da notícia com conteúdo completo e relacionadas.
 \end{itemize}
 
-\noindent \textbf{Requisitos Não-Funcionais:}
+\noindent Requisitos Não-Funcionais:
 \begin{itemize}
   \item Interface responsiva em diferentes dispositivos;
   \item Otimização de desempenho para carregamento rápido;
   \item Suporte a SEO nas páginas públicas (relevante em SSR).
 \end{itemize}
 
-\noindent \textbf{Critérios de Aceite:}
+\noindent Critérios de Aceite:
 \begin{itemize}
   \item Visitantes conseguem navegar e visualizar notícias sem necessidade de login;
   \item É possível realizar pesquisas e aplicar filtros por país;
@@ -113,14 +113,14 @@ A seguir, apresenta-se o \textbf{EPIC-01}, responsável por organizar as funcion
 \subsubsection*{HU01: Visualização da Tela Inicial com Notícias em Destaque}
 
 \begin{itemize}
-  \item \textbf{Who:} Visitante anônimo
-  \item \textbf{What:} Ver na página inicial uma barra de pesquisa, uma notícia mais visitada em destaque, três outras recém acessadas e uma lista com as cinco últimas notícias publicadas.
-  \item \textbf{Why:} Explorar rapidamente o conteúdo mais relevante e recente sobre tecnologia.
+  \item Who: Visitante anônimo
+  \item What: Ver na página inicial uma barra de pesquisa, uma notícia mais visitada em destaque, três outras recém acessadas e uma lista com as cinco últimas notícias publicadas.
+  \item Why: Explorar rapidamente o conteúdo mais relevante e recente sobre tecnologia.
 \end{itemize}
 
-\noindent \textbf{História:} \textit{Como um visitante, quero ver na página inicial uma barra de pesquisa, a notícia mais visitada em destaque, outras três recém visitadas ao lado e as cinco últimas notícias abaixo, para que eu possa explorar rapidamente o conteúdo mais relevante sobre tecnologia.}
+\noindent História: \textit{Como um visitante, quero ver na página inicial uma barra de pesquisa, a notícia mais visitada em destaque, outras três recém visitadas ao lado e as cinco últimas notícias abaixo, para que eu possa explorar rapidamente o conteúdo mais relevante sobre tecnologia.}
 
-\noindent \textbf{Critérios de Aceite:}
+\noindent Critérios de Aceite:
 \begin{itemize}
   \item A página inicial contém uma barra de pesquisa funcional;
   \item A notícia mais visitada aparece em destaque;
@@ -132,14 +132,14 @@ A seguir, apresenta-se o \textbf{EPIC-01}, responsável por organizar as funcion
 \subsubsection*{HU02: Pesquisar Notícias por Palavra-chave ou Categoria}
 
 \begin{itemize}
-  \item \textbf{Who:} Visitante
-  \item \textbf{What:} Utilizar a barra de pesquisa para buscar por título, palavra-chave ou categoria.
-  \item \textbf{Why:} Encontrar conteúdos relevantes de forma eficiente.
+  \item Who: Visitante
+  \item What: Utilizar a barra de pesquisa para buscar por título, palavra-chave ou categoria.
+  \item Why: Encontrar conteúdos relevantes de forma eficiente.
 \end{itemize}
 
-\noindent \textbf{História:} \textit{Como um visitante, quero pesquisar notícias por título, palavra-chave ou categoria, para que eu possa encontrar facilmente conteúdos relevantes sem precisar navegar por toda a lista.}
+\noindent História: \textit{Como um visitante, quero pesquisar notícias por título, palavra-chave ou categoria, para que eu possa encontrar facilmente conteúdos relevantes sem precisar navegar por toda a lista.}
 
-\noindent \textbf{Critérios de Aceite:}
+\noindent Critérios de Aceite:
 \begin{itemize}
   \item Campo de texto para busca;
   \item Filtro por categoria;
@@ -151,14 +151,14 @@ A seguir, apresenta-se o \textbf{EPIC-01}, responsável por organizar as funcion
 \subsubsection*{HU03: Filtrar Notícias por País}
 
 \begin{itemize}
-  \item \textbf{Who:} Visitante
-  \item \textbf{What:} Filtrar as notícias por país usando um seletor com bandeiras.
-  \item \textbf{Why:} Visualizar conteúdos específicos da localidade desejada.
+  \item Who: Visitante
+  \item What: Filtrar as notícias por país usando um seletor com bandeiras.
+  \item Why: Visualizar conteúdos específicos da localidade desejada.
 \end{itemize}
 
-\noindent \textbf{História:} \textit{Como um visitante, quero filtrar notícias por país (Brasil ou EUA), para que eu possa visualizar apenas conteúdos relevantes para minha localidade ou interesse regional.}
+\noindent História: \textit{Como um visitante, quero filtrar notícias por país (Brasil ou EUA), para que eu possa visualizar apenas conteúdos relevantes para minha localidade ou interesse regional.}
 
-\noindent \textbf{Critérios de Aceite:}
+\noindent Critérios de Aceite:
 \begin{itemize}
   \item Menu com seleção de país exibindo bandeira e nome;
   \item Lista de notícias é atualizada dinamicamente conforme a seleção;
@@ -169,14 +169,14 @@ A seguir, apresenta-se o \textbf{EPIC-01}, responsável por organizar as funcion
 \subsubsection*{HU04: Visualizar Detalhes de uma Notícia}
 
 \begin{itemize}
-  \item \textbf{Who:} Visitante
-  \item \textbf{What:} Acessar a página de detalhes de uma notícia específica.
-  \item \textbf{Why:} Ler o conteúdo completo e visualizar informações adicionais.
+  \item Who: Visitante
+  \item What: Acessar a página de detalhes de uma notícia específica.
+  \item Why: Ler o conteúdo completo e visualizar informações adicionais.
 \end{itemize}
 
-\noindent \textbf{História:} \textit{Como um visitante, quero clicar em uma notícia para acessar sua página de detalhes, para que eu possa ler o conteúdo completo e visualizar informações relacionadas.}
+\noindent História: \textit{Como um visitante, quero clicar em uma notícia para acessar sua página de detalhes, para que eu possa ler o conteúdo completo e visualizar informações relacionadas.}
 
-\noindent \textbf{Critérios de Aceite:}
+\noindent Critérios de Aceite:
 \begin{itemize}
   \item Acesso a uma URL única da notícia;
   \item Exibição completa do conteúdo (título, autor, data, imagem, corpo do texto, país de origem);
@@ -196,11 +196,11 @@ A seguir, apresenta-se o \textbf{EPIC-01}, responsável por organizar as funcion
 \section{Requisitos}
 \label{section:requisitos}
 
-O levantamento e a definição dos requisitos da plataforma WallTech foram guiados pelas necessidades dos usuários e organizados por meio da técnica de \textit{histórias de usuário}, agrupadas em \textit{épicos}. A partir da análise funcional do \textbf{EPIC-01 — Visualização de Notícias (Público)}, foram identificadas as principais funcionalidades esperadas para a aplicação, considerando tanto o fluxo de interação do visitante quanto os objetivos de usabilidade, desempenho e escalabilidade.
+O levantamento e a definição dos requisitos da plataforma WallTech foram guiados pelas necessidades dos usuários e organizados por meio da técnica de \textit{histórias de usuário}, agrupadas em \textit{épicos}. A partir da análise funcional do EPIC-01 — Visualização de Notícias (Público), foram identificadas as principais funcionalidades esperadas para a aplicação, considerando tanto o fluxo de interação do visitante quanto os objetivos de usabilidade, desempenho e escalabilidade.
 
 A seguir, são apresentados os requisitos funcionais, que representam as funcionalidades diretamente percebidas pelos usuários, e os não funcionais, que tratam de atributos como desempenho, acessibilidade e responsividade.
 
-\textbf{Requisitos Funcionais:}
+Requisitos Funcionais:
 \begin{itemize}
   \item O sistema deve permitir que visitantes visualizem uma lista de notícias recentes e em destaque.
   \item O sistema deve disponibilizar uma barra de pesquisa por palavra-chave, título ou categoria.
@@ -210,7 +210,7 @@ A seguir, são apresentados os requisitos funcionais, que representam as funcion
   \item O sistema deve apresentar mensagens claras em situações de ausência de conteúdo.
 \end{itemize}
 
-\textbf{Requisitos Não Funcionais:}
+Requisitos Não Funcionais:
 \begin{itemize}
   \item A interface deve ser responsiva, adaptando-se corretamente a diferentes tamanhos de tela.
   \item O carregamento das páginas deve ser otimizado, proporcionando uma experiência fluida mesmo em conexões lentas.
@@ -229,9 +229,9 @@ O design do sistema foi orientado para refletir as diferenças estruturais entre
 
 Para modelagem arquitetural e comportamental, foram utilizados diagramas da UML, incluindo:
 \begin{itemize}
-  \item \textbf{Diagrama de Caso de Uso}, para representar as principais funcionalidades acessadas pelos usuários visitantes.
-  \item \textbf{Diagrama de Sequência}, a fim de ilustrar o fluxo de interação entre navegador e a \textit{NewsAPI} durante operações como busca e carregamento de notícias.
-  \item \textbf{Diagrama de Componentes}, para representar os módulos da aplicação, como a interface, o serviço de requisição à API, e os componentes de renderização.
+  \item Diagrama de Caso de Uso, para representar as principais funcionalidades acessadas pelos usuários visitantes.
+  \item Diagrama de Sequência, a fim de ilustrar o fluxo de interação entre navegador e a \textit{NewsAPI} durante operações como busca e carregamento de notícias.
+  \item Diagrama de Componentes, para representar os módulos da aplicação, como a interface, o serviço de requisição à API, e os componentes de renderização.
 \end{itemize}
 
 As decisões de design foram fundamentadas em boas práticas para renderização web discutidas por \cite{osmani2025}, bem como nas diretrizes da literatura especializada em arquitetura de frontend, como apresentado pela \cite{atori2024}.
@@ -243,7 +243,7 @@ Segundo \cite{osmani2025}, a escolha entre renderização no cliente ou no servi
 
 Para o estudo comparativo, a plataforma foi desenvolvida em duas arquiteturas distintas de renderização e navegação: 
 \acrfull{ssr} com \acrfull{mpa} e \acrfull{csr} com \acrfull{spa}.  
-Cada abordagem foi implementada com tecnologias adequadas ao seu paradigma Next.js para \acrshort{ssr}/\acrshort{mpa} e React para \acrshort{csr}/\acrshort{spa}  permitindo observar diferenças de desempenho, interatividade e otimização para mecanismos de busca (\acrshort{seo}).
+Cada abordagem foi implementada com tecnologias adequadas ao seu paradigma Next.js para \acrshort{ssr}/\acrshort{mpa} e React para \acrshort{csr}/\acrshort{spa} permitindo observar diferenças de desempenho, interatividade e otimização para mecanismos de busca (\acrshort{seo}).
 
 A seguir, cada abordagem é apresentada com seu fluxo típico de funcionamento, diagrama de componentes (representando a estrutura modular) e diagrama de sequência (detalhando as interações passo a passo).
 
@@ -290,7 +290,7 @@ A Figura \ref{fig:component-diagram-next} mostra que, nessa arquitetura, o servi
   \includegraphics[width=1\textwidth]{media/component-diagram-next.jpeg}
   \legend{Fonte: os autores.}
   \label{fig:component-diagram-next}
-\end{figure}
+</figure}
 
 
 \subsection{CSR/SPA - Fluxo e Arquitetura}
@@ -315,7 +315,7 @@ A Figura \ref{fig:sequence-diagram-csr} descreve como o navegador processa as in
   \includegraphics[width=1\textwidth]{media/wall_tech_detail_sequence_diagram.jpeg}
   \legend{Fonte: os autores.}
   \label{fig:sequence-diagram-csr}
-\end{figure}
+</figure}
 
 
 A Figura \ref{fig:component-diagram-react} mostra que, nessa arquitetura, o navegador concentra toda a lógica de renderização. O Roteador React decide quais componentes de página serão exibidos, enquanto o Gerenciador de Estado controla o fluxo de dados entre a interface e a NewsAPI.
@@ -326,7 +326,7 @@ A Figura \ref{fig:component-diagram-react} mostra que, nessa arquitetura, o nave
   \includegraphics[width=1\textwidth]{media/component-diagram-react.jpeg}
   \legend{Fonte: os autores.}
   \label{fig:component-diagram-react}
-\end{figure}
+</figure}
 
 
 
@@ -649,8 +649,8 @@ A análise de métricas (estatísticas descritivas e percentis como p50 e p95) s
 \label{ssec:repositorios-repro}
 O código-fonte, instruções de execução e artefatos de instrumentação estão disponíveis nos repositórios públicos da empresa fictícia WallTech:
 \begin{itemize}
-  \item \textbf{CSR/SPA (React+Vite)}: \url{https://github.com/WallTechTCC/React-CSR}
-  \item \textbf{SSR/MPA (Next.js)}: \url{https://github.com/WallTechTCC/Next-SSR}
+  \item CSR/SPA (React+Vite): \url{https://github.com/WallTechTCC/React-CSR}
+  \item SSR/MPA (Next.js): \url{https://github.com/WallTechTCC/Next-SSR}
 \end{itemize}
 Esses repositórios permitem reproduzir o experimento localmente com os mesmos limites de CPU/RAM, sistema de arquivos \textit{read-only} e coleta de \textit{Web Vitals} no formato NDJSON, preservando a comparabilidade entre \acrshort{csr} e \acrshort{ssr}.
 
@@ -662,15 +662,15 @@ Para registrar o uso de CPU, memória e número de \textit{PIDs} dos contêinere
 
 Cada linha do arquivo CSV gerado contém as seguintes colunas para a análise dos dados:
 \begin{itemize}
-  \item \textbf{ts}: timestamp da coleta no host (\texttt{YYYY-MM-DD HH:MM:SS});
-  \item \textbf{name}: nome do contêiner;
-  \item \textbf{cpu\_perc}: percentual de CPU do contêiner (string com ``\%'' conforme \texttt{docker stats});
-  \item \textbf{mem\_usage}: uso de memória reportado (formato humano, ex.: ``123.4MiB / 1.00GiB'');
-  \item \textbf{mem\_perc}: percentual de memória (string com ``\%'');
-  \item \textbf{pids}: quantidade de processos/threads visíveis ao cgroup do contêiner.
+  \item ts: timestamp da coleta no host (\texttt{YYYY-MM-DD HH:MM:SS});
+  \item name: nome do contêiner;
+  \item cpu\_perc: percentual de CPU do contêiner (string com ``\%'' conforme \texttt{docker stats});
+  \item mem\_usage: uso de memória reportado (formato humano, ex.: ``123.4MiB / 1.00GiB'');
+  \item mem\_perc: percentual de memória (string com ``\%'');
+  \item pids: quantidade de processos/threads visíveis ao cgroup do contêiner.
 \end{itemize}
 
-O comando utilizado para a coleta no contêiner \textbf{SSR (\texttt{next-ssr})}, que cria o diretório de métricas e inicia a captura contínua em \texttt{metrics-host/docker-stats-ssr.csv}, é apresentado a seguir.
+O comando utilizado para a coleta no contêiner SSR (\texttt{next-ssr}), que cria o diretório de métricas e inicia a captura contínua em \texttt{metrics-host/docker-stats-ssr.csv}, é apresentado a seguir.
 
 \begin{lstlisting}[language=bash,caption={Captura de CPU/RAM do contêiner SSR e exportação para CSV}]
 mkdir -p metrics-host
@@ -686,7 +686,7 @@ mkdir -p metrics-host
 ) >> metrics-host/docker-stats-ssr.csv
 \end{lstlisting}
 
-De forma análoga, a coleta para o contêiner \textbf{CSR (\texttt{react-csr})} foi realizada com o script abaixo, gravando os dados em \texttt{metrics-host/docker-stats-csr.csv}.
+De forma análoga, a coleta para o contêiner CSR (\texttt{react-csr}) foi realizada com o script abaixo, gravando os dados em \texttt{metrics-host/docker-stats-csr.csv}.
 
 \begin{lstlisting}[language=bash,caption={Captura de CPU/RAM do contêiner CSR e exportação para CSV}]
 (
@@ -708,9 +708,9 @@ O \textit{Lighthouse} foi utilizado como apoio diagnóstico em ambiente laborato
 
 No contexto deste estudo, o Lighthouse foi empregado com os seguintes propósitos:
 \begin{itemize}
-  \item \textbf{Interatividade em laboratório}: leitura do TBT (\textit{Total Blocking Time}) como indicador de trabalho bloqueante no \textit{main thread};
-  \item \textbf{Oportunidades/Auditorias}: insumos para orientar correções de build e de carregamento (JS/CSS, imagens, dicas de rede);
-  \item \textbf{Acessibilidade e SEO}: verificação rápida de barreiras e sinalização para mecanismos de busca.
+  \item Interatividade em laboratório: leitura do TBT (\textit{Total Blocking Time}) como indicador de trabalho bloqueante no \textit{main thread};
+  \item Oportunidades/Auditorias: insumos para orientar correções de build e de carregamento (JS/CSS, imagens, dicas de rede);
+  \item Acessibilidade e SEO: verificação rápida de barreiras e sinalização para mecanismos de busca.
 \end{itemize}
 
 Os testes foram executados no Google Chrome, em \textit{DevTools} \textrightarrow{} Lighthouse, no modo \textit{Navigation}, com throttling padrão de rede/CPU, em \textit{Mobile} e, quando pertinente, \textit{Desktop}. Para cada cenário (página inicial, resultados de busca, detalhes da notícia) foram feitas 3 execuções, registrando-se a mediana do TBT e as principais oportunidades reportadas. Os relatórios foram exportados em JSON e HTML.
@@ -718,7 +718,7 @@ Os testes foram executados no Google Chrome, em \textit{DevTools} \textrightarro
 Na análise de performance, priorizou-se:
 \begin{itemize}
   \item \acrshort{tbt} (\textit{numericValue} e evidências de \textit{long tasks});
-  \item \textbf{Oportunidades e auditorias} diretamente relacionadas a custo de carregamento e execução:
+  \item Oportunidades e auditorias diretamente relacionadas a custo de carregamento e execução:
   \begin{itemize}
     \item \textit{render-blocking-resources};
     \item \textit{unused-javascript} e \textit{unused-css-rules};
@@ -730,11 +730,11 @@ Na análise de performance, priorizou-se:
 
 Na parte de acessibilidade, foram verificados itens que impactam navegação por teclado, leitores de tela e clareza de interface:
 \begin{itemize}
-  \item \textbf{Semântica e estrutura}: hierarquia de \textit{headings} e \textit{landmarks} (banner, main, nav);
-  \item \textbf{Foco e tabulação}: ordem lógica, foco visível, ausência de \textit{focus traps};
-  \item \textbf{Rótulos e nomes acessíveis}: uso adequado de \texttt{label} e atributos \texttt{aria-*};
-  \item \textbf{Contraste e legibilidade}: verificação de contraste de cor e tamanhos de fonte;
-  \item \textbf{Alternativos de mídia}: textos alternativos em imagens e propósito claro de links/botões.
+  \item Semântica e estrutura: hierarquia de \textit{headings} e \textit{landmarks} (banner, main, nav);
+  \item Foco e tabulação: ordem lógica, foco visível, ausência de \textit{focus traps};
+  \item Rótulos e nomes acessíveis: uso adequado de \texttt{label} e atributos \texttt{aria-*};
+  \item Contraste e legibilidade: verificação de contraste de cor e tamanhos de fonte;
+  \item Alternativos de mídia: textos alternativos em imagens e propósito claro de links/botões.
 \end{itemize}
 Dos relatórios JSON, foram lidos os \texttt{audits} mais acionáveis, como
 \texttt{color-contrast}, \texttt{image-alt}, \texttt{label}, \texttt{link-name},
@@ -742,10 +742,10 @@ Dos relatórios JSON, foram lidos os \texttt{audits} mais acionáveis, como
 
 A verificação de \acrshort{seo} concentrou-se em sinalização técnica e rastreabilidade:
 \begin{itemize}
-  \item \textbf{Sinalização}: título e meta description presentes; \texttt{rel=canonical} consistente;
-  \item \textbf{Rastreabilidade}: links rastreáveis, \texttt{robots.txt}/meta robots válidos;
-  \item \textbf{Internacionalização e dados estruturados}: \texttt{hreflang} (quando aplicável) e \textit{structured data} sem erros;
-  \item \textbf{Compatibilidade móvel}: viewport configurado, fontes legíveis e \textit{tap targets} adequados.
+  \item Sinalização: título e meta description presentes; \texttt{rel=canonical} consistente;
+  \item Rastreabilidade: links rastreáveis, \texttt{robots.txt}/meta robots válidos;
+  \item Internacionalização e dados estruturados: \texttt{hreflang} (quando aplicável) e \textit{structured data} sem erros;
+  \item Compatibilidade móvel: viewport configurado, fontes legíveis e \textit{tap targets} adequados.
 \end{itemize}
 Foram consultados, entre outros, os \texttt{audits}: \texttt{document-title}, \texttt{meta-description}, \texttt{canonical}, \texttt{is-crawlable}, \texttt{robots-txt}, \texttt{hreflang}, \texttt{structured-data}, \texttt{viewport}, \texttt{font-size} e \texttt{tap-targets}.
 
