@@ -46,9 +46,9 @@ O Protocolo de Transferência de Hipertexto (\acrshort{http}) é a base da comun
  O Funcionamento do \acrshort{http} opera no modelo cliente-servidor, onde o cliente inicia uma requisição e o servidor responde com os recursos solicitados ou mensagens de erro, se aplicável. Cada interação consiste em uma mensagem de requisição do cliente e uma mensagem de resposta do servidor. As mensagens \acrshort{http} são compostas por:
 
 \begin{itemize}
-    \item \textbf{Linha de início:} Indica o método \acrshort{http} (como \texttt{GET} ou \texttt{POST}) e o caminho do recurso.
-    \item \textbf{Cabeçalhos:} Fornecem informações adicionais sobre a requisição ou resposta, como tipo de conteúdo e codificação.
-    \item \textbf{Corpo:} Contém os dados enviados ou recebidos, sendo opcional dependendo do método utilizado.
+    \item Linha de início: Indica o método \acrshort{http} (como \texttt{GET} ou \texttt{POST}) e o caminho do recurso.
+    \item Cabeçalhos: Fornecem informações adicionais sobre a requisição ou resposta, como tipo de conteúdo e codificação.
+    \item Corpo: Contém os dados enviados ou recebidos, sendo opcional dependendo do método utilizado.
 \end{itemize}
 
 \begin{flushright}
@@ -59,23 +59,24 @@ O Protocolo de Transferência de Hipertexto (\acrshort{http}) é a base da comun
 Métodos \acrshort{http} são operações definidas pelo protocolo que especificam a ação a ser realizada em um recurso. Os métodos mais comuns incluem:
 
 \begin{itemize}
-    \item \textbf{GET:} Solicita a representação de um recurso específico. Requisições GET devem ser utilizadas apenas para recuperar dados.
-    \item \textbf{POST:} Envia dados ao servidor para processamento, como o envio de formulários.
-    \item \textbf{PUT:} Atualiza um recurso existente ou cria um novo se não existir.
-    \item \textbf{DELETE:} Remove um recurso específico.
-    \item \textbf{HEAD:} Similar ao GET, mas solicita apenas os cabeçalhos da resposta, sem o corpo.
+    \item GET: Solicita a representação de um recurso específico. Requisições GET devem ser utilizadas apenas para recuperar dados.
+    \item POST: Envia dados ao servidor para processamento, como o envio de formulários.
+    \item PUT: Atualiza um recurso existente ou cria um novo se não existir.
+    \item DELETE: Remove um recurso específico.
+    \item HEAD: Similar ao GET, mas solicita apenas os cabeçalhos da resposta, sem o corpo.
 \end{itemize}
+
 Cada método possui uma finalidade específica e deve ser utilizado conforme a necessidade da aplicação \cite{wikipedia_http}.
 
 
 Códigos de Status \acrshort{http} são códigos de três dígitos que indicam o resultado de uma requisição feita pelo cliente ao servidor. Eles são agrupados em cinco classes principais:
 
 \begin{itemize}
-    \item \textbf{1xx (Informativo):} Indica que a requisição foi recebida e o processo continua.
-    \item \textbf{2xx (Sucesso):} Indica que a requisição foi bem-sucedida. Exemplo: 200 OK.
-    \item \textbf{3xx (Redirecionamento):} Indica que é necessário tomar medidas adicionais para completar a requisição. Exemplo: 301 Moved Permanently.
-    \item \textbf{4xx (Erro do Cliente):} Indica que houve um erro na requisição do cliente. Exemplo: 404 Not Found.
-    \item \textbf{5xx (Erro do Servidor):} Indica que o servidor falhou ao processar uma requisição válida. Exemplo: 500 Internal Server Error.
+    \item 1xx (Informativo): Indica que a requisição foi recebida e o processo continua.
+    \item 2xx (Sucesso): Indica que a requisição foi bem-sucedida. Exemplo: 200 OK.
+    \item 3xx (Redirecionamento): Indica que é necessário tomar medidas adicionais para completar a requisição. Exemplo: 301 Moved Permanently.
+    \item 4xx (Erro do Cliente): Indica que houve um erro na requisição do cliente. Exemplo: 404 Not Found.
+    \item 5xx (Erro do Servidor): Indica que o servidor falhou ao processar uma requisição válida. Exemplo: 500 Internal Server Error.
 \end{itemize}
 
 Esses códigos auxiliam na identificação e resolução de problemas durante a comunicação \acrshort{http} \cite{mdn_http}.
@@ -84,17 +85,17 @@ Esses códigos auxiliam na identificação e resolução de problemas durante a 
 Evolução do \acrshort{http} refere-se às revisões progressivas do protocolo com o objetivo de aprimorar sua eficiência e desempenho ao longo do tempo. As principais versões são:
 
 \begin{itemize}
-    \item \textbf{HTTP/1.0:} Primeira versão oficial do protocolo, em que cada requisição exigia uma nova conexão com o servidor.
-    \item \textbf{HTTP/1.1:} Introduziu conexões persistentes, permitindo múltiplas requisições por conexão. Trouxe também melhorias no controle de cache e suporte a novos métodos.
-    \item \textbf{HTTP/2:} Implementou multiplexação, compressão de cabeçalhos e priorização de fluxos, resultando em uma transferência de dados mais rápida e eficiente.
-    \item \textbf{HTTP/3:} Baseado no protocolo \acrshort{quic}, substitui o \acrshort{tcp} pelo \acrshort{udp}, oferecendo conexões mais rápidas e seguras, com menor latência e melhor desempenho em redes instáveis.
+    \item HTTP/1.0: Primeira versão oficial do protocolo, em que cada requisição exigia uma nova conexão com o servidor.
+    \item HTTP/1.1: Introduziu conexões persistentes, permitindo múltiplas requisições por conexão. Trouxe também melhorias no controle de cache e suporte a novos métodos.
+    \item HTTP/2: Implementou multiplexação, compressão de cabeçalhos e priorização de fluxos, resultando em uma transferência de dados mais rápida e eficiente.
+    \item HTTP/3: Baseado no protocolo \acrshort{quic}, substitui o \acrshort{tcp} pelo \acrshort{udp}, oferecendo conexões mais rápidas e seguras, com menor latência e melhor desempenho em redes instáveis.
 \end{itemize}
 
 Essas atualizações refletem a evolução das necessidades da web e a busca por protocolos mais robustos e otimizados \cite{cloudflare_http}.
 
-\textbf{\acrshort{http} e \acrshort{https}} representam protocolos utilizados para comunicação na web, com a principal distinção centrada na segurança da transmissão dos dados.
+\acrshort{http} e \acrshort{https} representam protocolos utilizados para comunicação na web, com a principal distinção centrada na segurança da transmissão dos dados.
 
-O \textbf{\english{\acrfull{https}}} é uma extensão do \acrshort{http} que adiciona uma camada de proteção por meio do protocolo \english{\acrfull{tls}} ou, anteriormente, \english{\acrfull{ssl}}. Essa camada de segurança garante a confidencialidade, integridade e autenticidade dos dados trafegados entre cliente e servidor. 
+O \english{\acrfull{https}} é uma extensão do \acrshort{http} que adiciona uma camada de proteção por meio do protocolo \english{\acrfull{tls}} ou, anteriormente, \english{\acrfull{ssl}}. Essa camada de segurança garante a confidencialidade, integridade e autenticidade dos dados trafegados entre cliente e servidor.
 
 A criptografia utilizada impede que terceiros acessem ou modifiquem as informações transmitidas, o que é fundamental em transações sensíveis, como cadastros, pagamentos e autenticações. Além disso, o uso de \textit{certificados digitais} garante que o site visitado é realmente aquele que afirma ser, protegendo os usuários contra ataques como o \textit{man-in-the-middle}\footnote{Um ataque \textit{man-in-the-middle} ocorre quando um invasor intercepta e possivelmente altera a comunicação entre duas partes que acreditam estar se comunicando diretamente. Isso pode permitir que o invasor capture informações sensíveis ou injete dados maliciosos na comunicação.\cite{wikipedia_man_in_the_middle}}.
 
@@ -107,9 +108,9 @@ Enquanto o \acrshort{http} tradicional opera normalmente na porta \acrshort{tcp}
 O desenvolvimento frontend, conforme definido por \citeonline{aws_frontend_backend}, refere-se à camada de apresentação de uma aplicação web a interface gráfica com a qual os usuários interagem diretamente, composta por menus, botões, formulários e outros elementos visuais. Essa camada baseia-se em um conjunto de tecnologias fundamentais que operam em conjunto para fornecer estrutura, estilo e interatividade às páginas: \acrshort{html}, \acrshort{css} e JavaScript. Cada uma dessas linguagens desempenha um papel específico e complementar, sendo essenciais tanto em abordagens tradicionais quanto em técnicas modernas como o \acrshort{csr}.
 
 
-\textbf{\acrfull{html}} é a linguagem de marcação padrão para a criação da estrutura de páginas web. Através de um conjunto de elementos (ou \textit{tags}), o \acrshort{html} organiza e define o conteúdo exibido ao usuário, como textos, imagens, links, formulários e tabelas. Além de estruturar visualmente o documento, o \acrshort{html} também confere semântica aos elementos, facilitando a indexação por motores de busca e promovendo acessibilidade para leitores de tela. Elementos como \texttt{<header>}, \texttt{<main>}, \texttt{<article>} e \texttt{<footer>} exemplificam essa função semântica~\cite{alura_htmlcssjs}.
+\acrfull{html} é a linguagem de marcação padrão para a criação da estrutura de páginas web. Através de um conjunto de elementos (ou \textit{tags}), o \acrshort{html} organiza e define o conteúdo exibido ao usuário, como textos, imagens, links, formulários e tabelas. Além de estruturar visualmente o documento, o \acrshort{html} também confere semântica aos elementos, facilitando a indexação por motores de busca e promovendo acessibilidade para leitores de tela. Elementos como \texttt{<header>}, \texttt{<main>}, \texttt{<article>} e \texttt{<footer>} exemplificam essa função semântica~\cite{alura_htmlcssjs}.
 
-\textbf{\acrfull{css}} é a linguagem responsável pela estilização das páginas web. Com o \acrshort{css}, define-se a aparência dos elementos estruturados no \acrshort{html}, controlando propriedades visuais como cores, fontes, espaçamentos, tamanhos e posicionamentos. O \acrshort{css} permite ainda a construção de layouts complexos e responsivos, adaptando o conteúdo para diferentes tamanhos de tela e dispositivos. A separação entre estrutura (\acrshort{html}) e estilo (\acrshort{css}) é um dos pilares das boas práticas em desenvolvimento web, promovendo manutenibilidade, reutilização e modularidade do código.
+\acrfull{css} é a linguagem responsável pela estilização das páginas web. Com o \acrshort{css}, define-se a aparência dos elementos estruturados no \acrshort{html}, controlando propriedades visuais como cores, fontes, espaçamentos, tamanhos e posicionamentos. O \acrshort{css} permite ainda a construção de layouts complexos e responsivos, adaptando o conteúdo para diferentes tamanhos de tela e dispositivos. A separação entre estrutura (\acrshort{html}) e estilo (\acrshort{css}) é um dos pilares das boas práticas em desenvolvimento web, promovendo manutenibilidade, reutilização e modularidade do código.
 
 Entre os recursos modernos do \acrshort{css}, destacam-se os seletores avançados, variáveis \acrshort{css}, pseudo-classes, animações e as funcionalidades de \textit{Flexbox} e \textit{Grid}, que facilitam a criação de interfaces ricas e adaptáveis~\cite{herocode_diferencas}.
 
@@ -159,19 +160,19 @@ Segundo \citeonline{osmani2025}, é importante distinguir os principais modelos 
 
 
 \begin{description}
-  \item[\textbf{Client-Side Rendering (CSR)}] 
+  \item[Client-Side Rendering (CSR)] 
   O conteúdo da aplicação é gerado dinamicamente no navegador, utilizando JavaScript. A página HTML inicial contém apenas uma estrutura básica com os scripts necessários para montar a interface após o carregamento. É comum em aplicações do tipo SPA (Single Page Application).
   
-  \item[\textbf{Server-Side Rendering (SSR)}]
+  \item[Server-Side Rendering (SSR)]
   O servidor monta todo o conteúdo da página em HTML antes de enviá-lo ao cliente. Isso permite uma exibição mais rápida do conteúdo, mesmo em conexões lentas, e melhora a indexação por mecanismos de busca.
 
-  \item[\textbf{Static Site Generation (SSG)}]
+  \item[Static Site Generation (SSG)]
   As páginas são geradas de forma estática em tempo de build, com base em dados disponíveis no momento da compilação. O conteúdo é entregue diretamente por uma CDN, garantindo alto desempenho.
 
-  \item[\textbf{Incremental Static Regeneration (ISR)}]
+  \item[Incremental Static Regeneration (ISR)]
   Introduzido pelo Next.js, o ISR permite que páginas geradas estaticamente possam ser atualizadas de forma incremental, após um período de tempo definido. Isso é feito em segundo plano, sem bloquear o carregamento da página atual. Ideal para sites com atualizações frequentes, mas não críticas em tempo real.
 
-  \item[\textbf{Deferred Static Generation (DSG)}]
+  \item[Deferred Static Generation (DSG)]
   Proposto pelo Gatsby, o DSG difere do ISR por não gerar certas páginas no momento do build. Em vez disso, elas são geradas apenas na primeira requisição (on-demand). Após isso, são armazenadas em cache e servidas como estáticas nas requisições seguintes. É útil em projetos com milhares de páginas de baixo acesso, reduzindo significativamente o tempo de build.
 \end{description}
 
@@ -529,17 +530,17 @@ O pilar da coleta de dados empíricos deste trabalho foi o conjunto de métricas
 \subsubsection{Principais Métricas do Web Vitals}
 As métricas a seguir, que compõem os Core Web Vitals atuais, foram essenciais para a análise comparativa:
 \begin{description}
-    \item[\textbf{\acrfull{lcp}}] Mede o tempo, em segundos, desde o início do carregamento da página até a renderização do maior elemento de conteúdo (imagem ou bloco de texto) visível na tela. É a principal métrica para a percepção de velocidade de carregamento.
-    \item[\textbf{\acrfull{inp}}] Avalia a latência de todas as interações do usuário (cliques, toques e digitação) com a página, medindo a capacidade de resposta geral da aplicação. Um baixo INP indica que a página responde rapidamente às ações do usuário.
-    \item[\textbf{\acrfull{cls}}] Quantifica a instabilidade visual da página. Mede a soma de todas as mudanças inesperadas de layout que ocorrem durante o carregamento, garantindo que os elementos não "pulem" na tela e frustrem a interação do usuário.
+    \item[\acrfull{lcp}] Mede o tempo, em segundos, desde o início do carregamento da página até a renderização do maior elemento de conteúdo (imagem ou bloco de texto) visível na tela. É a principal métrica para a percepção de velocidade de carregamento.
+    \item[\acrfull{inp}] Avalia a latência de todas as interações do usuário (cliques, toques e digitação) com a página, medindo a capacidade de resposta geral da aplicação. Um baixo INP indica que a página responde rapidamente às ações do usuário.
+    \item[\acrfull{cls}] Quantifica a instabilidade visual da página. Mede a soma de todas as mudanças inesperadas de layout que ocorrem durante o carregamento, garantindo que os elementos não "pulem" na tela e frustrem a interação do usuário.
 \end{description}
 
 \subsubsection{Métricas Complementares}
 Além dos Core Web Vitals, outras métricas foram observadas para fornecer um diagnóstico mais completo do processo de carregamento:
 \begin{description}
-    \item[\textbf{\acrfull{ttfb}}] Indica a responsividade do servidor. Mede o tempo entre a requisição de um recurso e o momento em que o primeiro byte da resposta chega ao navegador. É um indicador crucial da saúde do \textit{backend}.
-    \item[\textbf{\acrfull{fcp}}] Marca o tempo em que o primeiro conteúdo do \acrshort{dom} (texto, imagem, etc.) é renderizado na tela, dando ao usuário o primeiro feedback visual de que a página está carregando.
-    \item[\textbf{\acrfull{ttfb}}] Medido em ambiente de laboratório (via Lighthouse), soma o tempo em que a \textit{thread} principal ficou bloqueada por tarefas longas, impedindo a resposta a interações do usuário. É um bom proxy para a métrica de campo INP.
+    \item[\acrfull{ttfb}] Indica a responsividade do servidor. Mede o tempo entre a requisição de um recurso e o momento em que o primeiro byte da resposta chega ao navegador. É um indicador crucial da saúde do \textit{backend}.
+    \item[\acrfull{fcp}] Marca o tempo em que o primeiro conteúdo do \acrshort{dom} (texto, imagem, etc.) é renderizado na tela, dando ao usuário o primeiro feedback visual de que a página está carregando.
+    \item[\acrfull{ttfb}] Medido em ambiente de laboratório (via Lighthouse), soma o tempo em que a \textit{thread} principal ficou bloqueada por tarefas longas, impedindo a resposta a interações do usuário. É um bom proxy para a métrica de campo INP.
 \end{description}
 O domínio e a correta interpretação dessas métricas foram fundamentais para a análise comparativa entre as arquiteturas CSR e SSR, permitindo uma compreensão aprofundada do desempenho percebido pelo usuário e servindo como base para as conclusões técnicas apresentadas neste estudo.
 
@@ -555,11 +556,11 @@ Bibliotecas JavaScript são conjuntos de funcionalidades reutilizáveis que forn
 
 
 \begin{itemize}
-  \item \textbf{React:} Desenvolvida pelo Facebook, React é uma biblioteca declarativa focada na construção de interfaces de usuário por meio de componentes reutilizáveis. Seu uso do \textit{virtual DOM} permite renderizações mais eficientes, tornando-a ideal para aplicações interativas com alto desempenho. Apesar de ser comumente chamada de framework, React atua apenas na camada de visualização, exigindo bibliotecas complementares para roteamento e gerenciamento de estado~\cite{react2025}.
+  \item React: Desenvolvida pelo Facebook, React é uma biblioteca declarativa focada na construção de interfaces de usuário por meio de componentes reutilizáveis. Seu uso do \textit{virtual DOM} permite renderizações mais eficientes, tornando-a ideal para aplicações interativas com alto desempenho. Apesar de ser comumente chamada de framework, React atua apenas na camada de visualização, exigindo bibliotecas complementares para roteamento e gerenciamento de estado~\cite{react2025}.
 
-  \item \textbf{jQuery:} Uma das bibliotecas mais populares da era inicial do JavaScript moderno, jQuery simplifica tarefas comuns como manipulação do DOM, tratamento de eventos e requisições AJAX. Embora sua popularidade tenha diminuído com o surgimento de bibliotecas mais modernas e frameworks reativos, ela ainda é amplamente utilizada em sistemas legados e aplicações de menor complexidade~\cite{jquery2023}.
+  \item jQuery: Uma das bibliotecas mais populares da era inicial do JavaScript moderno, jQuery simplifica tarefas comuns como manipulação do DOM, tratamento de eventos e requisições AJAX. Embora sua popularidade tenha diminuído com o surgimento de bibliotecas mais modernas e frameworks reativos, ela ainda é amplamente utilizada em sistemas legados e aplicações de menor complexidade~\cite{jquery2023}.
 
-  \item \textbf{Alpine.js:} Alpine.js é uma biblioteca leve e reativa voltada para a manipulação de componentes diretamente no HTML, com uma sintaxe declarativa inspirada em Vue.js. Ela é particularmente útil para adicionar interatividade a páginas estáticas ou aplicações simples, sendo uma alternativa eficiente em cenários onde o uso de bibliotecas maiores seria excessivo~\cite{alpinejs2023}.
+  \item Alpine.js: Alpine.js é uma biblioteca leve e reativa voltada para a manipulação de componentes diretamente no HTML, com uma sintaxe declarativa inspirada em Vue.js. Ela é particularmente útil para adicionar interatividade a páginas estáticas ou aplicações simples, sendo uma alternativa eficiente em cenários onde o uso de bibliotecas maiores seria excessivo~\cite{alpinejs2023}.
 \end{itemize}
 
 \subsection{Frameworks para CSR}
@@ -568,11 +569,11 @@ Bibliotecas JavaScript são conjuntos de funcionalidades reutilizáveis que forn
 No modelo \acrshort{csr}, a renderização da interface é realizada diretamente no navegador do usuário, após o carregamento dos arquivos JavaScript. Frameworks como os listados a seguir são amplamente utilizados para implementar essa abordagem:
 
 \begin{itemize}
-    \item \textbf{Vue.js}: framework progressivo para construção de interfaces web interativas. Seu foco está na camada de visualização, com curva de aprendizado acessível e estrutura modular~\cite{vue2025}.
+    \item Vue.js: framework progressivo para construção de interfaces web interativas. Seu foco está na camada de visualização, com curva de aprendizado acessível e estrutura modular~\cite{vue2025}.
     
-    \item \textbf{Angular}: framework completo mantido pelo Google, baseado em TypeScript, que oferece arquitetura robusta e recursos integrados como injeção de dependência e roteamento~\cite{angular2025}.
+    \item Angular: framework completo mantido pelo Google, baseado em TypeScript, que oferece arquitetura robusta e recursos integrados como injeção de dependência e roteamento~\cite{angular2025}.
     
-    \item \textbf{Svelte}: framework que realiza a compilação dos componentes no momento do build, eliminando a necessidade de um \textit{virtual DOM}, o que reduz o tempo de carregamento e o uso de recursos do navegador~\cite{svelte2025}.
+    \item Svelte: framework que realiza a compilação dos componentes no momento do build, eliminando a necessidade de um \textit{virtual DOM}, o que reduz o tempo de carregamento e o uso de recursos do navegador~\cite{svelte2025}.
 \end{itemize}
 
 Esses frameworks tornam o desenvolvimento com \acrshort{csr} mais eficiente e sustentável, proporcionando experiências ricas ao usuário com foco em interatividade e responsividade.
@@ -583,19 +584,19 @@ Esses frameworks tornam o desenvolvimento com \acrshort{csr} mais eficiente e su
 Para aplicações com foco em renderização no lado do servidor, os \emph{meta-frameworks} oferecem soluções completas, otimizando tanto o desempenho inicial quanto a indexabilidade em mecanismos de busca. Eles operam sobre frameworks tradicionais (como Vue ou Svelte) ou bibliotecas (como React), incorporando funcionalidades essenciais como roteamento, pré-renderização, recuperação de dados e \textit{hydration}.
 
 \begin{itemize}
-    \item \textbf{Next.js}: baseado em React, fornece recursos para \acrshort{ssr}, geração de sites estáticos e suporte a APIs integradas \cite{nextjs2024}.
+    \item Next.js: baseado em React, fornece recursos para \acrshort{ssr}, geração de sites estáticos e suporte a APIs integradas \cite{nextjs2024}.
     
-    \item \textbf{Nuxt.js}: extensão do Vue.js que oferece SSR, geração estática e arquitetura modular \cite{nuxtjs2024}.
+    \item Nuxt.js: extensão do Vue.js que oferece SSR, geração estática e arquitetura modular \cite{nuxtjs2024}.
     
-    \item \textbf{SvelteKit}: baseado em Svelte, permite renderização no servidor e no cliente, com foco em simplicidade e desempenho \cite{sveltekit2024}.
+    \item SvelteKit: baseado em Svelte, permite renderização no servidor e no cliente, com foco em simplicidade e desempenho \cite{sveltekit2024}.
     
-    \item \textbf{Angular Universal}: solução oficial para SSR em Angular, melhora a indexação e o tempo de carregamento inicial \cite{angularuniversal2024}.
+    \item Angular Universal: solução oficial para SSR em Angular, melhora a indexação e o tempo de carregamento inicial \cite{angularuniversal2024}.
     
-    \item \textbf{Remix}: framework full-stack para React que adota um modelo de dados centrado em carregadores e ações \cite{remix2024}.
+    \item Remix: framework full-stack para React que adota um modelo de dados centrado em carregadores e ações \cite{remix2024}.
     
-    \item \textbf{Astro}: framework moderno que carrega apenas o JavaScript necessário, permitindo uso híbrido de componentes React, Vue, Svelte e outros \cite{astro2024}.
+    \item Astro: framework moderno que carrega apenas o JavaScript necessário, permitindo uso híbrido de componentes React, Vue, Svelte e outros \cite{astro2024}.
     
-    \item \textbf{Qwik}: introduz o conceito de aplicações \textit{resumíveis}, com SSR e carregamento progressivo de interatividade \cite{qwik2024}.
+    \item Qwik: introduz o conceito de aplicações \textit{resumíveis}, com SSR e carregamento progressivo de interatividade \cite{qwik2024}.
 \end{itemize}
 
 Esses meta-frameworks são especialmente indicados para aplicações que priorizam SEO, acessibilidade e desempenho no primeiro carregamento, como páginas institucionais, lojas virtuais e blogs.
@@ -613,63 +614,23 @@ O quadro a seguir sintetiza os principais pontos de contraste entre essas duas a
 \label{tab:comparativo-frameworks}
 \begin{tabular}{|p{3cm}|p{5.5cm}|p{5.5cm}|}
 \hline
-\textbf{Critério} & \textbf{Frameworks CSR (Vue, Angular, Svelte)} & \textbf{Meta-frameworks SSR (Next.js, Nuxt, SvelteKit, etc.)} \\
+Critério & Frameworks CSR (Vue, Angular, Svelte) & Meta-frameworks SSR (Next.js, Nuxt, SvelteKit, etc.) \\
 \hline
-\textbf{Renderização Inicial} & O conteúdo é montado no navegador após o carregamento do JavaScript & O conteúdo é gerado no servidor e entregue já renderizado ao navegador \\
+Renderização Inicial & O conteúdo é montado no navegador após o carregamento do JavaScript & O conteúdo é gerado no servidor e entregue já renderizado ao navegador \\
 \hline
-\textbf{Tempo de Carregamento} & Maior tempo de carregamento inicial (dependente do JS) & Melhor desempenho no carregamento inicial (TTFB menor) \\
+Tempo de Carregamento & Maior tempo de carregamento inicial (dependente do JS) & Melhor desempenho no carregamento inicial (TTFB menor) \\
 \hline
-\textbf{SEO} & Pode ser limitado, pois bots podem não processar JavaScript adequadamente & Excelente, já que o HTML completo está disponível para rastreadores \\
+SEO & Pode ser limitado, pois bots podem não processar JavaScript adequadamente & Excelente, já que o HTML completo está disponível para rastreadores \\
 \hline
-\textbf{Interatividade} & Alta, com foco em aplicações ricas e dinâmicas & Boa, com necessidade de \textit{hydration} após o carregamento \\
+Interatividade & Alta, com foco em aplicações ricas e dinâmicas & Boa, com necessidade de \textit{hydration} após o carregamento \\
 \hline
-\textbf{Complexidade de Infraestrutura} & Menor, geralmente servido por CDNs e arquivos estáticos & Maior, exige servidores para processar cada requisição \\
+Complexidade de Infraestrutura & Menor, geralmente servido por CDNs e arquivos estáticos & Maior, exige servidores para processar cada requisição \\
 \hline
-\textbf{Casos de Uso Ideais} & SPAs, dashboards, aplicações com muitas interações em tempo real & Landing pages, blogs, e-commerces, sites que dependem de SEO \\
+Casos de Uso Ideais & SPAs, dashboards, aplicações com muitas interações em tempo real & Landing pages, blogs, e-commerces, sites que dependem de SEO \\
 \hline
 \end{tabular}
 \end{table}
 
-
-% \subsection{Modelos de Arquitetura Web}
-% \label{subsec:modelos-arq-web}
-% Os modelos arquiteturais variam conforme os requisitos de escalabilidade, manutenção e desempenho:
-
-% \begin{itemize}
-%     \item \textbf{Arquitetura Monolítica}: Um único projeto concentra \textit{frontend} e \textit{backend}, frequentemente usando \acrshort{ssr}. Possui inicialização simples, mas pode tornar-se complexo de manter e escalar.
-%     \item \textbf{Microserviços}: Divide a aplicação em múltiplos serviços independentes. Cada serviço pode escolher a melhor abordagem de renderização (SSR ou CSR), facilitando a escalabilidade seletiva.
-%     \item \textbf{Serverless}: As funções são executadas sob demanda em plataformas de nuvem, onde a renderização pode ocorrer tanto no servidor (funções que retornam HTML) quanto no cliente (ao entregar apenas APIs).
-% \end{itemize}
-
-% \subsection{Ferramentas e \textit{Frameworks}}
-% \label{subsec:ferramentas-frameworks}
-% O ecossistema de desenvolvimento web oferece diversas ferramentas que simplificam \acrshort{ssr} e \acrshort{csr}:
-
-% \begin{itemize}
-%     \item \textbf{\acrshort{ssr}}: \textit{Next.js} (React), \textit{Nuxt.js} (Vue), \textit{SvelteKit} (Svelte), entre outros.
-%     \item \textbf{\acrshort{csr}}: React, Vue.js, Angular e muitas bibliotecas voltadas para \textit{Single Page Applications} (SPA).
-% \end{itemize}
-
-
-% \section{Infraestrutura de Serviço Web}
-% \label{sec:infraestrutura-web}
-
-% A decisão por \acrshort{ssr} ou \acrshort{csr} influencia diretamente a infraestrutura necessária:
-
-% \begin{itemize}
-%     \item \textbf{Servidores e Processamento}: Em \acrshort{ssr}, o servidor gera páginas dinamicamente, aumentando a carga de CPU. Já em \acrshort{csr}, o servidor atua mais como um provedor de arquivos estáticos e APIs.
-%     \item \textbf{\english{Content Delivery Networks} (CDNs)}: Tanto para SSR quanto para CSR, uma CDN pode melhorar a distribuição de arquivos estáticos (HTML, CSS, JavaScript, imagens) e reduzir a latência.
-%     \item \textbf{Escalabilidade}: Aplicações com alto número de requisições precisam de estratégias adequadas para lidar com picos de acesso. Em \acrshort{ssr}, muitas requisições simultâneas podem sobrecarregar o servidor; em \acrshort{csr}, o foco está em serviços de dados e na entrega eficiente de arquivos iniciais.
-% \end{itemize}
-
-% \textbf{Segurança} também se faz presente em ambas as abordagens. Boas práticas incluem:
-% \begin{itemize}
-%     \item Uso de \textbf{HTTPS} para proteger a comunicação.
-%     \item Implementação de \textbf{CORS} (Cross-Origin Resource Sharing) quando necessário.
-%     \item Tratamento de \textbf{tokens de sessão/autenticação} com cuidado para evitar vazamento de dados.
-% \end{itemize}
-
-% ---
 
 \section{Experiência do Usuário}
 \label{sec:ux}
@@ -763,11 +724,11 @@ O Git é um sistema de controle de versão distribuído criado por Linus Torvald
 Entre os conceitos fundamentais do Git, destacam-se:
 
 \begin{itemize}
-\item \textbf{Repositório (\textit{Repository}):} Estrutura que armazena o histórico completo do projeto, incluindo arquivos, diretórios e suas versões ao longo do tempo.
-\item \textbf{Commits:} Registros de alterações no projeto. Cada commit possui um identificador único (hash) e uma mensagem descritiva \cite{chacon_git}.
-\item \textbf{Branches:} Ramificações independentes do repositório que permitem o desenvolvimento paralelo de funcionalidades, correções ou experimentos sem impactar o código principal.
-\item \textbf{Merge:} Integração de alterações realizadas em diferentes branches.
-\item \textbf{Clone e Pull:} Operações que permitem obter uma cópia local do repositório e sincronizar com atualizações remotas.
+\item Repositório (\textit{Repository}): Estrutura que armazena o histórico completo do projeto, incluindo arquivos, diretórios e suas versões ao longo do tempo.
+\item Commits: Registros de alterações no projeto. Cada commit possui um identificador único (hash) e uma mensagem descritiva \cite{chacon_git}.
+\item Branches: Ramificações independentes do repositório que permitem o desenvolvimento paralelo de funcionalidades, correções ou experimentos sem impactar o código principal.
+\item Merge: Integração de alterações realizadas em diferentes branches.
+\item Clone e Pull: Operações que permitem obter uma cópia local do repositório e sincronizar com atualizações remotas.
 \end{itemize}
 
 O modelo distribuído do Git permite que cada colaborador mantenha uma cópia completa do repositório em sua máquina local, o que garante maior resiliência e independência em relação ao servidor central \cite{chacon_git}.
@@ -778,12 +739,11 @@ O modelo distribuído do Git permite que cada colaborador mantenha uma cópia co
 O GitHub é uma plataforma de hospedagem de código baseada em Git, que amplia suas funcionalidades com recursos colaborativos e integração contínua \cite{github_official}. Fundada em 2008, a plataforma popularizou-se como um ambiente de colaboração para projetos de software de código aberto e privado.
 
 Além de hospedar repositórios Git, o GitHub oferece funcionalidades como:
-
 \begin{itemize}
-\item \textbf{Issues:} Ferramenta para rastreamento de tarefas, bugs e melhorias \cite{github_official}.
-\item \textbf{Pull Requests (PR):} Fluxo de revisão e integração de código, permitindo que contribuições sejam analisadas antes de serem incorporadas ao branch principal.
-\item \textbf{Actions:} Automatização de processos com integração contínua (CI) e entrega contínua (CD).
-\item \textbf{Wikis e Documentação:} Área para criação de páginas informativas sobre o projeto.
+\item Issues: Ferramenta para rastreamento de tarefas, bugs e melhorias \cite{github_official}.
+\item Pull Requests (PR): Fluxo de revisão e integração de código, permitindo que contribuições sejam analisadas antes de serem incorporadas ao branch principal.
+\item Actions: Automatização de processos com integração contínua (CI) e entrega contínua (CD).
+\item Wikis e Documentação: Área para criação de páginas informativas sobre o projeto.
 \end{itemize}
 
 \subsection{GitHub Projects}
@@ -794,10 +754,10 @@ O GitHub Projects é uma funcionalidade integrada à plataforma que possibilita 
 Entre os recursos oferecidos pelo GitHub Projects, destacam-se:
 
 \begin{itemize}
-\item \textbf{Quadros Kanban:} Visualização de tarefas em colunas (como \textit{To Do}, \textit{In Progress} e \textit{Done}), facilitando o acompanhamento do fluxo de trabalho.
-\item \textbf{Automação:} Regras automáticas que movem cartões entre colunas com base em eventos, como o fechamento de issues ou merge de pull requests \cite{github_projects}.
-\item \textbf{Customização:} Campos personalizados e filtros para adaptar o quadro às necessidades do projeto.
-\item \textbf{Integração com Issues e Pull Requests:} Possibilidade de vincular tarefas diretamente ao código, permitindo rastreabilidade completa entre planejamento e implementação.
+\item Quadros Kanban: Visualização de tarefas em colunas (como \textit{To Do}, \textit{In Progress} e \textit{Done}), facilitando o acompanhamento do fluxo de trabalho.
+\item Automação: Regras automáticas que movem cartões entre colunas com base em eventos, como o fechamento de issues ou merge de pull requests \cite{github_projects}.
+\item Customização: Campos personalizados e filtros para adaptar o quadro às necessidades do projeto.
+\item Integração com Issues e Pull Requests: Possibilidade de vincular tarefas diretamente ao código, permitindo rastreabilidade completa entre planejamento e implementação.
 \end{itemize}
 
 
@@ -814,8 +774,8 @@ A News API é uma interface de programação que disponibiliza fluxos de notíci
 A plataforma oferece dois principais tipos de consulta: 
 
 \begin{itemize}
-    \item \textbf{Busca por artigos (\texttt{/everything}):} permite pesquisar notícias com base em termos, operadores booleanos, intervalos de datas, domínios específicos e critérios de ordenação, como relevância, popularidade ou data de publicação \cite{newsapi_docs}.
-    \item \textbf{Manchetes principais (\texttt{/top-headlines}):} retorna as notícias mais recentes, com filtros por país, categoria jornalística e fontes específicas.
+    \item Busca por artigos (\texttt{/everything}): permite pesquisar notícias com base em termos, operadores booleanos, intervalos de datas, domínios específicos e critérios de ordenação, como relevância, popularidade ou data de publicação \cite{newsapi_docs}.
+    \item Manchetes principais (\texttt{/top-headlines}): retorna as notícias mais recentes, com filtros por país, categoria jornalística e fontes específicas.
 \end{itemize}
 
 Além disso, a News API disponibiliza o endpoint \texttt{/sources}, que fornece metadados sobre os veículos indexados, como nome, idioma, categoria e URL oficial.
@@ -859,17 +819,17 @@ A arquitetura do Docker segue o modelo cliente-servidor, onde o cliente (\texttt
   \label{fig:docker-arquitetura}
 \end{figure}
 
-Os principais objetos manipulados pela plataforma são as imagens e os contêineres. Uma \textbf{imagem} é um modelo (\textit{template}) imutável, composto por um sistema de arquivos em camadas (\textit{layers}), onde cada camada representa uma instrução do processo de construção. Um \textbf{contêiner}, por sua vez, é uma instância executável e isolada de uma imagem. Ele pode ser criado, iniciado, parado e removido, e suas alterações internas são, por padrão, efêmeras, sendo descartadas ao final de seu ciclo de vida, a menos que se utilizem volumes para persistência de dados \cite{docker_overview}.
+Os principais objetos manipulados pela plataforma são as imagens e os contêineres. Uma imagem é um modelo (\textit{template}) imutável, composto por um sistema de arquivos em camadas (\textit{layers}), onde cada camada representa uma instrução do processo de construção. Um contêiner, por sua vez, é uma instância executável e isolada de uma imagem. Ele pode ser criado, iniciado, parado e removido, e suas alterações internas são, por padrão, efêmeras, sendo descartadas ao final de seu ciclo de vida, a menos que se utilizem volumes para persistência de dados \cite{docker_overview}.
 
 \subsection{Construção de Imagens com Dockerfile}
 \label{sec:dockerfile-construcao}
 
-A construção de imagens é definida por meio de um \textbf{Dockerfile}, um arquivo de texto com um conjunto de instruções sequenciais. Cada instrução gera uma nova camada na imagem, otimizando reconstruções futuras por meio de cache. As instruções essenciais incluem \texttt{FROM} para definir a imagem base; \texttt{RUN} para executar comandos de instalação ou compilação; \texttt{COPY} para adicionar arquivos do contexto local; e \texttt{CMD} ou \texttt{ENTRYPOINT} para especificar o comando de execução padrão do contêiner. Outras instruções como \texttt{WORKDIR}, \texttt{ENV} e \texttt{EXPOSE} configuram o ambiente de execução \cite{dockerfile_ref}. Para otimizar o processo, o arquivo \texttt{.dockerignore} é utilizado para excluir arquivos e diretórios desnecessários do contexto de build, reduzindo o tamanho da imagem e o tempo de construção.
+A construção de imagens é definida por meio de um Dockerfile, um arquivo de texto com um conjunto de instruções sequenciais. Cada instrução gera uma nova camada na imagem, otimizando reconstruções futuras por meio de cache. As instruções essenciais incluem \texttt{FROM} para definir a imagem base; \texttt{RUN} para executar comandos de instalação ou compilação; \texttt{COPY} para adicionar arquivos do contexto local; e \texttt{CMD} ou \texttt{ENTRYPOINT} para especificar o comando de execução padrão do contêiner. Outras instruções como \texttt{WORKDIR}, \texttt{ENV} e \texttt{EXPOSE} configuram o ambiente de execução \cite{dockerfile_ref}. Para otimizar o processo, o arquivo \texttt{.dockerignore} é utilizado para excluir arquivos e diretórios desnecessários do contexto de build, reduzindo o tamanho da imagem e o tempo de construção.
 
 \subsection{Boas Práticas e Otimização de Builds}
 \label{sec:docker-boas-praticas}
 
-Para criar imagens eficientes, seguras e enxutas, é fundamental adotar boas práticas. A principal delas é o uso de \textbf{multi-stage builds}, uma técnica que permite utilizar múltiplos estágios \texttt{FROM} em um mesmo Dockerfile. Com isso, é possível compilar a aplicação em um estágio com todas as ferramentas de desenvolvimento (\textit{toolchain}) e copiar apenas os artefatos finais para um estágio de produção mínimo, baseado em uma imagem enxuta como a \texttt{alpine} ou \texttt{scratch}. O resultado é uma imagem final drasticamente menor, com superfície de ataque reduzida e mais rápida para distribuir \cite{dockerfile_ref}.
+Para criar imagens eficientes, seguras e enxutas, é fundamental adotar boas práticas. A principal delas é o uso de multi-stage builds, uma técnica que permite utilizar múltiplos estágios \texttt{FROM} em um mesmo Dockerfile. Com isso, é possível compilar a aplicação em um estágio com todas as ferramentas de desenvolvimento (\textit{toolchain}) e copiar apenas os artefatos finais para um estágio de produção mínimo, baseado em uma imagem enxuta como a \texttt{alpine} ou \texttt{scratch}. O resultado é uma imagem final drasticamente menor, com superfície de ataque reduzida e mais rápida para distribuir \cite{dockerfile_ref}.
 
 \begin{codigo}[H]
 \begin{lstlisting}[language=Dockerfile]
@@ -895,7 +855,7 @@ CMD ["node", ".next/standalone/server.js"]
 \label{lst:dockerfile-multistage}
 \end{codigo}
 
-A otimização do \textbf{cache de build} também é crucial. Como cada instrução gera uma camada, a ordem no Dockerfile deve ser da menos para a mais volátil, permitindo que o cache seja aproveitado ao máximo. Para operações que frequentemente mudam, como a instalação de pacotes, o motor de build moderno (BuildKit) oferece montagens de cache avançadas, como \texttt{RUN --mount=type=cache}, que persistem o cache de gerenciadores de pacotes sem invalidar as camadas da imagem. Além disso, a segurança deve ser uma prioridade: dados sensíveis, como tokens e chaves SSH, nunca devem ser inseridos na imagem via \texttt{ENV} ou \texttt{ARG}. A abordagem correta é utilizar montagens de segredos, como \texttt{RUN --mount=type=secret}, que disponibilizam as credenciais apenas durante o build, sem armazená-las nas camadas finais \cite{dockerfile_ref}.
+A otimização do cache de build também é crucial. Como cada instrução gera uma camada, a ordem no Dockerfile deve ser da menos para a mais volátil, permitindo que o cache seja aproveitado ao máximo. Para operações que frequentemente mudam, como a instalação de pacotes, o motor de build moderno (BuildKit) oferece montagens de cache avançadas, como \texttt{RUN --mount=type=cache}, que persistem o cache de gerenciadores de pacotes sem invalidar as camadas da imagem. Além disso, a segurança deve ser uma prioridade: dados sensíveis, como tokens e chaves SSH, nunca devem ser inseridos na imagem via \texttt{ENV} ou \texttt{ARG}. A abordagem correta é utilizar montagens de segredos, como \texttt{RUN --mount=type=secret}, que disponibilizam as credenciais apenas durante o build, sem armazená-las nas camadas finais \cite{dockerfile_ref}.
 
 \subsection{Padrões de Infraestrutura para Aplicações CSR e SSR}
 \label{sec:docker-padroes-infra}
