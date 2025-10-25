@@ -32,11 +32,21 @@ Essa expansão resultou nas seguintes colunas principais:
 Com os dados estruturados dessa forma, foi possível aplicar filtros, agregações e análises comparativas entre SSR e CSR, utilizando os recursos visuais e analíticos do Power BI de maneira eficiente.
 
 \subsection{Metas de referência}
-Adotaram-se os seguintes alvos para interpretação:
+\label{subsec:metas_referencia}
+
+Para uma interpretação objetiva dos resultados, adotaram-se os seguintes alvos para a análise. Estes valores são baseados nas diretrizes oficiais da iniciativa \textit{Web Vitals} do Google, que define o 75º percentil (p75) das experiências de usuário como o limiar para uma classificação "Boa" (Good).
+
+As metas foram divididas entre as métricas de experiência real (campo) e as pontuações de auditoria (laboratório):
+
 \begin{itemize}
-    \item LCP $\leq 2{,}5$\,s;\quad CLS $\leq 0{,}10$;\quad INP $\leq 200$\,ms;\quad TTFB $\leq 800$\,ms.
-    \item TBT (Lighthouse) $<200$\,ms;\quad Acessibilidade (LH) $\geq 90$;\quad SEO (LH) $\geq 90$.
+    \item Métricas de Campo (Core Web Vitals e Diagnóstico): 
+    LCP $\leq 2{,}5$\,s;\quad CLS $\leq 0{,}10$;\quad INP $\leq 200$\,ms;\quad TTFB $\leq 800$\,ms.
+    
+    \item Métricas de Laboratório (Auditoria Lighthouse): 
+    TBT (Lighthouse) $<200$\,ms;\quad Acessibilidade (LH) $\geq 90$;\quad SEO (LH) $\geq 90$.
 \end{itemize}
+
+Dessa forma, os dados empíricos apresentados nas seções seguintes deste capítulo serão diretamente confrontados com esses limiares. A análise de desempenho não será apenas relativa (comparando \acrshort{csr} com \acrshort{ssr}), mas avaliará cada arquitetura **individualmente frente a esses padrões**, determinando se ela, isoladamente, foi capaz de entregar uma experiência de usuário considerada "Boa".
 
 \subsection{Resultados Aplicação SSR}
 \label{subsec:resultados-ssr}
